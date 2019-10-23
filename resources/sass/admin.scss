@@ -1,0 +1,97 @@
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+/* Global Styles */
+html {height: 100%;}
+body {
+  margin-top: 100px;
+  background-color: #f5f8fa;
+}
+
+#app {padding-left: 0;}
+#page-wrapper {
+  width: 100%;
+  padding: 0;
+}
+@media (min-width: 768px) {
+  body {margin-top: 50px;}
+  #app {padding-left: 180px;}
+  #page-wrapper {padding: 10px;}
+}
+
+.side-nav hr {
+  border-style: none;
+  border-width: 1px 0 0;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+/* Top Navigation */
+.navbar-header {width: 100%;}
+.navbar-light {
+  padding: 5px;
+  border-color: #aaa;
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
+}
+.navbar-nav .dropdown-menu {position: absolute;}
+
+/* Side Navigation */
+@media (min-width: 768px) {
+  .side-nav {
+    position: fixed;
+    top: 51px;
+    left: 180px;
+    width: 180px;
+    margin-left: -180px;
+    border: none;
+    border-right: 1px solid #aaa;
+    border-radius: 0;
+    overflow-y: auto;
+    bottom: 0;
+    overflow-x: hidden;
+    padding-bottom: 20px;
+    > li > a {
+        display: block;
+        width: 100%;
+        line-height: 16px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        &:hover {
+          outline: none;
+        }
+      }
+  }
+}
+.side-nav {
+  background-color: #f8f8f8;
+  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.14), 0 10px 10px 0 rgba(0,0,0,0.12), 0 4px 4px -1px rgba(0,0,0,0.2);
+  > li > a {
+    color: #42526E;
+    &:hover {color: #0052CC;}
+    &:focus {background-color: transparent;}
+    &.active, &.active:focus {
+      background-color: #eee;
+      color: #0052CC;
+    }
+  }
+  .collapse, .collapsing {
+    li {
+      background-color: #444444;
+      a:hover {
+        background-color: #373737;
+        color: #fff;
+      }
+      a:before {
+        content: "";
+        transition: margin ease 0.5s;
+      }
+    }
+  }
+}
+
+.page-header {
+  padding-bottom: 9px;
+  margin: 5px 0 20px;
+  border-bottom: 1px solid #eee;
+}
