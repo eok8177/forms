@@ -12,11 +12,7 @@ class AjaxController extends Controller
     {
         if($request->ajax()){
 
-            if ($request->input('model') == 'User') {
-                $model = "App\User";
-            } else {
-                $model = "App\Model\\" . $request->input('model');
-            }
+            $model = "App\\" . $request->input('model');
 
             $field = $request->input('field');
 

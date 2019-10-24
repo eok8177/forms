@@ -42,4 +42,10 @@ return [
     'description' => 'Description',
     'enabled' => 'Enabled',
 
+    'form' => 'Form',
+    'new_form' => 'New Form',
+    'forms' => 'Forms',
+    'active' => 'Active',
+    'trash' => 'Trash',
+
 ];
