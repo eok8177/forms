@@ -11,9 +11,10 @@ use App\Form;
 
 class FormController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.form.index', ['forms' => Form::all()]);
+        $search = $request->input('search', false);
+        return view('admin.form.index', ['forms' => Form::search($search)->paginate(15)]);
     }
 
     public function create()

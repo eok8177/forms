@@ -1,14 +1,20 @@
 @extends('admin.layout')
 
 @section('content')
-<div class="page-header">
+<div class="page-header row justify-content-between">
   <h2>@lang('message.forms')</h2>
-  <div>
-    <a href="{{ route('admin.form.create') }}" class="btn btn-light"><i class="fa fa-plus-square"></i> @lang('message.create')</a>
-  </div>
+  <a href="{{ route('admin.form.create') }}" class="btn btn-light"><i class="fa fa-plus-square"></i> @lang('message.create')</a>
 </div>
 
 <div class="table-responsive">
+
+  <form class="input-group mb-3" action="{{ route('admin.form.index') }}" method="get">
+    <input type="text" class="form-control" placeholder="Search ..." name="search">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit" >Search</button>
+    </div>
+  </form>
+
   <table class="table table-hover">
     <thead>
       <tr>
@@ -36,5 +42,7 @@
     @endforeach
   </table>
 </div>
+
+{{ $forms->appends(request()->except('page'))->links('admin.parts.pagination') }}
 
 @endsection
