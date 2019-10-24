@@ -14,7 +14,7 @@ class AddDescriptionToForms extends Migration
     public function up()
     {
         Schema::table('forms', function (Blueprint $table) {
-            $table->mediumText('description')->nullable();
+            $table->mediumText('description')->nullable()->after('title');
         });
     }
 
