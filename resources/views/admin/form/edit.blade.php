@@ -7,4 +7,8 @@
   @include('admin.form.form')
 {!! Form::close() !!}
 
+<hr>
+
+<form-builder-component :formdata="{{$form->config ?? 'null'}}" :formid="{{$form->id}}"></form-builder-component>
+
 @endsection

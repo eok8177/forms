@@ -62,3 +62,11 @@ $(function () {
   });
 
 });
+/*----- VueJS -----*/
+window.Vue = require('vue');
+
+Vue.component('form-builder-component', require('./components/FormBuilderComponent.vue').default);
+
+const app = new Vue({
+    el: '#app',
+});

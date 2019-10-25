@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Form;
 
 
 class AjaxController extends Controller
@@ -57,6 +58,21 @@ class AjaxController extends Controller
         }
 
         return redirect()->route('admin.dashboard');
+    }
+
+    public function form(Request $request, $id)
+    {
+
+        $data = $request->input('data', false);
+
+        if ($data) {
+            $form = Form::find($id);
+            $form->config = $data;
+            $form->save();
+            return response()->json($form, 200);
+        }
+        return response()->json($data, 400);
+
     }
 
 }

@@ -14,6 +14,12 @@
   <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
   @stack('styles')
+  <script>
+    <!-- FontAwesome settings -->
+    FontAwesomeConfig = {
+      showMissingIcons: false
+    }
+  </script>
 </head>
 
 <body>

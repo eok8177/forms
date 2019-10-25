@@ -23,5 +23,8 @@
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.20-14",
+        "v-form-builder": "^1.4.1-rc2"
+    }
 }
