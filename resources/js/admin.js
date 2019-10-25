@@ -65,7 +65,13 @@ $(function () {
 /*----- VueJS -----*/
 window.Vue = require('vue');
 
-Vue.component('form-builder-component', require('./components/FormBuilderComponent.vue').default);
+Vue.component(
+    'form-builder-component', 
+    () => import(
+        /* webpackChunkName: "form-builder-component" */
+        './components/FormBuilderComponent.vue'
+    )
+);
 
 const app = new Vue({
     el: '#app',
