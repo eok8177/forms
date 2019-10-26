@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as' => 'front.index', 'uses' => 'FrontendController@index']);
+Route::get('/form/{id}', ['as' => 'front.form', 'uses' => 'FrontendController@form']);
 
 Auth::routes();
 
