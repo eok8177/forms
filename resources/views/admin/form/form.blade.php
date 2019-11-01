@@ -6,7 +6,7 @@
 
 <div class="form-group">
 	<label for="title">Description</label>
-  {!! Form::textarea('description', $form->description, ['class' => 'form-control']) !!}
+  {!! Form::textarea('description', $form->description, ['class' => 'form-control', 'rows' => '2']) !!}
 </div>
 
 <div class="custom-control custom-checkbox custom-control-inline">

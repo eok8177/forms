@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import FormBuilder from 'v-form-builder';
+    import FormBuilder from 'v-form-builder-m';
 
     export default {
         components: {FormBuilder},

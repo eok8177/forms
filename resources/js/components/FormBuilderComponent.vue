@@ -2,15 +2,16 @@
     <div class="builder">
         <h4>Form config</h4>
         <form-builder type="template" v-model="form"></form-builder>
-
-        <div v-if="status" class="text-success">Config updated</div>
-        <button class="btn btn-secondary mt-5" @click="saveConfig()">Save form config</button>
+        <div class="mt-5">
+            <div v-if="status" class="text-success mb-1">Config updated</div>
+            <button class="btn btn-secondary" @click="saveConfig()">Save form config</button>
+        </div>
     </div>
     
 </template>
 
 <script>
-    import FormBuilder from 'v-form-builder';
+    import FormBuilder from 'v-form-builder-m';
     import axios from 'axios';
 
     export default {
