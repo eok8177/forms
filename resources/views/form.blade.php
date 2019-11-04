@@ -14,7 +14,7 @@
       </ul>
     </div>
     <div class="col-sm-10">
-      <form-gui-component :formdata="{{$form->config ?? 'null'}}" class="py-2 px-2 bg-white"></form-gui-component>
+      <form-gui-component :form="{{$form->config ?? 'null'}}" class="py-2 px-2 bg-white"></form-gui-component>
     </div>
   </div>
 </div>
