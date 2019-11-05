@@ -28,12 +28,14 @@
 </template>
 
 <script>
+    import axios from 'axios';
     import RowComponent from "./formGUI/RowComponent";
 
     export default {
         components: {RowComponent},
         props: {
             form: {type: Object},
+            formid: {type: Number},
         },
         data: () => ({
             formdata: {type: Object},
@@ -43,8 +45,48 @@
                 this.formdata.sections[index].instances = instance;
             },
             Submit() {
-                //TODO parse object & send to server
-                console.log(this.formdata.sections);
+                // parse form object
+                let submitData = {};
+                let i = 0;
+                _.forEach(this.formdata.sections, function(value) {
+                    if (value.isDynamic) { // parse sections
+                        _.forEach(value.instances, function(value) {
+                            _.forEach(value, function(value) {
+                                _.forEach(value.controls, function(value) {
+                                    submitData[i] = {
+                                        label: value.label,
+                                        value: value.value
+                                    };
+                                    i++;
+                                });
+                            });
+                        });
+                    } else {
+                        _.forEach(value.rows, function(value) {
+                            _.forEach(value.controls, function(value) {
+                                submitData[i] = {
+                                    label: value.label,
+                                    value: value.value
+                                };
+                                i++;
+                            });
+                        });
+                    }
+                });
+                //send to server
+                console.log(submitData);
+                axios.post('/api/post-form', {
+                    formid: this.formid,
+                    data: submitData
+                  })
+                  .then(
+                    (response) => {
+                      console.log(response)
+                    }
+                  )
+                  .catch(
+                    (error) => console.log(error)
+                  );
             }
         },
         created() {
