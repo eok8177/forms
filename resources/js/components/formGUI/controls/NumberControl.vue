@@ -2,33 +2,33 @@
     <div>
         <div class="row" v-if="labelPosition === 'left'">
             <div class="col-md-4">
-                <label :class="{'bold': control.labelBold, 'italic': control.labelItalic, 'underline': control.labelUnderline}">{{control.label}}</label>
+                <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">{{value.label}}</label>
             </div>
             <div class="col-md-8">
                 <div class="input-group">
                     <input type="number"
                        class="form-control"
-                       :readonly="this.control.readonly"
-                       :name="control.fieldName"
+                       :readonly="value.readonly"
+                       :name="value.fieldName"
                        :step="controlStep"
                        @change="numberChange"
-                       v-model="control.value" />
+                       v-model="value.value" />
                 </div>
             </div>
         </div>
         <div class="form-group" v-else>
-            <label :class="{'bold': control.labelBold, 'italic': control.labelItalic, 'underline': control.labelUnderline}">
-                {{control.label}}
+            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">
+                {{value.label}}
             </label>
 
             <div class="input-group">
                 <input type="number"
                    class="form-control"
-                   :readonly="this.control.readonly"
-                   :name="control.fieldName"
+                   :readonly="value.readonly"
+                   :name="value.fieldName"
                    :step="controlStep"
                    @change="numberChange"
-                   v-model="control.value" />
+                   v-model="value.value" />
             </div>
         </div>
     </div>
@@ -37,28 +37,23 @@
 <script>
     export default {
         name: "NumberControl",
-        props: ['propControl', 'labelPosition'],
-        data: () => ({
-            control: {type: Object},
-        }),
+        props: ['value', 'labelPosition'],
         created() {
-            this.control= this.propControl;
-            this.control.value = 0;
+            this.value.value = 0;
         },
         mounted() {
-            this.control= this.propControl;
-            if (!_.isEmpty(this.control.defaultValue)) {
-                this.control.value = this.control.defaultValue;
+            if (!_.isEmpty(this.value.defaultValue)) {
+                this.value.value = this.value.defaultValue;
             }
         },
         methods: {
             numberChange(e) {
                 let val = e.target.value;
 
-                if (this.control.isInteger === false) {
-                    this.control.value = parseFloat(val).toFixed(this.control.decimalPlace);
+                if (this.value.isInteger === false) {
+                    this.value.value = parseFloat(val).toFixed(this.value.decimalPlace);
                 } else {
-                    this.control.value = parseInt(val);
+                    this.value.value = parseInt(val);
                 }
             }
         },

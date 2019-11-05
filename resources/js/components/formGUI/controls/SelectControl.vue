@@ -2,28 +2,28 @@
     <div>
         <div class="row" v-if="labelPosition === 'left'">
             <div class="col-md-4">
-                <label :class="{'bold': control.labelBold, 'italic': control.labelItalic, 'underline': control.labelUnderline}">
-                    {{control.label}}
+                <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">
+                    {{value.label}}
                 </label>
             </div>
             <div class="col-md-8">
                 <select class="form-control" 
-                    v-model="control.value"
-                    :multiple="control.isMultiple"
-                    :disabled="this.control.readonly">
+                    v-model="value.value"
+                    :multiple="value.isMultiple"
+                    :disabled="value.readonly">
                   <option v-for="option in dataSource" v-bind:value="option.id">{{option.text}}</option>
                 </select>
             </div>
         </div>
 
         <div class="form-group" v-else>
-            <label :class="{'bold': control.labelBold, 'italic': control.labelItalic, 'underline': control.labelUnderline}">
-                {{control.label}}
+            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">
+                {{value.label}}
             </label>
             <select class="form-control" 
-                v-model="control.value"
-                :multiple="control.isMultiple"
-                :disabled="this.control.readonly">
+                v-model="value.value"
+                :multiple="value.isMultiple"
+                :disabled="value.readonly">
               <option v-for="option in dataSource" v-bind:value="option.id">{{option.text}}</option>
             </select>
         </div>
@@ -33,39 +33,37 @@
 <script>
     export default {
         name: "SelectControl",
-        props:['propControl', 'labelPosition'],
+        props:['value', 'labelPosition'],
         data: () => ({
-            control: {type: Object},
             dataSource: [],
         }),
         created() {
             // request for ajax source
-            if (this.control.isAjax) {
+            if (this.value.isAjax) {
                 let self = this;
-                $.getJSON(this.control.ajaxDataUrl)
+                $.getJSON(this.value.ajaxDataUrl)
                     .done(data => {
                         if (_.isArray(data)) {
                             self.dataSource = data;
                         } else {
-                            SethPhatToaster.error(`Control data error: ${this.control.label}.`);
-                            console.error(`Data for select control of ${this.control.label} is wrong format!`);
+                            SethPhatToaster.error(`Control data error: ${this.value.label}.`);
+                            console.error(`Data for select control of ${this.value.label} is wrong format!`);
                         }
                     })
                     .fail(err => {
-                        SethPhatToaster.error(`Failed to load data for control: ${this.control.label}.`);
+                        SethPhatToaster.error(`Failed to load data for control: ${this.value.label}.`);
                         console.error("Request for Select Data Source Failed: ", err);
                     });
             } else {
-                this.dataSource = this.propControl.dataOptions;
+                this.dataSource = this.value.dataOptions;
             }
         },
         mounted() {
-            this.control= this.propControl;
-            if (!_.isEmpty(this.control.defaultValue)) {
-                if (this.control.isMultiple) {
-                    this.control.value = [this.control.defaultValue];
+            if (!_.isEmpty(this.value.defaultValue)) {
+                if (this.value.isMultiple) {
+                    this.value.value = [this.value.defaultValue];
                 } else {
-                    this.control.value = this.control.defaultValue;
+                    this.value.value = this.value.defaultValue;
                 }
             }
         }

@@ -3,26 +3,28 @@
         <div class="custom-control custom-switch" v-if="labelPosition === 'left'">
             <input type="checkbox"
                class="custom-control-input"
-               :id = "control.name + '_gui_control'"
-               :readonly="this.control.readonly"
-               :name="control.fieldName"
-               v-model="control.value" />
-            <label :for="control.name + '_gui_control'"
-                   :class="{'bold': control.labelBold, 'italic': control.labelItalic, 'underline': control.labelUnderline} + ' custom-control-label'">
-                {{control.label}}
+               :id = "value.name + '_gui_control'"
+               :readonly="value.readonly"
+               :name="value.fieldName"
+               v-model="value.value" />
+            <label :for="value.name + '_gui_control'"
+                   class="custom-control-label"
+                   :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">
+                {{value.label}}
             </label>
         </div>
         <div class="form-check" v-else>
             <input type="checkbox"
                class="form-check-input"
-               :id = "control.name + '_gui_control'"
-               :readonly="this.control.readonly"
-               :name="control.fieldName"
-               v-model="control.value" />
+               :id = "value.name + '_gui_control'"
+               :readonly="value.readonly"
+               :name="value.fieldName"
+               v-model="value.value" />
 
-            <label :for="control.name + '_gui_control'"
-                   :class="{'bold': control.labelBold, 'italic': control.labelItalic, 'underline': control.labelUnderline} + ' form-check-label'">
-                {{control.label}}
+            <label :for="value.name + '_gui_control'"
+                   class="custom-control-label"
+                   :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">
+                {{value.label}}
             </label>
         </div>
     </div>
@@ -31,14 +33,10 @@
 <script>
     export default {
         name: "CheckboxControl",
-        props: ['propControl', 'labelPosition'],
-        data: () => ({
-            control: {type: Object},
-        }),
+        props: ['value', 'labelPosition'],
         mounted() {
-          this.control= this.propControl;
-          if (this.control.isChecked) {
-              this.control.value = true;
+          if (this.value.isChecked) {
+              this.value.value = true;
           }
         }
     }

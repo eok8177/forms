@@ -1,28 +1,28 @@
 <template>
     <div>
         <div class="form-group row datePickerControl" v-if="labelPosition === 'left'">
-            <label :class="{'bold': control.labelBold, 'italic': control.labelItalic, 'underline': control.labelUnderline} + ' col-sm-4 col-form-label'">
-                {{control.label}}
+            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline} + ' col-sm-4 col-form-label'">
+                {{value.label}}
             </label>
             <div class="col-sm-8">
                 <input type="date"
                    class="form-control"
-                   :readonly="this.control.readonly"
-                   :name="control.fieldName"
-                   v-model="control.value" />
+                   :readonly="value.readonly"
+                   :name="value.fieldName"
+                   v-model="value.value" />
            </div>
         </div>
 
         <div class="form-group" v-else>
-            <label :class="{'bold': control.labelBold, 'italic': control.labelItalic, 'underline': control.labelUnderline}">
-                {{control.label}}
+            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">
+                {{value.label}}
             </label>
 
             <input type="date"
                class="form-control"
-               :readonly="this.control.readonly"
-               :name="control.fieldName"
-               v-model="control.value" />
+               :readonly="value.readonly"
+               :name="value.fieldName"
+               v-model="value.value" />
         </div>
     </div>
 </template>
@@ -31,35 +31,31 @@
     import {CONTROL_CONSTANTS} from "../config/constants";
     export default {
         name: "DatePickerControl",
-        props:['propControl', 'labelPosition'],
+        props:['value', 'labelPosition'],
         data: () => ({
-            control: {type: Object},
-            options: {
-            },
+            options: {},
         }),
         created() {
-            this.control= this.propControl;
             // set date format
-            this.options.dateFormat = this.control.dateFormat;
+            this.options.dateFormat = this.value.dateFormat;
 
             // if this control already have value, set it (value => default value => settings)
-            if (!_.isEmpty(this.control.value)) {
+            if (!_.isEmpty(this.value.value)) {
                 return; // stop
             }
 
             // default value
-            if (!_.isEmpty(this.control.defaultValue)) {
-                this.control.value = this.control.defaultValue;
+            if (!_.isEmpty(this.value.defaultValue)) {
+                this.value.value = this.value.defaultValue;
                 return;
             }
 
             // today value or not
-            if (this.control.isTodayValue) {
-                this.control.value = (moment().format(CONTROL_CONSTANTS.DateFormat[this.control.dateFormat]));
+            if (this.value.isTodayValue) {
+                this.value.value = (moment().format(CONTROL_CONSTANTS.DateFormat[this.value.dateFormat]));
             }
-        },
-        mounted() {
-            this.control= this.propControl;
+            //ToDo sceck default value
+            // console.log(this.value);
         }
     }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div class="controlItem form-group" :class="control.className">
-        <component :is="controlInstance" :propControl="control" :label-position="labelPosition"></component>
+        <component :is="controlInstance" v-model="control" :label-position="labelPosition"></component>
     </div>
 </template>
 

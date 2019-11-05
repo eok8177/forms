@@ -2,27 +2,27 @@
     <div>
         <div class="row" v-if="labelPosition === 'left'">
             <div class="col-md-4">
-                <label :class="{'bold': control.labelBold, 'italic': control.labelItalic, 'underline': control.labelUnderline}">
-                    {{control.label}}
+                <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">
+                    {{value.label}}
                 </label>
             </div>
             <div class="col-md-8">
                 <input type="time"
                    class="form-control"
-                   :readonly="this.control.readonly"
-                   :name="control.fieldName"
-                   v-model="control.value" />
+                   :readonly="value.readonly"
+                   :name="value.fieldName"
+                   v-model="value.value" />
             </div>
         </div>
         <div v-else class="form-group">
-            <label :class="{'bold': control.labelBold, 'italic': control.labelItalic, 'underline': control.labelUnderline}">
-                {{control.label}}
+            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">
+                {{value.label}}
             </label>
             <input type="time"
                class="form-control"
-               :readonly="this.control.readonly"
-               :name="control.fieldName"
-               v-model="control.value" />
+               :readonly="value.readonly"
+               :name="value.fieldName"
+               v-model="value.value" />
         </div>
     </div>
 </template>
@@ -31,25 +31,20 @@
     import {CONTROL_CONSTANTS} from "../config/constants";
     export default {
         name: "TimePickerControl",
-        props:['propControl', 'labelPosition'],
+        props:['value', 'labelPosition'],
         data: () => ({
-            control: {type: Object},
-            options: {
-                zindex:1111,
-            }
+            options: {}
         }),
         created() {
-            this.control= this.propControl;
-
             // setup data
-            this.options.timeFormat = this.control.timeFormat;
+            this.options.timeFormat = this.value.timeFormat;
 
-            if (!_.isEmpty(this.control.defaultValue)) {
-                this.control.value = this.control.defaultValue;
+            if (!_.isEmpty(this.value.defaultValue)) {
+                this.value.value = this.value.defaultValue;
             }
 
-            if (this.control.isNowTimeValue) {
-                this.control.value = moment().format(CONTROL_CONSTANTS.TimeFormat[this.control.timeFormat]);
+            if (this.value.isNowTimeValue) {
+                this.value.value = moment().format(CONTROL_CONSTANTS.TimeFormat[this.value.timeFormat]);
             }
         }
     }
