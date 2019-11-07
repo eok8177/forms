@@ -81,7 +81,8 @@
                   })
                   .then(
                     (response) => {
-                      console.log(response)
+                      console.log(response);
+                      window.location.href = '/success';
                     }
                   )
                   .catch(

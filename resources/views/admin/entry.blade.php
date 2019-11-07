@@ -1,21 +1,21 @@
 @extends('admin.layout')
 
 @section('content')
-<h5>Dashboard</h5>
+<h5>Entry</h5>
 
 
 <div class="table-responsive">
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">Entry</th>
-        <th scope="col">Form</th>
+        <th scope="col">Name</th>
+        <th scope="col">Value</th>
       </tr>
     </thead>
     @foreach($entries as $entry)
       <tr>
-        <td><a href="{{ route('admin.entry', $entry->entry_id) }}" class="btn">{{$entry->entry_id}}</a></td>
-        <td>{{$forms[$entry->form_id]}}</td>
+        <td>{{$entry->name}}</td>
+        <td>{{$entry->value}}</td>
       </tr>
 
     @endforeach

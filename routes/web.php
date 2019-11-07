@@ -12,6 +12,7 @@
 */
 
 Route::get('/', ['as' => 'front.index', 'uses' => 'FrontendController@index']);
+Route::get('/success', ['as' => 'front.success', 'uses' => 'FrontendController@success']);
 Route::get('/form/{id}', ['as' => 'front.form', 'uses' => 'FrontendController@form']);
 
 Auth::routes();
@@ -26,6 +27,8 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin', 'sad
     Route::put('ajax/status', ['as' => 'ajax.status', 'uses' => 'AjaxController@status']);
 
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
+    Route::get('entry/{entry}', ['as' => 'entry', 'uses' => 'DashboardController@entry']);
+
     Route::resource('user', 'UserController');
     Route::resource('form', 'FormController');
     Route::post('ajax/form/{id}', ['as' => 'ajax.form', 'uses' => 'AjaxController@form']);
