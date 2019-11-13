@@ -16,10 +16,11 @@ class Form extends Model
     /**
      * Search forms
      */
-    static function search($search, $order = 'ASC')
+    static function search($search, $trash = 0, $order = 'ASC')
     {
         $forms = Form::Where('title','LIKE', '%'.$search.'%');
-        return $forms;
+
+        return $forms->where('is_trash', $trash);
     }
 
 }

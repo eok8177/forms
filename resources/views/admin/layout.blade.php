@@ -24,14 +24,23 @@
 
 <body>
 
-  <div id="app">
+  <div id="app" class="menu-closed">
 
     {{-- Navigation --}}
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
-          <i class="fa fa-tachometer"></i> <span class="d-none d-md-inline">@lang('message.dashboard')</span>
-        </a>
+
+        <div class="navbar-nav flex-row">
+
+          <button type="button" class="menu-toggler nav-link" onclick="document.getElementById('app').classList.toggle('menu-closed');"><span class="navbar-toggler-icon"></span></button>
+
+          <a class="nav-link" href="{{ route('admin.dashboard') }}">
+            <i class="fa fa-tachometer"></i> <span class="d-none d-md-inline">@lang('message.dashboard')</span>
+          </a>
+
+          <a class="nav-link {{ request()->is('*form*') ? 'active' : '' }}" href="{{route('admin.form.index')}}"><i class="fa fa-file-text-o"></i> @lang('message.forms')</a>
+
+        </div>
 
         <ul class="navbar-nav flex-row">
           <li class="nav-item">
@@ -73,7 +82,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav flex-column side-nav">
 
-            <a class="nav-item nav-link {{ request()->is('*user*') ? 'active' : '' }}" href="{{route('admin.user.index')}}"><i class="fa fa-users"></i> @lang('message.users')</a>
+            {{-- <a class="nav-item nav-link {{ request()->is('*user*') ? 'active' : '' }}" href="{{route('admin.user.index')}}"><i class="fa fa-users"></i> @lang('message.users')</a> --}}
 
             <a class="nav-item nav-link {{ request()->is('*form*') ? 'active' : '' }}" href="{{route('admin.form.index')}}"><i class="fa fa-file-text-o"></i> @lang('message.forms')</a>
 

@@ -9,6 +9,9 @@
 <div class="table-responsive">
 
   <form class="input-group mb-3" action="{{ route('admin.form.index') }}" method="get">
+
+    <a class="btn btn-outline-secondary mr-5" href="{{ route('admin.form.index', ['trash'=>1]) }}">Trashed Forms</a>
+
     <input type="text" class="form-control" placeholder="Search ..." name="search">
     <div class="input-group-append">
       <button class="btn btn-outline-secondary" type="submit" >Search</button>
@@ -28,7 +31,7 @@
       <tr>
         <td>
           <a href="{{ route('admin.form.edit',    $form->id) }}" class="btn fa fa-pencil"></a>
-          <a href="{{ route('admin.form.destroy', $form->id) }}" class="btn fa fa-trash-o delete"></a>
+          {{-- <a href="{{ route('admin.form.destroy', $form->id) }}" class="btn fa fa-trash-o delete"></a> --}}
         </td>
         <td>{{$form->title}}</td>
         <td>

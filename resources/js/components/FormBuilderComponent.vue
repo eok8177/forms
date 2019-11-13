@@ -32,7 +32,7 @@
                 axios.post('/admin/ajax/form/'+this.formid, {data: this.form})
                   .then(
                     (response) => {
-                        console.log(response);
+                        // console.log(response);
                         this.status = true;
                     }
                   )

@@ -14,7 +14,8 @@ class FormController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search', false);
-        return view('admin.form.index', ['forms' => Form::search($search)->paginate(15)]);
+        $trash = $request->input('trash', false);
+        return view('admin.form.index', ['forms' => Form::search($search, $trash)->paginate(15)]);
     }
 
     public function create()
