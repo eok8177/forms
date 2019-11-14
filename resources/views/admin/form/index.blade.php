@@ -32,6 +32,7 @@
         <td>
           <a href="{{ route('admin.form.edit',    $form->id) }}" class="btn fa fa-pencil"></a>
           {{-- <a href="{{ route('admin.form.destroy', $form->id) }}" class="btn fa fa-trash-o delete"></a> --}}
+          <a class="btn fa fa-eye" href="{{route('front.form',$form->id)}}" target="_blank"></a>
         </td>
         <td>{{$form->title}}</td>
         <td>
