@@ -13,13 +13,13 @@ class UserController extends Controller
 {
     public function index()
     {
-        return redirect()->route('admin.user.index');
+        return redirect()->route('admin.dashboard');
         return view('admin.user.index', ['users' => User::all()]);
     }
 
     public function create()
     {
-        return redirect()->route('admin.user.index');
+        return redirect()->route('admin.dashboard');
         return view('admin.user.create', ['user' => new User]);
     }
 
