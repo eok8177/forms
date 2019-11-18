@@ -13,6 +13,7 @@
         data: () => ({
             controlInstance: null,
             show: true,
+            rules: {type: Object},
         }),
         created() {
             let self = this;
@@ -24,31 +25,42 @@
             this.controlInstance = CONTROL_TYPES[this.control.type].source;
 
             if (this.control.isCalculated) {
-                console.log(this.control);
                 this.show = this.control.condition.action_type == 'show' ? false : true;
 
                 _.each(this.control.condition.rules, (rule) => {
+                    self.rules[rule.fieldId] = false;
 
                     // add Event to target field
                     $('body').on('change', 'input[name="'+rule.fieldId+'"]', function(){
                         let valid = false;
+                        let numVal = parseFloat($(this).val());
+                        let stringVal = $(this).val();
                         switch(rule.operator) {
                           case 'is':
-                            if (parseInt($(this).val()) == rule.value) valid = true;
+                            if (numVal == rule.value) valid = true;
                             break;
                           case 'is_not':
-                            if (parseInt($(this).val()) != rule.value) valid = true;
+                            if (numVal != rule.value) valid = true;
                             break;
                           case 'greater':
-                            if (parseInt($(this).val()) > rule.value) valid = true;
+                            if (numVal > rule.value) valid = true;
                             break;
                           case 'less':
-                            if (parseInt($(this).val()) < rule.value) valid = true;
+                            if (numVal < rule.value) valid = true;
+                            break;
+                          case 'contain':
+                            if (stringVal.indexOf(rule.value) >= 0) valid = true;
+                            break;
+                          case 'start':
+                            if (stringVal.startsWith(rule.value)) valid = true;
+                            break;
+                          case 'end':
+                            if (stringVal.endsWith(rule.value)) valid = true;
                             break;
                           default:
                             valid = false;
                         }
-                        self.toggleField(valid);
+                        self.toggleField(rule.fieldId, valid);
                     });
 
                 });
@@ -56,9 +68,18 @@
             }
         },
         methods: {
-            toggleField(valid) {
-                //TODO: add login on this.control.condition.logic_type AND many rules
-                this.show = this.control.condition.action_type == 'show' ? valid : !valid;
+            toggleField(fieldId, valid) {
+                this.rules[fieldId] = valid;
+                let show = this.control.condition.logic_type == 'all' ? true : false;
+                _.each(this.rules, (value) => {
+                    if (this.control.condition.logic_type == 'all') { // AND logic
+                        if (value === false) show = false;
+                    }
+                    if (this.control.condition.logic_type == 'any') { // OR logic
+                        if (value === true) show = true;
+                    }
+                });
+                this.show = this.control.condition.action_type == 'show' ? show : !show;
             }
         }
     }
