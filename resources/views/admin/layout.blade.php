@@ -54,12 +54,12 @@
 
               <div class="dropdown-divider"></div>
 
-              <h6 class="dropdown-header">@lang('message.users')</h6>
+              {{-- <h6 class="dropdown-header">@lang('message.users')</h6> --}}
 
-              <a class="dropdown-item" href="{{route('admin.user.create')}}"><i class="fa fa-user"></i> @lang('message.create')</a>
-              <a class="dropdown-item" href="{{route('admin.user.index')}}"><i class="fa fa-users"></i> @lang('message.users')</a>
+              {{-- <a class="dropdown-item" href="{{route('admin.user.create')}}"><i class="fa fa-user"></i> @lang('message.create')</a> --}}
+              {{-- <a class="dropdown-item" href="{{route('admin.user.index')}}"><i class="fa fa-users"></i> @lang('message.users')</a> --}}
 
-              <div class="dropdown-divider"></div>
+              {{-- <div class="dropdown-divider"></div> --}}
 
               <a href="{{ route('logout') }}" class="dropdown-item"
                  onclick="event.preventDefault();document.getElementById('logout-form').submit();">
