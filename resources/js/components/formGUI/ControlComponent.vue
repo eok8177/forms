@@ -27,20 +27,22 @@
             if (this.control.isCalculated) {
                 this.show = this.control.condition.action_type == 'show' ? false : true;
 
-                _.each(this.control.condition.rules, (rule) => {
-                    self.rules[rule.fieldId] = false;
+                _.each(this.control.condition.rules, (rule, key) => {
+                    self.rules[key] = false;
 
                     // add Event to target field
-                    $('body').on('change', 'input[name="'+rule.fieldId+'"]', function(){
+                    $('body').on('change', '[name="'+rule.fieldId+'"]', function(){
                         let valid = false;
                         let numVal = parseFloat($(this).val());
-                        let stringVal = $(this).val();
+                        let stringVal = $(this).val().toString();
+                        if($(this).attr('type') == "checkbox") stringVal = this.checked ? 1 : 0;
+
                         switch(rule.operator) {
                           case 'is':
-                            if (numVal == rule.value) valid = true;
+                            if (stringVal == rule.value) valid = true;
                             break;
                           case 'is_not':
-                            if (numVal != rule.value) valid = true;
+                            if (stringVal != rule.value) valid = true;
                             break;
                           case 'greater':
                             if (numVal > rule.value) valid = true;
@@ -60,7 +62,7 @@
                           default:
                             valid = false;
                         }
-                        self.toggleField(rule.fieldId, valid);
+                        self.toggleField(key, valid);
                     });
 
                 });
@@ -68,15 +70,21 @@
             }
         },
         methods: {
-            toggleField(fieldId, valid) {
-                this.rules[fieldId] = valid;
+            toggleField(key, valid) {
+                this.rules[key] = valid;
                 let show = this.control.condition.logic_type == 'all' ? true : false;
                 _.each(this.rules, (value) => {
                     if (this.control.condition.logic_type == 'all') { // AND logic
-                        if (value === false) show = false;
+                        if (value === false) {
+                            show = false;
+                            return true;
+                        }
                     }
                     if (this.control.condition.logic_type == 'any') { // OR logic
-                        if (value === true) show = true;
+                        if (value === true) {
+                            show = true;
+                            return true;
+                        }
                     }
                 });
                 this.show = this.control.condition.action_type == 'show' ? show : !show;

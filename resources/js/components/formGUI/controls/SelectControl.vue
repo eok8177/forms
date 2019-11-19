@@ -10,6 +10,7 @@
                 <select class="form-control" 
                     v-model="value.value"
                     :multiple="value.isMultiple"
+                    :name="value.fieldName"
                     :disabled="value.readonly">
                   <option v-for="option in dataSource" v-bind:value="option.id">{{option.text}}</option>
                 </select>
@@ -23,6 +24,7 @@
             <select class="form-control" 
                 v-model="value.value"
                 :multiple="value.isMultiple"
+                :name="value.fieldName"
                 :disabled="value.readonly">
               <option v-for="option in dataSource" v-bind:value="option.id">{{option.text}}</option>
             </select>

@@ -6,6 +6,7 @@
                :id = "value.name + '_gui_control'"
                :readonly="value.readonly"
                :name="value.fieldName"
+               value="1"
                v-model="value.value" />
             <label :for="value.name + '_gui_control'"
                    class="custom-control-label"
@@ -19,6 +20,7 @@
                :id = "value.name + '_gui_control'"
                :readonly="value.readonly"
                :name="value.fieldName"
+               value="1"
                v-model="value.value" />
 
             <label :for="value.name + '_gui_control'"
