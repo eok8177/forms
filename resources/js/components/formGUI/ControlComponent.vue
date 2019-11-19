@@ -24,7 +24,7 @@
             // set control
             this.controlInstance = CONTROL_TYPES[this.control.type].source;
 
-            if (this.control.isCalculated) {
+            if (this.control.isConditional) {
                 this.show = this.control.condition.action_type == 'show' ? false : true;
 
                 _.each(this.control.condition.rules, (rule, key) => {
