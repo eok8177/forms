@@ -50,7 +50,7 @@
                 }
                 this.instances.push(_.cloneDeep(this.dynamicTemplate));
                 //Update parent object instances field
-                this.$parent.updateInstances(this.index, this.instances);
+                this.$parent.$parent.updateInstances(this.index, this.instances);
             },
             removeDynamicObj(index) {
                 if (this.value.minInstance === this.value.instances.length) {
@@ -59,7 +59,7 @@
                 }
                 this.instances.splice(index, 1);
                 //Update parent object instances field
-                this.$parent.updateInstances(this.index, this.instances);
+                this.$parent.$parent.updateInstances(this.index, this.instances);
             },
             generateDynamic() {
                 if (this.value.isDynamic) {
