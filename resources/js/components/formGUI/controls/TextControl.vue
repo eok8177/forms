@@ -1,5 +1,12 @@
 <template>
     <div>
+      <div v-if="value.hidden">
+        <input type="hidden"
+               :readonly="value.readonly"
+               :name="value.fieldName"
+               v-model="value.value" />
+      </div>
+      <div v-else>
         <div class="row" v-if="labelPosition === 'left'">
             <div class="col-md-4">
                 <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">
@@ -35,6 +42,7 @@
                       :readonly="value.readonly"
                       :name="value.fieldName"></textarea>
         </div>
+      </div>
     </div>
 </template>
 

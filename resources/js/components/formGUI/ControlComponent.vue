@@ -1,5 +1,5 @@
 <template>
-    <div class="controlItem form-group" :class="control.className" v-if="show">
+    <div class="controlItem form-group" :class="control.hidden ? '' : control.className" v-if="show">
         <component :is="controlInstance" v-model="control" :label-position="labelPosition"></component>
     </div>
 </template>
@@ -13,7 +13,8 @@
         data: () => ({
             controlInstance: null,
             show: true,
-            rules: {type: Object},
+            rules: {},
+            formula: {},
         }),
         created() {
             let self = this;
@@ -68,6 +69,29 @@
                 });
 
             }
+
+            // Parse Formula object from string
+            if (this.control.isCalculated) {
+                let fields = this.control.formula.replace(/\s/g, ""); //remove whitespace's
+                fields.replace(/\s*\{.*?\}\s*/g, function(match, key, value){
+                    let fieldId = match.replace(/\{([\s\S]+)\:/g, "");
+                    fieldId = fieldId.replace(/\}/g, "");
+                    self.formula = Object.assign(self.formula, {
+                        [fieldId]: {
+                            key: key,
+                            value: '',
+                            text: match
+                        }
+                    });
+                });
+
+                // set events to terget fields
+                _.each(this.formula, (field, key) => {
+                    $('body').on('change', '[name="'+key+'"]', function(){
+                        self.calcField(key, $(this).val());
+                    });
+                });
+            }
         },
         methods: {
             toggleField(key, valid) {
@@ -88,6 +112,28 @@
                     }
                 });
                 this.show = this.control.condition.action_type == 'show' ? show : !show;
+            },
+            calcField(fieldId, value) {
+                this.formula[fieldId].value = value;
+                let self = this;
+                let runCalc = true;
+                _.each(this.formula, (item) => {
+                    if (!item.value) runCalc = false;
+                });
+                this.control.value = '';
+                if (runCalc) {
+                    let formula = this.control.formula.replace(/\s/g, ""); //remove whitespace's
+                    formula = formula.replace(/\s*\{.*?\}\s*/g, function(match, key, value) {
+                        let fieldId = match.replace(/\{([\s\S]+)\:/g, "");
+                        fieldId = fieldId.replace(/\}/g, "");
+                        return self.formula[fieldId].value; //fill formula by values
+                    });
+                    try { // calculate formula
+                        this.control.value = eval(formula);
+                    } catch (e) {
+                        console.log('Formula Error');
+                    }
+                }
             }
         }
     }
