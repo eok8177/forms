@@ -9,7 +9,7 @@
       <div v-else>
         <div class="row" v-if="labelPosition === 'left'">
             <div class="col-md-4">
-                <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label"></label>
+                <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
             </div>
             <div class="col-md-8">
                 <input type="text"
@@ -17,25 +17,29 @@
                        :readonly="value.readonly"
                        v-if="!value.isMultiLine"
                        :name="value.fieldName"
+                       :required="value.required"
                        v-model="value.value" />
                 <textarea v-else class="form-control"
                           v-model="value.value"
                           :readonly="value.readonly"
+                          :required="value.required"
                           :name="value.fieldName"></textarea>
             </div>
         </div>
         <div v-else class="form-group">
-            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label"></label>
+            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
 
             <input type="text"
                    class="form-control"
                    :readonly="value.readonly"
                    v-if="!value.isMultiLine"
                    :name="value.fieldName"
+                   :required="value.required"
                    v-model="value.value" />
             <textarea v-else class="form-control"
                       v-model="value.value"
                       :readonly="value.readonly"
+                      :required="value.required"
                       :name="value.fieldName"></textarea>
         </div>
       </div>

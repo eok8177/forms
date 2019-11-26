@@ -84,3 +84,10 @@
         }
     }
 </script>
+
+<style module>
+    label.required:after {
+        content: "*";
+        color: red;
+    }
+</style>

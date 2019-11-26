@@ -9,6 +9,7 @@
                    class="form-control"
                    :readonly="value.readonly"
                    :name="value.fieldName"
+                   :required="value.required"
                    v-model="value.value" />
             </div>
         </div>
@@ -18,6 +19,7 @@
                class="form-control"
                :readonly="value.readonly"
                :name="value.fieldName"
+               :required="value.required"
                v-model="value.value" />
         </div>
     </div>

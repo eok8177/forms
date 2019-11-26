@@ -6,6 +6,7 @@
                :id = "value.name + '_gui_control'"
                :readonly="value.readonly"
                :name="value.fieldName"
+               :required="value.required"
                value="1"
                v-model="value.value" />
             <label :for="value.name + '_gui_control'"
@@ -13,6 +14,7 @@
                    :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}"
                    v-html="value.label">
             </label>
+            <span v-if="value.required" style="color:red;">*</span>
         </div>
         <div class="form-check" v-else>
             <input type="checkbox"
@@ -20,6 +22,7 @@
                :id = "value.name + '_gui_control'"
                :readonly="value.readonly"
                :name="value.fieldName"
+               :required="value.required"
                value="1"
                v-model="value.value" />
 
@@ -28,6 +31,7 @@
                    :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}"
                    v-html="value.label">
             </label>
+            <span v-if="value.required" style="color:red;">*</span>
         </div>
     </div>
 </template>

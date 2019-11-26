@@ -2,7 +2,7 @@
     <div>
         <div class="row" v-if="labelPosition === 'left'">
             <div class="col-md-4">
-                <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label"></label>
+                <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
             </div>
             <div class="col-md-8">
                 <div class="input-group">
@@ -11,13 +11,14 @@
                        :readonly="value.readonly"
                        :name="value.fieldName"
                        :step="controlStep"
+                       :required="value.required"
                        @change="numberChange"
                        v-model="value.value" />
                 </div>
             </div>
         </div>
         <div class="form-group" v-else>
-            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label"></label>
+            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
 
             <div class="input-group">
                 <input type="number"
@@ -25,6 +26,7 @@
                    :readonly="value.readonly"
                    :name="value.fieldName"
                    :step="controlStep"
+                   :required="value.required"
                    @change="numberChange"
                    v-model="value.value" />
             </div>

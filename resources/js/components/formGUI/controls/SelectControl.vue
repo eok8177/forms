@@ -2,13 +2,14 @@
     <div>
         <div class="row" v-if="labelPosition === 'left'">
             <div class="col-md-4">
-                <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label"></label>
+                <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
             </div>
             <div class="col-md-8">
                 <select class="form-control" 
                     v-model="value.value"
                     :multiple="value.isMultiple"
                     :name="value.fieldName"
+                    :required="value.required"
                     :disabled="value.readonly">
                   <option v-for="option in dataSource" v-bind:value="option.id">{{option.text}}</option>
                 </select>
@@ -16,11 +17,12 @@
         </div>
 
         <div class="form-group" v-else>
-            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label"></label>
+            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
             <select class="form-control" 
                 v-model="value.value"
                 :multiple="value.isMultiple"
                 :name="value.fieldName"
+                :required="value.required"
                 :disabled="value.readonly">
               <option v-for="option in dataSource" v-bind:value="option.id">{{option.text}}</option>
             </select>
