@@ -10,8 +10,8 @@
                v-model="value.value" />
             <label :for="value.name + '_gui_control'"
                    class="custom-control-label"
-                   :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">
-                {{value.label}}
+                   :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}"
+                   v-html="value.label">
             </label>
         </div>
         <div class="form-check" v-else>
@@ -25,8 +25,8 @@
 
             <label :for="value.name + '_gui_control'"
                    class="custom-control-label"
-                   :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">
-                {{value.label}}
+                   :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}"
+                   v-html="value.label">
             </label>
         </div>
     </div>

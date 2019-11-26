@@ -1,9 +1,7 @@
 <template>
     <div>
         <div class="form-group row datePickerControl" v-if="labelPosition === 'left'">
-            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline} + ' col-sm-4 col-form-label'">
-                {{value.label}}
-            </label>
+            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline} + ' col-sm-4 col-form-label'" v-html="value.label"></label>
             <div class="col-sm-8">
                 <input type="date"
                    class="form-control"
@@ -14,9 +12,7 @@
         </div>
 
         <div class="form-group" v-else>
-            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">
-                {{value.label}}
-            </label>
+            <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label"></label>
 
             <input type="date"
                class="form-control"
