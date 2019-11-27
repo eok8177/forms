@@ -5,6 +5,8 @@ import NumberControl from '../controls/NumberControl';
 import SelectControl from '../controls/SelectControl';
 import TextControl from '../controls/TextControl';
 import TimePickerControl from '../controls/TimePickerControl';
+import FileControl from '../controls/FileControl';
+import HtmlControl from '../controls/HtmlControl';
 
 const CONTROL_TYPES = {
     text: {
@@ -30,7 +32,15 @@ const CONTROL_TYPES = {
     checkbox: {
         label:"Checkbox",
         source: CheckboxControl
-    }
+    },
+    file: {
+        label:"File Input",
+        source: FileControl
+    },
+    html: {
+        label:"HTML Block",
+        source: HtmlControl
+    },
 };
 
 export {
