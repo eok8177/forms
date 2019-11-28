@@ -7,6 +7,7 @@ import TextControl from '../controls/TextControl';
 import TimePickerControl from '../controls/TimePickerControl';
 import FileControl from '../controls/FileControl';
 import HtmlControl from '../controls/HtmlControl';
+import AddressControl from '../controls/AddressControl';
 
 const CONTROL_TYPES = {
     text: {
@@ -40,6 +41,10 @@ const CONTROL_TYPES = {
     html: {
         label:"HTML Block",
         source: HtmlControl
+    },
+    address: {
+        label:"Address Block",
+        source: AddressControl
     },
 };
 
