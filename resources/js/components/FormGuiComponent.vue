@@ -28,6 +28,8 @@
         },
         data: () => ({
             formdata: {type: Object},
+            submitData: {},
+            validForm: true,
         }),
         methods: {
             updateInstances(index, instance) {
@@ -35,38 +37,64 @@
             },
             Submit() {
                 // parse form object
-                let submitData = {};
-                let i = 0;
-                _.forEach(this.formdata.sections, function(value) {
-                    if (value.isDynamic) { // parse sections
-                        _.forEach(value.instances, function(value) {
-                            _.forEach(value, function(value) {
-                                _.forEach(value.controls, function(value) {
-                                    submitData[i] = {
-                                        label: value.label,
-                                        value: value.value
-                                    };
-                                    i++;
-                                });
+                let self = this;
+                self.validForm = true;
+                self.submitData = {};
+                _.forEach(this.formdata.sections, function(section) {
+                    if (section.isDynamic) { // parse in Dynamic section
+                        _.forEach(section.instances, function(instance) {
+                            _.forEach(instance, function(value) {
+                                self.fillSubmitData(value.controls);
                             });
                         });
                     } else {
-                        _.forEach(value.rows, function(value) {
-                            _.forEach(value.controls, function(value) {
-                                submitData[i] = {
-                                    label: value.label,
-                                    value: value.value
-                                };
-                                i++;
-                            });
+                        _.forEach(section.rows, function(row) {
+                            self.fillSubmitData(row.controls);
                         });
                     }
                 });
+
                 //send to server
-                console.log(submitData);
+                if (self.validForm) {
+                    this.sendFrom();
+                }
+            },
+
+            fillSubmitData(controls) {
+                let self = this;
+                let i = Object.keys(self.submitData).length;
+                _.forEach(controls, function(control) {
+                    // Validate start
+                    let valid = true;
+                    if (control.type != 'file' && control.type != 'html') { //TODO file
+                        $('body [name="'+control.name+'"]').removeClass('is-invalid');
+                        if (control.required) {
+                            if (!control.value) {
+                                self.validForm = false;
+                                valid = false
+                                $('body [name="'+control.name+'"]').addClass('is-invalid');
+                            }
+                        }
+                    }
+
+                    self.submitData = Object.assign(self.submitData, {
+                        [i]: {
+                            label: control.label,
+                            value: control.value,
+                            name: control.name,
+                            valid: valid
+                        }
+                    });
+                    i++;
+                });
+            },
+
+            sendFrom() {
+                // console.log(this.submitData);
+                // return false;
                 axios.post('/api/post-form', {
                     formid: this.formid,
-                    data: submitData
+                    data: this.submitData
                   })
                   .then(
                     (response) => {

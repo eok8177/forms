@@ -50,7 +50,18 @@
                     SethPhatToaster.error("Maximum instances reached, can't create more.");
                     return;
                 }
-                this.instances.push(_.cloneDeep(this.dynamicTemplate));
+
+                //set unique fieldName to cloned items
+                let template = _.cloneDeep(this.dynamicTemplate);
+                let i = Object.keys(this.instances).length;
+                _.forEach(template, function(row, rowKey) {
+                    _.forEach(row.controls, function(control, controlKey) {
+                        template[rowKey].controls[controlKey].name += i;
+                        template[rowKey].controls[controlKey].fieldName += i;
+                    });
+                });
+
+                this.instances.push(template);
                 //Update parent object instances field
                 this.$parent.$parent.updateInstances(this.index, this.instances);
             },
