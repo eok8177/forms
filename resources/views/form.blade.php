@@ -14,6 +14,7 @@
       </ul>
     </div> --}}
     <div class="col-sm-12">
+      <h2>{{$form->title}}</h2>
       <form-gui-component :form="{{$form->config ?? 'null'}}" :formid="{{$form->id}}" class="py-2 px-2 bg-white"></form-gui-component>
     </div>
   </div>

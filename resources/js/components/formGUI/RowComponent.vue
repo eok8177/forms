@@ -10,6 +10,8 @@
                     <span class="remove text-danger" @click="removeDynamicObj(index)"><i class="fa fa-times-circle"></i></span>
                 </div>
 
+                <hr  v-if="index > 0">
+
                 <div class="row" v-for="row in instance">
                     <control-component v-for="control in row.controls"
                                        :key="control.name + index"
