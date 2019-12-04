@@ -8,6 +8,7 @@ import TimePickerControl from '../controls/TimePickerControl';
 import FileControl from '../controls/FileControl';
 import HtmlControl from '../controls/HtmlControl';
 import AddressControl from '../controls/AddressControl';
+import RadioControl from '../controls/RadioControl';
 
 const CONTROL_TYPES = {
     text: {
@@ -45,6 +46,10 @@ const CONTROL_TYPES = {
     address: {
         label:"Address Block",
         source: AddressControl
+    },
+    radio: {
+        label:"Radio Block",
+        source: RadioControl
     },
 };
 
