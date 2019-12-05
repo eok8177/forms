@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-<h5>Entry</h5>
+<h5>Response</h5>
 
 
 <div class="table-responsive">

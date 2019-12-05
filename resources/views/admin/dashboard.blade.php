@@ -8,7 +8,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">Entry</th>
+        <th scope="col">Responses</th>
         <th scope="col">Form</th>
       </tr>
     </thead>
