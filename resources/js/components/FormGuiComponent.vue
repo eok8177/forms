@@ -35,32 +35,54 @@
             updateInstances(index, instance) {
                 this.formdata.sections[index].instances = instance;
             },
-            Submit() {
-                // parse form object
-                let self = this;
-                self.validForm = true;
-                self.submitData = {};
-                _.forEach(this.formdata.sections, function(section) {
-                    if (section.isDynamic) { // parse in Dynamic section
-                        _.forEach(section.instances, function(instance) {
-                            _.forEach(instance, function(value) {
-                                self.fillSubmitData(value.controls);
-                            });
-                        });
+
+            toggleSection(index) {
+                if (index > 0) {
+                    // parse & validate previous sections
+                    this.parseForm(index);
+
+                // collapse toggle logic: open previous not-valid section
+                    if (this.validForm) {
+                        $('#'+this.form.sections[index - 1].name + '_gui_body').collapse('hide');
+                        $('#'+this.form.sections[index].name + '_gui_body').collapse('toggle');
                     } else {
-                        _.forEach(section.rows, function(row) {
-                            self.fillSubmitData(row.controls);
-                        });
+                        $('#'+this.form.sections[index].name + '_gui_body').collapse('show');
                     }
-                });
+                } else {
+                    $('#'+this.form.sections[index].name + '_gui_body').collapse('toggle');
+                }
+            },
+            Submit() {
+                // parse all form object
+                this.parseForm(false);
 
                 //send to server
-                if (self.validForm) {
+                if (this.validForm) {
                     this.sendFrom();
                 }
             },
 
-            fillSubmitData(controls) {
+            parseForm(index) {
+                let self = this;
+                self.validForm = true;
+                self.submitData = {};
+                _.forEach(this.formdata.sections, function(section, key) {
+                    if (index && key == index) return false;
+                    if (section.isDynamic) { // parse in Dynamic section
+                        _.forEach(section.instances, function(instance) {
+                            _.forEach(instance, function(value) {
+                                self.fillSubmitData(value.controls, key);
+                            });
+                        });
+                    } else {
+                        _.forEach(section.rows, function(row) {
+                            self.fillSubmitData(row.controls, key);
+                        });
+                    }
+                });
+            },
+
+            fillSubmitData(controls, section) {
                 let self = this;
                 let i = Object.keys(self.submitData).length;
                 _.forEach(controls, function(control) {
@@ -73,6 +95,7 @@
                                 self.validForm = false;
                                 valid = false
                                 $('body [name="'+control.name+'"]').addClass('is-invalid');
+                                $('#'+self.form.sections[section].name + '_gui_body').collapse('show');
                             }
                         }
                     }
@@ -109,6 +132,10 @@
         },
         created() {
             this.formdata = this.form;
+        },
+        mounted() {
+            // open first Section
+            $('#'+this.form.sections[0].name + '_gui_body').collapse('show');
         }
     }
 </script>

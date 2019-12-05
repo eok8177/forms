@@ -1,15 +1,16 @@
 <template>
     <div class="section" v-if="show">
 
-      <button class="btn btn-link w-100 text-left bg-light"
+      <button class="btn btn-link w-100 text-left bg-light btn-collapse"
           type="button"
           data-toggle="collapse"
           :data-target="'#'+section.name + '_gui_body'"
-          aria-expanded="true" >
+          aria-expanded="false"
+          @click.stop.prevent="toggleSection()" >
         <h2 class="mb-0">{{section.label}}</h2>
       </button>
 
-      <div :id="section.name + '_gui_body'" class="collapse show">
+      <div :id="section.name + '_gui_body'" class="collapse">
           <row-component v-model="section" :key="section.name" :index="index"></row-component>
       </div>
     </div>
@@ -93,11 +94,29 @@
                     }
                 });
                 this.show = this.section.condition.action_type == 'show' ? show : !show;
+            },
+
+            toggleSection() {
+                this.$parent.toggleSection(this.index);
             }
         }
     }
 </script>
 
-<style scoped>
-
+<style lang="scss" module>
+    .btn-collapse {
+        position: relative;
+        &:hover, &:focus {text-decoration: none;}
+        &:after {
+            content: "-";
+            position: absolute;
+            right: 10px;
+            top: 2px;
+            font-size: 40px;
+            line-height: 40px;
+        }
+        &[aria-expanded="false"]:after {
+            content: "+";
+        }
+    }
 </style>
