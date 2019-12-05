@@ -9,6 +9,7 @@
                      class="form-control-file"
                      :name="value.fieldName"
                      :required="value.required"
+                     @change="processFile($event)"
                      />
           </div>
       </div>
@@ -19,6 +20,7 @@
                  class="form-control-file"
                  :name="value.fieldName"
                  :required="value.required"
+                 @change="processFile($event)"
                  />
       </div>
     </div>
@@ -29,8 +31,12 @@
         name: "FileControl",
         props: ['value', 'labelPosition'],
         mounted() {
+        },
+        methods: {
+          processFile(event) {
+            this.value.value = event.target.files[0];
+          }
         }
-        //TODO get file and send it to server
     }
 </script>
 

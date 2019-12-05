@@ -15,7 +15,7 @@
     @foreach($entries as $entry)
       <tr>
         <td>{{$entry->name}}</td>
-        <td>{{$entry->value}}</td>
+        <td>{!! $entry->value !!}</td>
       </tr>
 
     @endforeach

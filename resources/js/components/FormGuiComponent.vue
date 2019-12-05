@@ -30,6 +30,8 @@
             formdata: {type: Object},
             submitData: {},
             validForm: true,
+            files: {},
+            entryid: false
         }),
         methods: {
             updateInstances(index, instance) {
@@ -88,7 +90,7 @@
                 _.forEach(controls, function(control) {
                     // Validate start
                     let valid = true;
-                    if (control.type != 'file' && control.type != 'html') { //TODO file
+                    if (control.type != 'file' && control.type != 'html') {
                         $('body [name="'+control.name+'"]').removeClass('is-invalid');
                         if (control.required) {
                             if (control.type != 'address' && !control.value) {
@@ -109,10 +111,16 @@
                             }
                         }
                     }
+                    if (control.type == 'file' && control.value) { // save files
+                        self.files[control.name] = {
+                            name: control.label,
+                            data: control.value,
+                        };
+                    }
                     //fill from address block
                     if (control.type == 'address') {
                         for (var j = 1; j <= 5; j++) {
-                            if (control['show'+j]) {
+                            if (control['show'+j] && control['value' + j]) {
                                 self.submitData = Object.assign(self.submitData, {
                                     [i]: {
                                         label: control['label' + j],
@@ -123,7 +131,7 @@
                                 i++;
                             }
                         }
-                    } else {
+                    } else if (control.type != 'file' && control.type != 'html' && control.value) {
                         self.submitData = Object.assign(self.submitData, {
                             [i]: {
                                 label: control.label,
@@ -141,21 +149,39 @@
             },
 
             sendFrom() {
-                console.log(this.submitData);
-                return false;
+                // console.log(this.files);
+                // console.log(this.submitData);
+                // return false;
                 axios.post('/api/post-form', {
                     formid: this.formid,
                     data: this.submitData
                   })
                   .then(
                     (response) => {
-                      console.log(response);
-                      window.location.href = '/success';
+                      this.entryid = response.data.entryid;
+                      this.sendFiles();
                     }
                   )
                   .catch(
                     (error) => console.log(error)
                   );
+            },
+
+            sendFiles() {
+                let self = this;
+                _.forEach(self.files, function(file,key) {
+                    var formData = new FormData();
+                    formData.append('entryId', self.entryid);
+                    formData.append('formId', self.formid);
+                    formData.append('fieldName', file.name);
+                    formData.append('file', file.data);
+                    axios.post('/api/upload-file', formData, {
+                        headers: {
+                          'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                });
+                window.location.href = '/success';
             }
         },
         created() {

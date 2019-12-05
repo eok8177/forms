@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Form;
 use App\Entry;
@@ -41,7 +42,32 @@ class FormController extends Controller
 
         return response()->json([
             'status' => 'OK',
+            'entryid' => $entry_id
         ], 200);
+    }
+
+    public function upload(Request $request) {
+
+        $entryId = $request->get('entryId');
+        $formId = $request->get('formId');
+        if ($fieldName = $request->get('fieldName')) {
+            $filename = $request->file->store('uploads/'.$formId.'/'.$entryId.'/', 'public');
+
+            $entry = new Entry;
+            $entry->entry_id = $entryId;
+            $entry->form_id = $formId;
+            $entry->name = $fieldName;
+            $entry->value = '<a href="/'.$filename.'" target="_blank">Download</a>';
+            $entry->save();
+
+            return response()->json([
+                'status' => 'OK',
+            ], 200);
+        }
+
+        return response()->json([
+            'status' => 'not found file',
+        ], 400);
     }
 
 }
