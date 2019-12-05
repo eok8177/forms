@@ -7,9 +7,10 @@
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.labelMap"></label>
           <div class="input-group">
               <input type="text" class="form-control"
-                     :readonly="value.readonly"
-                     :name="value.fieldName + 'Map'"
-                     >
+                 v-model="value.valueMap"
+                 :readonly="value.readonly"
+                 :name="value.fieldName + 'Map'"
+                 >
           </div>
       </div>
 
@@ -17,9 +18,10 @@
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label1"></label>
           <div class="input-group">
               <input type="text" class="form-control"
-                     :readonly="value.readonly"
-                     :name="value.fieldName + '1'"
-                     >
+                 v-model="value.value1"
+                 :readonly="value.readonly"
+                 :name="value.fieldName + '1'"
+                 >
           </div>
       </div>
 
@@ -27,9 +29,10 @@
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label2"></label>
           <div class="input-group">
               <input type="text" class="form-control"
-                     :readonly="value.readonly"
-                     :name="value.fieldName + '2'"
-                     >
+                 v-model="value.value2"
+                 :readonly="value.readonly"
+                 :name="value.fieldName + '2'"
+                 >
           </div>
       </div>
 
@@ -37,9 +40,10 @@
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label3"></label>
           <div class="input-group">
               <input type="text" class="form-control"
-                     :readonly="value.readonly"
-                     :name="value.fieldName + '3'"
-                     >
+                 v-model="value.value3"
+                 :readonly="value.readonly"
+                 :name="value.fieldName + '3'"
+                 >
           </div>
       </div>
 
@@ -47,9 +51,10 @@
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label4"></label>
           <div class="input-group">
               <input type="text" class="form-control"
-                     :readonly="value.readonly"
-                     :name="value.fieldName + '4'"
-                     >
+                 v-model="value.value4"
+                 :readonly="value.readonly"
+                 :name="value.fieldName + '4'"
+                 >
           </div>
       </div>
 
@@ -57,9 +62,10 @@
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label5"></label>
           <div class="input-group">
               <input type="text" class="form-control"
-                     :readonly="value.readonly"
-                     :name="value.fieldName + '5'"
-                     >
+                 v-model="value.value5"
+                 :readonly="value.readonly"
+                 :name="value.fieldName + '5'"
+                 >
           </div>
       </div>
 

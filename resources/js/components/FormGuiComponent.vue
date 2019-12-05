@@ -91,30 +91,58 @@
                     if (control.type != 'file' && control.type != 'html') { //TODO file
                         $('body [name="'+control.name+'"]').removeClass('is-invalid');
                         if (control.required) {
-                            if (!control.value) {
+                            if (control.type != 'address' && !control.value) {
                                 self.validForm = false;
                                 valid = false
                                 $('body [name="'+control.name+'"]').addClass('is-invalid');
-                                $('#'+self.form.sections[section].name + '_gui_body').collapse('show');
+                            }
+                            // Validate Address block
+                            if (control.type == 'address') {
+                                for (var j = 1; j <= 5; j++) {
+                                    $('body [name="'+control.name+j+'"]').removeClass('is-invalid');
+                                    if (control['show'+j] && !control['value'+j] && j != 2) {
+                                        self.validForm = false;
+                                        valid = false
+                                        $('body [name="'+control.name+j+'"]').addClass('is-invalid');
+                                    }
+                                }
                             }
                         }
                     }
-
-                    self.submitData = Object.assign(self.submitData, {
-                        [i]: {
-                            label: control.label,
-                            value: control.value,
-                            name: control.name,
-                            valid: valid
+                    //fill from address block
+                    if (control.type == 'address') {
+                        for (var j = 1; j <= 5; j++) {
+                            if (control['show'+j]) {
+                                self.submitData = Object.assign(self.submitData, {
+                                    [i]: {
+                                        label: control['label' + j],
+                                        value: control['value' + j],
+                                        valid: valid
+                                    }
+                                });
+                                i++;
+                            }
                         }
-                    });
-                    i++;
+                    } else {
+                        self.submitData = Object.assign(self.submitData, {
+                            [i]: {
+                                label: control.label,
+                                value: control.value,
+                                valid: valid
+                            }
+                        });
+                        i++;
+                    }
+
+                    if (!valid) {
+                        $('#'+self.form.sections[section].name + '_gui_body').collapse('show');
+                    }
                 });
             },
 
             sendFrom() {
-                // console.log(this.submitData);
-                // return false;
+                console.log(this.submitData);
+                return false;
                 axios.post('/api/post-form', {
                     formid: this.formid,
                     data: this.submitData
