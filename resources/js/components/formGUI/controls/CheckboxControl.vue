@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="custom-control custom-switch" v-if="labelPosition === 'left'">
+        <div class="custom-control custom-switch" v-if="labelPosition === 'left'" :class="value.cssClass">
             <input type="checkbox"
                class="custom-control-input"
                :id = "value.name + '_gui_control'"
@@ -16,7 +16,7 @@
             </label>
             <span v-if="value.required" style="color:red;">*</span>
         </div>
-        <div class="form-check" v-else :class="{'required':value.required}">
+        <div class="form-check" v-else :class="{'required':value.required}" :class="value.cssClass">
             <input type="checkbox"
                class="form-check-input"
                :id = "value.name + '_gui_control'"

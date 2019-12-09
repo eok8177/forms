@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div class="row" v-if="labelPosition === 'left'">
+      <div class="row" v-if="labelPosition === 'left'" :class="value.cssClass">
           <div class="col-md-4">
               <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label"></label>
           </div>
@@ -8,7 +8,7 @@
               <div v-html="value.text"></div>
           </div>
       </div>
-      <div v-else class="form-group">
+      <div v-else class="form-group" :class="value.cssClass">
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label"></label>
 
           <div v-html="value.text"></div>

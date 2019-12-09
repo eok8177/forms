@@ -14,7 +14,7 @@
           </div>
       </div>
 
-      <div class="form-group" v-if="value.show1">
+      <div class="form-group" v-if="value.show1" :class="value.cssClass">
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label1"></label>
           <div class="input-group">
               <input type="text" class="form-control"
@@ -25,7 +25,7 @@
           </div>
       </div>
 
-      <div class="form-group" v-if="value.show2">
+      <div class="form-group" v-if="value.show2" :class="value.cssClass">
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label2"></label>
           <div class="input-group">
               <input type="text" class="form-control"
@@ -36,7 +36,7 @@
           </div>
       </div>
 
-      <div class="form-group" v-if="value.show3">
+      <div class="form-group" v-if="value.show3" :class="value.cssClass">
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label3"></label>
           <div class="input-group">
               <input type="text" class="form-control"
@@ -47,7 +47,7 @@
           </div>
       </div>
 
-      <div class="form-group" v-if="value.show4">
+      <div class="form-group" v-if="value.show4" :class="value.cssClass">
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label4"></label>
           <div class="input-group">
               <input type="text" class="form-control"
@@ -58,7 +58,7 @@
           </div>
       </div>
 
-      <div class="form-group" v-if="value.show5">
+      <div class="form-group" v-if="value.show5" :class="value.cssClass">
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label5"></label>
           <div class="input-group">
               <input type="text" class="form-control"
