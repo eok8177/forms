@@ -29,6 +29,7 @@
 
       gtag('config', 'UA-152798417-1');
     </script>
+    @stack('styles')
 </head>
 <body>
     <div id="app">
@@ -66,7 +67,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @if(Auth::user()->role == 'admin')
                                     <a class="dropdown-item" href="{{ url('/admin/dashboard') }}">Dashboard</a>
+                                    @else
+                                    <a class="dropdown-item" href="{{ url('/user') }}">Dashboard</a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -84,9 +89,31 @@
             </div>
         </nav>
 
+        <div class="container pt-3">
+            <div class="flash-message">
+              @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has($msg))
+                  <p class="alert alert-{{ $msg }}">{{ Session::get($msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                @endif
+              @endforeach
+
+              @if (count($errors) > 0)
+              <div class="alert alert-danger">
+                <ul>
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+              @endif
+            </div>
+        </div>
+
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+
+    @stack('scripts')
 </body>
 </html>
