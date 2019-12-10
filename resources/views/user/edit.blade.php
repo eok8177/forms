@@ -39,12 +39,7 @@
           </div>
         {!! Form::close() !!}
     </div>
-    <div class="col-md-2">
-        <div class="list-group">
-          <a class="list-group-item list-group-item-action" href="/user">My Apps</a>
-          <a class="list-group-item list-group-item-action" href="/user/edit">My details</a>
-        </div>
-    </div>
+    @include('user.parts.sidebar', ['class_col' => 'col-md-2', 'slug' => 'my-details'])
   </div>
 </div>
 
