@@ -11,18 +11,36 @@
                         {!! csrf_field() !!}
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Name</label>
+                            <label class="col-lg-4 col-form-label text-lg-right">First Name</label>
 
                             <div class="col-lg-6">
-                                @if(!empty($name))
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{$name}}" required>
+                                @if(!empty($first_name))
+                                <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{$first_name}}" required>
                                 @else
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required>
+                                <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required>
                                 @endif
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('first_name'))
                                     <div class="invalid-feedback">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Last Name</label>
+
+                            <div class="col-lg-6">
+                                @if(!empty($last_name))
+                                <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{$last_name}}" required>
+                                @else
+                                <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required>
+                                @endif
+
+                                @if ($errors->has('last_name'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('last_name') }}</strong>
                                     </div>
                                 @endif
                             </div>
@@ -41,6 +59,20 @@
                                 @if ($errors->has('email'))
                                     <div class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-lg-right">Login</label>
+
+                            <div class="col-lg-6">
+                                <input id="login" type="text" class="form-control{{ $errors->has('login') ? ' is-invalid' : '' }}" name="login" value="{{ old('login') }}" required>
+
+                                @if ($errors->has('login'))
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $errors->first('login') }}</strong>
                                     </div>
                                 @endif
                             </div>

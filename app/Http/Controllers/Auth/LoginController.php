@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -22,6 +23,19 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+
+    // Dual login via login or email
+    protected function credentials(Request $request)
+    {
+        $field = filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)
+        ? 'email'
+        : 'login';
+
+        return [
+            $field => $request->get('email'),
+            'password' => $request->password,
+        ];
+    }
 
     /**
      * Where to redirect users after login.
@@ -72,7 +86,7 @@ class LoginController extends Controller
             return redirect('/');
         }else{
             return view('auth.register',[
-                'name' => $userSocial->getName(),
+                'first_name' => $userSocial->getName(),
                 'email' => $userSocial->getEmail(),
                 'social_id' => $userSocial->getId(),
                 'avatar' => $userSocial->getAvatar(),
