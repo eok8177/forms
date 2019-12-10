@@ -6,8 +6,13 @@
 <div class="row">
   <div class="col-lg-8">
     <div class="form-group">
-      <label for="name">{{Lang::get('message.name')}}</label>
-      <input type="text" name="name" value="{{$user->name}}" class="form-control">
+      <label for="name">{{Lang::get('message.first_name')}}</label>
+      <input type="text" name="first_name" value="{{$user->first_name}}" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="name">{{Lang::get('message.last_name')}}</label>
+      <input type="text" name="last_name" value="{{$user->last_name}}" class="form-control">
     </div>
 
     <div class="form-group">
