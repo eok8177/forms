@@ -21,6 +21,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
+        <th scope="col">@lang('message.id')</th>
         <th scope="col">@lang('message.actions')</th>
         <th scope="col">@lang('message.title')</th>
         <th scope="col">@lang('message.active')</th>
@@ -29,6 +30,7 @@
     </thead>
     @foreach($forms as $form)
       <tr>
+	  	<td>{{$form->id}}</td>
         <td>
           <a href="{{ route('admin.form.edit',    $form->id) }}" class="btn fa fa-pencil"></a>
           {{-- <a href="{{ route('admin.form.destroy', $form->id) }}" class="btn fa fa-trash-o delete"></a> --}}
