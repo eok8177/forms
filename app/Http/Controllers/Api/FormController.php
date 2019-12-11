@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Form;
 use App\Entry;
+use App\Application;
 
 
 class FormController extends Controller
@@ -68,6 +69,28 @@ class FormController extends Controller
         return response()->json([
             'status' => 'not found file',
         ], 400);
+    }
+
+    public function saveApp(Request $request) {
+        $userid = $request->get('userid');
+        $formid = $request->get('formid');
+        $data = $request->input('data', false);
+
+        $app = Application::where('user_id', $userid)->where('form_id', $formid)->first();
+
+        if (!$app) {
+            $app = new Application;
+        }
+
+        $app->user_id = $userid;
+        $app->form_id = $formid;
+        $app->config = json_encode($data);
+        $app->save();
+
+        return response()->json([
+            'status' => 'OK',
+            'appid' => $app->id
+        ], 200);
     }
 
 }

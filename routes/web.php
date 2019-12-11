@@ -38,6 +38,7 @@ Route::group(['middleware' => 'roles','roles' =>['user']], function() {
     Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index']);
     Route::get('user/edit', ['as' => 'user.edit', 'uses' => 'UserController@edit']);
     Route::put('user/update', ['as' => 'user.update', 'uses' => 'UserController@update']);
+    Route::get('user/form/{app}', ['as' => 'user.form', 'uses' => 'UserController@form']);
 });
 
 

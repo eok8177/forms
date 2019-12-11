@@ -11,6 +11,7 @@
         </div>
 
         <button @click="Submit()" class="btn btn-outline-secondary">Submit</button>
+        <button v-if="userid > 0" @click="SaveApps()" class="btn btn-outline-secondary">Save & fill later</button>
 
 
     </div>
@@ -25,6 +26,7 @@
         props: {
             form: {type: Object},
             formid: {type: Number},
+            userid: {type: Number},
         },
         data: () => ({
             formdata: {type: Object},
@@ -182,6 +184,27 @@
                     })
                 });
                 window.location.href = '/success';
+            },
+
+            SaveApps() {
+                // console.log(this.form);
+                // console.log(this.formid);
+                // console.log(this.userid);
+                // return false;
+                axios.post('/api/save-apps', {
+                    userid: this.userid,
+                    formid: this.formid,
+                    data: this.form
+                  })
+                  .then(
+                    (response) => {
+                      console.log(response.data.appid);
+                      // this.sendFiles();
+                    }
+                  )
+                  .catch(
+                    (error) => console.log(error)
+                  );
             }
         },
         created() {

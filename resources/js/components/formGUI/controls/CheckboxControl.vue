@@ -16,7 +16,7 @@
             </label>
             <span v-if="value.required" style="color:red;">*</span>
         </div>
-        <div class="form-check" v-else :class="{'required':value.required}" :class="value.cssClass">
+        <div class="form-check" v-else :class="{'required':value.required} + value.cssClass">
             <input type="checkbox"
                class="form-check-input"
                :id = "value.name + '_gui_control'"

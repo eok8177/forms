@@ -24,4 +24,6 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/post-form',  ['uses' => 'FormController@entry']);
     Route::post('/upload-file',  ['uses' => 'FormController@upload']);
 
+    Route::post('/save-apps',  ['uses' => 'FormController@saveApp']);
+
 });
