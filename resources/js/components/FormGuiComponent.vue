@@ -127,7 +127,8 @@
                                     [i]: {
                                         label: control['label' + j],
                                         value: control['value' + j],
-                                        valid: valid
+                                        valid: valid,
+                                        field_id: control['label' + j]
                                     }
                                 });
                                 i++;
@@ -138,7 +139,8 @@
                             [i]: {
                                 label: control.label,
                                 value: control.value,
-                                valid: valid
+                                valid: valid,
+                                field_id: control.fieldName
                             }
                         });
                         i++;
@@ -154,7 +156,12 @@
                 // console.log(this.files);
                 // console.log(this.submitData);
                 // return false;
+                if (this.userid > 0) {
+                  this.SaveApps();
+                }
+
                 axios.post('/api/post-form', {
+                    userid: this.userid,
                     formid: this.formid,
                     data: this.submitData
                   })
@@ -174,6 +181,7 @@
                 _.forEach(self.files, function(file,key) {
                     var formData = new FormData();
                     formData.append('entryId', self.entryid);
+                    formData.append('userid', self.userid);
                     formData.append('formId', self.formid);
                     formData.append('fieldName', file.name);
                     formData.append('file', file.data);

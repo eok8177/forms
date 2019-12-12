@@ -18,6 +18,7 @@ class CreateApplicationsTable extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('form_id');
             $table->mediumText('config')->nullable();
+            $table->tinyInteger('sent')->default(0);
             $table->timestamps();
         });
     }

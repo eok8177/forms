@@ -20,6 +20,7 @@ class CreateEntriesTable extends Migration
             $table->string('name');
             $table->text('value')->nullable();
             $table->string('field_id')->nullable();
+            $table->bigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }
