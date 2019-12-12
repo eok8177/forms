@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use App\User;
 use App\Application;
@@ -37,10 +38,21 @@ class UserController extends Controller
 
         $data = $request->all();
 
-        if ($data['password']) {
+        // Password
+        if ($data['old_password']) {
+            if (!Hash::check($data['old_password'], $user->password)) {
+                return redirect()->route('user.edit')->with('danger', 'Wrong old password');
+            }
+            if (!$data['password']) {
+                return redirect()->route('user.edit')->with('danger', 'Restrict empty password');
+            }
             $data['password'] = bcrypt($data['password']);
+            unset($data['old_password']);
+            unset($data['re_password']);
         } else {
+            unset($data['old_password']);
             unset($data['password']);
+            unset($data['re_password']);
         }
 
         $user->update($data);

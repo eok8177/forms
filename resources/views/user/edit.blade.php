@@ -30,8 +30,18 @@
           <hr>
 
           <div class="form-group">
+            <label for="">{{Lang::get('message.old_password')}}</label>
+            <input type="password" id="old_password" name="old_password" class="form-control">
+          </div>
+
+          <div class="form-group">
             <label for="">{{Lang::get('message.new_password')}}</label>
-            <input type="password" name="password" class="form-control">
+            <input type="password" id="password" name="password" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <label for="">{{Lang::get('message.re_password')}}</label>
+            <input type="password" id="re_password" name="re_password" class="form-control">
           </div>
 
           <div class="form-group">
@@ -53,4 +63,26 @@
     top: -999px;
   }
 </style>
+@endpush
+
+@push('scripts')
+  <script>
+    $(function () {
+      var old_password = document.getElementById("old_password")
+        , password = document.getElementById("password")
+        , re_password = document.getElementById("re_password");
+
+      function validatePassword(){
+        if(old_password.value.length > 0 && password.value != re_password.value) {
+          re_password.setCustomValidity("Passwords Don't Match");
+        } else {
+          re_password.setCustomValidity('');
+        }
+      }
+
+      old_password.onchange = validatePassword;
+      password.onchange = validatePassword;
+      re_password.onkeyup = validatePassword;
+    });
+  </script>
 @endpush
