@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="row" v-if="labelPosition === 'left'" :class="value.cssClass">
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <div class="custom-control custom-radio custom-control-inline" v-for="(option, index) in value.dataOptions">
                   <input type="radio" 
                   v-model="value.value"

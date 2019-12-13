@@ -36,6 +36,8 @@ return [
     'avatar' => 'Avatar',
     'profile' => 'Profile',
     'new_password' => 'New password',
+    'old_password' => 'Old password',
+    're_password' => 'Confirm Password',
     'email' => 'Email',
     'role' => 'Role',
     'image' => 'Image',

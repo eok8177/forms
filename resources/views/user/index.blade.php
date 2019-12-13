@@ -17,7 +17,13 @@
           </thead>
           @foreach($apps as $app)
             <tr>
-              <td><a href="{{ route('user.form', $app->id) }}" class="btn">{{$app->id}} Edit</a></td>
+              <td>
+                @if($app->sent == 1)
+                Form already sent
+                @else
+                <a href="{{ route('user.form', $app->id) }}" class="btn">Edit</a>
+                @endif
+              </td>
               <td>{{$app->form->title}}</td>
             </tr>
 

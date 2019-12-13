@@ -32,6 +32,7 @@
             formdata: {type: Object},
             submitData: {},
             validForm: true,
+            validSection: true,
             files: {},
             entryid: false
         }),
@@ -41,24 +42,21 @@
             },
 
             toggleSection(index) {
-                if (index > 0) {
-                    // parse & validate previous sections
-                    this.parseForm(index);
+                // parse & validate previous sections
+                this.parseForm(index);
 
-                // collapse toggle logic: open previous not-valid section
-                    if (this.validForm) {
-                        $('#'+this.form.sections[index - 1].name + '_gui_body').collapse('hide');
-                        $('#'+this.form.sections[index].name + '_gui_body').collapse('toggle');
-                    } else {
-                        $('#'+this.form.sections[index].name + '_gui_body').collapse('show');
-                    }
-                } else {
-                    $('#'+this.form.sections[index].name + '_gui_body').collapse('toggle');
+                if (this.formdata.sections[index].valid) {
+                    $('#'+this.formdata.sections[index].name + '_gui_body').collapse('toggle');
                 }
+
+                // hide prev Valid section
+                if (index > 0 && this.formdata.sections[index-1].valid)
+                    $('#'+this.formdata.sections[index-1].name + '_gui_body').collapse('hide');
+
             },
             Submit() {
                 // parse all form object
-                this.parseForm(false);
+                this.parseForm(-1);
 
                 //send to server
                 if (this.validForm) {
@@ -71,7 +69,8 @@
                 self.validForm = true;
                 self.submitData = {};
                 _.forEach(this.formdata.sections, function(section, key) {
-                    if (index && key == index) return false;
+                    self.validSection = true;
+                    if (index >= 0 && key > index) return false;
                     if (section.isDynamic) { // parse in Dynamic section
                         _.forEach(section.instances, function(instance) {
                             _.forEach(instance, function(value) {
@@ -83,6 +82,7 @@
                             self.fillSubmitData(row.controls, key);
                         });
                     }
+                    self.formdata.sections[key]['valid'] = self.validSection;
                 });
             },
 
@@ -97,6 +97,7 @@
                         if (control.required) {
                             if (control.type != 'address' && !control.value) {
                                 self.validForm = false;
+                                self.validSection = false;
                                 valid = false
                                 $('body [name="'+control.name+'"]').addClass('is-invalid');
                             }
@@ -106,6 +107,7 @@
                                     $('body [name="'+control.name+j+'"]').removeClass('is-invalid');
                                     if (control['show'+j] && !control['value'+j] && j != 2) {
                                         self.validForm = false;
+                                        self.validSection = false;
                                         valid = false
                                         $('body [name="'+control.name+j+'"]').addClass('is-invalid');
                                     }
@@ -127,7 +129,8 @@
                                     [i]: {
                                         label: control['label' + j],
                                         value: control['value' + j],
-                                        valid: valid
+                                        valid: valid,
+                                        field_id: control['label' + j]
                                     }
                                 });
                                 i++;
@@ -138,7 +141,8 @@
                             [i]: {
                                 label: control.label,
                                 value: control.value,
-                                valid: valid
+                                valid: valid,
+                                field_id: control.fieldName
                             }
                         });
                         i++;
@@ -154,7 +158,12 @@
                 // console.log(this.files);
                 // console.log(this.submitData);
                 // return false;
+                if (this.userid > 0) {
+                  this.SaveApps();
+                }
+
                 axios.post('/api/post-form', {
+                    userid: this.userid,
                     formid: this.formid,
                     data: this.submitData
                   })
@@ -174,6 +183,7 @@
                 _.forEach(self.files, function(file,key) {
                     var formData = new FormData();
                     formData.append('entryId', self.entryid);
+                    formData.append('userid', self.userid);
                     formData.append('formId', self.formid);
                     formData.append('fieldName', file.name);
                     formData.append('file', file.data);
