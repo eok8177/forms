@@ -65,13 +65,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <span class="text">or Login with </span>
-                                <a href="{{ url('login/google') }}" class="btn"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                <a href="{{ url('login/facebook') }}" class="btn"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>
