@@ -35,9 +35,14 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin', 'sad
 });
 
 Route::group(['middleware' => 'roles','roles' =>['user']], function() {
-    Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index']);
+	Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index']);
+	
     Route::get('user/edit', ['as' => 'user.edit', 'uses' => 'UserController@edit']);
-    Route::put('user/update', ['as' => 'user.update', 'uses' => 'UserController@update']);
+	Route::put('user/update', ['as' => 'user.update', 'uses' => 'UserController@update']);
+
+	Route::get('user/security', ['as' => 'user.security', 'uses' => 'UserController@security']);
+	Route::put('user/update_security', ['as' => 'user.update_security', 'uses' => 'UserController@update_security']);
+
     Route::get('user/form/{app}', ['as' => 'user.form', 'uses' => 'UserController@form']);
 });
 
