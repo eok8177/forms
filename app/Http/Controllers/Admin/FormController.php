@@ -44,6 +44,11 @@ class FormController extends Controller
         return view('admin.form.edit', ['form' => $form]);
     }
 
+    public function setting(Form $form)
+    {
+        return view('admin.form.setting', ['form' => $form]);
+    }
+
     public function update(Request $request, Form $form)
     {
         $form->update($request->all());

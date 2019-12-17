@@ -32,16 +32,17 @@
       <tr>
 	  	<td>{{$form->id}}</td>
         <td>
-          <a href="{{ route('admin.form.edit',    $form->id) }}" class="btn fa fa-pencil"></a>
+          <a href="{{ route('admin.form.edit',    $form->id) }}" class="btn fa fa-pencil" title="Edit"></a>
           {{-- <a href="{{ route('admin.form.destroy', $form->id) }}" class="btn fa fa-trash-o delete"></a> --}}
-          <a class="btn fa fa-eye" href="{{route('front.form',$form->id)}}" target="_blank"></a>
+          <a class="btn fa fa-gear" href="{{route('admin.form.setting',$form->id)}}" title="Setings"></a>
+          <a class="btn fa fa-eye" href="{{route('front.form',$form->id)}}" target="_blank" title="Open Form in new window"></a>
         </td>
         <td>{{$form->title}}</td>
         <td>
-            <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'is_active'])}}" class="status btn fa fa-{{$form->is_active ? 'check-circle' : 'times-circle'}}"></a>
+            <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'is_active'])}}" class="status btn fa fa-{{$form->is_active ? 'check-circle' : 'times-circle'}}" title="Toggle Active"></a>
         </td>
         <td>
-          <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'is_trash'])}}" class="status btn fa fa-{{$form->is_trash ? 'check-circle' : 'times-circle'}}"></a>
+          <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'is_trash'])}}" class="status btn fa fa-{{$form->is_trash ? 'check-circle' : 'times-circle'}}" title="Toggle trash"></a>
         </td>
       </tr>
 

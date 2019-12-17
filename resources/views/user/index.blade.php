@@ -13,6 +13,7 @@
             <tr>
               <th scope="col">Action</th>
               <th scope="col">Form Name</th>
+              <th scope="col">Date</th>
             </tr>
           </thead>
           @foreach($apps as $app)
@@ -25,6 +26,7 @@
                 @endif
               </td>
               <td>{{$app->form->title}}</td>
+              <td>{{$app->form->updated_at}}</td>
             </tr>
 
           @endforeach
