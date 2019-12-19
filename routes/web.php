@@ -15,7 +15,7 @@ Route::get('/', ['as' => 'front.index', 'uses' => 'FrontendController@index']);
 Route::get('/success', ['as' => 'front.success', 'uses' => 'FrontendController@success']);
 Route::get('/form/{id}', ['as' => 'front.form', 'uses' => 'FrontendController@form']);
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Social login
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
@@ -37,7 +37,7 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin', 'sad
     Route::post('ajax/form/{id}', ['as' => 'ajax.form', 'uses' => 'AjaxController@form']);
 });
 
-Route::group(['middleware' => 'roles','roles' =>['user']], function() {
+Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user']], function() {
 	Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index']);
 	
     Route::get('user/edit', ['as' => 'user.edit', 'uses' => 'UserController@edit']);
