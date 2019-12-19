@@ -23,4 +23,9 @@ class Form extends Model
         return $forms->where('is_trash', $trash);
     }
 
+    public function email()
+    {
+        return $this->hasOne(FormEmail::class, 'form_id');
+    }
+
 }

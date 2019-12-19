@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 use App\Form;
+use App\FormEmail;
 
 
 class FormController extends Controller
@@ -54,6 +55,23 @@ class FormController extends Controller
         $form->update($request->all());
 
         return redirect()->route('admin.form.setting', ['form' => $form->id])->with('success', 'Form settings updated');
+    }
+
+    public function email(Form $form)
+    {
+        if(empty($form->email))
+            $form->email()->save(new FormEmail);
+
+        return view('admin.form.email', [
+            'form' => Form::where('id',$form->id)->with('email')->first()
+        ]);
+    }
+
+    public function emailStore(Request $request, Form $form)
+    {
+        $form->email->update($request->all());
+
+        return view('admin.form.email', ['form' => $form]);
     }
 
     public function destroy(Form $form)

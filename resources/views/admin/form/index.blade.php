@@ -35,6 +35,7 @@
           <a href="{{ route('admin.form.edit',    $form->id) }}" class="btn fa fa-pencil" title="Edit"></a>
           {{-- <a href="{{ route('admin.form.destroy', $form->id) }}" class="btn fa fa-trash-o delete"></a> --}}
           <a class="btn fa fa-gear" href="{{route('admin.form.setting',$form->id)}}" title="Setings"></a>
+          <a class="btn fa fa-envelope-o" href="{{route('admin.form.email',$form->id)}}" title="Email Notification"></a>
           <a class="btn fa fa-eye" href="{{route('front.form',$form->id)}}" target="_blank" title="Open Form in new window"></a>
         </td>
         <td>{{$form->title}}</td>

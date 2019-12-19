@@ -32,6 +32,8 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin', 'sad
     Route::resource('user', 'UserController');
     Route::resource('form', 'FormController');
     Route::get('form/{form}/setting', ['as' => 'form.setting', 'uses' => 'FormController@setting']);
+    Route::get('form/{form}/email', ['as' => 'form.email', 'uses' => 'FormController@email']);
+    Route::put('form/{form}/email', ['as' => 'form.email.store', 'uses' => 'FormController@emailStore']);
     Route::post('ajax/form/{id}', ['as' => 'ajax.form', 'uses' => 'AjaxController@form']);
 });
 
