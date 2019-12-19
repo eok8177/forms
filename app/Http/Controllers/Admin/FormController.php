@@ -53,7 +53,7 @@ class FormController extends Controller
     {
         $form->update($request->all());
 
-        return redirect()->route('admin.form.edit', ['form' => $form->id])->with('success', 'Form updated');
+        return redirect()->route('admin.form.setting', ['form' => $form->id])->with('success', 'Form settings updated');
     }
 
     public function destroy(Form $form)
