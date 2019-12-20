@@ -79,4 +79,13 @@ class UserController extends Controller
         ]);
     }
 
+    public function destroy(Application $app)
+    {
+        $app->delete();
+
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
+
 }

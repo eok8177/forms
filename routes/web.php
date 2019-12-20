@@ -47,6 +47,7 @@ Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user']], functio
 	Route::put('user/update_security', ['as' => 'user.update_security', 'uses' => 'UserController@update_security']);
 
     Route::get('user/form/{app}', ['as' => 'user.form', 'uses' => 'UserController@form']);
+    Route::delete('user/form/{app}', ['as' => 'user.form.destroy', 'uses' => 'UserController@destroy']);
 });
 
 

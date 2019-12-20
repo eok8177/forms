@@ -23,6 +23,7 @@
                 Form already sent
                 @else
                 <a href="{{ route('user.form', $app->id) }}" class="btn">Edit</a>
+                <a href="{{ route('user.form.destroy', $app->id) }}" class="btn fa fa-trash-o delete"></a>
                 @endif
               </td>
               <td>{{$app->form->title}}</td>
