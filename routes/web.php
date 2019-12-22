@@ -16,6 +16,7 @@ Route::get('/success', ['as' => 'front.success', 'uses' => 'FrontendController@s
 Route::get('/form/{id}', ['as' => 'front.form', 'uses' => 'FrontendController@form']);
 
 Auth::routes(['verify' => true]);
+Route::get('/redirect-to', ['as' => 'redirect', 'uses' => 'UserController@redirectTo']);
 
 // Social login
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');

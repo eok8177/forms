@@ -14,6 +14,21 @@ use App\Application;
 
 class UserController extends Controller
 {
+    public function redirectTo(Request $request)
+    {
+        $user =Auth::user();
+        if ($user->role == 'admin') {
+            return redirect('/admin/dashboard');
+        } elseif ($user->role == 'user') {
+            $redirectTo = $request->session()->get('redirectTo', '/user');
+            if (!$user->email_verified_at) {
+                return redirect('/user');
+            }
+            $request->session()->forget('redirectTo');
+            return redirect($redirectTo);
+        }
+    }
+
     public function index()
     {
         $user =Auth::user();
