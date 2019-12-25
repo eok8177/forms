@@ -9,7 +9,7 @@
   @if($form->shedule == 0)
     <form-gui-component class="py-2 px-2 bg-white"
       :form="{{$form->config ?? 'null'}}" 
-      :formid="{{$form->form_id}}"
+      :formid="{{$form->id}}"
       :userid="{{Auth::user()->id ?? 0}}" >
   </form-gui-component>
   @elseif($form->start_date > date('Y-m-d H:i:s'))

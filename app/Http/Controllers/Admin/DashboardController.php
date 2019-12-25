@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 use App\Entry;
 use App\Form;
@@ -14,12 +15,22 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $entries = Entry::select('entry_id', 'form_id')->distinct()->get();
+        $form_id = $request->input('id', false);
+
+        $forms = Entry::select('form_id')->distinct()->pluck('form_id')->toArray();
+
+        if ($form_id) {
+            $entries = Entry::where('form_id', $form_id)->select('entry_id', 'form_id', 'created_at')->distinct()->get();
+        } else {
+            $entries = Entry::select('entry_id', 'form_id', 'created_at')->distinct()->get();
+        }
+
         return view('admin.dashboard', [
             'entries' => $entries,
-            'forms' => Form::pluck('title', 'id')
+            'forms' => Form::pluck('title', 'id'),
+            'select_forms' => Form::whereIn('id',$forms)->pluck('title', 'id'),
         ]);
     }
 
