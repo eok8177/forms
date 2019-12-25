@@ -15,9 +15,13 @@ class FrontendController extends Controller
         return view('home', ['forms' => Form::where('is_active', 1)->get()]);
     }
 
-    public function success()
+    public function success($id)
     {
-        return view('success', ['forms' => Form::where('is_active', 1)->get()]);
+        $form = Form::find($id);
+        return view('success', [
+            'forms' => Form::where('is_active', 1)->get(),
+            'form' => $form
+        ]);
     }
 
     public function form(Request $request, $id)

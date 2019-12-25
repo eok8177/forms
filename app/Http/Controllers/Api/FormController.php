@@ -55,7 +55,7 @@ class FormController extends Controller
         return response()->json([
             'status' => 'OK',
             'entryid' => $entry_id,
-            'redirect_url' => $form->redirect_url ? $form->redirect_url : '/success',
+            'redirect_url' => $form->redirect_url ? $form->redirect_url : '/success/'.$formid,
         ], 200);
     }
 
