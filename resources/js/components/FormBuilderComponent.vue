@@ -29,6 +29,11 @@
         methods: {
             saveConfig: function() {
                 this.status = false;
+                let self = this;
+                // Collapse form for next editing
+                _.forEach(this.form.sections, function(section, key) {
+                    self.form.sections[key].expanded = false;
+                });
                 axios.post('/admin/ajax/form/'+this.formid, {data: this.form})
                   .then(
                     (response) => {
