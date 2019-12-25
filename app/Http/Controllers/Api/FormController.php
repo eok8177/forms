@@ -28,6 +28,8 @@ class FormController extends Controller
         $formid = $request->get('formid');
         $data = $request->get('data');
 
+        $form = Form::find($formid);
+
         $last = Entry::latest()->first();
         if ($last) {
             $entry_id = $last->entry_id + 1;
@@ -52,7 +54,8 @@ class FormController extends Controller
 
         return response()->json([
             'status' => 'OK',
-            'entryid' => $entry_id
+            'entryid' => $entry_id,
+            'redirect_url' => $form->redirect_url ? $form->redirect_url : '/success',
         ], 200);
     }
 

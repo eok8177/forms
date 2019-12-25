@@ -34,7 +34,8 @@
             validForm: true,
             validSection: true,
             files: {},
-            entryid: false
+            entryid: false,
+            redirect_url: '/'
         }),
         methods: {
             updateInstances(index, instance) {
@@ -170,6 +171,7 @@
                   .then(
                     (response) => {
                       this.entryid = response.data.entryid;
+                      this.redirect_url = response.data.redirect_url;
                       this.sendFiles();
                     }
                   )
@@ -193,7 +195,7 @@
                         }
                     })
                 });
-                window.location.href = '/success';
+                window.location.href = this.redirect_url;
             },
 
             SaveApps() {
