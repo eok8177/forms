@@ -3,25 +3,21 @@
 @section('content')
 
 <div class="container">
-  <div class="row">
-{{--     <div class="col-sm-2">
-      <ul class="nav flex-column">
-        @foreach($forms as $item)
-        <li class="nav-item">
-          <a class="nav-link" href="{{route('front.form',$item->id)}}">{{$item->title}}</a>
-        </li>
-        @endforeach
-      </ul>
-    </div> --}}
-    <div class="col-sm-12">
-      <h2>{{$form->title}}</h2>
-      <form-gui-component class="py-2 px-2 bg-white"
-        :form="{{$form->config ?? 'null'}}" 
-        :formid="{{$form->id}}"
-        :userid="{{Auth::user()->id ?? 0}}" >
-      </form-gui-component>
-    </div>
-  </div>
+
+  <h2>{{$form->title}}</h2>
+
+  @if($form->shedule == 0)
+    <form-gui-component class="py-2 px-2 bg-white"
+      :form="{{$form->config ?? 'null'}}" 
+      :formid="{{$form->form_id}}"
+      :userid="{{Auth::user()->id ?? 0}}" >
+  </form-gui-component>
+  @elseif($form->start_date > date('Y-m-d H:i:s'))
+    <div class="text">{!! $form->pending_msg !!}</div>
+  @elseif($form->end_date < date('Y-m-d H:i:s'))
+    <div class="text">{!! $form->expired_msg !!}</div>
+  @endif
+
 </div>
 
 @endsection

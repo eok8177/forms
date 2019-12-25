@@ -5,34 +5,46 @@
 
 {!! Form::open(['route' => ['admin.form.update', $form->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 
-  <div class="custom-control custom-checkbox custom-control-inline">
+  <div class="custom-control custom-checkbox mb-2">
     {!! Form::hidden('shedule', 0) !!}
     {!! Form::checkbox('shedule', 1, $form->shedule, ['class' => 'custom-control-input', 'id' => 'shedule']) !!}
-    <label for="shedule" class="custom-control-label">Shedule form</label>
+    <label for="shedule" class="custom-control-label" data-toggle='collapse' data-target='#collapseShedule'>Shedule form</label>
   </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <div class="form-group">
-        <label>Shedule form start Date/Time</label>
-          <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-              <input type="text" name="start_date" value="{{$form->start_date}}" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-              <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-              </div>
-          </div>
+  <div id='collapseShedule' class='collapse {{$form->shedule ? 'show' : ''}}'>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Shedule form start Date/Time</label>
+            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                <input type="text" name="start_date" value="{{$form->start_date}}" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
+                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Shedule form end Date/Time</label>
+            <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                <input name="end_date" value="{{$form->end_date}}" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
+                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label>Shedule form end Date/Time</label>
-          <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-              <input name="end_date" value="{{$form->end_date}}" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
-              <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-              </div>
-          </div>
-      </div>
+
+    <div class="form-group mt-3">
+      <label>Form Pending Message</label>
+      {!! Form::textarea('pending_msg', $form->pending_msg, ['class' => 'form-control', 'rows' => '1']) !!}
+    </div>
+
+    <div class="form-group mt-3">
+      <label>Form Expired Message</label>
+      {!! Form::textarea('expired_msg', $form->expired_msg, ['class' => 'form-control', 'rows' => '1']) !!}
     </div>
   </div>
 
