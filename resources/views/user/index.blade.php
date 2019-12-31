@@ -27,7 +27,7 @@
                 @endif
               </td>
               <td>{{$app->form->title}}</td>
-              <td>{{$app->form->updated_at}}</td>
+              <td>{{$app->updated_at}}</td>
             </tr>
 
           @endforeach
