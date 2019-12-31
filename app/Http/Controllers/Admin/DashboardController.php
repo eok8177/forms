@@ -20,17 +20,17 @@ class DashboardController extends Controller
         $form_id = $request->input('id', false);
 
         $forms = Entry::select('form_id')->distinct()->pluck('form_id')->toArray();
+        $select_forms = Form::whereIn('id',$forms)->pluck('title', 'id');
 
-        if ($form_id) {
-            $entries = Entry::where('form_id', $form_id)->select('entry_id', 'form_id', 'created_at')->distinct()->get();
-        } else {
-            $entries = Entry::select('entry_id', 'form_id', 'created_at')->distinct()->get();
-        }
+        $selected_form_name = $form_id ? $select_forms->toArray()[$form_id] : 'All Forms';
+        $entriesWhere = $form_id ? Entry::where('form_id', $form_id) : Entry::where('form_id', '>', 0);
+        $entries = $entriesWhere->select('entry_id', 'form_id', 'created_at')->distinct()->orderBy('created_at', 'desc')->get();
 
         return view('admin.dashboard', [
             'entries' => $entries,
             'forms' => Form::pluck('title', 'id'),
-            'select_forms' => Form::whereIn('id',$forms)->pluck('title', 'id'),
+            'select_forms' => $select_forms,
+            'selected_form_name' => $selected_form_name
         ]);
     }
 
