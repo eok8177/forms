@@ -11,7 +11,8 @@
         <th scope="col">Responses</th>
         <th scope="col">
           <div class="dropdown">
-            <a class="btn btn-outline-info dropdown-toggle" href="#" role="button" id="dropdownForms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by Form</a>
+            <a class="btn btn-outline-info dropdown-toggle" href="#" role="button" id="dropdownForms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $selected_form_name }}</a>
+			
             <div class="dropdown-menu" aria-labelledby="dropdownForms">
               <a class="dropdown-item" href="{{ route('admin.dashboard') }}">All Forms</a>
               @foreach($select_forms as $id => $item)
