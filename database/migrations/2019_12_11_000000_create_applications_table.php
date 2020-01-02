@@ -18,7 +18,8 @@ class CreateApplicationsTable extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('form_id');
             $table->mediumText('config')->nullable();
-            $table->tinyInteger('sent')->default(0);
+            $table->string('status')->default('draft'); // draft submitted rejected accepted
+            $table->bigInteger('entry_id')->nullable();
             $table->timestamps();
         });
     }

@@ -46,12 +46,6 @@ class FormController extends Controller
             $entry->save();
         }
 
-        $app = Application::where('user_id', $userid)->where('form_id', $formid)->first();
-        if ($app) {
-            $app->sent = 1;
-            $app->save();
-        }
-
         return response()->json([
             'status' => 'OK',
             'entryid' => $entry_id,
@@ -88,6 +82,8 @@ class FormController extends Controller
     public function saveApp(Request $request) {
         $userid = $request->get('userid', 0);
         $formid = $request->get('formid');
+        $status = $request->get('status');
+        $entryid = $request->get('entryid', NULL);
         $data = $request->input('data', false);
 
         $app = Application::where('user_id', $userid)->where('form_id', $formid)->first();
@@ -98,6 +94,8 @@ class FormController extends Controller
 
         $app->user_id = $userid;
         $app->form_id = $formid;
+        $app->status = $status;
+        $app->entry_id = $entryid;
         $app->config = json_encode($data);
         $app->save();
 

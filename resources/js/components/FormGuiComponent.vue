@@ -34,7 +34,8 @@
             validForm: true,
             validSection: true,
             files: {},
-            entryid: false,
+            entryid: '',
+            status: 'draft',
             redirect_url: '/'
         }),
         methods: {
@@ -159,9 +160,6 @@
                 // console.log(this.files);
                 // console.log(this.submitData);
                 // return false;
-                if (this.userid > 0) {
-                  this.SaveApps();
-                }
 
                 axios.post('/api/post-form', {
                     userid: this.userid,
@@ -172,6 +170,12 @@
                     (response) => {
                       this.entryid = response.data.entryid;
                       this.redirect_url = response.data.redirect_url;
+                      this.status = 'submitted';
+
+                      if (this.userid > 0) {
+                        this.SaveApps();
+                      }
+
                       this.sendFiles();
                     }
                   )
@@ -199,13 +203,11 @@
             },
 
             SaveApps() {
-                // console.log(this.form);
-                // console.log(this.formid);
-                // console.log(this.userid);
-                // return false;
                 axios.post('/api/save-apps', {
                     userid: this.userid,
                     formid: this.formid,
+                    entryid: this.entryid,
+                    status: this.status,
                     data: this.form
                   })
                   .then(

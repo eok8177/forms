@@ -14,20 +14,20 @@
               <th scope="col">Action</th>
               <th scope="col">Form Name</th>
               <th scope="col">Date</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
           @foreach($apps as $app)
             <tr>
               <td>
-                @if($app->sent == 1)
-                Form already sent
-                @else
-                <a href="{{ route('user.form', $app->id) }}" class="btn">Edit</a>
-                <a href="{{ route('user.form.destroy', $app->id) }}" class="btn fa fa-trash-o delete"></a>
+                @if($app->status == 'draft' || $app->status == 'rejected')
+                  <a href="{{ route('user.form', $app->id) }}" class="btn">Edit</a>
+                  <a href="{{ route('user.form.destroy', $app->id) }}" class="btn fa fa-trash-o delete"></a>
                 @endif
               </td>
               <td>{{$app->form->title}}</td>
               <td>{{$app->updated_at}}</td>
+              <td>{{$app->status}}</td>
             </tr>
 
           @endforeach

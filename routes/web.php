@@ -29,6 +29,7 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin', 'sad
 
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
     Route::get('entry/{entry}', ['as' => 'entry', 'uses' => 'DashboardController@entry']);
+    Route::get('entry-status/{entry}/{status}', ['as' => 'entryStatus', 'uses' => 'DashboardController@status']);
 
     Route::resource('user', 'UserController');
     Route::resource('form', 'FormController');

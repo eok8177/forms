@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Application;
 use App\Entry;
 use App\Form;
 
@@ -17,20 +18,28 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $form_id = $request->input('id', false);
+        $form_id = $request->input('id', 0);
+        $status = $request->input('status', 'Status');
 
-        $forms = Entry::select('form_id')->distinct()->pluck('form_id')->toArray();
-        $select_forms = Form::whereIn('id',$forms)->pluck('title', 'id');
+        $forms = Application::select('form_id')->distinct()->pluck('form_id')->toArray();
+        $select_forms = [0 =>'All Forms'];
+        $select_forms = $select_forms + Form::whereIn('id',$forms)->pluck('title', 'id')->all();
 
-        $selected_form_name = $form_id ? $select_forms->toArray()[$form_id] : 'All Forms';
-        $entriesWhere = $form_id ? Entry::where('form_id', $form_id) : Entry::where('form_id', '>', 0);
-        $entries = $entriesWhere->select('entry_id', 'form_id', 'created_at')->distinct()->orderBy('created_at', 'desc')->get();
+        $entries = Application::orderBy('created_at', 'desc');
+
+        if ($form_id > 0) {
+            $entries->where('form_id', $form_id);
+        }
+
+        if ($status != 'Status') {
+            $entries->where('status', $status);
+        }
 
         return view('admin.dashboard', [
-            'entries' => $entries,
-            'forms' => Form::pluck('title', 'id'),
+            'entries' => $entries->get(),
             'select_forms' => $select_forms,
-            'selected_form_name' => $selected_form_name
+            'form_id' => $form_id,
+            'status' => $status
         ]);
     }
 
@@ -40,5 +49,14 @@ class DashboardController extends Controller
         return view('admin.entry', [
             'entries' => $entries
         ]);
+    }
+
+    public function status($entry, $status)
+    {
+        $app = Application::where('entry_id', $entry)->first();
+        $app->status = $status;
+        $app->save();
+
+        return redirect()->route('admin.dashboard');
     }
 }
