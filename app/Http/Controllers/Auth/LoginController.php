@@ -25,17 +25,17 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     // Dual login via login or email
-    protected function credentials(Request $request)
-    {
-        $field = filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)
-        ? 'email'
-        : 'login';
+    // protected function credentials(Request $request)
+    // {
+    //     $field = filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)
+    //     ? 'email'
+    //     : 'login';
 
-        return [
-            $field => $request->get('email'),
-            'password' => $request->password,
-        ];
-    }
+    //     return [
+    //         $field => $request->get('email'),
+    //         'password' => $request->password,
+    //     ];
+    // }
 
     /**
      * Where to redirect users after login.
