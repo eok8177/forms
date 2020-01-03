@@ -22,16 +22,21 @@ Route::get('/redirect-to', ['as' => 'redirect', 'uses' => 'UserController@redire
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 
-// Admin
-Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin', 'sadmin'], 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
-
-    Route::put('ajax/status', ['as' => 'ajax.status', 'uses' => 'AjaxController@status']);
+// Manager
+Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin', 'manager'], 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
 
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
     Route::get('entry/{entry}', ['as' => 'entry', 'uses' => 'DashboardController@entry']);
     Route::get('entry-status/{entry}/{status}', ['as' => 'entryStatus', 'uses' => 'DashboardController@status']);
 
     Route::resource('user', 'UserController');
+});
+
+// Admin
+Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
+
+    Route::put('ajax/status', ['as' => 'ajax.status', 'uses' => 'AjaxController@status']);
+
     Route::resource('form', 'FormController');
     Route::get('form/{form}/setting', ['as' => 'form.setting', 'uses' => 'FormController@setting']);
     Route::get('form/{form}/email', ['as' => 'form.email', 'uses' => 'FormController@email']);
@@ -39,6 +44,7 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin', 'sad
     Route::post('ajax/form/{id}', ['as' => 'ajax.form', 'uses' => 'AjaxController@form']);
 });
 
+// User
 Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user']], function() {
 	Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index']);
 	

@@ -48,7 +48,11 @@
             <i class="fa fa-tachometer"></i> <span class="d-none d-md-inline">@lang('message.dashboard')</span>
           </a>
 
+          @if(Auth::user()->role == 'admin')
+
           <a class="nav-link {{ request()->is('*form*') ? 'active' : '' }}" href="{{route('admin.form.index')}}"><i class="fa fa-file-text-o"></i> @lang('message.forms')</a>
+
+          @endif
 
         </div>
 
@@ -93,9 +97,9 @@
           <div class="navbar-nav flex-column side-nav">
 
             {{-- <a class="nav-item nav-link {{ request()->is('*user*') ? 'active' : '' }}" href="{{route('admin.user.index')}}"><i class="fa fa-users"></i> @lang('message.users')</a> --}}
-
+            @if(Auth::user()->role == 'admin')
             <a class="nav-item nav-link {{ request()->is('*form*') ? 'active' : '' }}" href="{{route('admin.form.index')}}"><i class="fa fa-file-text-o"></i> @lang('message.forms')</a>
-
+            @endif
           </div>
         </div>
     </nav>

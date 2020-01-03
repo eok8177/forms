@@ -19,11 +19,12 @@
       <label for="email">{{Lang::get('message.email')}}</label>
       <input type="text" name="email" value="{{$user->email}}" class="form-control">
     </div>
-
+    @if(Auth::user()->role == 'admin')
     <div class="form-group">
       <label for="role">{{Lang::get('message.role')}}</label>
       {!! Form::select('role', ['user' => 'User', 'admin' => 'Admin'], $user->role, ['class' => 'form-control']) !!}
     </div>
+    @endif
     <hr>
 
     <div class="form-group">
