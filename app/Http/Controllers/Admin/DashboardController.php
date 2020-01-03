@@ -11,8 +11,6 @@ use App\Form;
 
 class DashboardController extends Controller
 {
-	var $statusDefault = 'Status';
-
     /**
      * Show the application dashboard.
      *
