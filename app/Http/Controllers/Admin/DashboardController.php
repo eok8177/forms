@@ -11,6 +11,8 @@ use App\Form;
 
 class DashboardController extends Controller
 {
+	var $statusDefault = 'Status';
+
     /**
      * Show the application dashboard.
      *
@@ -19,11 +21,11 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $form_id = $request->input('id', 0);
-        $status = $request->input('status', 'Status');
+        $status = $request->input('status', Application::STATUS_ALL);
 
         $forms = Application::select('form_id')->distinct()->pluck('form_id')->toArray();
-        $select_forms = [0 =>'All Forms'];
-        $select_forms = $select_forms + Form::whereIn('id',$forms)->pluck('title', 'id')->all();
+
+        $select_forms = [0 =>'All Forms'] + Form::whereIn('id',$forms)->pluck('title', 'id')->all();
 
         $entries = Application::orderBy('created_at', 'desc');
 
@@ -31,7 +33,7 @@ class DashboardController extends Controller
             $entries->where('form_id', $form_id);
         }
 
-        if ($status != 'Status') {
+        if ($status != Application::STATUS_ALL) {
             $entries->where('status', $status);
         }
 
