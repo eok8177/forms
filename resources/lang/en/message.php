@@ -48,7 +48,8 @@ return [
 
     'form' => 'Form',
     'new_form' => 'New Form',
-    'forms' => 'Forms',
+	'forms' => 'Forms',
+	'pages' => 'Pages',
     'active' => 'Active',
     'trash' => 'Trash',
 
