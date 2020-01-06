@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="page-header row justify-content-between">
-  <h2>@lang('message.forms')</h2>
+<h5>{{ $trash == 0 ? __('message.forms_all') : __('message.forms_trashed') }}</h5>
   <a href="{{ route('admin.form.create') }}" class="btn btn-light"><i class="fa fa-plus-square"></i> @lang('message.create')</a>
 </div>
 
@@ -10,7 +10,7 @@
 
   <form class="input-group mb-3" action="{{ route('admin.form.index') }}" method="get">
 
-    <a class="btn btn-outline-secondary mr-5" href="{{ route('admin.form.index', ['trash'=>1]) }}">Trashed Forms</a>
+    <a class="btn btn-outline-secondary mr-5" href="{{ route('admin.form.index', ['trash' => 1-$trash ]) }}"> Show {{ $trash==0 ? __('message.forms_trashed') : __('message.forms_all')}}</a>
 
     <input type="text" class="form-control" placeholder="Search ..." name="search">
     <div class="input-group-append">
@@ -18,6 +18,7 @@
     </div>
   </form>
 
+@if ($total_records > 0)
   <table class="table table-hover">
     <thead>
       <tr>
@@ -49,6 +50,9 @@
 
     @endforeach
   </table>
+@else
+	@lang('message.no_records').
+@endif
 </div>
 
 {{ $forms->appends(request()->except('page'))->links('admin.parts.pagination') }}

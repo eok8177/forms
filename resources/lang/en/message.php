@@ -49,8 +49,11 @@ return [
     'form' => 'Form',
     'new_form' => 'New Form',
 	'forms' => 'Forms',
+	'forms_all' => 'All Forms',
+	'forms_trashed' => 'Trashed Forms',
 	'pages' => 'Pages',
     'active' => 'Active',
-    'trash' => 'Trash',
+	'trash' => 'Trash',
+	'no_records' => 'No records'
 
 ];
