@@ -20,7 +20,8 @@ class FormController extends Controller
         return view('admin.form.index', [
 			'forms' => $forms->paginate(15),
 			'total_records' => $forms->count(),
-			'trash' => $trash
+			'trash' => $trash,
+			'search' => $search
 			]);
     }
 

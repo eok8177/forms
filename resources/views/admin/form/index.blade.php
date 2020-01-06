@@ -12,7 +12,7 @@
 
     <a class="btn btn-outline-secondary mr-5" href="{{ route('admin.form.index', ['trash' => 1-$trash ]) }}"> Show {{ $trash==0 ? __('message.forms_trashed') : __('message.forms_all')}}</a>
 
-    <input type="text" class="form-control" placeholder="Search ..." name="search">
+    <input type="text" class="form-control" placeholder="Search ..." name="search" value="{{$search}}">
     <div class="input-group-append">
       <button class="btn btn-outline-secondary" type="submit" >Search</button>
     </div>
