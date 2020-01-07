@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Application;
 use App\Entry;
@@ -18,6 +19,8 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
+        $user = Auth::user();
+
         $form_id = $request->input('id', 0);
         $status = $request->input('status', Application::STATUS_ALL);
 
@@ -33,6 +36,14 @@ class DashboardController extends Controller
 
         if ($status != Application::STATUS_ALL) {
             $entries->where('status', $status);
+        }
+
+        if ($user->role == 'manager') {
+            $groupIds = $user->groups->pluck('id')->toArray();
+            $formIds = Form::whereHas('groups', function($q) use ($groupIds) {
+                $q->whereIn('group_id', $groupIds);
+            })->pluck('id')->toArray();
+            $entries->whereIn('form_id', $formIds);
         }
 
         return view('admin.dashboard', [
