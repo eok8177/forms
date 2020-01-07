@@ -26,8 +26,6 @@ class DashboardController extends Controller
 
         $forms = Application::select('form_id')->distinct()->pluck('form_id')->toArray();
 
-        $select_forms = [0 =>'All Forms'] + Form::whereIn('id',$forms)->pluck('title', 'id')->all();
-
         $entries = Application::orderBy('created_at', 'desc');
 
         if ($form_id > 0) {
@@ -40,11 +38,13 @@ class DashboardController extends Controller
 
         if ($user->role == 'manager') {
             $groupIds = $user->groups->pluck('id')->toArray();
-            $formIds = Form::whereHas('groups', function($q) use ($groupIds) {
+            $forms = Form::whereHas('groups', function($q) use ($groupIds) {
                 $q->whereIn('group_id', $groupIds);
             })->pluck('id')->toArray();
-            $entries->whereIn('form_id', $formIds);
+            $entries->whereIn('form_id', $forms);
         }
+
+        $select_forms = [0 =>'All Forms'] + Form::whereIn('id',$forms)->pluck('title', 'id')->all();
 
         return view('admin.dashboard', [
             'entries' => $entries->get(),
