@@ -39,7 +39,7 @@ class AjaxController extends Controller
             if ($request->input('model') == 'User') {
                 $model = "App\User";
             } else {
-                $model = "App\Model\\" . $request->input('model');
+                $model = "App\\" . $request->input('model');
             }
 
             $order = $request->input('order');
@@ -54,7 +54,7 @@ class AjaxController extends Controller
             $response = [
                 "status" => "reordered"
                 ];
-            return json_encode($response);
+            return response()->json($response, 200);
         }
 
         return redirect()->route('admin.dashboard');

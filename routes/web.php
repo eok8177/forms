@@ -36,6 +36,7 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin', 'man
 Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
 
     Route::put('ajax/status', ['as' => 'ajax.status', 'uses' => 'AjaxController@status']);
+    Route::put('ajax/reorder', ['as' => 'ajax.reorder', 'uses' => 'AjaxController@reorder']);
 
     Route::resource('form', 'FormController');
     Route::get('form/{form}/setting', ['as' => 'form.setting', 'uses' => 'FormController@setting']);
@@ -43,7 +44,8 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
     Route::put('form/{form}/email', ['as' => 'form.email.store', 'uses' => 'FormController@emailStore']);
     Route::post('ajax/form/{id}', ['as' => 'ajax.form', 'uses' => 'AjaxController@form']);
 
-	Route::resource('page', 'PageController');
+    Route::resource('page', 'PageController');
+    Route::resource('faq', 'FaqController');
 });
 
 // User

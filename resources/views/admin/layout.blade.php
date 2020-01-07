@@ -54,6 +54,8 @@
 
           <a class="nav-link {{ request()->is('*form*') ? 'active' : '' }}" href="{{route('admin.form.index')}}"><i class="fa fa-list-alt"></i> @lang('message.forms')</a>
 
+          <a class="nav-link {{ request()->is('*faq*') ? 'active' : '' }}" href="{{route('admin.faq.index')}}"><i class="fa fa-question-circle-o"></i> Faq</a>
+
           @endif
 
         </div>
@@ -102,8 +104,11 @@
 
             {{-- <a class="nav-item nav-link {{ request()->is('*user*') ? 'active' : '' }}" href="{{route('admin.user.index')}}"><i class="fa fa-users"></i> @lang('message.users')</a> --}}
             @if(Auth::user()->role == 'admin')
-			<a class="nav-item nav-link {{ request()->is('*page*') ? 'active' : '' }}" href="{{route('admin.page.index')}}"><i class="fa fa-file-text-o"></i> @lang('message.pages')</a>
-            <a class="nav-item nav-link {{ request()->is('*form*') ? 'active' : '' }}" href="{{route('admin.form.index')}}"><i class="fa fa-list-alt"></i> @lang('message.forms')</a>
+              <a class="nav-item nav-link {{ request()->is('*page*') ? 'active' : '' }}" href="{{route('admin.page.index')}}"><i class="fa fa-file-text-o"></i> @lang('message.pages')</a>
+
+              <a class="nav-item nav-link {{ request()->is('*form*') ? 'active' : '' }}" href="{{route('admin.form.index')}}"><i class="fa fa-list-alt"></i> @lang('message.forms')</a>
+
+              <a class="av-item nav-link {{ request()->is('*faq*') ? 'active' : '' }}" href="{{route('admin.faq.index')}}"><i class="fa fa-question-circle-o"></i> Faq</a>
             @endif
           </div>
         </div>
@@ -144,6 +149,7 @@
 <!-- Scripts -->
 <script src="{{ asset('js/admin.js') }}"></script>
 <script src="{{ asset('vendor/laravel-filemanager/js/lfm.js') }}"></script>
+<script src="{{ asset('vendor/jquery-sortable.min.js') }}"></script>
 @stack('scripts')
 
 </body>

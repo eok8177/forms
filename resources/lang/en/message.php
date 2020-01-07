@@ -54,6 +54,8 @@ return [
 	'pages' => 'Pages',
     'active' => 'Active',
 	'trash' => 'Trash',
-	'no_records' => 'No records'
+	'no_records' => 'No records',
+    'question' => 'Question',
+    'answer' => 'Answer',
 
 ];
