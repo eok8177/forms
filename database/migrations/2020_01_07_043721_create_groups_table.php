@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFormGroupsTable extends Migration
+class CreateGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFormGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('form_groups', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
 			$table->bigIncrements('id');
 			$table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateFormGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('form_groups');
+        Schema::dropIfExists('groups');
     }
 }

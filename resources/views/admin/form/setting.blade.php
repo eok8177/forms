@@ -64,6 +64,24 @@
     <input type="text" name="redirect_url" value="{{$form->redirect_url}}" class="form-control">
   </div>
 
+  <div class="d-flex justify-content-start mt-3">
+    <div class="pr-3"><label>Form Groups</label></div>
+    <div class="px-3">
+      @foreach($groups as $group)
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="group_{{$group->id}}"
+          name="groups[]"
+          value="{{$group->id}}"
+          @if($form->groups->contains('id', $group->id))
+            checked="checked"
+          @endif
+          >
+        <label class="form-check-label" for="group_{{$group->id}}">{{$group->name}}</label>
+      </div>
+      @endforeach
+    </div>
+  </div>
+
 
   <div class="form-group mt-4">
     <input type="submit" value="{{Lang::get('message.save')}}" class="btn btn-secondary">

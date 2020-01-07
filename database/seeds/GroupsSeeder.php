@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class FormGroupsSeeder extends Seeder
+class GroupsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class FormGroupsSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('form_groups')->insert([
+        DB::table('groups')->insert([
 			['id' => 1, 'name' => 'Outreach'],
 			['id' => 2, 'name' => 'Grants'],
 			['id' => 3, 'name' => 'Recruitment'],

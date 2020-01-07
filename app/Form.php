@@ -28,4 +28,9 @@ class Form extends Model
         return $this->hasOne(FormEmail::class, 'form_id');
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
+
 }

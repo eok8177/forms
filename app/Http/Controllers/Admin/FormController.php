@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 
 use App\Form;
 use App\FormEmail;
+use App\Group;
 
 
 class FormController extends Controller
@@ -53,12 +54,21 @@ class FormController extends Controller
 
     public function setting(Form $form)
     {
-        return view('admin.form.setting', ['form' => $form]);
+        return view('admin.form.setting', [
+            'form' => $form,
+            'groups' => Group::all()
+        ]);
     }
 
     public function update(Request $request, Form $form)
     {
-        $form->update($request->all());
+        $form->update($request->except('groups'));
+
+        $form->groups()->detach();
+        // Groups attach
+        if ($request->has('groups')) {
+            $form->groups()->attach($request->input('groups'));
+        }
 
         return redirect()->route('admin.form.setting', ['form' => $form->id])->with('success', 'Form settings updated');
     }
