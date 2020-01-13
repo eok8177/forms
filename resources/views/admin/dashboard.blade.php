@@ -42,10 +42,10 @@
         <td>{{$entry->created_at}}</td>
         <td>{{$entry->status}}</td>
         <td>
-          @if($entry->status == 'submitted' || $entry->status == 'accepted' || $entry->status == 'rejected')
+          @if($entry->status == 'submitted' || $entry->status == 'accepted' || $entry->status == 'rejected' || $entry->form->to_be_approved == 0)
             <a href="{{ route('admin.entry', ['entry' => $entry->entry_id]) }}" class="btn fa fa-eye" target="_blank" title="View Entry in new Tab"></a>
           @endif
-		  @if($entry->status == 'submitted')
+          @if($entry->status == 'submitted' && $entry->form->to_be_approved == 1)
             <a href="{{ route('admin.entryStatus', ['entry' => $entry->entry_id, 'status' => 'accepted']) }}" class="btn fa fa-thumbs-o-up" title="Accept Entry"></a><a href="{{ route('admin.entryStatus', ['entry' => $entry->entry_id, 'status' => 'rejected']) }}" class="btn fa fa-thumbs-o-down" title="Reject Entry"></a>
           @endif
         </td>

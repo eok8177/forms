@@ -5,6 +5,12 @@
 
 {!! Form::open(['route' => ['admin.form.update', $form->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 
+  <div class="custom-control custom-checkbox custom-control-inline">
+    {!! Form::hidden('to_be_approved', 0) !!}
+    {!! Form::checkbox('to_be_approved', 1, $form->to_be_approved, ['class' => 'custom-control-input', 'id' => 'to_be_approved']) !!}
+    <label for="to_be_approved" class="custom-control-label">To be Approved</label>
+  </div>
+
   <div class="custom-control custom-checkbox mb-2">
     {!! Form::hidden('shedule', 0) !!}
     {!! Form::checkbox('shedule', 1, $form->shedule, ['class' => 'custom-control-input', 'id' => 'shedule']) !!}
