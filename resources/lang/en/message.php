@@ -58,4 +58,6 @@ return [
     'question' => 'Question',
     'answer' => 'Answer',
 
+    'not_active_msg' => 'Sorry, this form is inactive',
+
 ];
