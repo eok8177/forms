@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         $form_id = $request->input('id', 0);
-        $status = $request->input('status', Application::STATUS_ALL);
+        $status = $request->input('status', Application::STATUS_SUBMITTED);
 
         $forms = Application::select('form_id')->distinct()->pluck('form_id')->toArray();
 

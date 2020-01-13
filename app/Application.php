@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Application extends Model
 {
 	const STATUS_ALL = 'All Statuses';
+	const STATUS_SUBMITTED = 'Submitted';
 	
     /**
      * The attributes that are mass assignable.
