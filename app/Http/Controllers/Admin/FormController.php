@@ -20,7 +20,6 @@ class FormController extends Controller
 		$forms = Form::search($search, $trash);
         return view('admin.form.index', [
 			'forms' => $forms->paginate(15),
-			'total_records' => $forms->count(),
 			'trash' => $trash,
 			'search' => $search
 			]);

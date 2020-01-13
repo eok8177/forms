@@ -18,7 +18,7 @@
     </div>
   </form>
 
-@if ($total_records > 0)
+@if ($forms->count() > 0)
   <table class="table table-hover">
     <thead>
       <tr>
