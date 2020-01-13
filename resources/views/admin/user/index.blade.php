@@ -21,7 +21,6 @@
     <thead>
       <tr>
         <th scope="col">@lang('message.actions')</th>
-        <th scope="col">@lang('message.avatar')</th>
         <th scope="col">@lang('message.name')</th>
         <th scope="col">@lang('message.email')</th>
         <th scope="col">@lang('message.role')</th>
@@ -35,7 +34,6 @@
           <a href="{{ route('admin.user.destroy', ['user'=>$user->id]) }}" class="btn fa fa-trash-o delete"></a>
           @endif
         </td>
-        <td><img src="{{$user->avatar}}" style="width: 40px;"></td>
         <td>{{$user->name}}</td>
         <td>{{$user->email}}</td>
         <td>{{$user->role}}</td>
