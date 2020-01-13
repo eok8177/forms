@@ -8,22 +8,29 @@ use Illuminate\Validation\Rule;
 
 use App\User;
 use App\Group;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index()
     {
-        // return redirect()->route('admin.dashboard');
-        return view('admin.user.index', ['users' => User::all()]);
+        if (Auth::user()->role == 'manager') {
+            return redirect()->route('admin.dashboard');
+        }
+        return view('admin.user.index', ['users' => User::where('role','!=','user')->get()]);
     }
 
     public function create()
     {
-        // return redirect()->route('admin.dashboard');
+        if (Auth::user()->role == 'manager') {
+            return redirect()->route('admin.dashboard');
+        }
+        $user = new User;
+        $user->role = 'manager';
         return view('admin.user.create', [
-            'user' => new User,
-            'groups' => Group::all()
+            'user' => $user,
+            'groups' => Group::all(),
+            'readonly' => false
         ]);
     }
 
@@ -60,9 +67,21 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        $readonly = false;
+        // restrict edit other users by manager
+        if (Auth::user()->role == 'manager' && Auth::user()->id != $user->id) {
+            return redirect()->route('admin.dashboard');
+        }
+        // for admin
+        if (Auth::user()->role == 'admin') {
+            if ($user->email_verified_at != NULL) $readonly = true;
+
+            if (Auth::user()->super_admin_to > date("Y-m-d H:i:s")) $readonly = false;
+        }
         return view('admin.user.edit', [
             'user' => $user,
-            'groups' => Group::all()
+            'groups' => Group::all(),
+            'readonly' => $readonly
         ]);
     }
 
@@ -74,7 +93,7 @@ class UserController extends Controller
 
         $data = $request->except('groups');
 
-        if ($data['password']) {
+        if ($request->has('password') && $data['password']) {
             $data['password'] = bcrypt($data['password']);
         } else {
             unset($data['password']);
@@ -82,10 +101,12 @@ class UserController extends Controller
 
         $user->update($data);
 
-        $user->groups()->detach();
-        // Groups attach
-        if ($request->has('groups')) {
-            $user->groups()->attach($request->input('groups'));
+        if (Auth::user()->role == 'admin') {
+            $user->groups()->detach();
+            // Groups attach
+            if ($request->has('groups')) {
+                $user->groups()->attach($request->input('groups'));
+            }
         }
 
 
@@ -99,5 +120,19 @@ class UserController extends Controller
         return response()->json([
             'status' => 'success'
         ]);
+    }
+
+    public function setSAdmin(Request $request)
+    {
+        $password = $request->input('password', false);
+        if ($password == '123456') { // TODO what password ro use?
+
+            $time_to = date("Y-m-d H:i:s", strtotime('+1 hours'));
+            $user = Auth::user();
+            $user->super_admin_to = $time_to;
+            $user->save();
+            return redirect()->route('admin.user.index')->with('success', 'You now super Admin until: '.$time_to);
+        }
+        return redirect()->route('admin.user.index')->with('danger', 'Wrong password');
     }
 }

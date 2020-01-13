@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('role')->default('user');
             $table->rememberToken();
+            $table->timestamp('super_admin_to')->nullable();
             $table->timestamps();
         });
     }

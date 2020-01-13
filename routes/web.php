@@ -46,6 +46,8 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
 
     Route::resource('page', 'PageController');
     Route::resource('faq', 'FaqController');
+
+    Route::post('user/sadmin', ['as' => 'user.sadmin', 'uses' => 'UserController@setSAdmin']);
 });
 
 // User
