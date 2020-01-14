@@ -131,7 +131,7 @@ class UserController extends Controller
             $user = Auth::user();
             $user->super_admin_to = $time_to;
             $user->save();
-            return redirect()->route('admin.user.index')->with('success', 'You now super Admin until: '.$time_to);
+            return redirect()->route('admin.user.index')->with('success', 'You got super-admin`s privileges until: '.$time_to);
         }
         return redirect()->route('admin.user.index')->with('danger', 'Wrong password');
     }

@@ -9,7 +9,7 @@
       @csrf
       <input type="password" class="form-control" name="password" placeholder="Password">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="submit">Set super admin</button>
+        <button class="btn btn-outline-secondary" type="submit">Set admin's privileges</button>
       </div>
     </form>
   </div>
