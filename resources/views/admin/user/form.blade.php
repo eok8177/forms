@@ -2,6 +2,10 @@
 <input type="text" name="" class="autofeel-hack">
 <input type="password" name="" class="autofeel-hack">
 
+    <div class="form-group">
+      <label for="name">{{Lang::get('message.username')}}</label>
+      <input type="text" name="login" value="{{$user->login}}" class="form-control" {{$readonly ? 'readonly' : ''}}>
+    </div>
 
     <div class="form-group">
       <label for="name">{{Lang::get('message.first_name')}}</label>
