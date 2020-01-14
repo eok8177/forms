@@ -45,6 +45,20 @@ $(function () {
       });
   });
 
+  //Send Email method
+  $('.sendemail').on('click', function (e) {
+    e.preventDefault();
+    var item = $(this);
+    item.removeClass('fa-envelope-o').addClass('fa-paper-plane-o').prop('disabled', true);
+    $.post({
+      type: 'PUT',
+      url: $(this).attr('href'),
+        dataType: 'json'
+      }).done(function (data) {
+          // item.removeClass('fa-paper-plane-o').addClass('fa-envelope-o');
+      });
+  });
+
   //laravel file manager
   $('.lfm').filemanager('image');
 

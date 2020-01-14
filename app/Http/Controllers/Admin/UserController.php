@@ -137,4 +137,12 @@ class UserController extends Controller
         }
         return redirect()->route('admin.user.index')->with('danger', 'Wrong password');
     }
+
+    public function sendVerifyEmail($id)
+    {
+        $user = User::find($id);
+        $user->sendVerifyEmail();
+
+        return response()->json('success', 200);
+    }
 }
