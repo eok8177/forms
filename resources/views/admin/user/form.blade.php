@@ -33,7 +33,7 @@
       <input type="password" name="password" class="form-control">
     </div>
   @endif
-@if(Auth::user()->role == 'admin')
+@if(Auth::user()->role == 'admin' && $user->role == 'manager')
     <hr>
     <div class="d-flex justify-content-start mt-3">
       <div class="pr-3"><label>Form Groups</label></div>

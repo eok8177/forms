@@ -4,6 +4,7 @@
 <div class="page-header row justify-content-between">
   <h2>@lang('message.users')</h2>
 
+@if (Auth::user()->super_admin_to < date("Y-m-d H:i:s"))
   <div class="form">
     <form action="{{route('admin.user.sadmin')}}" method="POST" class="input-group">
       @csrf
@@ -13,6 +14,7 @@
       </div>
     </form>
   </div>
+@endif
 </div>
 
 

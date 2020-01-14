@@ -66,7 +66,12 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user"></i> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+              @if (Auth::user()->super_admin_to >= date("Y-m-d H:i:s"))
+                <span class="small text-danger">[super admin]</span>
+              @endif
+            </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
               <a href="{{ route('admin.user.edit', ['user' => Auth::user()->id]) }}" class="dropdown-item"><i class="fa fa-gear"></i> @lang('message.profile')</a>
 
