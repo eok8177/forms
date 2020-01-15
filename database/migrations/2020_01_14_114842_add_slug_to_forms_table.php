@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddNameAndSlugToFormsTable extends Migration
+class AddSlugToFormsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddNameAndSlugToFormsTable extends Migration
     public function up()
     {
         Schema::table('forms', function (Blueprint $table) {
-			$table->string('name', 255)->nullable()->after('id');
-			$table->string('slug', 255)->nullable()->after('expired_msg');
+            $table->string('slug')->nullable()->after('expired_msg');
         });
     }
 
@@ -27,7 +26,6 @@ class AddNameAndSlugToFormsTable extends Migration
     public function down()
     {
         Schema::table('forms', function (Blueprint $table) {
-			$table->dropColumn(['name']);
 			$table->dropColumn(['slug']);
         });
 	}
