@@ -24,12 +24,12 @@ class FrontendController extends Controller
         ]);
     }
 
-    public function form(Request $request, $id)
+    public function form(Request $request, $slug = '')
     {
-        $form = Form::find($id);
+		$form = Form::where('slug', $slug)->first();
 
-        if ($form->login_only == 1 && !Auth::user()) {
-            $request->session()->put('redirectTo', '/form/'.$id);
+        if ($form && $form->login_only == 1 && !Auth::user()) {
+            $request->session()->put('redirectTo', '/form/'.$slug);
             return redirect()->route('login');
         }
 

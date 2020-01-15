@@ -4,9 +4,11 @@
 
 <div class="container">
 
+  @if($form)
   <h2>{{$form->title}}</h2>
+  @endif
 
-  @if($form->is_active == 0)
+  @if(!$form || $form->is_active == 0)
     <div class="text">{{Lang::get('message.not_active_msg')}}</div>
   @elseif($form->shedule == 1 && $form->start_date > date('Y-m-d H:i:s'))
     <div class="text">{!! $form->pending_msg !!}</div>
