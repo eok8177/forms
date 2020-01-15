@@ -153,6 +153,8 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/admin.js') }}"></script>
+<script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('vendor/unisharp/laravel-ckeditor/adapters/jquery.js') }}"></script>
 <script src="{{ asset('vendor/laravel-filemanager/js/lfm.js') }}"></script>
 <script src="{{ asset('vendor/jquery-sortable.min.js') }}"></script>
 @stack('scripts')

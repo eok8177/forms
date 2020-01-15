@@ -5,7 +5,7 @@
 
 <div class="form-group">
   <label for="name">{{Lang::get('message.answer')}}</label>
-  {!! Form::textarea('answer', $faq->answer, ['class' => 'form-control', 'rows' => '2']) !!}
+  {!! Form::textarea('answer', $faq->answer, ['class' => 'form-control editor']) !!}
 </div>
 
 <div class="custom-control custom-checkbox mb-2">
@@ -14,16 +14,6 @@
   <label for="show" class="custom-control-label">Show</label>
 </div>
 
-
 <div class="form-group">
   <input type="submit" value="{{Lang::get('message.save')}}" class="btn btn-secondary">
 </div>
-
-@push('styles')
-  <style type="text/css">
-    .autofeel-hack {
-      position: absolute;
-      top: -999px;
-    }
-  </style>
-@endpush
