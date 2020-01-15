@@ -32,8 +32,8 @@ class CreateFormGroupTable extends Migration
     public function down()
     {
         Schema::table('form_group', function (Blueprint $table) {
-            $table->fropForeign('form_group_form_id_foreign');
-            $table->fropForeign('form_group_group_id_foreign');
+            $table->dropForeign('form_group_form_id_foreign');
+            $table->dropForeign('form_group_group_id_foreign');
         });
         Schema::dropIfExists('form_group');
     }
