@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Notifications\VerifyEmail;
 
+use App\Notifications\NewPassword;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -57,5 +59,23 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendVerifyEmail()
     {
         return $this->notify(new VerifyEmail);
+    }
+
+    public function sendNewPasswordEmail()
+    {
+        $password = $this->generateRandomString();
+        $this->password = bcrypt($password);
+        $this->save();
+        return $this->notify(new NewPassword($password));
+    }
+
+    private function generateRandomString($length = 8) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }
