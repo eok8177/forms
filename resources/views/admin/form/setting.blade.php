@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-<h2 class="page-header">@lang('message.form') <small>{{ $form->title }}</small></h2>
+<h5 class="page-header">@lang('message.form_settings') <small>{{ $form->title }}</small></h5>
 
 {!! Form::open(['route' => ['admin.form.update', $form->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 
@@ -45,12 +45,12 @@
 
     <div class="form-group mt-3">
       <label>Form Pending Message</label>
-      {!! Form::textarea('pending_msg', $form->pending_msg, ['class' => 'form-control', 'rows' => '1']) !!}
+      {!! Form::textarea('pending_msg', $form->pending_msg, ['class' => 'form-control', 'rows' => '3']) !!}
     </div>
 
     <div class="form-group mt-3">
       <label>Form Expired Message</label>
-      {!! Form::textarea('expired_msg', $form->expired_msg, ['class' => 'form-control', 'rows' => '1']) !!}
+      {!! Form::textarea('expired_msg', $form->expired_msg, ['class' => 'form-control', 'rows' => '3']) !!}
     </div>
   </div>
 
@@ -62,7 +62,7 @@
 
   <div class="form-group mt-3">
     <label>Confirmation text</label>
-    {!! Form::textarea('confirm_text', $form->confirm_text, ['class' => 'form-control', 'rows' => '2']) !!}
+    {!! Form::textarea('confirm_text', $form->confirm_text, ['class' => 'form-control', 'rows' => '3']) !!}
   </div>
 
   <div class="form-group">

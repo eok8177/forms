@@ -40,13 +40,15 @@ return [
     're_password' => 'Confirm Password',
     'email' => 'Email',
     'role' => 'Role',
-    'image' => 'Image',
+	'image' => 'Image',
+	'name' => 'Name',
     'slug' => 'Slug',
     'title' => 'Title',
     'description' => 'Description',
     'enabled' => 'Enabled',
 
-    'form' => 'Form',
+	'form' => 'Form',
+	'form_settings' => 'Form Settings',
     'new_form' => 'New Form',
 	'forms' => 'Forms',
 	'forms_all' => 'All Forms',
@@ -58,6 +60,6 @@ return [
     'question' => 'Question',
     'answer' => 'Answer',
 
-    'not_active_msg' => 'Sorry, this form is inactive',
+    'not_active_msg' => 'Sorry, this form does not exist or is not active.',
 
 ];

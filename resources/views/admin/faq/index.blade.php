@@ -12,14 +12,14 @@
     <table class="table table-hover sorted_table">
       <thead>
         <tr>
-          <th scope="col">Question</th>
-          <th scope="col">&nbsp;</th>
+          <th scope="col" class="col-md-10">Question</th>
+          <th scope="col" class="col-md-2 text-center">Actions</th>
         </tr>
       </thead>
       @foreach($faqs as $faq)
         <tr data-id="{{$faq->id}}">
-          <td>{{$faq->question}}</td>
-          <td class="text-right">
+          <td><a href="{{ route('admin.faq.edit', ['faq'=>$faq->id]) }}" class="btn">{{$faq->question}}</a></td>
+          <td class="text-center">
             <a href="{{ route('admin.faq.edit', ['faq'=>$faq->id]) }}" class="btn fa fa-pencil" title="Edit"></a>
             <a href="{{ route('admin.faq.destroy', ['faq'=>$faq->id]) }}" class="btn fa fa-trash-o delete" title="Delete"></a>
             <a href="{{route('admin.ajax.status', ['id' => $faq->id, 'model' => 'Faq', 'field' => 'show'])}}" class="status btn fa fa-{{$faq->show ? 'check-circle' : 'times-circle'}}" title="Toggle Show"></a>

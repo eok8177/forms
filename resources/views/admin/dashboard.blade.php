@@ -19,8 +19,8 @@
             </div>
           </div>
         </th>
-        <th scope="col">Date</th>
-        <th scope="col">
+		<th scope="col" class="col-md-3 text-center">Date</th>
+        <th scope="col" class="col-md-1">
           <div class="dropdown">
             <a class="btn btn-outline-info dropdown-toggle" href="#" role="button" id="dropdownStatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $status }}</a>
           
@@ -33,15 +33,15 @@
             </div>
           </div>
         </th>
-		<th scope="col">Actions</th>
+		<th scope="col" class="col-md-2 text-center">Actions</th>
       </tr>
     </thead>
     @foreach($entries as $entry)
       <tr>
-        <td>{{$select_forms[$entry->form_id]}}</td>
-        <td>{{$entry->created_at}}</td>
+        <td><a href="{{ route('admin.entry', ['entry' => $entry->entry_id]) }}" class="btn">{{$select_forms[$entry->form_id]}}</a></td>
+        <td class="text-center">{{$entry->created_at}}</td>
         <td>{{$entry->status}}</td>
-        <td>
+        <td class="text-center">
           @if($entry->status == 'submitted' || $entry->status == 'accepted' || $entry->status == 'rejected' || $entry->form->to_be_approved == 0)
             <a href="{{ route('admin.entry', ['entry' => $entry->entry_id]) }}" class="btn fa fa-eye" target="_blank" title="View Entry in new Tab"></a>
           @endif
