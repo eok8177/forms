@@ -2,6 +2,7 @@
 
 @section('content')
 <h5>Response</h5>
+<p>Response for <strong>{{ $form->title }}</strong> at <i>{{ $entries->first()->created_at }}</i></p>
 
 
 <div class="table-responsive">

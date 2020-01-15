@@ -57,8 +57,10 @@ class DashboardController extends Controller
     public function entry($entry)
     {
         $entries = Entry::where('entry_id', $entry)->get();
+        $form = Form::where('id', $entries->first()->form_id)->first();
         return view('admin.entry', [
-            'entries' => $entries
+            'entries' => $entries,
+            'form' => $form
         ]);
     }
 
