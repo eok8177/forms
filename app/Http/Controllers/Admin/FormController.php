@@ -61,6 +61,7 @@ class FormController extends Controller
 
     public function update(Request $request, Form $form)
     {
+        $form->slug = null;
         $form->update($request->except('groups'));
 
         $form->groups()->detach();
