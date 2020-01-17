@@ -8,7 +8,7 @@
   <div class="custom-control custom-checkbox custom-control-inline">
     {!! Form::hidden('to_be_approved', 0) !!}
     {!! Form::checkbox('to_be_approved', 1, $form->to_be_approved, ['class' => 'custom-control-input', 'id' => 'to_be_approved']) !!}
-    <label for="to_be_approved" class="custom-control-label">To be Approved</label>
+    <label for="to_be_approved" class="custom-control-label">To be Approved/Rejected by admin</label>
   </div>
 
   <div class="custom-control custom-checkbox mb-2">
