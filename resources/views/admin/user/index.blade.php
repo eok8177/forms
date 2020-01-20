@@ -22,26 +22,26 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">@lang('message.actions')</th>
         <th scope="col">@lang('message.name')</th>
         <th scope="col">@lang('message.email')</th>
-        <th scope="col">@lang('message.role')</th>
-        <th scope="col">@lang('message.loged_at')</th>
+        <th scope="col" class="text-center">@lang('message.role')</th>
+        <th scope="col" class="col-md-2 text-center">@lang('message.loged_at')</th>
+        <th scope="col" class="col-md-2 text-center">@lang('message.actions')</th>
         <th></th>
       </tr>
     </thead>
     @foreach($users as $user)
       <tr>
-        <td>
-          <a href="{{ route('admin.user.edit',    ['user'=>$user->id]) }}" class="btn fa fa-pencil"></a>
+        <td><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->name}}</a></td>
+        <td><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->email}}</a></td>
+        <td class="text-center"><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->role}}</a></td>
+        <td class="text-center"><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->last_logged_in}}</a></td>
+        <td class="text-center">
+          <a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn fa fa-pencil"></a>
           @if($user->id != Auth::user()->id && Auth::user()->super_admin_to >= date("Y-m-d H:i:s"))
           <a href="{{ route('admin.user.destroy', ['user'=>$user->id]) }}" class="btn fa fa-trash-o delete"></a>
           @endif
         </td>
-        <td>{{$user->name}}</td>
-        <td>{{$user->email}}</td>
-        <td>{{$user->role}}</td>
-        <td>{{$user->last_logged_in}}</td>
         <td>
           @if ($user->email_verified_at == NULL && $user->role == 'manager')
           <button href="{{route('admin.user.sendemail', ['id' => $user->id])}}" class="sendemail btn fa fa-envelope-o" title="Send Verification Email"></button>
