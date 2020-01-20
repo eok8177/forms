@@ -26,6 +26,7 @@
         <th scope="col">@lang('message.name')</th>
         <th scope="col">@lang('message.email')</th>
         <th scope="col">@lang('message.role')</th>
+        <th scope="col">@lang('message.loged_at')</th>
         <th></th>
       </tr>
     </thead>
@@ -40,6 +41,7 @@
         <td>{{$user->name}}</td>
         <td>{{$user->email}}</td>
         <td>{{$user->role}}</td>
+        <td>{{$user->last_logged_in}}</td>
         <td>
           @if ($user->email_verified_at == NULL && $user->role == 'manager')
           <button href="{{route('admin.user.sendemail', ['id' => $user->id])}}" class="sendemail btn fa fa-envelope-o" title="Send Verification Email"></button>
