@@ -5,6 +5,35 @@
 
 {!! Form::open(['route' => ['admin.form.update', $form->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 
+  <div class="form-group">
+    <label for="name">{{Lang::get('message.name')}}</label>
+    <input type="text" name="name" value="{{$form->name}}" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="title">{{Lang::get('message.title')}}</label>
+    <input type="text" name="title" value="{{$form->title}}" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="title">Description</label>
+    {!! Form::textarea('description', $form->description, ['class' => 'form-control', 'rows' => '2']) !!}
+  </div>
+
+  <div class="custom-control custom-checkbox custom-control-inline">
+    {!! Form::hidden('is_active', 0) !!}
+    {!! Form::checkbox('is_active', 1, $form->is_active, ['class' => 'custom-control-input', 'id' => 'is_active']) !!}
+    <label for="is_active" class="custom-control-label">{{Lang::get('message.draft')}}</label>
+  </div>
+
+  <div class="custom-control custom-checkbox custom-control-inline">
+    {!! Form::hidden('is_trash', 0) !!}
+    {!! Form::checkbox('is_trash', 1, $form->is_trash, ['class' => 'custom-control-input', 'id' => 'is_trash']) !!}
+    <label for="is_trash" class="custom-control-label">{{Lang::get('message.trash')}}</label>
+  </div>
+
+  <hr>
+
   <div class="custom-control custom-checkbox custom-control-inline">
     {!! Form::hidden('to_be_approved', 0) !!}
     {!! Form::checkbox('to_be_approved', 1, $form->to_be_approved, ['class' => 'custom-control-input', 'id' => 'to_be_approved']) !!}

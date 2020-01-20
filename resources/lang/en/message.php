@@ -60,6 +60,7 @@ return [
 	'no_records' => 'No records',
     'question' => 'Question',
     'answer' => 'Answer',
+    'draft' => 'Draft',
 
     'not_active_msg' => 'Sorry, this form does not exist or is not active.',
 
