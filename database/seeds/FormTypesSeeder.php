@@ -12,9 +12,10 @@ class FormTypesSeeder extends Seeder
     public function run()
     {
         DB::table('form_types')->insert([
-			['id' => 1, 'name' => 'Analytical'],
-			['id' => 2, 'name' => 'Evaluation'],
-			['id' => 3, 'name' => 'Exp of Interest']
+			['id' => 1, 'name' => 'General'],
+			['id' => 2, 'name' => 'Analytical'],
+			['id' => 3, 'name' => 'Evaluation'],
+			['id' => 4, 'name' => 'Exp of Interest']
 		]);
 	}
 	

@@ -14,7 +14,7 @@ class AddFormTypeIdToFormsTable extends Migration
     public function up()
     {
         Schema::table('forms', function (Blueprint $table) {
-			$table->unsignedBigInteger('form_type_id')->after('is_trash');
+			$table->unsignedBigInteger('form_type_id')->after('is_trash')->default(1);
 			
 			$table->foreign('form_type_id')->references('id')->on('form_types')->onDelete('restrict');
         });
