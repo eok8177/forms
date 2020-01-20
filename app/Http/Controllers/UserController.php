@@ -18,9 +18,9 @@ class UserController extends Controller
     {
         $user =Auth::user();
         if ($user->role == 'admin') {
-            return redirect('/admin/dashboard');
+            return redirect('/admin/responces');
         } elseif ($user->role == 'manager') {
-            return redirect('/admin/dashboard');
+            return redirect('/admin/responces');
         } elseif ($user->role == 'user') {
             $redirectTo = $request->session()->get('redirectTo', '/user');
             if (!$user->email_verified_at) {

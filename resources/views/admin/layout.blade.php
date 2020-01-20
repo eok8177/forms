@@ -44,8 +44,8 @@
 
           <button type="button" class="menu-toggler nav-link" onclick="document.getElementById('app').classList.toggle('menu-closed');"><span class="navbar-toggler-icon"></span></button>
 
-          <a class="nav-link" href="{{ route('admin.dashboard') }}">
-            <i class="fa fa-tachometer"></i> <span class="d-none d-md-inline">@lang('message.dashboard')</span>
+          <a class="nav-link" href="{{ route('admin.responces') }}">
+            <i class="fa fa-tachometer"></i> <span class="d-none d-md-inline">@lang('message.responces')</span>
           </a>
 
           @if(Auth::user()->role == 'admin')

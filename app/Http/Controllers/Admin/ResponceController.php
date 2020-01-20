@@ -10,13 +10,8 @@ use App\Application;
 use App\Entry;
 use App\Form;
 
-class DashboardController extends Controller
+class ResponceController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $user = Auth::user();
@@ -46,11 +41,12 @@ class DashboardController extends Controller
 
         $select_forms = [0 =>'All Forms'] + Form::whereIn('id',$forms)->pluck('title', 'id')->all();
 
-        return view('admin.dashboard', [
+        return view('admin.responce', [
             'entries' => $entries->get(),
             'select_forms' => $select_forms,
             'form_id' => $form_id,
-            'status' => $status
+            'status' => $status,
+            'user' => $user
         ]);
     }
 
@@ -70,6 +66,6 @@ class DashboardController extends Controller
         $app->status = $status;
         $app->save();
 
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.responce');
     }
 }
