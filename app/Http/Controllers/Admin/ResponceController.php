@@ -66,6 +66,23 @@ class ResponceController extends Controller
         $app->status = $status;
         $app->save();
 
-        return redirect()->route('admin.responce');
+        return redirect()->route('admin.responces');
+    }
+
+    public function statusReject(Request $request)
+    {
+        $id = $request->input('id', false);
+        if (!$id) {
+            return redirect()->route('admin.responces');
+        }
+
+        $rejection = $request->input('rejection', NULL);
+
+        $app = Application::where('id', $id)->first();
+        $app->rejection = $rejection;
+        $app->status = 'rejected';
+        $app->save();
+
+        return redirect()->route('admin.responces');
     }
 }

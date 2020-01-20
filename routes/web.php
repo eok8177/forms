@@ -28,6 +28,7 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin', 'man
     Route::get('responces', ['as' => 'responces', 'uses' => 'ResponceController@index']);
     Route::get('entry/{entry}', ['as' => 'entry', 'uses' => 'ResponceController@entry']);
     Route::get('entry-status/{entry}/{status}', ['as' => 'entryStatus', 'uses' => 'ResponceController@status']);
+    Route::post('entry-reject', ['as' => 'entryReject', 'uses' => 'ResponceController@statusReject']);
 
     Route::resource('user', 'UserController');
 });

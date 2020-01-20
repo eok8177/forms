@@ -27,7 +27,16 @@
               </td>
               <td>{{$app->form->title}}</td>
               <td>{{$app->updated_at}}</td>
-              <td>{{$app->status}}</td>
+              <td>
+                @if($app->status == 'rejected')
+                  <details>
+                    <summary>{{$app->status}}</summary>
+                    <p>{{$app->rejection}}</p>
+                  </details>
+                @else
+                  {{$app->status}}
+                @endif
+              </td>
             </tr>
 
           @endforeach

@@ -92,11 +92,14 @@ class FormController extends Controller
             $app = new Application;
         }
 
+        $form = Form::where('id', $formid)->first();
+
         $app->user_id = $userid;
         $app->form_id = $formid;
         $app->status = $status;
         $app->entry_id = $entryid;
         $app->config = json_encode($data);
+        $app->to_be_approved = $form->to_be_approved;
         $app->save();
 
         return response()->json([
