@@ -89,6 +89,14 @@
   </div>
 
 
+  <div class="d-flex justify-content-start mt-3">
+    <div class="pr-3"><label>Form Type</label></div>
+    <div class="px-3">
+	  {!! Form::select('form_type_id', $form_types, $form->form_type_id, ['class' => 'form-control']) !!}
+    </div>
+  </div>    
+
+
   <div class="form-group mt-4">
     <input type="submit" value="{{Lang::get('message.save')}}" class="btn btn-secondary">
   </div>

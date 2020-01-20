@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Form;
 use App\FormEmail;
 use App\Group;
+use App\FormType;
 
 
 class FormController extends Controller
@@ -55,7 +56,8 @@ class FormController extends Controller
     {
         return view('admin.form.setting', [
             'form' => $form,
-            'groups' => Group::all()
+			'groups' => Group::all(),
+			'form_types' => FormType::pluck('name', 'id')
         ]);
     }
 

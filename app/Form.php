@@ -48,6 +48,12 @@ class Form extends Model
     public function groups()
     {
         return $this->belongsToMany(Group::class);
+	}
+	
+	public function types()
+    {
+        return $this->hAsOne('FormType');
     }
+
 
 }
