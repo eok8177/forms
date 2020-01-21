@@ -32,7 +32,7 @@
     </thead>
     @foreach($users as $user)
       <tr>
-        <td><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->name}}</a></td>
+        <td><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->login}}</a></td>
         <td><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->email}}</a></td>
         <td class="text-center"><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->role}}</a></td>
         <td class="text-center"><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->last_logged_in}}</a></td>
