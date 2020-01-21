@@ -12,14 +12,14 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        return view('home', ['forms' => Form::where('is_active', 1)->get()]);
+        return view('home', ['forms' => Form::where('draft', 0)->get()]);
     }
 
     public function success($id)
     {
         $form = Form::find($id);
         return view('success', [
-            'forms' => Form::where('is_active', 1)->get(),
+            'forms' => Form::where('draft', 0)->get(),
             'form' => $form
         ]);
     }
@@ -34,7 +34,7 @@ class FrontendController extends Controller
         }
 
         return view('form', [
-            'forms' => Form::where('is_active', 1)->get(),
+            'forms' => Form::where('draft', 0)->get(),
             'form' => $form
         ]);
     }

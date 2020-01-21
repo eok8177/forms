@@ -21,9 +21,9 @@
   </div>
 
   <div class="custom-control custom-checkbox custom-control-inline">
-    {!! Form::hidden('is_active', 0) !!}
-    {!! Form::checkbox('is_active', 1, $form->is_active, ['class' => 'custom-control-input', 'id' => 'is_active']) !!}
-    <label for="is_active" class="custom-control-label">{{Lang::get('message.draft')}}</label>
+    {!! Form::hidden('draft', 0) !!}
+    {!! Form::checkbox('draft', 1, $form->draft, ['class' => 'custom-control-input', 'id' => 'draft']) !!}
+    <label for="draft" class="custom-control-label">{{Lang::get('message.draft')}}</label>
   </div>
 
   <div class="custom-control custom-checkbox custom-control-inline">
