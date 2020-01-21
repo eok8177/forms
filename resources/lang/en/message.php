@@ -42,6 +42,7 @@ return [
     'role' => 'Role',
     'image' => 'Image',
     'name' => 'Name',
+    'type' => 'Type',
     'slug' => 'Slug',
     'name' => 'Name',
     'title' => 'Title',

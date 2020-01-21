@@ -52,7 +52,7 @@ class Form extends Model
 	
 	public function types()
     {
-        return $this->hAsOne('FormType');
+        return $this->hasOne(FormType::class, 'id', 'form_type_id');
     }
 
 
