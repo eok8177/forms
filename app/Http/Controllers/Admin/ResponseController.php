@@ -19,6 +19,9 @@ class ResponseController extends Controller
         $form_id = $request->input('id', 0);
         $status = $request->input('status', Application::STATUS_SUBMITTED);
 
+        $from = $request->input('from', false);
+        $to = $request->input('to', false);
+
         $forms = Application::select('form_id')->distinct()->pluck('form_id')->toArray();
 
         $entries = Application::orderBy('created_at', 'desc');
@@ -29,6 +32,14 @@ class ResponseController extends Controller
 
         if ($status != Application::STATUS_ALL) {
             $entries->where('status', $status);
+        }
+
+        if ($from) {
+            $entries->where('created_at', '>=', $from);
+        }
+
+        if ($to) {
+            $entries->where('created_at', '<=', $to);
         }
 
         if ($user->role == 'manager') {
@@ -46,7 +57,9 @@ class ResponseController extends Controller
             'select_forms' => $select_forms,
             'form_id' => $form_id,
             'status' => $status,
-            'user' => $user
+            'user' => $user,
+            'from' => $from,
+            'to' => $to
         ]);
     }
 
