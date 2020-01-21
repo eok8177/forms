@@ -32,7 +32,7 @@
 
   <div class="form-group mt-3">
     <label>Message</label>
-    {!! Form::textarea('message', $form->email->message, ['class' => 'form-control', 'rows' => '2']) !!}
+    {!! Form::textarea('message', $form->email->message, ['class' => 'form-control editor', 'rows' => '2']) !!}
   </div>
 
   <div class="form-group mt-4">
