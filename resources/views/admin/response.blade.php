@@ -19,17 +19,19 @@
             </div>
           </div>
         </th>
-    <th scope="col" class="col-md-3 text-center">
+    <th scope="col" class="col-md-3">
       <div class="btn-group">
         <input type="text" id="datetimepicker1" class="form-control datetimepicker-input"
           data-toggle="datetimepicker"
           data-target="#datetimepicker1"
           placeholder="Date from"
+          style="width: 120px"
           value="{{$from}}">
         <input type="text" id="datetimepicker2" class="form-control datetimepicker-input"
           data-toggle="datetimepicker"
           data-target="#datetimepicker2"
           placeholder="Date to"
+          style="width: 120px"
           value="{{$to}}">
         <button class="btn btn-outline-info" onclick="setDate()">Filter</button>
       </div>
@@ -53,8 +55,8 @@
     @foreach($entries as $entry)
       <tr>
         <td><a href="{{ route('admin.entry', ['entry' => $entry->entry_id]) }}" class="btn">{{$select_forms[$entry->form_id]}}</a></td>
-        <td class="text-center">{{$entry->created_at}}</td>
-        <td>{{$entry->status}}</td>
+        <td>{{$entry->created_at}}</td>
+        <td class="text-center">{{$entry->status}}</td>
         <td class="text-center">
           @if($entry->status == 'submitted' || $entry->status == 'accepted' || $entry->status == 'rejected' || $entry->to_be_approved == 0)
             <a href="{{ route('admin.entry', ['entry' => $entry->entry_id]) }}" class="btn fa fa-eye" target="_blank" title="View Entry in new Tab"></a>
