@@ -56,12 +56,13 @@
         @endforeach
       </div>
     </div>
+
+    <div class="form-group">
+        <input type="submit" value="{{Lang::get('message.save')}}" class="btn btn-secondary">
+    </div>
 @endif
 
 
-<div class="form-group">
-  <input type="submit" value="{{Lang::get('message.save')}}" class="btn btn-secondary">
-</div>
 
 @push('styles')
   <style type="text/css">
