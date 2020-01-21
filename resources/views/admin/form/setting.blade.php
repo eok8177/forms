@@ -90,7 +90,7 @@
   </div>
 
   <div class="form-group mt-3">
-    <label>Confirmation text</label>
+    <label>Confirmation message on screen</label>
     {!! Form::textarea('confirm_text', $form->confirm_text, ['class' => 'form-control', 'rows' => '3']) !!}
   </div>
 
