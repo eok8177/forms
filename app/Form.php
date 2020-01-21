@@ -55,5 +55,10 @@ class Form extends Model
         return $this->hasOne(FormType::class, 'id', 'form_type_id');
     }
 
+    public function getTypeAttribute()
+    {
+        return $this->types->name;
+    }
+
 
 }

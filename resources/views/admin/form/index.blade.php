@@ -32,7 +32,7 @@
     @foreach($forms as $form)
       <tr>
         <td><a href="{{ route('admin.form.edit', $form->id) }}" class="btn">{{$form->name}}</a></td>
-        <td class="text-center"><a href="{{ route('admin.form.edit', $form->id) }}" class="btn">{{$form->types->name}}</a></td>
+        <td class="text-center"><a href="{{ route('admin.form.edit', $form->id) }}" class="btn">{{$form->type}}</a></td>
         <td class="text-center">
             <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'is_active'])}}" class="status btn fa fa-{{$form->is_active ? 'check-circle' : 'times-circle'}}" title="Toggle Active"></a>
         </td>
