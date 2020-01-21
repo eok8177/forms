@@ -14,7 +14,7 @@
 			
             <div class="dropdown-menu" aria-labelledby="dropdownForms">
               @foreach($select_forms as $id => $item)
-                <a class="dropdown-item" href="{{ route('admin.responces', ['status' => $status, 'id' => $id]) }}">{{$item}}</a>
+                <a class="dropdown-item" href="{{ route('admin.responses', ['status' => $status, 'id' => $id]) }}">{{$item}}</a>
               @endforeach
             </div>
           </div>
@@ -25,11 +25,11 @@
             <a class="btn btn-outline-info dropdown-toggle" href="#" role="button" id="dropdownStatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $status }}</a>
           
             <div class="dropdown-menu" aria-labelledby="dropdownStatus">
-              <a class="dropdown-item" href="{{ route('admin.responces', ['id' => $form_id, 'status' => 'All Statuses']) }}">All Statuses</a>
-              <a class="dropdown-item" href="{{ route('admin.responces', ['id' => $form_id, 'status' => 'draft']) }}">Draft</a>
-              <a class="dropdown-item" href="{{ route('admin.responces', ['id' => $form_id, 'status' => 'submitted']) }}">Submitted</a>
-              <a class="dropdown-item" href="{{ route('admin.responces', ['id' => $form_id, 'status' => 'rejected']) }}">Rejected</a>
-              <a class="dropdown-item" href="{{ route('admin.responces', ['id' => $form_id, 'status' => 'accepted']) }}">Accepted</a>
+              <a class="dropdown-item" href="{{ route('admin.responses', ['id' => $form_id, 'status' => 'All Statuses']) }}">All Statuses</a>
+              <a class="dropdown-item" href="{{ route('admin.responses', ['id' => $form_id, 'status' => 'draft']) }}">Draft</a>
+              <a class="dropdown-item" href="{{ route('admin.responses', ['id' => $form_id, 'status' => 'submitted']) }}">Submitted</a>
+              <a class="dropdown-item" href="{{ route('admin.responses', ['id' => $form_id, 'status' => 'rejected']) }}">Rejected</a>
+              <a class="dropdown-item" href="{{ route('admin.responses', ['id' => $form_id, 'status' => 'accepted']) }}">Accepted</a>
             </div>
           </div>
         </th>
@@ -61,7 +61,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="rejectModalLabel">Reject Responce: <span id="modalTitle"></span></h5>
+        <h5 class="modal-title" id="rejectModalLabel">Reject Response: <span id="modalTitle"></span></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

@@ -10,7 +10,7 @@ use App\Application;
 use App\Entry;
 use App\Form;
 
-class ResponceController extends Controller
+class ResponseController extends Controller
 {
     public function index(Request $request)
     {
@@ -41,7 +41,7 @@ class ResponceController extends Controller
 
         $select_forms = [0 =>'All Forms'] + Form::whereIn('id',$forms)->pluck('title', 'id')->all();
 
-        return view('admin.responce', [
+        return view('admin.response', [
             'entries' => $entries->get(),
             'select_forms' => $select_forms,
             'form_id' => $form_id,
@@ -66,14 +66,14 @@ class ResponceController extends Controller
         $app->status = $status;
         $app->save();
 
-        return redirect()->route('admin.responces');
+        return redirect()->route('admin.responses');
     }
 
     public function statusReject(Request $request)
     {
         $id = $request->input('id', false);
         if (!$id) {
-            return redirect()->route('admin.responces');
+            return redirect()->route('admin.responses');
         }
 
         $rejection = $request->input('rejection', NULL);
@@ -83,6 +83,6 @@ class ResponceController extends Controller
         $app->status = 'rejected';
         $app->save();
 
-        return redirect()->route('admin.responces');
+        return redirect()->route('admin.responses');
     }
 }

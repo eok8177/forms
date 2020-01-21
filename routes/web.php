@@ -25,10 +25,10 @@ Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallba
 // Manager
 Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin', 'manager'], 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
 
-    Route::get('responces', ['as' => 'responces', 'uses' => 'ResponceController@index']);
-    Route::get('entry/{entry}', ['as' => 'entry', 'uses' => 'ResponceController@entry']);
-    Route::get('entry-status/{entry}/{status}', ['as' => 'entryStatus', 'uses' => 'ResponceController@status']);
-    Route::post('entry-reject', ['as' => 'entryReject', 'uses' => 'ResponceController@statusReject']);
+    Route::get('responses', ['as' => 'responses', 'uses' => 'ResponseController@index']);
+    Route::get('entry/{entry}', ['as' => 'entry', 'uses' => 'ResponseController@entry']);
+    Route::get('entry-status/{entry}/{status}', ['as' => 'entryStatus', 'uses' => 'ResponseController@status']);
+    Route::post('entry-reject', ['as' => 'entryReject', 'uses' => 'ResponseController@statusReject']);
 
     Route::resource('user', 'UserController');
 });

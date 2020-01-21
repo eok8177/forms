@@ -20,9 +20,9 @@ class UserController extends Controller
         $user->last_logged_in = date("Y-m-d H:i:s");
         $user->save();
         if ($user->role == 'admin') {
-            return redirect('/admin/responces');
+            return redirect('/admin/responses');
         } elseif ($user->role == 'manager') {
-            return redirect('/admin/responces');
+            return redirect('/admin/responses');
         } elseif ($user->role == 'user') {
             $redirectTo = $request->session()->get('redirectTo', '/user');
             if (!$user->email_verified_at) {

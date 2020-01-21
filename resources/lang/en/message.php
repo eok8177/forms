@@ -13,7 +13,7 @@ return [
     'published' => 'Published',
     'gen_auto' => 'Generated auto',
 
-    'responces' => 'Responses',
+    'responses' => 'Responses',
     'to_site' => 'Go to site',
     'settings' => 'Settings',
     'logout' => 'Logout',
