@@ -48,7 +48,7 @@ return [
     'title' => 'Title',
     'description' => 'Description',
     'enabled' => 'Enabled',
-    'loged_at' => 'Last logged in',
+    'loged_at' => 'Last time logged in',
 
     'form' => 'Form',
     'form_settings' => 'Form Settings',
