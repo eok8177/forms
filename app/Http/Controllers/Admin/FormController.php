@@ -17,12 +17,20 @@ class FormController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search', false);
-		$trash = $request->input('trash', false);
+		$trash = $request->input('trash', 0);
+        $form_type_id = $request->input('form_type_id', 0);
 		$forms = Form::search($search, $trash);
+
+        if ($form_type_id > 0) {
+            $forms->where('form_type_id', $form_type_id);
+        }
+
         return view('admin.form.index', [
 			'forms' => $forms->paginate(15),
 			'trash' => $trash,
-			'search' => $search
+			'search' => $search,
+            'form_types' => FormType::pluck('name', 'id'),
+            'form_type_id' => $form_type_id
 			]);
     }
 

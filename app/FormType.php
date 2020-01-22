@@ -13,4 +13,9 @@ class FormType extends Model
      */
     protected $guarded = [];
 
+    public function forms()
+    {
+        return $this->hasMany(Form::class, 'form_type_id', 'id');
+    }
+
 }
