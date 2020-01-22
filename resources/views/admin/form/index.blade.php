@@ -29,9 +29,9 @@
     </thead>
     @foreach($forms as $form)
       <tr>
-        <td>
+        <td class="d-flex">
             <a href="{{ route('admin.form.edit', $form->id) }}" class="btn">{{$form->name}}{{$form->draft ? ' [draft]' : ''}}</a>
-            <a href="#" class="status btn fa fa-files-o"></a>
+            <a href="{{ route('admin.form.copy', $form->id) }}" class="btn fa fa-files-o" title="Duplicate Form"></a>
         </td>
         <td class="text-center"><a href="{{ route('admin.form.edit', $form->id) }}" class="btn">{{$form->type}}</a></td>
         <td class="col-md-3 text-center">

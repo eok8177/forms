@@ -100,4 +100,14 @@ class FormController extends Controller
             'status' => 'success'
         ]);
     }
+
+    public function copy(Form $form)
+    {
+        $newForm = $form->replicate();
+        $newForm->name .= ' Copy';
+        $newForm->draft = 1;
+        $newForm->save();
+
+        return redirect()->route('admin.form.index')->with('success', 'Form duplicated');
+    }
 }
