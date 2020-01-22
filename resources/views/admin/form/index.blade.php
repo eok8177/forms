@@ -4,6 +4,7 @@
 <div class="page-header row justify-content-between">
 <h5>{{ $trash == 0 ? __('message.forms_all') : __('message.forms_trashed') }}</h5>
   <div>
+    <a href="{{ route('admin.group.index') }}" class="btn btn-light"><i class="fa fa-list"></i> @lang('message.formgroups')</a>
     <a href="{{ route('admin.form-type.index') }}" class="btn btn-light"><i class="fa fa-list"></i> @lang('message.formtypes')</a>
     <a href="{{ route('admin.form.create') }}" class="btn btn-light"><i class="fa fa-plus-square"></i> @lang('message.create')</a>
   </div>

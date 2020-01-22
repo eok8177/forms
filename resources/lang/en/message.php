@@ -67,5 +67,6 @@ return [
     'not_active_msg' => 'Sorry, this form does not exist or is not active.',
 
     'formtypes' => 'Form Types',
+    'formgroups' => 'Form Groups',
 
 ];

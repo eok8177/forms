@@ -53,6 +53,7 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
     Route::put('users/sendemail/{id}', ['as' => 'user.sendemail', 'uses' => 'UserController@sendVerifyEmail']);
 
     Route::resource('form-type', 'FormTypeController');
+    Route::resource('group', 'GroupController');
 });
 
 // User

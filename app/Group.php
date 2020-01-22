@@ -13,4 +13,13 @@ class Group extends Model
      */
     protected $guarded = [];
 
+    public function empty()
+    {
+        $forms = $this->belongsToMany(Form::class);
+        $users = $this->belongsToMany(User::class);
+
+        return ($forms->count() == 0 && $users->count() == 0) ? true : false;
+    }
+
+
 }
