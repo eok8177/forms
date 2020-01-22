@@ -24,28 +24,23 @@
       <tr>
 		<th scope="col">@lang('message.name')</th>
         <th scope="col" class="text-center">@lang('message.type')</th>
-        <th scope="col" class="text-center">@lang('message.draft')</th>
-        <th scope="col" class="col-md-2 text-center">@lang('message.actions')</th>
-        <th scope="col" class="text-center">@lang('message.trash')</th>
+        <th scope="col" class="col-md-3 text-center">@lang('message.actions')</th>
       </tr>
     </thead>
     @foreach($forms as $form)
       <tr>
-        <td><a href="{{ route('admin.form.edit', $form->id) }}" class="btn">
-          {{$form->name}}{{$form->draft ? ' [draft]' : ''}}
-        </a></td>
-        <td class="text-center"><a href="{{ route('admin.form.edit', $form->id) }}" class="btn">{{$form->type}}</a></td>
-        <td class="text-center">
-            <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'draft'])}}" class="status btn fa fa-{{$form->draft ? 'check-circle' : 'times-circle'}}" title="Toggle Draft"></a>
+        <td>
+            <a href="{{ route('admin.form.edit', $form->id) }}" class="btn">{{$form->name}}{{$form->draft ? ' [draft]' : ''}}</a>
+            <a href="#" class="status btn fa fa-files-o"></a>
         </td>
-        <td class="col-md-2 text-center">
+        <td class="text-center"><a href="{{ route('admin.form.edit', $form->id) }}" class="btn">{{$form->type}}</a></td>
+        <td class="col-md-3 text-center">
           <a href="{{ route('admin.form.edit', $form->id) }}" class="btn fa fa-pencil" title="Edit"></a>
+          <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'draft'])}}" class="status btn fa fa-{{$form->draft ? 'check-circle' : 'times-circle'}}" title="Toggle Draft"></a>
           <a class="btn fa fa-gear" href="{{route('admin.form.setting',$form->id)}}" title="Setings"></a>
           <a class="btn fa fa-envelope-o" href="{{route('admin.form.email',$form->id)}}" title="Email Notification"></a>
           <a class="btn fa fa-eye" href="{{route('front.form',$form->slug)}}" target="_blank" title="Open Form in new window"></a>
-        </td>
-        <td class="text-center">
-          <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'is_trash'])}}" class="status btn fa fa-{{$form->is_trash ? 'check-circle' : 'times-circle'}}" title="Toggle trash"></a>
+          <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'is_trash'])}}" class="status btn fa fa-{{$form->is_trash ? 'trash-o' : 'trash-o'}}" title="Toggle trash"></a>
         </td>
       </tr>
 
