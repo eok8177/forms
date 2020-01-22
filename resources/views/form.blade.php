@@ -7,7 +7,7 @@
   @if($form)
   <h2>{{$form->title}}{{$form->draft ? ' [draft]' : ''}}</h2>
 
-    @if($form->draft == 1)
+    @if($form->draft == 1 || $form->is_trash == 1)
       <div class="text">{{Lang::get('message.not_active_msg')}}</div>
     @elseif($form->shedule == 1 && $form->start_date > date('Y-m-d H:i:s'))
       <div class="text">{!! $form->pending_msg !!}</div>
