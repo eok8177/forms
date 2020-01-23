@@ -12,12 +12,30 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::user()->role == 'manager') {
             return redirect()->route('admin.dashboard');
         }
-        return view('admin.user.index', ['users' => User::where('role','!=','user')->get()]);
+
+        $roles = [
+            'admin' => 'Administrator',
+            'manager' => 'Manager',
+            'user' => 'Applicant',
+        ];
+
+        $role = $request->input('role', false);
+        $users = User::orderBy('id','asc');
+
+        if ($role) {
+            $users->where('role', '=', $role);
+        }
+
+        return view('admin.user.index', [
+            'users' => $users->get(),
+            'role' => $role,
+            'roles' => $roles
+        ]);
     }
 
     public function create()

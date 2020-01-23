@@ -18,13 +18,23 @@
 </div>
 
 
-<div class="table-responsive">
+<div class="table-responsive-sm">
   <table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">@lang('message.name')</th>
         <th scope="col">@lang('message.email')</th>
-        <th scope="col" class="text-center">@lang('message.role')</th>
+        <th scope="col" class="text-center">
+          <div class="dropdown">
+            <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownRoles" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $role ? $roles[$role] : __('message.role') }}</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownRoles">
+              <a class="dropdown-item" href="{{ route('admin.user.index') }}">All</a>
+              @foreach($roles as $id => $name)
+                <a class="dropdown-item" href="{{ route('admin.user.index', ['role' => $id]) }}">{{$name}}</a>
+              @endforeach
+            </div>
+          </div>
+        </th>
         <th scope="col" class="col-md-2 text-center">@lang('message.loged_at')</th>
         <th scope="col" class="col-md-2 text-center">@lang('message.actions')</th>
         <th></th>
