@@ -111,10 +111,16 @@ class FormController extends Controller
 
     public function copy(Form $form)
     {
+        $groups = $form->groups->pluck('id');
+
         $newForm = $form->replicate();
         $newForm->name .= ' Copy';
         $newForm->draft = 1;
         $newForm->save();
+        // Groups attach
+        if ($groups) {
+            $newForm->groups()->attach($groups);
+        }
 
         return redirect()->route('admin.form.index')->with('success', 'Form duplicated');
     }
