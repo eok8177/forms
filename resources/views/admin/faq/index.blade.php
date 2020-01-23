@@ -7,13 +7,22 @@
   <a href="{{ route('admin.faq.create') }}" class="btn btn-light"><i class="fa fa-plus-square"></i> @lang('message.create')</a>
 </div>
 
+<div class="d-flex justify-content-center">
+  <form class="input-group mb-3" action="{{ route('admin.faq.index') }}" method="get" style="max-width: 600px;">
+    <input type="text" class="form-control" placeholder="Search ..." name="search" value="{{$search}}">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit" >Search</button>
+    </div>
+  </form>
+</div>
+
 <div class="position-relative">
   <div class="table-responsive">
     <table class="table table-hover sorted_table">
       <thead>
         <tr>
-          <th scope="col" class="col-md-10">Question</th>
-          <th scope="col" class="col-md-2 text-center">Actions</th>
+          <th scope="col">Question</th>
+          <th scope="col" class="text-center">Actions</th>
         </tr>
       </thead>
       @foreach($faqs as $faq)

@@ -8,9 +8,21 @@ use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.faq.index', ['faqs' => Faq::orderBy('order','asc')->get()]);
+        $search = $request->input('search', false);
+
+        $faq = Faq::orderBy('order','asc');
+
+        if ($search) {
+            $faq->where('question','LIKE', '%'.$search.'%');
+                // ->orWhere('answer','LIKE', '%'.$search.'%');
+        }
+
+        return view('admin.faq.index', [
+            'faqs' => $faq->get(),
+            'search' => $search
+        ]);
     }
 
     public function create()
