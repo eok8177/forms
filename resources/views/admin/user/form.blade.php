@@ -58,11 +58,11 @@
     </div>
 @endif
 
-@if(Auth::user()->role == 'admin' && Auth::user()->super_admin_to >= date("Y-m-d H:i:s"))
-    <div class="form-group">
-        <input type="submit" value="{{Lang::get('message.save')}}" class="btn btn-secondary">
-    </div>
-@endif
+
+  <div class="form-group">
+      <input type="submit" value="{{Lang::get('message.save')}}" class="btn btn-secondary">
+  </div>
+
 
 
 
