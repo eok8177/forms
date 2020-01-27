@@ -60,5 +60,16 @@ class Form extends Model
         return $this->types->name;
     }
 
+    public function apps()
+    {
+        return $this->hasMany(Application::class, 'form_id', 'id');
+    }
+
+    public function getHasAppsAttribute()
+    {
+        $apps = $this->hasMany(Application::class, 'form_id', 'id');
+        return $apps->count() > 0 ? true : false;
+    }
+
 
 }
