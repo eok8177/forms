@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<div class="table-responsive">
+
 
   <form class="input-group mb-3" action="{{ route('admin.form.index') }}" method="get">
 
@@ -23,50 +23,52 @@
   </form>
 
 @if ($forms->count() > 0)
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">@lang('message.name')</th>
-        <th scope="col" class="text-center">
-          <div class="dropdown">
-            <a class="btn btn-outline-info dropdown-toggle" href="#" role="button" id="dropdownTypes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $form_type_id > 0 ? $form_types[$form_type_id] : __('message.type') }}</a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownTypes">
-              @foreach($form_types as $id => $name)
-                <a class="dropdown-item" href="{{ route('admin.form.index', ['form_type_id' => $id, 'trash' => $trash ]) }}">{{$name}}</a>
-              @endforeach
-            </div>
+    <div class="row border-top border-bottom py-1 my-2 font-weight-bold align-items-center">
+      <div class="col">@lang('message.name')</div>
+      <div class="col text-center">
+        <div class="dropdown">
+          <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownTypes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $form_type_id > 0 ? $form_types[$form_type_id] : __('message.type') }}</a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownTypes">
+            @foreach($form_types as $id => $name)
+              <a class="dropdown-item" href="{{ route('admin.form.index', ['form_type_id' => $id, 'trash' => $trash ]) }}">{{$name}}</a>
+            @endforeach
           </div>
-        </th>
-        <th scope="col" class="col-md-3 text-center">@lang('message.actions')</th>
-      </tr>
-    </thead>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">@lang('message.actions')</div>
+    </div>
     @foreach($forms as $form)
-      <tr>
-        <td class="d-flex">
-            <a href="{{ route('admin.form.edit', $form->id) }}" class="btn">{{$form->name}}{{$form->draft ? ' [draft]' : ''}}</a>
+      <div class="row border-bottom mb-2">
+
+        <div class="col d-flex align-items-center">
+            <a href="{{ route('admin.form.edit', $form->id) }}" class="text-body" title="Edit">{{$form->name}}{{$form->draft ? ' [draft]' : ''}}</a>
             <a href="{{ route('admin.form.copy', $form->id) }}" class="btn fa fa-files-o" title="Duplicate Form"></a>
-        </td>
-        <td class="text-center"><a href="{{ route('admin.form.edit', $form->id) }}" class="btn">{{$form->type}}</a></td>
-        <td class="col-md-3 text-center">
+        </div>
+
+        <div class="col text-center"><a href="{{ route('admin.form.edit', $form->id) }}" class="btn" title="Edit">{{$form->type}}</a></div>
+
+        <div class="col-md-3 text-left">
           <a href="{{ route('admin.form.edit', $form->id) }}" class="btn fa fa-pencil" title="Edit"></a>
-          <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'draft'])}}" class="status btn fa fa-{{$form->draft ? 'check-circle' : 'times-circle'}}" title="Toggle Draft"></a>
+          <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'draft'])}}" class="status btn fa fa-{{$form->draft ? 'check-circle' : 'times-circle'}} reload" title="Toggle Draft"></a>
           <a class="btn fa fa-gear" href="{{route('admin.form.setting',$form->id)}}" title="Setings"></a>
           <a class="btn fa fa-envelope-o" href="{{route('admin.form.email',$form->id)}}" title="Email Notification"></a>
           <a class="btn fa fa-eye" href="{{route('front.form',$form->slug)}}" target="_blank" title="Open Form in new window"></a>
 
           @if(!$form->has_apps)
-            <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'is_trash'])}}" class="status btn fa fa-{{$form->is_trash ? 'trash-o' : 'trash-o'}}" title="Toggle trash"></a>
+            <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'is_trash'])}}" class="status btn fa fa-{{$form->is_trash ? 'trash-o' : 'trash-o'}} reload" title="Toggle trash"></a>
           @endif
-        </td>
-      </tr>
+        </div>
+
+      </div>
 
     @endforeach
-  </table>
+
 @else
 	@lang('message.no_records').
 @endif
-</div>
+
 
 {{ $forms->appends(request()->except('page'))->links('admin.parts.pagination') }}
 

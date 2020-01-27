@@ -42,6 +42,7 @@ $(function () {
         } else {
           item.removeClass('fa-check-circle').addClass('fa-times-circle');
         }
+        if (item.hasClass('reload')) location.reload(true);
       });
   });
 
