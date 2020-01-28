@@ -1,9 +1,4 @@
-try {
-  window.Popper = require('popper.js').default;
-  window.$ = window.jQuery = require('jquery');
-
-  require('bootstrap');
-} catch (e) {}
+require('./bootstrap');
 
 // ---------- Methods ---------- //
 $(function () {
@@ -94,6 +89,14 @@ Vue.component(
     () => import(
         /* webpackChunkName: "form-builder-component" */
         './components/FormBuilderComponent.vue'
+    )
+);
+
+Vue.component(
+    'form-view-component', 
+    () => import(
+        /* webpackChunkName: "form-view-component" */
+        './components/FormViewComponent.vue'
     )
 );
 

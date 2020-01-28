@@ -26,4 +26,9 @@ class Application extends Model
         return $this->belongsTo(Form::class, 'form_id');
     }
 
+    public function approvs()
+    {
+        return $this->hasMany(ApplicationApproval::class);
+    }
+
 }

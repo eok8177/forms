@@ -15,7 +15,6 @@ class AddApprovedRejectionToApplicationsTable extends Migration
     {
         Schema::table('applications', function (Blueprint $table) {
             $table->tinyInteger('to_be_approved')->default(0)->after('status');
-            $table->mediumText('rejection')->nullable()->after('to_be_approved');
         });
     }
 
@@ -28,7 +27,6 @@ class AddApprovedRejectionToApplicationsTable extends Migration
     {
         Schema::table('applications', function (Blueprint $table) {
             $table->dropColumn(['to_be_approved']);
-            $table->dropColumn(['rejection']);
         });
     }
         

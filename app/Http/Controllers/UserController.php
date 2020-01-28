@@ -38,7 +38,7 @@ class UserController extends Controller
         $user =Auth::user();
         return view('user.index', [
             'user' => $user,
-            'apps' => Application::where('user_id', $user->id)->get()
+            'apps' => Application::where('user_id', $user->id)->where('status', '!=', 'deleted')->get()
         ]);
     }
 	
@@ -100,7 +100,8 @@ class UserController extends Controller
 
     public function destroy(Application $app)
     {
-        $app->delete();
+        $app->status = 'deleted';
+        $app->save();
 
         return response()->json([
             'status' => 'success'

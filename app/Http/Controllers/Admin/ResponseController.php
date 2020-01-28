@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Application;
+use App\ApplicationApproval;
 use App\Entry;
 use App\Form;
 
@@ -24,7 +25,7 @@ class ResponseController extends Controller
 
         $forms = Application::select('form_id')->distinct()->pluck('form_id')->toArray();
 
-        $entries = Application::orderBy('created_at', 'desc');
+        $entries = Application::orderBy('created_at', 'desc')->where('status', '!=', 'deleted');
 
         if ($form_id > 0) {
             $entries->where('form_id', $form_id);
@@ -63,39 +64,26 @@ class ResponseController extends Controller
         ]);
     }
 
-    public function entry($entry)
+    public function entry(Application $app)
     {
-        $entries = Entry::where('entry_id', $entry)->get();
-        $form = Form::where('id', $entries->first()->form_id)->first();
-        return view('admin.entry', [
-            'entries' => $entries,
-            'form' => $form
-        ]);
+        return view('admin.entry', ['app' => $app]);
     }
 
-    public function status($entry, $status)
+    public function status(Request $request, Application $app)
     {
-        $app = Application::where('entry_id', $entry)->first();
-        $app->status = $status;
+        $status = $request->input('status', 0);
+
+        $appApprov = new ApplicationApproval;
+
+        $app->status = ApplicationApproval::STATUS[$status];
         $app->save();
+
+        $appApprov->application_id = $app->id;
+        $appApprov->notes = $request->input('notes', NULL);
+        $appApprov->status = $status;
+        $appApprov->save();
 
         return redirect()->route('admin.responses');
     }
 
-    public function statusReject(Request $request)
-    {
-        $id = $request->input('id', false);
-        if (!$id) {
-            return redirect()->route('admin.responses');
-        }
-
-        $rejection = $request->input('rejection', NULL);
-
-        $app = Application::where('id', $id)->first();
-        $app->rejection = $rejection;
-        $app->status = 'rejected';
-        $app->save();
-
-        return redirect()->route('admin.responses');
-    }
 }

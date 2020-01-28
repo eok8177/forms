@@ -29,10 +29,17 @@
               <td>{{$app->updated_at}}</td>
               <td>
                 @if($app->status == 'rejected')
-                  <details>
-                    <summary>{{$app->status}}</summary>
-                    <p>{{$app->rejection}}</p>
-                  </details>
+                <div class="dropdown">
+                  <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="approv_{{$app->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$app->status}}</button>
+                  <div class="dropdown-menu" aria-labelledby="approv_{{$app->id}}">
+                    @foreach($app->approvs as $approv)
+                    <div class="dropdown-item">
+                      <span class="small d-block">{{$approv->created_at}}</span>
+                      <p>{{$approv->notes}}</p>
+                    </div>
+                    @endforeach
+                  </div>
+                </div>
                 @else
                   {{$app->status}}
                 @endif
