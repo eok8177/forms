@@ -51,6 +51,7 @@ FORM_CONSTANTS.Control = {
 
     // attr for text
     isMultiLine: false,
+    isEmail: false,
 
     // attr for number
     isInteger: false,

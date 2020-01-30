@@ -12,7 +12,7 @@
                 <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
             </div>
             <div class="col-md-8">
-                <input type="text"
+                <input :type="value.isEmail ? 'email' : 'text'"
                        class="form-control"
                        :readonly="value.readonly"
                        v-if="!value.isMultiLine"
@@ -29,7 +29,7 @@
         <div v-else class="form-group" :class="value.cssClass">
             <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
 
-            <input type="text"
+            <input :type="value.isEmail ? 'email' : 'text'"
                    class="form-control"
                    :readonly="value.readonly"
                    v-if="!value.isMultiLine"
