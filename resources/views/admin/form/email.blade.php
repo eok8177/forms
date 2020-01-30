@@ -8,7 +8,10 @@
   <div class="form-group">
     <label>Email subject</label>
     <input type="text" name="subject" value="{{$form->email->subject}}" class="form-control">
+    <small class="form-text text-muted">You can use macro: {form_title}</small>
   </div>
+
+
 
   <div class="form-group">
     <label>From Name</label>
@@ -31,8 +34,13 @@
   </div>
 
   <div class="form-group mt-3">
-    <label>Message</label>
-    {!! Form::textarea('message', $form->email->message, ['class' => 'form-control editor', 'rows' => '2']) !!}
+    <label>Admin notification</label>
+    {!! Form::textarea('admin_message', $form->email->admin_message, ['class' => 'form-control editor', 'rows' => '2']) !!}
+  </div>
+
+  <div class="form-group mt-3">
+    <label>User notification</label>
+    {!! Form::textarea('client_message', $form->email->client_message, ['class' => 'form-control editor', 'rows' => '2']) !!}
   </div>
 
   <div class="form-group mt-4">

@@ -21,7 +21,8 @@ class CreateFormEmailsTable extends Migration
             $table->string('from_email')->nullable();
             $table->string('reply_to')->nullable();
             $table->string('send_to')->nullable();
-            $table->mediumText('message')->nullable();
+            $table->mediumText('admin_message')->nullable();
+            $table->mediumText('client_message')->nullable();
             $table->timestamps();
         });
     }
