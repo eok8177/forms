@@ -72,4 +72,28 @@ class Form extends Model
     }
 
 
+    public function getFieldsAttribute()
+    {
+        if (!$this->config) return false;
+
+        $fields = [];
+        $config = json_decode($this->config, true);
+
+        // return $config['sections'];
+
+        foreach ($config['sections'] as $section) {
+            if (array_key_exists('rows', $section)) {
+                foreach ($section['rows'] as $row) {
+                    if (array_key_exists('controls', $row)) {
+                        foreach ($row['controls'] as $control) {
+                            $fields[$section['label']][$control['fieldName']] = $control['label'];
+                        }
+                    }
+                }
+            }
+        }
+        return $fields;
+    }
+
+
 }

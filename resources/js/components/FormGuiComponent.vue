@@ -171,11 +171,7 @@
                       this.entryid = response.data.entryid;
                       this.redirect_url = response.data.redirect_url;
                       this.status = 'submitted';
-
-                      if (this.userid > 0) {
-                        this.SaveApps();
-                      }
-
+                      this.SaveApps();
                       this.sendFiles();
                     }
                   )

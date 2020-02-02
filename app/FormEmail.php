@@ -36,4 +36,18 @@ class FormEmail extends Model
 
         return str_replace($find,$replace,$string);
     }
+
+    public function clientMessageFields()
+    {
+        preg_match_all("/\[([^\]]*)\]/", $this->client_message, $matches);
+
+        $items = [];
+
+        foreach ($matches[0] as $item) {
+            preg_match("/\w+/", $item, $match);
+            $items[$item] = $match[0];
+        }
+        return $items;
+
+    }
 }

@@ -88,7 +88,7 @@ class FormController extends Controller
 
         $app = Application::where('user_id', $userid)->where('form_id', $formid)->first();
 
-        if (!$app) {
+        if (!$app || $userid == 0) {
             $app = new Application;
         }
 
