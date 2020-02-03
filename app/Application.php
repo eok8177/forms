@@ -58,27 +58,53 @@ class Application extends Model
 
         foreach ($config['sections'] as $section) {
             if (array_key_exists('rows', $section)) {
-                foreach ($section['rows'] as $row) {
-                    if (array_key_exists('controls', $row)) {
-                        foreach ($row['controls'] as $control) {
 
-                            $fields[$control['fieldName']]['type'] = $control['type'];
+                if ($section['isDynamic']) {
+                    foreach ($section['instances'] as $idInst => $instance) {
+                        foreach ($instance as $section) {
+                            foreach ($section['controls'] as $control) {
+                                $fields[$idInst.'_'.$control['fieldName']]['type'] = $control['type'];
 
-                            if (array_key_exists('isEmail', $control) && $control['isEmail']) {
-                                $fields[$control['fieldName']]['type'] = 'email';
-                                $emails[$control['label']] = $control['value'];
-                            }
-
-                            if ($control['type'] == 'address') {
-                                // TODO File
-                                for ($i=1; $i <= 5; $i++) {
-                                    if ($control['show'.$i] && @$control['value'.$i]) {
-                                        $fields[$control['fieldName']][$control['label'.$i]] = $control['value'.$i];
-                                    }
+                                if (array_key_exists('isEmail', $control) && $control['isEmail']) {
+                                    $fields[$idInst.'_'.$control['fieldName']]['type'] = 'email';
+                                    $emails[$control['label']] = $control['value'];
                                 }
-                            } else {
-                                $fields[$control['fieldName']]['label'] = $control['label'];
-                                $fields[$control['fieldName']]['value'] = $control['value'];
+                                if ($control['type'] == 'address') {
+                                    for ($i=1; $i <= 5; $i++) {
+                                        if ($control['show'.$i] && @$control['value'.$i]) {
+                                            $fields[$idInst.'_'.$control['fieldName']][$control['label'.$i]] = $control['value'.$i];
+                                        }
+                                    }
+                                } else {
+                                    $fields[$idInst.'_'.$control['fieldName']]['label'] = $control['label'];
+                                    $fields[$idInst.'_'.$control['fieldName']]['value'] = $control['value'];
+                                }
+                            }
+                        }
+
+                    }
+                } else {
+                    foreach ($section['rows'] as $row) {
+                        if (array_key_exists('controls', $row)) {
+                            foreach ($row['controls'] as $control) {
+
+                                $fields[$control['fieldName']]['type'] = $control['type'];
+
+                                if (array_key_exists('isEmail', $control) && $control['isEmail']) {
+                                    $fields[$control['fieldName']]['type'] = 'email';
+                                    $emails[$control['label']] = $control['value'];
+                                }
+                                // TODO isDynamic fields
+                                if ($control['type'] == 'address') {
+                                    for ($i=1; $i <= 5; $i++) {
+                                        if ($control['show'.$i] && @$control['value'.$i]) {
+                                            $fields[$control['fieldName']][$control['label'.$i]] = $control['value'.$i];
+                                        }
+                                    }
+                                } else {
+                                    $fields[$control['fieldName']]['label'] = $control['label'];
+                                    $fields[$control['fieldName']]['value'] = $control['value'];
+                                }
                             }
                         }
                     }
@@ -127,6 +153,29 @@ class Application extends Model
           if ($email['reply_to']) $mail->cc($email['reply_to']);
         });
 
+        return true;
+    }
+
+
+    public function updateConfig($fieldName, $value)
+    {
+        $config = json_decode($this->config, true);
+
+        foreach ($config['sections'] as $idSection => $section) {
+            if (array_key_exists('rows', $section)) {
+                foreach ($section['rows'] as $idRow => $row) {
+                    if (array_key_exists('controls', $row)) {
+                        foreach ($row['controls'] as $idControl => $control) {
+                            if ($control['fieldName'] == $fieldName) {
+                                $config['sections'][$idSection]['rows'][$idRow]['controls'][$idControl]['value'] = $value;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        $this->config = json_encode($config);
+        $this->save();
         return true;
     }
 

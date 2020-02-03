@@ -37,7 +37,8 @@
             files: {},
             entryid: '',
             status: 'draft',
-            redirect_url: '/'
+            redirect_url: '/',
+            appID: ''
         }),
         methods: {
             updateInstances(index, instance) {
@@ -122,6 +123,7 @@
                         self.files[control.name] = {
                             name: control.label,
                             data: control.value,
+                            fieldId: control.fieldName,
                         };
                     }
                     //fill from address block
@@ -158,60 +160,66 @@
             },
 
             sendFrom() {
-                // console.log(this.files);
-                // console.log(this.submitData);
-                // return false;
+                this.SaveApps();
 
-                axios.post('/api/post-form', {
-                    userid: this.userid,
-                    formid: this.formid,
-                    data: this.submitData
-                  })
-                  .then(
-                    (response) => {
-                      this.entryid = response.data.entryid;
-                      this.redirect_url = response.data.redirect_url;
-                      this.status = 'submitted';
-                      this.SaveApps();
-                      this.sendFiles();
-                    }
-                  )
-                  .catch(
-                    (error) => console.log(error)
-                  );
+                // axios.post('/api/post-form', {
+                //     userid: this.userid,
+                //     formid: this.formid,
+                //     data: this.submitData
+                //   })
+                //   .then(
+                //     (response) => {
+                //       this.entryid = response.data.entryid;
+                //       this.redirect_url = response.data.redirect_url;
+                //       this.status = 'submitted';
+                //       this.SaveApps();
+                //       this.sendFiles();
+                //     }
+                //   )
+                //   .catch(
+                //     (error) => console.log(error)
+                //   );
             },
 
             sendFiles() {
                 let self = this;
                 _.forEach(self.files, function(file,key) {
                     var formData = new FormData();
+                    formData.append('appid', self.appID);
                     formData.append('entryId', self.entryid);
                     formData.append('userid', self.userid);
                     formData.append('formId', self.formid);
                     formData.append('fieldName', file.name);
+                    formData.append('fieldId', file.fieldId);
                     formData.append('file', file.data);
                     axios.post('/api/upload-file', formData, {
                         headers: {
                           'Content-Type': 'multipart/form-data'
                         }
-                    })
+                      }).then(
+                        (response) => {
+                          console.log(response.data);
+                        }
+                      ).catch((error) => console.log(error));
                 });
                 window.location.href = this.redirect_url;
             },
 
             SaveApps() {
+                this.parseForm(-1);
+                let self = this;
                 axios.post('/api/save-apps', {
                     userid: this.userid,
                     formid: this.formid,
-                    appid:  this.appid,
+                    appid:  this.appID,
                     entryid: this.entryid,
                     status: this.status,
                     data: this.form
                   })
                   .then(
                     (response) => {
-                      console.log(response.data.appid);
-                      // this.sendFiles();
+                      self.appID = response.data.appid;
+                      this.sendFiles();
                     }
                   )
                   .catch(
@@ -221,6 +229,7 @@
         },
         created() {
             this.formdata = this.form;
+            this.appID = this.appid;
         },
         mounted() {
             // open first Section

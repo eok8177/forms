@@ -109,4 +109,29 @@ class FormController extends Controller
         ], 200);
     }
 
+    public function uploadFile(Request $request) {
+
+        $appid = $request->get('appid', 0);
+        $fieldId = $request->get('fieldId');
+        $formId = $request->get('formId');
+        if ($fieldName = $request->get('fieldName')) {
+            $filename = $request->file->store('uploads/'.$formId.'/'.$appid.'/', 'public');
+
+            $app = Application::where('id', $appid)->first();
+            if ($app) {
+                $app->updateConfig($fieldId, $filename);
+
+                return response()->json([
+                    'status' => 'OK',
+                    'file' => $filename,
+                    'fieldId' => $fieldId,
+                ], 200);
+            }
+        }
+
+        return response()->json([
+            'status' => 'not found file',
+        ], 400);
+    }
+
 }

@@ -22,7 +22,7 @@ Route::group(['namespace' => 'Api'], function() {
 
     Route::get('/',  ['uses' => 'FormController@index']);
     Route::post('/post-form',  ['uses' => 'FormController@entry']);
-    Route::post('/upload-file',  ['uses' => 'FormController@upload']);
+    Route::post('/upload-file',  ['uses' => 'FormController@uploadFile']);
 
     Route::post('/save-apps',  ['uses' => 'FormController@saveApp']);
 
