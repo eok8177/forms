@@ -56,7 +56,7 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
 });
 
 // User
-Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user']], function() {
+Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user', 'admin', 'manager']], function() {
 	Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index']);
 	
     Route::get('user/edit', ['as' => 'user.edit', 'uses' => 'UserController@edit']);

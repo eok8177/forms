@@ -17,6 +17,7 @@
       <form-gui-component class="py-2 px-2 bg-white"
         :form="{{$form->config ?? 'null'}}" 
         :formid="{{$form->id}}"
+        :appid="0"
         :userid="{{Auth::user()->id ?? 0}}" >
       </form-gui-component>
     @endif

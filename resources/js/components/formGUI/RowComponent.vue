@@ -47,7 +47,7 @@
         methods: {
             addDynamicObj() {
                 if (this.value.maxInstance > 0 && this.value.instances.length === this.value.maxInstance) {
-                    SethPhatToaster.error("Maximum instances reached, can't create more.");
+                    console.log("Maximum instances reached, can't create more.");
                     return;
                 }
 
@@ -67,7 +67,7 @@
             },
             removeDynamicObj(index) {
                 if (this.value.minInstance === this.value.instances.length) {
-                    SethPhatToaster.error("Minimum instances reached, can't remove more.");
+                    console.log("Minimum instances reached, can't remove more.");
                     return;
                 }
                 this.instances.splice(index, 1);
@@ -76,15 +76,19 @@
             },
             generateDynamic() {
                 if (this.value.isDynamic) {
-                    this.instances = [];
-
                     // generate dynamic template
                     this.dynamicTemplate = _.cloneDeep(this.value.rows);
 
-                    // populate min instance
-                    if (this.value.minInstance > 0) {
-                        for (var i = 0; i < this.value.minInstance; i++) {
-                            this.addDynamicObj();
+                    if (this.value.instances.length > 0) {
+                        this.instances = this.value.instances;
+                    } else {
+                        this.instances = [];
+
+                        // populate min instance
+                        if (this.value.minInstance > 0) {
+                            for (var i = 0; i < this.value.minInstance; i++) {
+                                this.addDynamicObj();
+                            }
                         }
                     }
                 }

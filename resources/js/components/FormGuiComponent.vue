@@ -26,6 +26,7 @@
         props: {
             form: {type: Object},
             formid: {type: Number},
+            appid: {type: Number},
             userid: {type: Number},
         },
         data: () => ({
@@ -202,6 +203,7 @@
                 axios.post('/api/save-apps', {
                     userid: this.userid,
                     formid: this.formid,
+                    appid:  this.appid,
                     entryid: this.entryid,
                     status: this.status,
                     data: this.form

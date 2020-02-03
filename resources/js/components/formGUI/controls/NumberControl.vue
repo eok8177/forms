@@ -39,12 +39,12 @@
         name: "NumberControl",
         props: ['value', 'labelPosition'],
         created() {
-            this.value.value = 0;
+            // this.value.value = 0;
         },
         mounted() {
-            if (!_.isEmpty(this.value.defaultValue)) {
-                this.value.value = this.value.defaultValue;
-            }
+            // if (!_.isEmpty(this.value.value)) {
+            //     this.value.value = this.value.value;
+            // }
         },
         methods: {
             numberChange(e) {

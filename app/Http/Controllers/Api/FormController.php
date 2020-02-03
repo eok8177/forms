@@ -80,15 +80,16 @@ class FormController extends Controller
     }
 
     public function saveApp(Request $request) {
+        $appid = $request->get('appid', 0);
         $userid = $request->get('userid', 0);
         $formid = $request->get('formid');
         $status = $request->get('status');
         $entryid = $request->get('entryid', NULL);
         $data = $request->input('data', false);
 
-        $app = Application::where('user_id', $userid)->where('form_id', $formid)->first();
+        $app = Application::where('id', $appid)->first();
 
-        if (!$app || $userid == 0) {
+        if ($appid == 0) {
             $app = new Application;
         }
 
