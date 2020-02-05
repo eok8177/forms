@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class FormEmail extends Model
 {
+    CONST TYPES = [
+        'user_submit' => 'Inform User when form submited',
+        'user_accept' => 'Inform User when form accepted',
+        'user_reject' => 'Inform User when form rejected',
+        'admin_submit' => 'Inform Admin when form submitted',
+        'manager_submit' => 'Inform Managers when form must be approved',
+     ];
     /**
      * The attributes that are mass assignable.
      *
@@ -39,7 +46,7 @@ class FormEmail extends Model
 
     public function clientMessageFields()
     {
-        preg_match_all("/\[([^\]]*)\]/", $this->client_message, $matches);
+        preg_match_all("/\[([^\]]*)\]/", $this->message, $matches);
 
         $items = [];
 

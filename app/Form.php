@@ -40,9 +40,14 @@ class Form extends Model
         return $forms->where('is_trash', $trash);
     }
 
-    public function email()
+    public function email($type = false)
     {
-        return $this->hasOne(FormEmail::class, 'form_id');
+        return $this->emails()->where('type', $type)->first();
+    }
+
+    public function emails()
+    {
+        return $this->hasMany(FormEmail::class, 'form_id');
     }
 
     public function groups()
@@ -79,10 +84,9 @@ class Form extends Model
         $fields = [];
         $config = json_decode($this->config, true);
 
-        // return $config['sections'];
-
         foreach ($config['sections'] as $section) {
-            if (array_key_exists('rows', $section)) {
+            if (array_key_exists('rows', $section) && !$section['isDynamic']) {
+              // get only not Dynamic fields
                 foreach ($section['rows'] as $row) {
                     if (array_key_exists('controls', $row)) {
                         foreach ($row['controls'] as $control) {

@@ -85,19 +85,26 @@ class FormController extends Controller
 
     public function email(Form $form)
     {
-        if(empty($form->email))
-            $form->email()->save(new FormEmail);
+        $types = FormEmail::TYPES;
+
+        foreach ($types as $type => $name) {
+            $form_emails[$type] = $form->emails()->firstOrCreate(['type' => $type]);
+        }
 
         return view('admin.form.email', [
-            'form' => Form::where('id',$form->id)->with('email')->first()
+            'form' => Form::where('id',$form->id)->first(),
+            'types' => $types,
+            'form_emails' => $form_emails
         ]);
     }
 
     public function emailStore(Request $request, Form $form)
     {
-        $form->email->update($request->all());
+        foreach ($request->except(['_token', '_method']) as $key => $item) {
+            $form->email($key)->update($item);
+        }
 
-        return view('admin.form.email', ['form' => $form]);
+        return redirect()->route('admin.form.email', ['form' => $form->id])->with('success', 'Form Emails updated');
     }
 
     public function destroy(Form $form)
