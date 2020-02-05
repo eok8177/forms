@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class FormEmail extends Model
 {
     CONST TYPES = [
-        'user_submit' => 'Inform User when form submited',
-        'user_accept' => 'Inform User when form accepted',
-        'user_reject' => 'Inform User when form rejected',
-        'admin_submit' => 'Inform Admin when form submitted',
+        'user_submit' => 'Inform User when form is submited',
+        'user_accept' => 'Inform User when form is accepted',
+        'user_reject' => 'Inform User when form is rejected',
+        'admin_submit' => 'Inform Admin when form is submitted',
         'manager_submit' => 'Inform Managers when form must be approved',
      ];
     /**
