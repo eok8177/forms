@@ -82,6 +82,10 @@
               <a class="dropdown-item" href="{{route('admin.user.index')}}"><i class="fa fa-users"></i> @lang('message.users')</a>
 
               <div class="dropdown-divider"></div>
+
+              <a class="dropdown-item" href="{{route('admin.settings')}}"><i class="fa fa-cogs"></i> @lang('message.settings')</a>
+
+              <div class="dropdown-divider"></div>
               @endif
 
               <a href="{{ route('logout') }}" class="dropdown-item"

@@ -7,6 +7,7 @@ return [
     'actions' => 'Actions',
     'create' => 'Create',
     'save' => 'Save',
+    'update' => 'Update',
     'chose' => 'Chose',
     'delete' => 'Delete',
     'select' => 'Select',

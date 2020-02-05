@@ -53,6 +53,9 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
 
     Route::resource('form-type', 'FormTypeController');
     Route::resource('group', 'GroupController');
+
+    Route::get('settings',  ['as' => 'settings', 'uses' => 'SettingController@index']);
+    Route::post('settings', ['as' => 'settings.update', 'uses' => 'SettingController@update']);
 });
 
 // User
