@@ -44,7 +44,7 @@ class FormEmail extends Model
         return str_replace($find,$replace,$string);
     }
 
-    public function clientMessageFields()
+    public function messageFields()
     {
         preg_match_all("/\[([^\]]*)\]/", $this->message, $matches);
 

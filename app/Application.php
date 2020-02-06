@@ -116,45 +116,6 @@ class Application extends Model
         ];
     }
 
-
-    public function sendClientEmail()
-    {
-        if (!$this->form->email) return false;
-        if (!$this->email) return false;
-
-        $view = 'email.client';
-        $email = [];
-
-        $find = false;
-        $replace = false;
-        $fields = $this->fields;
-        $msgMacros = $this->form->email->clientMessageFields();
-        foreach ($msgMacros as $key => $item) {
-            if (@$fields[$item]['value']) {
-                $find[] = $key;
-                $replace[] = $fields[$item]['value'];
-            }
-        }
-
-        $clientMsg = str_replace($find, $replace, $this->form->email->client_message);
-
-        $email['to'] = $this->email;
-        $email['subject'] = $this->form->email->subject;
-        $email['from_name'] = $this->form->email->from_name;
-        $email['from_email'] = $this->form->email->from_email;
-        $email['reply_to'] = $this->form->email->reply_to;
-
-
-        Mail::send($view, ['msg' => $clientMsg], function ($mail) use ($email) {
-          $mail->from($email['from_email'], $email['from_name'])
-                ->to($email['to'])
-                ->subject($email['subject']);
-          if ($email['reply_to']) $mail->cc($email['reply_to']);
-        });
-
-        return true;
-    }
-
     /*
     * Save uploaded files path to config
     */
@@ -218,14 +179,69 @@ class Application extends Model
         return true;
     }
 
+    // TODO check info what sending
     public function adminSubmitEmail()
-    {}
+    {
+        return $this->sendEmail('admin_submit');
+    }
 
     public function userSubmitEmail()
-    {}
+    {
+        return $this->sendEmail('user_submit');
+    }
+
+    public function userAcceptEmail()
+    {
+        return $this->sendEmail('user_accept');
+    }
+
+    public function userRejectEmail()
+    {
+        return $this->sendEmail('user_reject');
+    }
 
     public function managersSubmitEmail()
-    {}
+    {
+        return $this->sendEmail('manager_submit');
+    }
+
+    private function sendEmail($type)
+    {
+        $email = $this->form->email($type);
+        if (!$email) return false;
+        if (!$email->send_to) return false;
+        if (!$email->from_email) return false;
+
+        $find = false;
+        $replace = false;
+        $fields = $this->fields;
+        $msgMacros = $email->messageFields();
+        foreach ($msgMacros as $key => $item) {
+            if (@$fields[$item]['value']) {
+                $find[] = $key;
+                $replace[] = $fields[$item]['value'];
+            }
+        }
+
+        $message = str_replace($find, $replace, $email->message);
+
+        $view = 'email.client';
+        $data = [];
+
+        $data['to'] = $email->send_to ? $email->send_to : $this->email;
+        $data['subject'] = $email->subject;
+        $data['from_name'] = $email->from_name;
+        $data['from_email'] = $email->from_email;
+
+
+        Mail::send($view, ['msg' => $message], function ($mail) use ($data) {
+          $mail->from($data['from_email'], $data['from_name'])
+                ->to($data['to'])
+                ->subject($data['subject']);
+        });
+
+        return true;
+    }
 
 
 }
