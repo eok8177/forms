@@ -64,7 +64,8 @@
 
                 //send to server
                 if (this.validForm) {
-                    this.sendFrom();
+                    this.status = 'submitted';
+                    this.SaveApps();
                 }
             },
 
@@ -159,30 +160,10 @@
                 });
             },
 
-            sendFrom() {
-                this.SaveApps();
-
-                // axios.post('/api/post-form', {
-                //     userid: this.userid,
-                //     formid: this.formid,
-                //     data: this.submitData
-                //   })
-                //   .then(
-                //     (response) => {
-                //       this.entryid = response.data.entryid;
-                //       this.redirect_url = response.data.redirect_url;
-                //       this.status = 'submitted';
-                //       this.SaveApps();
-                //       this.sendFiles();
-                //     }
-                //   )
-                //   .catch(
-                //     (error) => console.log(error)
-                //   );
-            },
-
-            sendFiles() {
+            uploadFiles() {
                 let self = this;
+                let done = Object.keys(self.files).length;
+                console.log(done);
                 _.forEach(self.files, function(file,key) {
                     var formData = new FormData();
                     formData.append('appid', self.appID);
@@ -198,11 +179,13 @@
                         }
                       }).then(
                         (response) => {
-                          console.log(response.data);
+                          done = done - 1;
+                          if (done == 0 && self.status == 'submitted') {
+                            self.postForm();
+                          }
                         }
                       ).catch((error) => console.log(error));
                 });
-                window.location.href = this.redirect_url;
             },
 
             SaveApps() {
@@ -219,12 +202,26 @@
                   .then(
                     (response) => {
                       self.appID = response.data.appid;
-                      this.sendFiles();
+                      self.redirect_url = response.data.redirect_url;
+                      this.uploadFiles();
                     }
                   )
                   .catch(
                     (error) => console.log(error)
                   );
+            },
+            postForm()
+            {
+                let self = this;
+                axios.post('/api/post-form', {
+                    appid:  this.appID,
+                  })
+                  .then(
+                    (response) => {
+                      window.location.href = self.redirect_url;
+                    }
+                  )
+                  .catch((error) => console.log(error));
             }
         },
         created() {

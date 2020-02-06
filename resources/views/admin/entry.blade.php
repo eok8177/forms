@@ -42,9 +42,11 @@
   </div>
 </div>
 
-{!! $app->sendClientEmail() !!}
+{{-- {!! $app->sendClientEmail() !!} --}}
 {{-- {{dd($app->sendClientEmail())}} --}}
 {{-- {{dd($app->email)}} --}}
 {{-- {{dd($app->fields)}} --}}
+{{-- {{dd($app->createEntry())}} --}}
+{{$app->createEntry()}}
 
 @endsection

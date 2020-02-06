@@ -94,7 +94,6 @@ class Application extends Model
                                     $fields[$control['fieldName']]['type'] = 'email';
                                     $emails[$control['label']] = $control['value'];
                                 }
-                                // TODO isDynamic fields
                                 if ($control['type'] == 'address') {
                                     for ($i=1; $i <= 5; $i++) {
                                         if ($control['show'.$i] && @$control['value'.$i]) {
@@ -156,7 +155,9 @@ class Application extends Model
         return true;
     }
 
-
+    /*
+    * Save uploaded files path to config
+    */
     public function updateConfig($fieldName, $value)
     {
         $config = json_decode($this->config, true);
@@ -178,5 +179,53 @@ class Application extends Model
         $this->save();
         return true;
     }
+
+    public function createEntry()
+    {
+        $entry_id = 1;
+        $last = Entry::latest()->first();
+        if ($last) {
+            $entry_id = $last->entry_id + 1;
+        }
+        $this->entry_id = $entry_id;
+        $this->save();
+
+        foreach ($this->fields as $fieldId => $field) {
+            if ($field['type'] == 'address') {
+                foreach ($field as $key => $value) {
+                    if ($key != 'type') {
+                        $this->newEntry($fieldId, $key, $value);
+                    }
+                }
+            } elseif ($field['type'] != 'html') {
+                if ($field['value'] !== NULL) 
+                    $this->newEntry($fieldId, $field['label'], $field['value']);
+            }
+        }
+        return true;
+    }
+
+    private function newEntry($fieldId, $label, $value)
+    {
+        $entry = new Entry;
+        $entry->entry_id = $this->entry_id;
+        $entry->form_id = $this->form_id;
+        $entry->field_id = $fieldId;
+        $entry->user_id = $this->user_id;
+        $entry->name = $label;
+        $entry->value = $value;
+        $entry->save();
+        return true;
+    }
+
+    public function adminSubmitEmail()
+    {}
+
+    public function userSubmitEmail()
+    {}
+
+    public function managersSubmitEmail()
+    {}
+
 
 }

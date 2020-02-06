@@ -21,65 +21,8 @@ class FormController extends Controller
         ], 200);
     }
 
-    public function entry(Request $request) {
-
-        $entry_id = 1;
-        $userid = $request->get('userid', 0);
-        $formid = $request->get('formid');
-        $data = $request->get('data');
-
-        $form = Form::find($formid);
-
-        $last = Entry::latest()->first();
-        if ($last) {
-            $entry_id = $last->entry_id + 1;
-        }
-
-        foreach ($data as $item) {
-            $entry = new Entry;
-            $entry->entry_id = $entry_id;
-            $entry->form_id = $formid;
-            $entry->name = $item['label'];
-            $entry->value = $item['value'];
-            $entry->field_id = $item['field_id'];
-            $entry->user_id = $userid;
-            $entry->save();
-        }
-
-        return response()->json([
-            'status' => 'OK',
-            'entryid' => $entry_id,
-            'redirect_url' => $form->redirect_url ? $form->redirect_url : '/success/'.$formid,
-        ], 200);
-    }
-
-    public function upload(Request $request) {
-
-        $userid = $request->get('userid', 0);
-        $entryId = $request->get('entryId');
-        $formId = $request->get('formId');
-        if ($fieldName = $request->get('fieldName')) {
-            $filename = $request->file->store('uploads/'.$formId.'/'.$entryId.'/', 'public');
-
-            $entry = new Entry;
-            $entry->entry_id = $entryId;
-            $entry->form_id = $formId;
-            $entry->name = $fieldName;
-            $entry->value = '<a href="/'.$filename.'" target="_blank">Download</a>';
-            $entry->user_id = $userid;
-            $entry->save();
-
-            return response()->json([
-                'status' => 'OK',
-            ], 200);
-        }
-
-        return response()->json([
-            'status' => 'not found file',
-        ], 400);
-    }
-
-    public function saveApp(Request $request) {
+    public function saveApp(Request $request)
+    {
         $appid = $request->get('appid', 0);
         $userid = $request->get('userid', 0);
         $formid = $request->get('formid');
@@ -105,12 +48,13 @@ class FormController extends Controller
 
         return response()->json([
             'status' => 'OK',
-            'appid' => $app->id
+            'appid' => $app->id,
+            'redirect_url' => $form->redirect_url ? $form->redirect_url : '/success/'.$formid,
         ], 200);
     }
 
-    public function uploadFile(Request $request) {
-
+    public function uploadFile(Request $request)
+    {
         $appid = $request->get('appid', 0);
         $fieldId = $request->get('fieldId');
         $formId = $request->get('formId');
@@ -132,6 +76,24 @@ class FormController extends Controller
         return response()->json([
             'status' => 'not found file',
         ], 400);
+    }
+
+    public function postForm(Request $request)
+    {
+        $appid = $request->get('appid', 0);
+        $app = Application::find($appid);
+
+        if ($app->to_be_approved == 0) {
+            $app->createEntry();
+            $app->adminSubmitEmail();
+            $app->userSubmitEmail();
+        } else {
+            $app->managersSubmitEmail();
+        }
+
+        return response()->json([
+            'status' => 'OK'
+        ], 200);
     }
 
 }
