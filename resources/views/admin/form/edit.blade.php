@@ -6,3 +6,11 @@
 <form-builder-component :formdata="{{$form->config ?? 'null'}}" :formid="{{$form->id}}"></form-builder-component>
 
 @endsection
+
+@push('scripts')
+<script>
+  function preview() {
+    window.open('/form/{{$form->slug}}', '_blank');
+  }
+</script>
+@endpush
