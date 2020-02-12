@@ -9,6 +9,7 @@ import FileControl from '../controls/FileControl';
 import HtmlControl from '../controls/HtmlControl';
 import AddressControl from '../controls/AddressControl';
 import RadioControl from '../controls/RadioControl';
+import AllFieldsControl from '../controls/AllFieldsControl';
 
 const CONTROL_TYPES = {
     text: {
@@ -50,6 +51,10 @@ const CONTROL_TYPES = {
     radio: {
         label:"Radio Block",
         source: RadioControl
+    },
+    all_fields: {
+        label:"All Fields",
+        source: AllFieldsControl
     },
 };
 

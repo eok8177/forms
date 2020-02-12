@@ -100,6 +100,10 @@ FORM_CONSTANTS.Type = {
         label:"Checkbox",
         icon: 'faCheck'
     },
+    all_fields: {
+        label: "All Fields",
+        icon: 'faCheck'
+    },
 };
 
 FORM_CONSTANTS.WidthOptions = {

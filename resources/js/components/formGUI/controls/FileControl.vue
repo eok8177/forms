@@ -11,7 +11,7 @@
                      :required="value.required"
                      @change="processFile($event)"
                      />
-              <a v-if="value.value" :href="'/'+value.value" target="_blank">Already uploaded file</a>
+              <a v-if="typeof value.value === 'string' || value.value instanceof String" :href="'/'+value.value" target="_blank">Already uploaded file</a>
           </div>
       </div>
       <div v-else class="form-group" :class="value.cssClass">
@@ -23,7 +23,7 @@
                  :required="value.required"
                  @change="processFile($event)"
                  />
-          <a v-if="value.value" :href="'/'+value.value" target="_blank">Already uploaded file</a>
+          <a v-if="typeof value.value === 'string' || value.value instanceof String" :href="'/'+value.value" target="_blank">Already uploaded file</a>
       </div>
     </div>
 </template>
