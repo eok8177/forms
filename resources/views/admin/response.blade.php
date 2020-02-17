@@ -54,7 +54,12 @@
     </thead>
     @foreach($entries as $entry)
       <tr>
-        <td><a href="{{ route('admin.entry', $entry->id) }}" class="btn">{{$select_forms[$entry->form_id]}}</a></td>
+        <td>
+          <a href="{{ route('admin.entry', $entry->id) }}" class="btn">
+            {{$select_forms[$entry->form_id]}}
+            <small>{{$entry->user->first_name}} {{$entry->user->last_name}}</small>
+          </a>
+        </td>
         <td>{{$entry->created_at}}</td>
         <td class="text-center">
           {{$entry->status}}

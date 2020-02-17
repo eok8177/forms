@@ -190,7 +190,9 @@
             uploadFiles() {
                 let self = this;
                 let done = Object.keys(self.files).length;
-                console.log(done);
+                if (done == 0) {
+                  self.postForm();
+                }
                 _.forEach(self.files, function(file,key) {
                     var formData = new FormData();
                     formData.append('appid', self.appID);

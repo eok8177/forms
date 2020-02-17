@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="page-header row justify-content-between">
-<h5>{{$app->form->title}} <small>(from client: {{$app->user->first_name}} {{$app->user->last_name}})</small></h5>
+<h5>{{$app->form->title}} &nbsp;&nbsp;&nbsp;<small>{{$app->user->first_name}} {{$app->user->last_name}}</small></h5>
   <div>
   @if($app->status == 'submitted' && $app->to_be_approved == 1 && Auth::user()->role == 'manager')
     <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#rejectModal" title="Approv or Reject Entry">Take action</button>
@@ -47,6 +47,6 @@
 {{-- {{dd($app->email)}} --}}
 {{-- {{dd($app->fields)}} --}}
 {{-- {{dd($app->createEntry())}} --}}
-{{$app->createEntry()}}
+{{-- {{$app->userSubmitEmail()}} --}}
 
 @endsection
