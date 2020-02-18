@@ -101,6 +101,11 @@ class Application extends Model
                                             $fields[$control['fieldName']][$control['label'.$i]] = $control['value'.$i];
                                         }
                                     }
+                                    if ($control['mapIt']) {
+                                        $fields[$control['fieldName']]['lat'] = $control['lat'];
+                                        $fields[$control['fieldName']]['lng'] = $control['lng'];
+                                        $fields[$control['fieldName']]['address'] = $control['address'];
+                                    }
                                 } else {
                                     $fields[$control['fieldName']]['label'] = $control['label'];
                                     $fields[$control['fieldName']]['value'] = $control['value'];

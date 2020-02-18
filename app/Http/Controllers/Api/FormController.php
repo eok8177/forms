@@ -96,4 +96,50 @@ class FormController extends Controller
         ], 200);
     }
 
+    public function getCoords(Request $request)
+    {
+        $key = $request->get('key', false);
+        $address = $request->get('address', false);
+        $address = urlencode($address);
+
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&key='.$key.'&address='.$address;
+
+        $headers = [
+            'content-type' => 'application/json; charset=utf-8'
+        ];
+
+        $options = [
+            CURLOPT_URL => $url,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_FRESH_CONNECT => 1,
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_FORBID_REUSE => 1,
+            CURLOPT_TIMEOUT => 4
+        ];
+
+        $options[CURLOPT_HTTPHEADER] = $headers;
+
+        $ch = curl_init();
+        curl_setopt_array($ch, $options);
+        $resp = curl_exec($ch);
+        $resp = json_decode($resp, true);
+        curl_close($ch);
+
+        if($resp['status']=='OK'){
+            $lat = isset($resp['results'][0]['geometry']['location']['lat']) ? $resp['results'][0]['geometry']['location']['lat'] : "";
+            $lng = isset($resp['results'][0]['geometry']['location']['lng']) ? $resp['results'][0]['geometry']['location']['lng'] : "";
+            $formatted_address = isset($resp['results'][0]['formatted_address']) ? $resp['results'][0]['formatted_address'] : "";
+            if($lat && $lng) {
+                return response()->json([
+                    'status' => 'OK',
+                    'lat' => $lat,
+                    'lng' => $lng,
+                    'address' => $formatted_address
+                ], 200);
+            }
+        }
+
+        return response()->json([], 204);
+    }
+
 }

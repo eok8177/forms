@@ -8,7 +8,7 @@
                  v-model="value.value1"
                  :readonly="value.readonly"
                  :name="value.fieldName + '1'"
-                  @change="showMap()"
+                  @blur="showMap()"
                  >
           </div>
       </div>
@@ -20,7 +20,7 @@
                  v-model="value.value2"
                  :readonly="value.readonly"
                  :name="value.fieldName + '2'"
-                  @change="showMap()"
+                  @blur="showMap()"
                  >
           </div>
       </div>
@@ -32,7 +32,7 @@
                  v-model="value.value3"
                  :readonly="value.readonly"
                  :name="value.fieldName + '3'"
-                  @change="showMap()"
+                  @blur="showMap()"
                  >
           </div>
       </div>
@@ -44,7 +44,7 @@
                  v-model="value.value4"
                  :readonly="value.readonly"
                  :name="value.fieldName + '4'"
-                  @change="showMap()"
+                  @blur="showMap()"
                  >
           </div>
       </div>
@@ -56,7 +56,7 @@
                  v-model="value.value5"
                  :readonly="value.readonly"
                  :name="value.fieldName + '5'"
-                  @change="showMap()"
+                  @blur="showMap()"
                  >
           </div>
       </div>
@@ -69,6 +69,7 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
         name: "AddressControl",
         props: ['value', 'labelPosition'],
@@ -77,6 +78,7 @@
             address: '',
         }),
         mounted() {
+          // TODO move key outside
           this.key = 'AIzaSyDnxGiPdH3lTiOVu98kJxvn3h8Oezlw3w4';
           this.showMap();
         },
@@ -92,9 +94,27 @@
                 if (cond && item ) addr.push(item);
                 if (cond && !item) show = false;
               }
+              this.address = addr.join();
+              this.getLatLng();
             }
-            this.address = addr.join();
             return show;
+          },
+          getLatLng() {
+            let self = this;
+            axios.post('/api/get-coords', {
+                key:  this.key,
+                address:  this.address,
+              })
+              .then(
+                (res) => {
+                  if (res.status == 200) {
+                    self.value.lat = res.data.lat;
+                    self.value.lng = res.data.lng;
+                    self.value.address = res.data.address;
+                  }
+                }
+              )
+              .catch(error => console.log(error));
           }
         }
     }
