@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Mail;
+use Illuminate\Support\Facades\Auth;
 
 class Application extends Model
 {
@@ -243,5 +244,62 @@ class Application extends Model
         return true;
     }
 
+
+    /**
+     * Search
+     * return Two objects
+     */
+    static function search($request = false, $order = 'DESC')
+    {
+        $user = Auth::user();
+
+        $filter['user'] = $user;
+        $filter['form_id'] = $request->input('id', 0);
+        $filter['status'] = $request->input('status', Application::STATUS_SUBMITTED);
+        $filter['from'] = $request->input('from', false);
+        $filter['to'] = $request->input('to', false);
+        $filter['search'] = $request->input('search', false);
+
+        $apps = Application::Where('status', '!=', 'deleted')->with('user');
+
+        if ($filter['search']) {
+            $searchValues = preg_split('/\s+/', $filter['search'], -1, PREG_SPLIT_NO_EMPTY);
+            foreach ($searchValues as $search) {
+                $apps->WhereHas('user', function ($query) use ($search) {
+                    $query->Where('first_name','LIKE', '%'.$search.'%')
+                        ->orWhere('last_name','LIKE', '%'.$search.'%');
+                });
+            }
+        }
+
+        if ($filter['form_id'] > 0) {
+            $apps->where('form_id', $filter['form_id']);
+        }
+
+        if ($filter['status'] != Application::STATUS_ALL) {
+            $apps->where('status', $filter['status']);
+        }
+
+        if ($filter['from']) {
+            $apps->where('created_at', '>=', $filter['from']);
+        }
+
+        if ($filter['to']) {
+            $apps->where('created_at', '<=', $filter['to']);
+        }
+
+        if ($user->role == 'manager') {
+            $groupIds = $user->groups->pluck('id')->toArray();
+            $forms = Form::whereHas('groups', function($q) use ($groupIds) {
+                $q->whereIn('group_id', $groupIds);
+            })->pluck('id')->toArray();
+            $apps->whereIn('form_id', $forms);
+        }
+
+        return [
+            $apps->orderBy('id', $order),
+            $filter
+        ];
+    }
 
 }

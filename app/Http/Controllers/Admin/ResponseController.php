@@ -15,52 +15,17 @@ class ResponseController extends Controller
 {
     public function index(Request $request)
     {
-        $user = Auth::user();
-
-        $form_id = $request->input('id', 0);
-        $status = $request->input('status', Application::STATUS_SUBMITTED);
-
-        $from = $request->input('from', false);
-        $to = $request->input('to', false);
-
-        $forms = Application::select('form_id')->distinct()->pluck('form_id')->toArray();
-
-        $entries = Application::orderBy('created_at', 'desc')->where('status', '!=', 'deleted');
-
-        if ($form_id > 0) {
-            $entries->where('form_id', $form_id);
-        }
-
-        if ($status != Application::STATUS_ALL) {
-            $entries->where('status', $status);
-        }
-
-        if ($from) {
-            $entries->where('created_at', '>=', $from);
-        }
-
-        if ($to) {
-            $entries->where('created_at', '<=', $to);
-        }
-
-        if ($user->role == 'manager') {
-            $groupIds = $user->groups->pluck('id')->toArray();
-            $forms = Form::whereHas('groups', function($q) use ($groupIds) {
-                $q->whereIn('group_id', $groupIds);
-            })->pluck('id')->toArray();
-            $entries->whereIn('form_id', $forms);
-        }
-
-        $select_forms = [0 =>'All Forms'] + Form::whereIn('id',$forms)->pluck('title', 'id')->all();
+        list($apps, $filter) = Application::search($request);
 
         return view('admin.response', [
-            'entries' => $entries->get(),
-            'select_forms' => $select_forms,
-            'form_id' => $form_id,
-            'status' => $status,
-            'user' => $user,
-            'from' => $from,
-            'to' => $to
+            'entries' => $apps->get(),
+            'select_forms' => Form::selectAppsList(),
+            'form_id' => $filter['form_id'],
+            'status' => $filter['status'],
+            'user' => $filter['user'],
+            'from' => $filter['from'],
+            'to' => $filter['to'],
+            'search' => $filter['search']
         ]);
     }
 

@@ -45,7 +45,7 @@
           <button type="button" class="menu-toggler nav-link" onclick="document.getElementById('app').classList.toggle('menu-closed');"><span class="navbar-toggler-icon"></span></button>
 
           <a class="nav-link" href="{{ route('admin.responses') }}">
-            <i class="fa fa-tachometer"></i> <span class="d-none d-md-inline">@lang('message.responses')</span>
+            <i class="fa fa-file-text-o"></i> <span class="d-none d-md-inline">@lang('message.responses')</span>
           </a>
 
           @if(Auth::user()->role == 'admin')
@@ -110,7 +110,7 @@
           <div class="navbar-nav flex-column side-nav">
 
             <a class="nav-link" href="{{ route('admin.responses') }}">
-                <i class="fa fa-tachometer"></i> <span class="d-none d-md-inline">@lang('message.responses')</span>
+                <i class="fa fa-file-text-o"></i> <span class="d-none d-md-inline">@lang('message.responses')</span>
             </a>
           
             {{-- <a class="nav-item nav-link {{ request()->is('*user*') ? 'active' : '' }}" href="{{route('admin.user.index')}}"><i class="fa fa-users"></i> @lang('message.users')</a> --}}

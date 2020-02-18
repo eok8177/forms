@@ -99,5 +99,12 @@ class Form extends Model
         return $fields;
     }
 
+    static function selectAppsList()
+    {
+        $forms = Application::select('form_id')->distinct()->pluck('form_id')->toArray();
+
+        return [0 =>'All Forms'] + Form::whereIn('id',$forms)->pluck('title', 'id')->all();
+    }
+
 
 }
