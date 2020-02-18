@@ -107,6 +107,16 @@
       date: moment($('#datetimepicker2').val(), format).toDate()
     });
 
+
+    $('#search').keypress(function (e) {
+     var key = e.which;
+     if(key == 13)  // the enter key code
+      {
+        searchByName();
+        return false;
+      }
+    });
+
   });
 
   var url = "{{ route('admin.responses') }}";
