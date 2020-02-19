@@ -44,6 +44,7 @@
             if (this.value.isNowTimeValue) {
                 this.value.value = moment().format(CONTROL_CONSTANTS.TimeFormat[this.value.timeFormat]);
             }
+            this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
         }
     }
 </script>

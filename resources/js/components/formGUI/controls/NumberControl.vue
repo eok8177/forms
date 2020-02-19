@@ -45,6 +45,7 @@
             // if (!_.isEmpty(this.value.value)) {
             //     this.value.value = this.value.value;
             // }
+            this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
         },
         methods: {
             numberChange(e) {

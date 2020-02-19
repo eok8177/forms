@@ -54,6 +54,7 @@
             if (!_.isEmpty(this.value.defaultValue)) {
                 this.value.value = this.value.defaultValue;
             }
+            this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
         }
     }
 </script>

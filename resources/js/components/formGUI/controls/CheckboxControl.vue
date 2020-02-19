@@ -8,6 +8,7 @@
                :name="value.fieldName"
                :required="value.required"
                value="1"
+               :disabled="admin"
                v-model="value.value" />
             <label :for="value.name + '_gui_control'"
                    class="custom-control-label"
@@ -23,6 +24,7 @@
                :readonly="value.readonly"
                :name="value.fieldName"
                value="1"
+               :disabled="admin"
                v-model="value.value" />
 
             <label :for="value.name + '_gui_control'"
@@ -39,10 +41,14 @@
     export default {
         name: "CheckboxControl",
         props: ['value', 'labelPosition'],
+        data: () => ({
+            admin: false,
+        }),
         mounted() {
           if (this.value.isChecked) {
               this.value.value = true;
           }
+          this.admin = this.$parent.$parent.$parent.$parent.admin;
         }
     }
 </script>

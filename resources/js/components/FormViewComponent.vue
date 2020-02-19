@@ -29,7 +29,8 @@
             files: {},
             entryid: '',
             status: 'draft',
-            redirect_url: '/'
+            redirect_url: '/',
+            admin: true,
         }),
         methods: {
             updateInstances(index, instance) {

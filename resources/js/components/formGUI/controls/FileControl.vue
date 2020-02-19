@@ -5,7 +5,7 @@
               <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
           </div>
           <div class="col-md-8">
-              <input type="file"
+              <input type="file" v-if="!admin"
                      class="form-control-file"
                      :name="value.fieldName"
                      :required="value.required"
@@ -17,7 +17,7 @@
       <div v-else class="form-group" :class="value.cssClass">
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
 
-          <input type="file"
+          <input type="file" v-if="!admin"
                  class="form-control-file"
                  :name="value.fieldName"
                  :required="value.required"
@@ -32,7 +32,11 @@
     export default {
         name: "FileControl",
         props: ['value', 'labelPosition'],
+        data: () => ({
+            admin: false,
+        }),
         mounted() {
+          this.admin = this.$parent.$parent.$parent.$parent.admin;
         },
         methods: {
           processFile(event) {

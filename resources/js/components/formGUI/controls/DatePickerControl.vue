@@ -54,6 +54,8 @@
             }
             //ToDo sceck default value
             // console.log(this.value);
+
+            this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
         }
     }
 </script>

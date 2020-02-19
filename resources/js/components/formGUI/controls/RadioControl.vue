@@ -11,6 +11,7 @@
                   :id="value.name + index" 
                   :name="value.fieldName" 
                   :value="option.id" 
+                  :disabled="admin"
                   class="custom-control-input">
 
                   <label class="custom-control-label" :for="value.name + index" :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">{{option.text}}</label>
@@ -27,6 +28,7 @@
               :id="value.name + index" 
               :name="value.fieldName" 
               :value="option.id" 
+              :disabled="admin"
               class="custom-control-input">
 
               <label class="custom-control-label" :for="value.name + index" :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}">{{option.text}}</label>
@@ -41,6 +43,7 @@
         props:['value', 'labelPosition'],
         data: () => ({
             dataSource: [],
+            admin: false,
         }),
         created() {
             // request for ajax source
@@ -54,6 +57,7 @@
                     this.value.value = this.value.defaultValue;
                 }
             }
+            this.admin = this.$parent.$parent.$parent.$parent.admin;
         }
     }
 </script>

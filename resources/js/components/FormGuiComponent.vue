@@ -65,7 +65,8 @@
             entryid: '',
             status: 'draft',
             redirect_url: '/',
-            appID: ''
+            appID: '',
+            admin: false,
         }),
         methods: {
             updateInstances(index, instance) {
