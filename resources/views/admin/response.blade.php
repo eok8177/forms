@@ -19,7 +19,15 @@
         </div>
       </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-3">
+      <div class="btn-group">
+        <input type="text" id="search" class="form-control"
+          placeholder="Name Surname"
+          value="{{$search}}">
+        <button class="btn btn-outline-info" onclick="searchByName()">Search</button>
+      </div>
+    </div>
+    <div class="col-md-4">
       <div class="btn-group mr-3">
         <input type="text" id="datetimepicker1" class="form-control datetimepicker-input"
           data-toggle="datetimepicker"
@@ -34,13 +42,6 @@
           style="width: 120px"
           value="{{$to}}">
         <button class="btn btn-outline-info" onclick="setDate()">Filter</button>
-      </div>
-
-      <div class="btn-group">
-        <input type="text" id="search" class="form-control"
-          placeholder="Name Surname"
-          value="{{$search}}">
-        <button class="btn btn-outline-info" onclick="searchByName()">Search</button>
       </div>
     </div>
     <div class="col-md-2 text-center">
@@ -66,10 +67,10 @@
       <div class="col-md-2">
         <a href="{{ route('admin.entry', $entry->id) }}" class="btn" target="_blank" title="View Entry in new Tab">
           {{$select_forms[$entry->form_id]}}
-          <small class="d-block">{{$entry->user->first_name}} {{$entry->user->last_name}}</small>
         </a>
       </div>
-      <div class="col-md-7">{{$entry->created_at}}</div>
+      <div class="col-md-3">{{$entry->user->first_name}} {{$entry->user->last_name}}</div>
+      <div class="col-md-4">{{$entry->created_at}}</div>
       <div class="col-md-2 text-center">
         {{$entry->status}}
         @if($entry->status == 'submitted' && $entry->to_be_approved == 1)
