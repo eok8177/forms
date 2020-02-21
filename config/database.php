@@ -1,6 +1,17 @@
 <?php
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Crypt;
+
+function decode($val)
+{
+    $ciphering = "AES-128-CTR"; // Store the cipher method
+    $iv_length = openssl_cipher_iv_length($ciphering); // Use OpenSSl Encryption method
+    $iv = '1234567887654321'; // Non-NULL Initialization Vector for encryption
+    $key = "key0123456789"; // Store the encryption key 
+
+    return openssl_decrypt ($val, $ciphering, $key, 0, $iv);
+}
 
 return [
 
@@ -49,8 +60,10 @@ return [
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            // 'username' => env('DB_USERNAME', 'forge'),
+            // 'password' => env('DB_PASSWORD', ''),
+            'username' => decode(env('DB_USERNAME', 'forge')),
+            'password' => decode(env('DB_PASSWORD', '')),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
