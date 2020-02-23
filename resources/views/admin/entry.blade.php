@@ -8,6 +8,8 @@
     <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#rejectModal" title="Approv or Reject Entry">Take action</button>
   @endif
 
+    <button href="{{route('admin.app.sendemail', $app->id)}}" class="sendemail btn fa fa-envelope-o" title="Send Test Email"></button>
+
   </div>
 </div>
 

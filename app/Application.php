@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Mail;
 use Illuminate\Support\Facades\Auth;
+
+use App\Jobs\SendEmail;
 
 class Application extends Model
 {
@@ -238,13 +239,11 @@ class Application extends Model
         $data['subject'] = $email->subject;
         $data['from_name'] = $email->from_name;
         $data['from_email'] = $email->from_email;
+        $data['message'] = $message;
 
-
-        Mail::send($view, ['msg' => $message], function ($mail) use ($data) {
-          $mail->from($data['from_email'], $data['from_name'])
-                ->to($data['to'])
-                ->subject($data['subject']);
-        });
+        echo "start: $type ".date('i:s')."\n";
+        SendEmail::dispatch($data)->delay(now()->addMinutes(2));;
+        echo "end: $type ".date('i:s')."\n";
 
         return true;
     }

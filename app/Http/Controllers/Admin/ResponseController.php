@@ -59,4 +59,14 @@ class ResponseController extends Controller
         return redirect()->route('admin.responses');
     }
 
+    public function sendEmail(Application $app)
+    {
+        echo "Run: ".date('i:s')."\n";
+        $app->userSubmitEmail();
+        $app->userAcceptEmail();
+        $app->adminSubmitEmail();
+        $app->userRejectEmail();
+        return $app->id;
+    }
+
 }

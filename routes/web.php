@@ -57,6 +57,9 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
     Route::get('settings',  ['as' => 'settings', 'uses' => 'SettingController@index']);
     Route::post('settings', ['as' => 'settings.update', 'uses' => 'SettingController@update']);
     Route::get('setting/crypt/{value}',  ['as' => 'setting.crypt', 'uses' => 'SettingController@crypt']);
+
+
+    Route::put('entry/{app}/sendemail', ['as' => 'app.sendemail', 'uses' => 'ResponseController@sendEmail']);
 });
 
 // User
