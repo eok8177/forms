@@ -241,9 +241,7 @@ class Application extends Model
         $data['from_email'] = $email->from_email;
         $data['message'] = $message;
 
-        echo "start: $type ".date('i:s')."\n";
-        SendEmail::dispatch($data)->delay(now()->addMinutes(2));;
-        echo "end: $type ".date('i:s')."\n";
+        SendEmail::dispatch($data);
 
         return true;
     }
