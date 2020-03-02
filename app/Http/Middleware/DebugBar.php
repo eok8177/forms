@@ -16,6 +16,10 @@ class DebugBar
     public function handle($request, Closure $next)
     {
         if ($request->get("debugbar") == 'on') {
+            $request->session()->put('debugbar', 'on');
+        }
+
+        if ($request->session()->has('debugbar')) {
             \Debugbar::enable();
         } else {
             \Debugbar::disable();
