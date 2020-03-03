@@ -1,5 +1,6 @@
 <template>
     <div>
+      <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label"></label>
 
       <div class="form-group" v-if="value.show1" :class="value.cssClass">
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label1"></label>
