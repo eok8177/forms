@@ -52,7 +52,7 @@
 
             // today value or not
             if (this.value.isTodayValue) {
-                this.value.value = (moment().format(CONTROL_CONSTANTS.DateFormat[this.value.dateFormat]));
+                // this.value.value = (moment().format(CONTROL_CONSTANTS.DateFormat[this.value.dateFormat]));
             }
             //ToDo sceck default value
             // console.log(this.value);
@@ -69,6 +69,9 @@
           }
           if(self.value.minDate) {
             optionsDate['startDate'] = self.dateDiff(self.value.minDate);
+          }
+          if(self.value.isTodayValue) {
+            optionsDate['todayHighlight'] = true;
           }
           $('#'+this.value.name).datepicker(optionsDate);
         },
