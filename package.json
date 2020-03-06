@@ -27,6 +27,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "bootstrap-datepicker": "^1.9.0",
         "v-form-builder-m": "^1.0.1"
     }
 }

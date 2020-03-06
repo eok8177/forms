@@ -12,6 +12,8 @@
                        :name="value.fieldName"
                        :step="controlStep"
                        :required="value.required"
+                       :min="value.minValue"
+                       :max="value.maxValue"
                        @change="numberChange"
                        v-model="value.value" />
                 </div>
@@ -27,6 +29,8 @@
                    :name="value.fieldName"
                    :step="controlStep"
                    :required="value.required"
+                   :min="value.minValue"
+                   :max="value.maxValue"
                    @change="numberChange"
                    v-model="value.value" />
             </div>

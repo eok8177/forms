@@ -3,8 +3,9 @@
         <div class="form-group row datePickerControl" v-if="labelPosition === 'left'" :class="value.cssClass">
             <label class="col-sm-4 col-form-label" :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
             <div class="col-sm-8">
-                <input type="date"
+                <input type="text"
                    class="form-control"
+                   :id = "value.name"
                    :readonly="value.readonly"
                    :name="value.fieldName"
                    :required="value.required"
@@ -15,8 +16,9 @@
         <div class="form-group" v-else :class="value.cssClass">
             <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
 
-            <input type="date"
+            <input type="text"
                class="form-control"
+               :id = "value.name"
                :readonly="value.readonly"
                :name="value.fieldName"
                :required="value.required"
@@ -56,6 +58,39 @@
             // console.log(this.value);
 
             this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
+        },
+        mounted() {
+          let self = this;
+          let optionsDate = {
+            format: self.options.dateFormat,
+          };
+          if(self.value.maxDate) {
+            optionsDate['endDate'] = self.dateDiff(self.value.maxDate);
+          }
+          if(self.value.minDate) {
+            optionsDate['startDate'] = self.dateDiff(self.value.minDate);
+          }
+          $('#'+this.value.name).datepicker(optionsDate);
+        },
+        methods: {
+          dateDiff(stringDate) {
+
+            let [day, month, year] = stringDate.split("\/");
+            let incDate = new Date(year, month - 1, day);
+
+            let now = new Date();
+            now.setHours(0,0,0,0);
+
+            let millisecondsPerDay = 1000 * 60 * 60 * 24;
+            let millisBetween = incDate.getTime() - now.getTime();
+
+            let days = millisBetween / millisecondsPerDay;
+
+            let shift = Math.ceil(days);
+            if (shift >= 0) shift = '+'+shift;
+
+            return shift + 'd';
+          }
         }
     }
 </script>
