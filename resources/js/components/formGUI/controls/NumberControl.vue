@@ -46,9 +46,9 @@
             // this.value.value = 0;
         },
         mounted() {
-            // if (!_.isEmpty(this.value.value)) {
-            //     this.value.value = this.value.value;
-            // }
+            if (!_.isEmpty(this.value.defaultValue)) {
+                this.value.value = this.value.defaultValue;
+            }
             this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
         },
         methods: {
