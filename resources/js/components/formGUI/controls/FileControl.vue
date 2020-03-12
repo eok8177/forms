@@ -9,8 +9,11 @@
                      class="form-control-file"
                      :name="value.fieldName"
                      :required="value.required"
+                     :accept="value.extensions"
+                     :max-size="value.maxSize"
                      @change="processFile($event)"
                      />
+                     <small v-if="value.extensions || value.maxSize" class="form-text text-muted">Accepted: {{value.maxSize}} {{value.extensions}}</small>
               <a v-if="typeof value.value === 'string' || value.value instanceof String" :href="'/'+value.value" target="_blank">Already uploaded file</a>
           </div>
       </div>
@@ -21,8 +24,11 @@
                  class="form-control-file"
                  :name="value.fieldName"
                  :required="value.required"
+                 :accept="value.extensions"
+                 :max-size="value.maxSize"
                  @change="processFile($event)"
                  />
+                 <small v-if="value.extensions || value.maxSize" class="form-text text-muted">Accepted: {{value.maxSize}} {{value.extensions}}</small>
           <a v-if="typeof value.value === 'string' || value.value instanceof String" :href="'/'+value.value" target="_blank">Already uploaded file</a>
       </div>
     </div>
