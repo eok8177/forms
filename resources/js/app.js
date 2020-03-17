@@ -8,6 +8,8 @@ require('./bootstrap');
 
 require('bootstrap-datepicker');
 
+window.moment = require('moment');
+
 window.Vue = require('vue');
 
 /**

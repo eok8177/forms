@@ -34,31 +34,38 @@
                     // add Event to target field
                     $('body').on('change', '[name="'+rule.fieldId+'"]', function(){
                         let valid = false;
+                        let ruleValue = rule.value;
                         let numVal = parseFloat($(this).val());
                         let stringVal = $(this).val().toString();
                         if($(this).attr('type') == "checkbox") stringVal = this.checked ? 1 : 0;
 
+                        if($(this).attr('data-type') == "datepicker") {
+                            ruleValue = parseFloat(moment(rule.value, DATE_FORMAT.toUpperCase()).valueOf());
+                            numVal = parseFloat(moment(stringVal, DATE_FORMAT.toUpperCase()).valueOf());
+                            stringVal = moment(stringVal, DATE_FORMAT.toUpperCase()).valueOf();
+                        }
+
                         switch(rule.operator) {
                           case 'is':
-                            if (stringVal == rule.value) valid = true;
+                            if (stringVal == ruleValue) valid = true;
                             break;
                           case 'is_not':
-                            if (stringVal != rule.value) valid = true;
+                            if (stringVal != ruleValue) valid = true;
                             break;
                           case 'greater':
-                            if (numVal > rule.value) valid = true;
+                            if (numVal > ruleValue) valid = true;
                             break;
                           case 'less':
-                            if (numVal < rule.value) valid = true;
+                            if (numVal < ruleValue) valid = true;
                             break;
                           case 'contain':
-                            if (stringVal.indexOf(rule.value) >= 0) valid = true;
+                            if (stringVal.indexOf(ruleValue) >= 0) valid = true;
                             break;
                           case 'start':
-                            if (stringVal.startsWith(rule.value)) valid = true;
+                            if (stringVal.startsWith(ruleValue)) valid = true;
                             break;
                           case 'end':
-                            if (stringVal.endsWith(rule.value)) valid = true;
+                            if (stringVal.endsWith(ruleValue)) valid = true;
                             break;
                           default:
                             valid = false;

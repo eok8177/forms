@@ -10,6 +10,7 @@ use App\Application;
 use App\ApplicationApproval;
 use App\Entry;
 use App\Form;
+use App\Setting;
 
 class ResponseController extends Controller
 {
@@ -31,7 +32,10 @@ class ResponseController extends Controller
 
     public function entry(Application $app)
     {
-        return view('admin.entry', ['app' => $app]);
+        return view('admin.entry', [
+            'app' => $app,
+            'settings' => Setting::pluck('value', 'key')
+        ]);
     }
 
     public function status(Request $request, Application $app)

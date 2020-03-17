@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Form;
+use App\Setting;
 
 class FrontendController extends Controller
 {
@@ -35,7 +36,8 @@ class FrontendController extends Controller
 
         return view('form', [
             'forms' => Form::where('draft', 0)->get(),
-            'form' => $form
+            'form' => $form,
+            'settings' => Setting::pluck('value', 'key')
         ]);
     }
 

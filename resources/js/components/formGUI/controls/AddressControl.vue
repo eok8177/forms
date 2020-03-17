@@ -89,7 +89,7 @@
         }),
         mounted() {
           // TODO move key outside
-          this.key = 'AIzaSyDnxGiPdH3lTiOVu98kJxvn3h8Oezlw3w4';
+          this.key = KEY_MAP;
           this.showMap();
           this.admin = this.$parent.$parent.$parent.$parent.admin;
           this.value.readonly = this.admin;

@@ -10,6 +10,7 @@ use App\Form;
 use App\FormEmail;
 use App\Group;
 use App\FormType;
+use App\Setting;
 
 
 class FormController extends Controller
@@ -57,7 +58,10 @@ class FormController extends Controller
 
     public function edit(Form $form)
     {
-        return view('admin.form.edit', ['form' => $form]);
+        return view('admin.form.edit', [
+            'form' => $form,
+            'settings' => Setting::pluck('value', 'key')
+        ]);
     }
 
     public function setting(Form $form)

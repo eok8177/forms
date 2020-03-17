@@ -5,6 +5,7 @@
             <div class="col-sm-8">
                 <input type="text"
                    class="form-control"
+                   data-type="datepicker"
                    :id = "value.name"
                    :readonly="value.readonly"
                    :name="value.fieldName"
@@ -18,6 +19,7 @@
 
             <input type="text"
                class="form-control"
+               data-type="datepicker"
                :id = "value.name"
                :readonly="value.readonly"
                :name="value.fieldName"
@@ -37,7 +39,7 @@
         }),
         created() {
             // set date format
-            this.options.dateFormat = this.value.dateFormat;
+            this.options.dateFormat = DATE_FORMAT;
 
             // if this control already have value, set it (value => default value => settings)
             if (!_.isEmpty(this.value.value)) {

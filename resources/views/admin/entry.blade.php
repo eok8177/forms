@@ -52,3 +52,10 @@
 {{-- {{$app->userSubmitEmail()}} --}}
 
 @endsection
+
+@push('scripts')
+<script>
+  const DATE_FORMAT = '{{$settings['date_format'] ?? 'false'}}';
+  const KEY_MAP = '{{$settings['key_map'] ?? 'false'}}';
+</script>
+@endpush
