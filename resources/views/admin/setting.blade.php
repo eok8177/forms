@@ -7,10 +7,15 @@
 
 {!! Form::open(['route' => ['admin.settings.update'], 'method' => 'POST', 'class' => 'form-horizontal']) !!}
     @foreach($settings as $item)
+
     <div class="form-group row">
       <label class="col-sm-2 col-form-label">{{$item->name}}</label>
       <div class="col-sm-10">
+        @if($item->key == 'date_format')
+        {!! Form::select('date_format', $dateFormats, $item->value, ['class' => 'custom-select']) !!}
+        @else
         <input type="text" class="form-control" name="{{$item->key}}" value="{{$item->value}}">
+        @endif
       </div>
     </div>
     @endforeach

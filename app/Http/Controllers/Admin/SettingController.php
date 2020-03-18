@@ -10,8 +10,17 @@ class SettingController extends Controller
 {
     public function index()
     {
+        $dateFormats = [
+            'dd/mm/yy' => 'dd/mm/yy',
+            'dd-mm-yy' => 'dd-mm-yy',
+            'mm/dd/yy' => 'mm/dd/yy',
+            'mm-dd-yy' => 'mm-dd-yy',
+            'yy/mm/dd' => 'yy/mm/dd',
+            'yy-mm-dd' => 'yy-mm-dd',
+        ];
         return view('admin.setting', [
-            'settings' => Setting::all()
+            'settings' => Setting::all(),
+            'dateFormats' => $dateFormats
         ]);
     }
 
