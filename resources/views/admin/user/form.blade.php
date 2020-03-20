@@ -58,6 +58,12 @@
     </div>
 @endif
 
+<div class="custom-control custom-checkbox mb-3 border-top border-bottom">
+  {!! Form::hidden('email_verified', 0) !!}
+  {!! Form::checkbox('email_verified', 1, $user->email_verified_at != NULL, ['class' => 'custom-control-input', 'id' => 'email_verified']) !!}
+  <label for="email_verified" class="custom-control-label">Email verified</label>
+</div>
+
 
   <div class="form-group">
       <input type="submit" value="{{Lang::get('message.save')}}" class="btn btn-secondary">

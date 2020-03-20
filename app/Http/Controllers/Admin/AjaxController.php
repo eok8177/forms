@@ -75,4 +75,28 @@ class AjaxController extends Controller
 
     }
 
+
+    public function setTime(Request $request)
+    {
+        if($request->ajax()){
+
+            $model = "App\\" . $request->input('model');
+
+            $field = $request->input('field');
+
+            $item = $model::find($request->input('id'));
+
+            $item->$field = $item->$field == NULL ? date('yy-m-d h:i:s') : NULL;
+            $item->save();
+
+            $response = [
+                "id" => $item->id,
+                "status" => $item->$field != NULL
+                ];
+            return json_encode($response);
+        }
+
+        return redirect()->route('admin.dashboard');
+    }
+
 }

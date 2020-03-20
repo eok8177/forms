@@ -50,6 +50,7 @@ return [
     'description' => 'Description',
     'enabled' => 'Enabled',
     'loged_at' => 'Last time logged in',
+    'email_verified' => 'Email verified',
 
     'form' => 'Form',
     'form_settings' => 'Form Settings',

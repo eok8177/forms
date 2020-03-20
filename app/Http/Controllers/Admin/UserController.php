@@ -67,6 +67,12 @@ class UserController extends Controller
             $data['password'] = bcrypt($data['password']);
         }
 
+        $email_verified = $data['email_verified'];
+        unset($data['email_verified']);
+        if ($email_verified == 1) {
+            $data['email_verified_at'] = date('yy-m-d h:i:s');
+        }
+
         $user = $user->create($data);
 
         $user->update($data);
@@ -117,6 +123,14 @@ class UserController extends Controller
             $data['password'] = bcrypt($data['password']);
         } else {
             unset($data['password']);
+        }
+
+        $email_verified = $data['email_verified'];
+        unset($data['email_verified']);
+        if ($email_verified == 1 && $user->email_verified_at == NULL) {
+            $data['email_verified_at'] = date('yy-m-d h:i:s');
+        } elseif ($email_verified == 0) {
+            $data['email_verified_at'] = NULL;
         }
 
         $user->update($data);

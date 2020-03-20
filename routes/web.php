@@ -37,6 +37,7 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
 
     Route::put('ajax/status', ['as' => 'ajax.status', 'uses' => 'AjaxController@status']);
     Route::put('ajax/reorder', ['as' => 'ajax.reorder', 'uses' => 'AjaxController@reorder']);
+    Route::put('ajax/set-time', ['as' => 'ajax.setTime', 'uses' => 'AjaxController@setTime']);
 
     Route::resource('form', 'FormController');
     Route::get('form/{form}/setting', ['as' => 'form.setting', 'uses' => 'FormController@setting']);
