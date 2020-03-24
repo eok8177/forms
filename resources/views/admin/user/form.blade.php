@@ -64,6 +64,16 @@
   <label for="email_verified" class="custom-control-label">Email verified</label>
 </div>
 
+@if (Auth::user()->super_admin_to >= date("Y-m-d H:i:s"))
+<div class="form-group">
+  <label for="api_token">{{Lang::get('message.api_token')}}</label>
+  <div class="d-flex">
+    <input type="text" name="api_token" id="api_token" value="{{$user->api_token}}" class="form-control" readonly>
+    <button type="button" class="btn btn-sm btn-outline-secondary text-nowrap" onclick="token(60);">Generate new key</button>
+  </div>
+</div>
+@endif
+
 
   <div class="form-group">
       <input type="submit" value="{{Lang::get('message.save')}}" class="btn btn-secondary">
@@ -79,4 +89,19 @@
       top: -999px;
     }
   </style>
+@endpush
+
+@push('scripts')
+<script>
+  function token(length) {
+     var result           = '';
+     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+     var charactersLength = characters.length;
+     for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+     }
+
+     $('#api_token').val(result);
+  }
+</script>
 @endpush

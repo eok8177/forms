@@ -13,6 +13,7 @@ return [
     'select' => 'Select',
     'published' => 'Published',
     'gen_auto' => 'Generated auto',
+    'api_token' => 'Auth api key',
 
     'responses' => 'Responses',
     'to_site' => 'Go to site',

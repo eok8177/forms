@@ -27,3 +27,11 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/get-coords',  ['uses' => 'FormController@getCoords']);
 
 });
+
+Route::group([
+    'middleware' => 'auth:api',
+    'namespace' => 'Api'
+  ], function() {
+    Route::get('test', 'EntryController@test');
+    Route::post('entries', 'EntryController@index');
+});
