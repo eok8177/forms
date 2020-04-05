@@ -34,4 +34,6 @@ Route::group([
   ], function() {
     Route::get('test', 'EntryController@test');
     Route::post('entries', 'EntryController@index');
+
+    Route::post('users', 'UserController@index');
 });
