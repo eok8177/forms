@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\ApiCall;
 
 class UserController extends Controller
 {
@@ -26,6 +27,24 @@ class UserController extends Controller
             'status' => 'OK',
             'count' => $users->count(),
             'data' => $users->get()
+        ], 200);
+    }
+
+    public function test(Request $request)
+    {
+        $user_id = $request->get('user', false);
+
+        if ($user_id) {
+            $user = User::where('id',$user_id)->firstOrFail();
+        }
+
+        $api = new ApiCall;
+        $data = $api->newUser($user);
+
+        return response()->json([
+            'type' => 'Get',
+            'status' => 'OK',
+            'data' => $data
         ], 200);
     }
 

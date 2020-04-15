@@ -37,3 +37,8 @@ Route::group([
 
     Route::post('users', 'UserController@index');
 });
+
+
+Route::group(['namespace' => 'Api'], function() {
+    Route::get('user-test', 'UserController@test');
+});
