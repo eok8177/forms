@@ -52,6 +52,8 @@
     </div>
 	@include('user.parts.sidebar', ['class_col' => 'col-md-2', 'slug' => 'my-apps'])
   </div>
+
+  <pre>{{ print_r($test, true) }}</pre>
 </div>
 
 
