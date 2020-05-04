@@ -48,7 +48,7 @@ class FormController extends Controller
 
         $form = $form->create($request->all());
 
-        return redirect()->route('admin.form.index')->with('success', 'Form created');
+        return redirect()->route('admin.form.edit', ['form' => $form->id])->with('success', 'Form created');
     }
 
     public function show(Form $form)
