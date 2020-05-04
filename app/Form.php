@@ -60,6 +60,17 @@ class Form extends Model
         return $this->hasOne(FormType::class, 'id', 'form_type_id');
     }
 
+    public function active()
+    {
+        $active = true;
+        if ($this->groups()->count() == 0) $active = false;
+        if ($this->types()->count() == 0) $active = false;
+        if ($this->draft == 1) $active = false;
+        if ($this->is_trash == 1) $active = false;
+
+        return $active;
+    }
+
     public function getTypeAttribute()
     {
         return $this->types->name;

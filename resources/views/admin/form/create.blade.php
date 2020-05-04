@@ -20,11 +20,7 @@
     {!! Form::textarea('description', $form->description, ['class' => 'form-control', 'rows' => '2']) !!}
   </div>
 
-  <div class="custom-control custom-checkbox custom-control-inline">
-    {!! Form::hidden('draft', 0) !!}
-    {!! Form::checkbox('draft', 1, $form->draft, ['class' => 'custom-control-input', 'id' => 'draft']) !!}
-    <label for="draft" class="custom-control-label">{{Lang::get('message.active')}}</label>
-  </div>
+    {!! Form::hidden('draft', 1) !!}
 
   <div class="custom-control custom-checkbox custom-control-inline">
     {!! Form::hidden('is_trash', 0) !!}

@@ -43,7 +43,11 @@
       <div class="row border-bottom mb-2">
 
         <div class="col d-flex align-items-center">
-            <a href="{{ route('admin.form.edit', $form->id) }}" class="text-body" title="Edit">{{$form->name}}{{$form->draft ? ' [draft]' : ''}}</a>
+            <a href="{{ route('admin.form.edit', $form->id) }}" class="text-body" title="Edit">
+              {{$form->name}}
+              {{$form->draft ? ' [draft]' : ''}}
+              {{$form->active() ? '' : ' [not active]'}}
+            </a>
         </div>
 
         <div class="col text-center"><a href="{{ route('admin.form.edit', $form->id) }}" class="btn" title="Edit">{{$form->type}}</a></div>
