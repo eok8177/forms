@@ -137,6 +137,8 @@
         mounted() {
             // open first Section
             $('#'+this.form.sections[0].name + '_gui_body').collapse('show');
+            // Refresh all fields on Conditions & Calculated events
+            $('input, select, textarea').change();
         }
     }
 </script>
