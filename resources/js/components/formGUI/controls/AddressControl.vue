@@ -63,7 +63,11 @@
       </div>
 
       <div v-if="showmap" class="map-it d-flex">
-        <img style="max-width: 100%;" :src="'https://maps.googleapis.com/maps/api/staticmap?autoscale=1&size=640x300&maptype=roadmap&key='+key+'&format=jpg&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:1%7C'+address" :alt="'Google Map of '+address">
+        <a :href="'https://www.google.com/maps/place/'+value.address" target="_blank">View on Map</a>
+
+
+        <!-- <img style="max-width: 100%;" :src="'https://maps.googleapis.com/maps/api/staticmap?autoscale=1&size=640x300&maptype=roadmap&key='+key+'&format=jpg&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:1%7C'+address" :alt="'Google Map of '+address">
+          -->
 
         <div class="form-group ml-3 w-100" v-if="admin">
           <label>Lat/Lng</label>
