@@ -9,6 +9,10 @@
     <label for="title">Name</label>
     <input type="text" class="form-control" name="name" value="{{$form_type->name}}">
   </div>
+  <div class="form-group">
+    <label for="name">Description</label>
+    {!! Form::textarea('description', $form_type->description, ['class' => 'form-control editor']) !!}
+  </div>
   <div class="form-group mt-4">
     <input type="submit" value="{{Lang::get('message.save')}}" class="btn btn-secondary">
   </div>
