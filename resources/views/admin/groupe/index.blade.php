@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="page-header row justify-content-between">
-  <h5>Form Types</h5>
+  <h5>Form Groups</h5>
   <a href="{{ route('admin.group.create') }}" class="btn btn-light"><i class="fa fa-plus-square"></i> @lang('message.create')</a>
 </div>
 

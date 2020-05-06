@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-<h2 class="page-header">Form Type</h2>
+<h2 class="page-header">New Form Type</h2>
 
 {!! Form::open(['route' => ['admin.form-type.store'], 'method' => 'POST', 'class' => 'form-horizontal']) !!}
 

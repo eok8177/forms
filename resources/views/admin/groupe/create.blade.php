@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-<h2 class="page-header">Group</h2>
+<h2 class="page-header">New Form Group</h2>
 
 {!! Form::open(['route' => ['admin.group.store'], 'method' => 'POST', 'class' => 'form-horizontal']) !!}
 

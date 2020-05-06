@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-<h2 class="page-header">Group: <small>{{ $group->name }}</small></h2>
+<h2 class="page-header">Form Group: <small>{{ $group->name }}</small></h2>
 
 {!! Form::open(['route' => ['admin.group.update', $group->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 
