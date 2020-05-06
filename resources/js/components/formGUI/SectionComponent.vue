@@ -75,6 +75,12 @@
 
             }
         },
+        mounted() {
+            // open Section
+            if (this.section.expanded) {
+                this.$parent.openSection(this.index);
+            }
+        },
         methods: {
             toggleField(key, valid) {
                 this.rules[key] = valid;

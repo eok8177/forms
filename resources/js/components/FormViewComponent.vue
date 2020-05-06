@@ -41,6 +41,9 @@
                 this.parseForm(index);
                 $('#'+this.formdata.sections[index].name + '_gui_body').collapse('toggle');
             },
+            openSection(index) {
+                $('#'+this.form.sections[index].name + '_gui_body').collapse('show');
+            },
             parseForm(index) {
                 let self = this;
                 self.validForm = true;

@@ -86,6 +86,9 @@
                     $('#'+this.formdata.sections[index-1].name + '_gui_body').collapse('hide');
 
             },
+            openSection(index) {
+                $('#'+this.form.sections[index].name + '_gui_body').collapse('show');
+            },
             Submit() {
                 // parse all form object
                 this.parseForm(-1);
