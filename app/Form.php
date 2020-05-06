@@ -71,6 +71,14 @@ class Form extends Model
         return $active;
     }
 
+    public function completed()
+    {
+        $completed = true;
+        if ($this->groups()->count() == 0) $completed = false;
+        if ($this->types()->count() == 0) $completed = false;
+        return $completed;
+    }
+
     public function getTypeAttribute()
     {
         return $this->types->name;

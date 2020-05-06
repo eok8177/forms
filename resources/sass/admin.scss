@@ -117,3 +117,10 @@ body {
 .sticky, .card {
   box-shadow: 0 0 5px 0 rgba(0,0,0,.2);
 }
+
+.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+  pointer-events: none;
+}

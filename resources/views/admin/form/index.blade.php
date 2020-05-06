@@ -46,7 +46,7 @@
             <a href="{{ route('admin.form.edit', $form->id) }}" class="text-body" title="Edit">
               {{$form->name}}
               {{$form->draft ? ' [draft]' : ''}}
-              {{$form->active() ? '' : ' [not active]'}}
+              {{$form->completed() ? '' : ' [not completed]'}}
             </a>
         </div>
 
@@ -55,7 +55,10 @@
         <div class="col-md-3 text-left">
           <a href="{{ route('admin.form.copy', $form->id) }}" class="btn fa fa-files-o" title="Duplicate Form"></a>
           <a href="{{ route('admin.form.edit', $form->id) }}" class="btn fa fa-pencil" title="Edit"></a>
-          <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'draft'])}}" class="status btn fa fa-{{$form->draft ? 'check-circle' : 'times-circle'}} reload" title="Toggle Draft"></a>
+          <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'draft'])}}" 
+            class="status btn fa {{$form->active() ? 'fa-check-square-o' : 'fa-pencil-square-o'}} {{$form->completed() ? '' : 'is-disabled'}} reload" 
+            title="Toggle Draft"
+          ></a>
           <a class="btn fa fa-gear" href="{{route('admin.form.setting',$form->id)}}" title="Setings"></a>
           <a class="btn fa fa-envelope-o" href="{{route('admin.form.email',$form->id)}}" title="Email Notification"></a>
           <a class="btn fa fa-eye" href="{{route('front.form',$form->slug)}}" target="_blank" title="Open Form in new window"></a>
