@@ -21,5 +21,10 @@ class Group extends Model
         return ($forms->count() == 0 && $users->count() == 0) ? true : false;
     }
 
+    public function managers()
+    {
+        return $this->belongsToMany(User::class)->where('role', 'manager');
+    }
+
 
 }

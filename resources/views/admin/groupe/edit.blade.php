@@ -5,10 +5,8 @@
 
 {!! Form::open(['route' => ['admin.group.update', $group->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 
-  <div class="form-group">
-    <label for="title">Name</label>
-    <input type="text" class="form-control" name="name" value="{{$group->name}}">
-  </div>
+  @include('admin.groupe._form')
+
   <div class="form-group mt-4">
     <input type="submit" value="{{Lang::get('message.save')}}" class="btn btn-secondary">
   </div>
