@@ -19,7 +19,7 @@
       @foreach($form_types as $form_type)
         <tr data-id="{{$form_type->id}}">
           <td>
-            <a href="{{ route('admin.form-type.edit', $form_type->id) }}" class="btn">{{$form_type->name}}</a>
+            <a href="{{ route('admin.form-type.edit', $form_type->id) }}" class="btn" style="color: {{$form_type->color}}">{{$form_type->name}}</a>
           </td>
           <td class="text-center">
             <a href="{{ route('admin.form-type.edit', $form_type->id) }}" class="btn fa fa-pencil" title="Edit"></a>

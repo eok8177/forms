@@ -24,4 +24,12 @@ class Setting extends Model
         return true;
     }
 
+    public static function colors()
+    {
+        $colors = Setting::where('key', 'form_type_colors')->first();
+        if (!$colors) return '#000';
+
+        return explode(',', preg_replace('/\s+/', '', $colors->value));
+    }
+
 }

@@ -18,4 +18,9 @@ class FormType extends Model
         return $this->hasMany(Form::class, 'form_type_id', 'id');
     }
 
+    public function getColorAttribute($value)
+    {
+        return $value ? $value : '#000';
+    }
+
 }

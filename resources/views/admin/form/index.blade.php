@@ -43,7 +43,7 @@
       <div class="row border-bottom mb-2">
 
         <div class="col d-flex align-items-center">
-            <a href="{{ route('admin.form.edit', $form->id) }}" class="text-body" title="Edit">
+            <a href="{{ route('admin.form.edit', $form->id) }}" title="Edit" style="color: {{$form->types->color}}">
               {{$form->name}}
               {{$form->draft ? ' [draft]' : ''}}
               {{$form->completed() ? '' : ' [not completed]'}}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\FormType;
+use App\Setting;
 
 class FormTypeController extends Controller
 {
@@ -15,7 +16,10 @@ class FormTypeController extends Controller
 
     public function create()
     {
-        return view('admin.formtype.create', ['form_type' => new FormType]);
+        return view('admin.formtype.create', [
+            'form_type' => new FormType,
+            'colors' => Setting::colors()
+        ]);
     }
 
     public function store(Request $request, FormType $form_type)
@@ -27,7 +31,10 @@ class FormTypeController extends Controller
 
     public function edit(FormType $form_type)
     {
-        return view('admin.formtype.edit', ['form_type' => $form_type]);
+        return view('admin.formtype.edit', [
+            'form_type' => $form_type,
+            'colors' => Setting::colors()
+        ]);
     }
 
     public function update(Request $request, FormType $form_type)
