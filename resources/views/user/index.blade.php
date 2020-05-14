@@ -11,22 +11,17 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">Action</th>
-              <th scope="col">Form Name</th>
-              <th scope="col">Date</th>
+              <th scope="col">Type</th>
+              <th scope="col">Details</th>
               <th scope="col">Status</th>
+              <th scope="col">Date</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           @foreach($apps as $app)
             <tr>
-              <td>
-                @if($app->status == 'draft' || $app->status == 'rejected')
-                  <a href="{{ route('user.form', $app->id) }}" class="btn">Edit</a>
-                  <a href="{{ route('user.form.destroy', $app->id) }}" class="btn fa fa-trash-o delete"></a>
-                @endif
-              </td>
+              <td></td>
               <td>{{$app->form->title}}</td>
-              <td>{{$app->updated_at}}</td>
               <td>
                 @if($app->status == 'rejected')
                 <div class="dropdown">
@@ -42,6 +37,13 @@
                 </div>
                 @else
                   {{$app->status}}
+                @endif
+              </td>
+              <td>{{$app->updated_at}}</td>
+              <td>
+                @if($app->status == 'draft' || $app->status == 'rejected')
+                  <a href="{{ route('user.form', $app->id) }}" class="btn">Edit</a>
+                  <a href="{{ route('user.form.destroy', $app->id) }}" class="btn fa fa-trash-o delete"></a>
                 @endif
               </td>
             </tr>
