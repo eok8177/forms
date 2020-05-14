@@ -4,7 +4,7 @@
 
 <div class="page-header row justify-content-between">
   <h5>Form Types</h5>
-  <a href="{{ route('admin.form-type.create') }}" class="btn btn-light"><i class="fa fa-plus-square"></i> @lang('message.create')</a>
+  <a href="{{ route('admin.form-type.create') }}" class="btn btn-light"><i class="fa fa-plus-square"></i> @lang('message.new_formtype')</a>
 </div>
 
 <div class="position-relative">
