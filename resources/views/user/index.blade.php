@@ -6,6 +6,7 @@
   <h2 class="page-header">{{$user->first_name}} {{$user->last_name}}</h2>
 
   <div class="row">
+    @include('user.parts.sidebar', ['class_col' => 'col-md-2', 'slug' => 'my-apps'])
     <div class="col-md-10">
       <div class="table-responsive">
         <table class="table table-hover">
@@ -20,7 +21,7 @@
           </thead>
           @foreach($apps as $app)
             <tr>
-              <td></td>
+              <td>{{$app->form->type}}</td>
               <td>{{$app->form->title}}</td>
               <td>
                 @if($app->status == 'rejected')
@@ -52,10 +53,10 @@
         </table>
       </div>
     </div>
-	@include('user.parts.sidebar', ['class_col' => 'col-md-2', 'slug' => 'my-apps'])
+
   </div>
 
-  <pre>{{ print_r($test, true) }}</pre>
+  {{-- <pre>{{ print_r($test, true) }}</pre> --}}
 </div>
 
 
