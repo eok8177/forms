@@ -33,17 +33,19 @@ class UserController extends Controller
         }
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $user =Auth::user();
 
         $api = new ApiCall;
-        $data = $api->newUser($user);
+        $data = $api->getDashboard();
+        // $data = $api->newUser($user);
 
         return view('user.index', [
             'user' => $user,
             'apps' => Application::where('user_id', $user->id)->where('status', '!=', 'deleted')->get(),
-            'test' => $data
+            'dataMars' => $data,
+            'host' => $request->getHost()
         ]);
     }
 	

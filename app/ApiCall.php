@@ -14,9 +14,19 @@ class ApiCall
         return $this->call('new-user', $user);
     }
 
+    public function getDashboard()
+    {
+        return $this->call('get-dashboard', false, 'GET');
+    }
+
+    /**
+     * 
+     * 
+     * @return false|array
+     */
     private function call($method = false, $postData = false, $type = 'POST')
     {
-        $url = "http://37.53.93.30:9302/api/".$method;
+        $url = env('API_HOST', 'http://37.53.93.30:9302') . "/api/". $method;
         $api_token = "0123456";
 
         $headers[] = "Content-type: application/json";
@@ -42,6 +52,7 @@ class ApiCall
         $result = curl_exec($ch);
         curl_close($ch);
 
-        return $result;
+        $res = json_decode($result);
+        if (isset($res->status) && $res->status == 'OK') return $res->data; else return false;
     }
 }

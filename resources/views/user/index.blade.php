@@ -50,6 +50,17 @@
             </tr>
 
           @endforeach
+
+          @foreach($dataMars as $obj)
+            <tr>
+              <td>{{$obj->Type}}</td>
+              <td></td>
+              <td>{{$obj->Status}}</td>
+              <td>{{ date('Y-m-d', strtotime($obj->Date)) }}</td>
+              <td></td>
+            </tr>
+          @endforeach
+          s
         </table>
       </div>
     </div>
@@ -57,6 +68,8 @@
   </div>
 
   {{-- <pre>{{ print_r($test, true) }}</pre> --}}
+
+  <!-- <pre>{{ print_r($dataMars, true) }}</pre> -->
 </div>
 
 
