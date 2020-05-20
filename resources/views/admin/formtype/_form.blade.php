@@ -8,7 +8,7 @@
   {!! Form::textarea('description', $form_type->description, ['class' => 'form-control editor']) !!}
 </div>
 
-<label>Color form name</label>
+<label>Pickup the colour</label>
 <div class="form-group">
   @foreach($colors as $color)
     <div class="color-radio">
