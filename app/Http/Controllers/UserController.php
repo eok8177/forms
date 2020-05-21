@@ -49,10 +49,10 @@ class UserController extends Controller
         ]);
     }
 	
-	public function security()
-	{
-		return view('user.security', ['user' => Auth::user()]);
-	}
+	// public function security()
+	// {
+	// 	return view('user.security', ['user' => Auth::user()]);
+	// }
 
     public function edit()
     {
@@ -69,34 +69,51 @@ class UserController extends Controller
 
         $data = $request->all();
 
+        // Password
+        if ($data['old_password']) {
+            if (!Hash::check($data['old_password'], $user->password)) {
+                return redirect()->route('user.edit')->with('danger', 'Wrong old password');
+            }
+            if (!$data['password']) {
+                return redirect()->route('user.edit')->with('danger', 'Password must be setup');
+            }
+            $data['password'] = bcrypt($data['password']);
+            unset($data['old_password']);
+            unset($data['re_password']);
+        } else {
+            unset($data['old_password']);
+            unset($data['password']);
+            unset($data['re_password']);
+        }
+
         $user->update($data);
 
         return redirect()->route('user.edit')->with('success', 'User updated');
     }
 	
-	public function update_security(Request $request)
-	{
-		$user = Auth::user();
-		$data = $request->all();
-		// Password
-		if ($data['old_password']) {
-			if (!Hash::check($data['old_password'], $user->password)) {
-				return redirect()->route('user.security')->with('danger', 'Wrong old password');
-			}
-			if (!$data['password']) {
-				return redirect()->route('user.security')->with('danger', 'Password must be setup');
-			}
-			$data['password'] = bcrypt($data['password']);
-			unset($data['old_password']);
-			unset($data['re_password']);
-		} else {
-			unset($data['old_password']);
-			unset($data['password']);
-			unset($data['re_password']);
-		}
-		$user->update($data);
-		return redirect()->route('user.security')->with('success', 'Security settings have been updated');
-	}
+	// public function update_security(Request $request)
+	// {
+	// 	$user = Auth::user();
+	// 	$data = $request->all();
+	// 	// Password
+	// 	if ($data['old_password']) {
+	// 		if (!Hash::check($data['old_password'], $user->password)) {
+	// 			return redirect()->route('user.security')->with('danger', 'Wrong old password');
+	// 		}
+	// 		if (!$data['password']) {
+	// 			return redirect()->route('user.security')->with('danger', 'Password must be setup');
+	// 		}
+	// 		$data['password'] = bcrypt($data['password']);
+	// 		unset($data['old_password']);
+	// 		unset($data['re_password']);
+	// 	} else {
+	// 		unset($data['old_password']);
+	// 		unset($data['password']);
+	// 		unset($data['re_password']);
+	// 	}
+	// 	$user->update($data);
+	// 	return redirect()->route('user.security')->with('success', 'Security settings have been updated');
+	// }
 
     public function form(Application $app)
     {
