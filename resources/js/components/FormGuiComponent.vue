@@ -1,6 +1,11 @@
 <template>
     <div v-if="form !== null">
 
+        <div class="d-flex justify-content-end mb-2">
+            <button class="btn btn-outline-secondary btn-sm" @click="expandAllSections()">expand all</button>
+            <button class="btn btn-outline-secondary btn-sm" @click="collapseAllSections()">collapse all</button>
+        </div>
+
         <!-- collapse layout -->
         <div class="accordion" v-if="form.layout === 'collapse'">
 
@@ -12,6 +17,11 @@
 
         <button @click="Submit()" class="btn btn-outline-secondary">Submit</button>
         <button v-if="userid > 0" @click="SaveApps()" class="btn btn-outline-secondary">Save & fill later</button>
+
+        <div class="d-flex justify-content-end mb-2">
+            <button class="btn btn-outline-secondary btn-sm" @click="expandAllSections()">expand all</button>
+            <button class="btn btn-outline-secondary btn-sm" @click="collapseAllSections()">collapse all</button>
+        </div>
 
 
         <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true">
@@ -88,6 +98,16 @@
             },
             openSection(index) {
                 $('#'+this.form.sections[index].name + '_gui_body').collapse('show');
+            },
+            expandAllSections() {
+                _.forEach(this.form.sections, function(section, key) {
+                    $('#'+section.name + '_gui_body').collapse('show');
+                });
+            },
+            collapseAllSections() {
+                _.forEach(this.form.sections, function(section, key) {
+                    $('#'+section.name + '_gui_body').collapse('hide');
+                });
             },
             Submit() {
                 // parse all form object
