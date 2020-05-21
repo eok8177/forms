@@ -38,7 +38,7 @@
                   {{$app->status}}
                 @endif
               </td>
-              <td>{{$app->updated_at}}</td>
+              <td>{{ date('Y-m-d H:i', strtotime($app->updated_at)) }}</td>
               <td>
                 @if($app->status == 'draft' || $app->status == 'rejected')
                   <a href="{{ route('user.form', $app->id) }}" class="btn">Edit</a>
