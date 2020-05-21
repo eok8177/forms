@@ -13,7 +13,10 @@
         @endforeach --}}
       </ul>
     </div>
-    <div class="col-sm-10"><h1>Forms</h1></div>
+
+    <div class="col-sm-10">
+    </div>
+    
   </div>
   
 </div>

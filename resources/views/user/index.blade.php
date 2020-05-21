@@ -3,8 +3,6 @@
 @section('content')
 
 <div class="container">
-  <h2 class="page-header">{{$user->first_name}} {{$user->last_name}}</h2>
-
   <div class="row">
     @include('user.parts.sidebar', ['class_col' => 'col-md-2', 'slug' => 'my-apps'])
     <div class="col-md-10">
@@ -30,7 +28,7 @@
                   <div class="dropdown-menu" aria-labelledby="approv_{{$app->id}}">
                     @foreach($app->approvs as $approv)
                     <div class="dropdown-item">
-                      <span class="small d-block">{{$approv->created_at}}</span>
+                      <span class="small d-block">{{ date('Y-m-d H:i', strtotime($approv->created_at)) }}</span>
                       <p>{{$approv->notes}}</p>
                     </div>
                     @endforeach
@@ -56,11 +54,10 @@
               <td>{{$obj->Type}}</td>
               <td></td>
               <td>{{$obj->Status}}</td>
-              <td>{{ date('Y-m-d', strtotime($obj->Date)) }}</td>
+              <td>{{ date('Y-m-d H:i', strtotime($obj->Date)) }}</td>
               <td></td>
             </tr>
           @endforeach
-          s
         </table>
       </div>
     </div>
