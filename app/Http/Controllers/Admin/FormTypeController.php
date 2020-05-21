@@ -31,9 +31,14 @@ class FormTypeController extends Controller
 
     public function edit(FormType $form_type)
     {
+        $colors = Setting::colors();
+        if (!in_array($form_type->color, $colors)) {
+            array_push($colors, $form_type->color);
+        }
+
         return view('admin.formtype.edit', [
             'form_type' => $form_type,
-            'colors' => Setting::colors()
+            'colors' => $colors
         ]);
     }
 
