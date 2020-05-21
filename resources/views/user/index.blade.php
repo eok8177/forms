@@ -49,6 +49,7 @@
 
           @endforeach
 
+          @if (!(empty($dataMars)))
           @foreach($dataMars as $obj)
             <tr>
               <td>{{$obj->Type}}</td>
@@ -58,6 +59,8 @@
               <td></td>
             </tr>
           @endforeach
+          @endif
+          
         </table>
       </div>
     </div>
@@ -66,7 +69,10 @@
 
   {{-- <pre>{{ print_r($test, true) }}</pre> --}}
 
+  @if (!(empty($dataMars)))
   <!-- <pre>{{ print_r($dataMars, true) }}</pre> -->
+  @endif
+
 </div>
 
 
