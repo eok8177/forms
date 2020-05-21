@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Application;
 use App\ApiCall;
+use App\Setting;
 
 class UserController extends Controller
 {
@@ -118,7 +119,8 @@ class UserController extends Controller
     public function form(Application $app)
     {
         return view('user.form', [
-            'form' => $app
+            'form' => $app,
+            'settings' => Setting::pluck('value', 'key'),
         ]);
     }
 

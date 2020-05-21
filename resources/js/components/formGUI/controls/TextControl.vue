@@ -54,6 +54,12 @@
             if (!_.isEmpty(this.value.defaultValue)) {
                 this.value.value = this.value.defaultValue;
             }
+            if (!this.value.value && this.value.pre_filled) {
+              let field = this.value.pre_filled.toUpperCase();
+              if (window[field]) {
+                this.value.value = window[field];
+              }
+            }
             this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
         }
     }

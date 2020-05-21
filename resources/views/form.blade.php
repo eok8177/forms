@@ -33,5 +33,8 @@
 <script>
   const DATE_FORMAT = '{{$settings['date_format'] ?? 'false'}}';
   const KEY_MAP = '{{$settings['key_map'] ?? 'false'}}';
+  window.FIRST_NAME = '{{$user->first_name ?? false}}';
+  window.LAST_NAME = '{{$user->last_name ?? false}}';
+  window.EMAIL = '{{$user->email ?? false}}';
 </script>
 @endpush

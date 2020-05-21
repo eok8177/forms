@@ -27,9 +27,10 @@ class FrontendController extends Controller
 
     public function form(Request $request, $slug = '')
     {
-		$form = Form::where('slug', $slug)->first();
+        $form = Form::where('slug', $slug)->first();
+        $user = Auth::user();
 
-        if ($form && $form->login_only == 1 && !Auth::user()) {
+        if ($form && $form->login_only == 1 && !$user) {
             $request->session()->put('redirectTo', '/form/'.$slug);
             return redirect()->route('login');
         }
@@ -37,7 +38,8 @@ class FrontendController extends Controller
         return view('form', [
             'forms' => Form::where('draft', 0)->get(),
             'form' => $form,
-            'settings' => Setting::pluck('value', 'key')
+            'settings' => Setting::pluck('value', 'key'),
+            'user' => $user
         ]);
     }
 
