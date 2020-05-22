@@ -3,7 +3,6 @@
 @section('content')
 
 <div class="container">
-  <h2 class="page-header">{{$user->first_name}} {{$user->last_name}}</h2>
 
   <div class="row">
     @include('user.parts.sidebar', ['class_col' => 'col-md-2', 'slug' => 'my-details'])
