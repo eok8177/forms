@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 
 use App\User;
 use App\Group;
+use App\ApiCall;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -134,6 +135,8 @@ class UserController extends Controller
         }
 
         $user->update($data);
+        $api = new ApiCall;
+        $data = $api->updateUser($user);
 
         if (Auth::user()->role == 'admin') {
             $user->groups()->detach();
