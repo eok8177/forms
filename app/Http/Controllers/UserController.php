@@ -42,9 +42,20 @@ class UserController extends Controller
         $data = $api->getDashboard();
         // $data = $api->newUser($user);
 
+        $apps = Application::where('user_id', $user->id)
+            ->where(function($q) {
+                $q->orWhere('status', 'rejected');
+                $q->orWhere('status', 'draft');
+                $q->orWhere(function($q) {
+                    $q->where('status', 'submitted');
+                    $q->where('to_be_approved', 1);
+                });
+            })
+            ->get();
+
         return view('user.index', [
             'user' => $user,
-            'apps' => Application::where('user_id', $user->id)->where('status', '!=', 'deleted')->get(),
+            'apps' => $apps,
             'dataMars' => $data,
             'host' => $request->getHost()
         ]);
@@ -134,6 +145,26 @@ class UserController extends Controller
 
         return response()->json([
             'status' => 'success'
+        ]);
+    }
+
+    public function archive(Request $request)
+    {
+        $user = Auth::user();
+
+        $apps = Application::where('user_id', $user->id)
+            ->where(function($q) {
+                $q->orWhere('status', 'accepted');
+                $q->orWhere(function($q) {
+                    $q->where('status', 'submitted');
+                    $q->where('to_be_approved', 0);
+                });
+            })
+            ->get();
+
+        return view('user.archive', [
+            'user' => $user,
+            'apps' => $apps,
         ]);
     }
 

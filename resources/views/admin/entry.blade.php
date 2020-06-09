@@ -4,7 +4,7 @@
 <div class="page-header row justify-content-between">
 <h5>{{$app->form->title}} &nbsp;&nbsp;&nbsp;<small>{{$app->user->first_name}} {{$app->user->last_name}}</small></h5>
   <div>
-  @if($app->status == 'submitted' && $app->to_be_approved == 1 && Auth::user()->role == 'manager')
+  @if($app->status == 'submitted' && $app->to_be_approved == 1 && (Auth::user()->role == 'manager' || Auth::user()->super_admin_to >= date("Y-m-d H:i:s")))
     <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#rejectModal" title="Approv or Reject Entry">Take action</button>
   @endif
 
