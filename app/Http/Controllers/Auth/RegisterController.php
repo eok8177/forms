@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use App\ApiCall;
+
 class RegisterController extends Controller
 {
     /*
@@ -64,14 +66,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            // 'login' => $data['login'],
+            'login' => $data['login'],
             'email' => $data['email'],
             'social_id' => $data['social_id'],
             'avatar' => $data['avatar'],
             'password' => bcrypt($data['password']),
         ]);
+
+        // pass data into MARS
+        $api = new ApiCall;
+		$data = $api->newUser($user);
+		
+        return $user;
     }
 }
