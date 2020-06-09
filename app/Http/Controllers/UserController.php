@@ -89,6 +89,9 @@ class UserController extends Controller
 
         $user->update($data);
 
+        $api = new ApiCall;
+        $data = $api->updateUser($user);
+	
         return redirect()->route('user.edit')->with('success', 'User updated');
     }
 	
