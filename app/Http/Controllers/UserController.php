@@ -39,8 +39,7 @@ class UserController extends Controller
         $user =Auth::user();
 
         $api = new ApiCall;
-        $data = $api->getDashboard();
-        // $data = $api->newUser($user);
+        $data = $api->getDashboard($user);
 
         $apps = Application::where('user_id', $user->id)
             ->where(function($q) {
