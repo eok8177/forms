@@ -6,6 +6,7 @@
   <div class="row">
     @include('user.parts.sidebar', ['class_col' => 'col-md-2', 'slug' => 'my-apps'])
     <div class="col-md-10">
+    @if ($apps->count() > 0)
       <div class="table-responsive">
         <table class="table table-hover">
           <thead>
@@ -63,6 +64,9 @@
           
         </table>
       </div>
+      @else
+          @lang('message.no_records').
+      @endif
     </div>
 
   </div>
