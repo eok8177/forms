@@ -9,9 +9,9 @@ class ApiCall
         return $this->call('test', false, 'GET');
     }
 
-	/**
-	 * User
-	 */
+    /**
+     * User
+     */
     public function newUser($user)
     {
         return $this->call('user-new', $user);
@@ -27,21 +27,21 @@ class ApiCall
         return $this->call('user-delete', $user);
     }
 
-	/**
-	 * Dashboard
-	 */
+    /**
+     * Dashboard
+     */
     public function getDashboard()
     {
         return $this->call('get-dashboard', false, 'GET');
     }
 	
-	/**
-	 * Response
-	 */
-	public function newResponse($responseData = null)
-	{
+    /**
+     * Response
+     */
+    public function newResponse($responseData = null)
+    {
 		return $this->call('response-new', $responseData);
-	}
+    }
 
     /**
      * 
