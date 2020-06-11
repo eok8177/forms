@@ -9,15 +9,39 @@ class ApiCall
         return $this->call('test', false, 'GET');
     }
 
+	/**
+	 * User
+	 */
     public function newUser($user)
     {
-        return $this->call('new-user', $user);
+        return $this->call('user-new', $user);
     }
 
+    public function updateUser($user)
+    {
+        return $this->call('user-update', $user);
+    }
+
+    public function deleteUser($user)
+    {
+        return $this->call('user-delete', $user);
+    }
+
+	/**
+	 * Dashboard
+	 */
     public function getDashboard()
     {
         return $this->call('get-dashboard', false, 'GET');
     }
+	
+	/**
+	 * Response
+	 */
+	public function newResponse($responseData = null)
+	{
+		return $this->call('response-new', $responseData);
+	}
 
     /**
      * 
