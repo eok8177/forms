@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Storage;
 use App\Form;
 use App\Entry;
 use App\Application;
-use App\ApiCall;
 
 
 class FormController extends Controller
@@ -46,9 +45,6 @@ class FormController extends Controller
         $app->config = json_encode($data);
         $app->to_be_approved = $form->to_be_approved;
         $app->save();
-		
-        $api = new ApiCall;
-        $data = $api->newResponse($app);
 
         return response()->json([
             'status' => 'OK',

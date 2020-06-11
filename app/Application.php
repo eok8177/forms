@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 use App\Jobs\SendEmail;
+use App\ApiCall;
 
 class Application extends Model
 {
@@ -158,18 +159,39 @@ class Application extends Model
         $this->entry_id = $entry_id;
         $this->save();
 
+        $data = [];
+
         foreach ($this->fields as $fieldId => $field) {
             if ($field['type'] == 'address') {
                 foreach ($field as $key => $value) {
                     if ($key != 'type') {
-                        $this->newEntry($fieldId, $key, $value);
+                        $entry = $this->newEntry($fieldId, $key, $value);
+                        $data[$entry->id] = [
+                            'name' => $entry->name,
+                            'value' => $entry->value,
+                        ];
                     }
                 }
             } elseif ($field['type'] != 'html') {
                 if ($field['value'] !== NULL) 
-                    $this->newEntry($fieldId, $field['label'], $field['value']);
+                    $entry = $this->newEntry($fieldId, $field['label'], $field['value']);
+                    $data[$entry->id] = [
+                        'name' => $entry->name,
+                        'value' => $entry->value,
+                    ];
             }
         }
+
+        $msg = [
+            'user_id' => $this->user_id,
+            'form_id' => $this->form_id,
+            'entry_id' => $entry_id,
+            'data' => $data,
+        ];
+
+        $api = new ApiCall;
+        $res = $api->newResponse($msg);
+
         return true;
     }
 
@@ -183,7 +205,7 @@ class Application extends Model
         $entry->name = $label;
         $entry->value = $value;
         $entry->save();
-        return true;
+        return $entry;
     }
 
     // TODO check info what sending
