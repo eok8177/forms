@@ -23,6 +23,7 @@
             <button class="btn btn-outline-secondary btn-sm" @click="collapseAllSections()">collapse all</button>
         </div>
 
+        <div v-if="msg">{{msg}}</div>
 
         <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -77,6 +78,7 @@
             redirect_url: '/',
             appID: '',
             admin: false,
+            msg: '',
         }),
         methods: {
             updateInstances(index, instance) {
@@ -214,7 +216,7 @@
             uploadFiles() {
                 let self = this;
                 let done = Object.keys(self.files).length;
-                if (done == 0) {
+                if (done == 0 && self.status === 'submitted') {
                   self.postForm();
                 }
                 _.forEach(self.files, function(file,key) {
@@ -233,12 +235,13 @@
                       }).then(
                         (response) => {
                           done = done - 1;
-                          if (done == 0 && self.status == 'submitted') {
+                          if (done == 0 && self.status === 'submitted') {
                             self.postForm();
                           }
                         }
                       ).catch((error) => console.log(error));
                 });
+                return;
             },
 
             SaveApps() {
@@ -257,6 +260,7 @@
                       self.appID = response.data.appid;
                       self.redirect_url = response.data.redirect_url;
                       this.uploadFiles();
+                      self.msg = 'Form Saved';
                     }
                   )
                   .catch(
