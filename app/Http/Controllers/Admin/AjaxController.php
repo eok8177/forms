@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Form;
-
+use App\ApiCall;
 
 class AjaxController extends Controller
 {
@@ -21,6 +21,26 @@ class AjaxController extends Controller
 
             $item->$field = 1 - $item->$field;
             $item->save();
+
+			// if form set to live (forms.draft == 0)
+			if ($request->input('model') == 'Form' && $item->$field == 0) {
+				$form = Form::find($request->input('id'));
+				if ($form) {
+					$formSections = $form->getFieldsAttribute();
+					$formMetaData = [];
+					foreach($formSections as $formSection) {
+						$formMetaData = array_merge($formMetaData, $formSection);
+					}
+					$formData = [
+						'portal_form_id' => $request->input('id'), 
+						'portal_form_name' => $form->name, 
+						'portal_portal_fields' => $formMetaData
+						];
+					// pass Portal Form definition into MARS
+					$api = new ApiCall;
+					$data = $api->newUpdateForm($formData);
+				}
+			}
 
             $response = [
                 "id" => $item->id,

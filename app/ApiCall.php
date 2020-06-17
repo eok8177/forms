@@ -43,6 +43,11 @@ class ApiCall
 		return $this->call('response-new', $responseData);
     }
 
+	public function newUpdateForm($formData)
+	{
+		return $this->call('form-new-update', $formData);
+	}
+
     /**
      * 
      * 
