@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Jobs\SendEmail;
 use App\ApiCall;
+use App\FormConfig;
 
 class Application extends Model
 {
+    use FormConfig;
+
 	const STATUS_ALL = 'All Statuses';
 	const STATUS_SUBMITTED = 'Submitted';
 	
@@ -51,78 +54,6 @@ class Application extends Model
         return $this->parseConfig($this->config)['fields'];
     }
 
-
-    private function parseConfig($config)
-    {
-        $fields = [];
-        $emails = [];
-
-        $config = json_decode($config, true);
-
-        foreach ($config['sections'] as $section) {
-            if (array_key_exists('rows', $section)) {
-
-                if ($section['isDynamic']) {
-                    foreach ($section['instances'] as $idInst => $instance) {
-                        foreach ($instance as $section) {
-                            foreach ($section['controls'] as $control) {
-                                $fields[$idInst.'_'.$control['fieldName']]['type'] = $control['type'];
-
-                                if (array_key_exists('isEmail', $control) && $control['isEmail']) {
-                                    $fields[$idInst.'_'.$control['fieldName']]['type'] = 'email';
-                                    $emails[$control['label']] = $control['value'];
-                                }
-                                if ($control['type'] == 'address') {
-                                    for ($i=1; $i <= 5; $i++) {
-                                        if ($control['show'.$i] && @$control['value'.$i]) {
-                                            $fields[$idInst.'_'.$control['fieldName']][$control['label'.$i]] = $control['value'.$i];
-                                        }
-                                    }
-                                } else {
-                                    $fields[$idInst.'_'.$control['fieldName']]['label'] = $control['label'];
-                                    $fields[$idInst.'_'.$control['fieldName']]['value'] = $control['value'];
-                                }
-                            }
-                        }
-
-                    }
-                } else {
-                    foreach ($section['rows'] as $row) {
-                        if (array_key_exists('controls', $row)) {
-                            foreach ($row['controls'] as $control) {
-
-                                $fields[$control['fieldName']]['type'] = $control['type'];
-
-                                if (array_key_exists('isEmail', $control) && $control['isEmail']) {
-                                    $fields[$control['fieldName']]['type'] = 'email';
-                                    $emails[$control['label']] = $control['value'];
-                                }
-                                if ($control['type'] == 'address') {
-                                    for ($i=1; $i <= 5; $i++) {
-                                        if ($control['show'.$i] && @$control['value'.$i]) {
-                                            $fields[$control['fieldName']][$control['label'.$i]] = $control['value'.$i];
-                                        }
-                                    }
-                                    if ($control['mapIt']) {
-                                        $fields[$control['fieldName']]['lat'] = $control['lat'];
-                                        $fields[$control['fieldName']]['lng'] = $control['lng'];
-                                        $fields[$control['fieldName']]['address'] = $control['address'];
-                                    }
-                                } else {
-                                    $fields[$control['fieldName']]['label'] = $control['label'];
-                                    $fields[$control['fieldName']]['value'] = $control['value'];
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return [
-            'fields' => $fields,
-            'emails' => $emails
-        ];
-    }
 
     /*
     * Save uploaded files path to config

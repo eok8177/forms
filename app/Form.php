@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use App\FormConfig;
 
 class Form extends Model
 {
+    use FormConfig;
     /**
      * The attributes that are mass assignable.
      *
@@ -95,27 +97,11 @@ class Form extends Model
         return $apps->count() > 0 ? true : false;
     }
 
-
     public function getFieldsAttribute()
     {
         if (!$this->config) return false;
 
-        $fields = [];
-        $config = json_decode($this->config, true);
-
-        foreach ($config['sections'] as $section) {
-            if (array_key_exists('rows', $section) && !$section['isDynamic']) {
-              // get only not Dynamic fields
-                foreach ($section['rows'] as $row) {
-                    if (array_key_exists('controls', $row)) {
-                        foreach ($row['controls'] as $control) {
-                            $fields[$section['label']][$control['fieldName']] = $control['label'];
-                        }
-                    }
-                }
-            }
-        }
-        return $fields;
+        return $this->parseConfig($this->config)['groups'];
     }
 
     static function selectAppsList()
