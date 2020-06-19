@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Jobs\SendEmail;
 use App\ApiCall;
@@ -11,11 +12,12 @@ use App\FormConfig;
 
 class Application extends Model
 {
+    use SoftDeletes;
     use FormConfig;
 
-	const STATUS_ALL = 'All Statuses';
-	const STATUS_SUBMITTED = 'Submitted';
-	
+    const STATUS_ALL = 'All Statuses';
+    const STATUS_SUBMITTED = 'Submitted';
+    
     /**
      * The attributes that are mass assignable.
      *

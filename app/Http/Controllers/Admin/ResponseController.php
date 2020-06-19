@@ -73,4 +73,13 @@ class ResponseController extends Controller
         return $app->id;
     }
 
+    public function destroy(Application $app)
+    {
+        $app->delete();
+
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
+
 }

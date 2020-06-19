@@ -60,7 +60,8 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
     Route::get('setting/crypt/{value}',  ['as' => 'setting.crypt', 'uses' => 'SettingController@crypt']);
 
 
-    Route::put('entry/{app}/sendemail', ['as' => 'app.sendemail', 'uses' => 'ResponseController@sendEmail']);
+    Route::put('response/{app}/sendemail', ['as' => 'app.sendemail', 'uses' => 'ResponseController@sendEmail']);
+    Route::delete('response/{app}', ['as' => 'app.destroy', 'uses' => 'ResponseController@destroy']);
 });
 
 // User
