@@ -31,11 +31,12 @@ class AjaxController extends Controller
 					foreach($formSections as $formSection) {
 						$formMetaData = array_merge($formMetaData, $formSection);
 					}
-					$formData = [
+					$formData = (object)[
 						'portal_form_id' => $request->input('id'), 
-						'portal_form_name' => $form->name, 
-						'portal_portal_fields' => $formMetaData
+						'portal_form_name' => $form->name
 						];
+					$formData->portal_fields = json_encode($formMetaData);
+					
 					// pass Portal Form definition into MARS
 					$api = new ApiCall;
 					$data = $api->newUpdateForm($formData);
