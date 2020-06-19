@@ -44,7 +44,7 @@
 
         <div class="col d-flex align-items-center">
             <a href="{{ route('admin.form.edit', $form->id) }}" title="Edit" style="color: {{$form->types->color}}">
-              {{$form->name}}
+              {{$form->id}} - {{$form->name}}
               {{$form->draft ? ' [draft]' : ''}}
               {{$form->completed() ? '' : ' [not completed]'}}
             </a>
