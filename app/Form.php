@@ -101,7 +101,7 @@ class Form extends Model
     {
         if (!$this->config) return false;
 
-        return $this->parseConfig($this->config)['groups'];
+        return $this->parseFormConfig($this->config)['groups'];
     }
 
     static function selectAppsList()

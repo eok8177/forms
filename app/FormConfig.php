@@ -4,7 +4,7 @@ namespace App;
 
 trait FormConfig
 {
-    public function parseConfig($config)
+    public function parseAppConfig($config)
     {
         $fields = [];
         $emails = [];
@@ -71,17 +71,17 @@ trait FormConfig
             }
         }
 
-        $groups = $this->parseFieldNames($config);
         return [
-            'groups' => $groups,
             'fields' => $fields,
             'emails' => $emails
         ];
     }
 
-    private function parseFieldNames($config)
+    public function parseFormConfig($config)
     {
+        $config = json_decode($config, true);
         $groups = [];
+        $fields = [];
 
         foreach ($config['sections'] as $section) {
             if (array_key_exists('rows', $section)) {
@@ -91,9 +91,17 @@ trait FormConfig
                             if ($control['type'] == 'address') {
                                 for ($i=1; $i <= 5; $i++) {
                                     $groups[$section['label']][$control['fieldName'].$i] = $control['label'.$i];
+                                    $fields[$control['fieldName'].'_'.$i] = [
+                                        "label" => $control['label'.$i],
+                                        "control_type" => $control['type'],
+                                    ];
                                 }
                             } else {
                                 $groups[$section['label']][$control['fieldName']] = $control['label'];
+                                $fields[$control['fieldName']] = [
+                                    "label" => $control['label'],
+                                    "control_type" => $control['type'],
+                                ];
                             }
                         }
                     }
@@ -102,6 +110,9 @@ trait FormConfig
             }
         }
 
-        return $groups;
+        return [
+            'fields' => $fields,
+            'groups' => $groups
+        ];
     }
 }

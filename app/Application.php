@@ -44,7 +44,7 @@ class Application extends Model
     {
         $email = $this->user->email;
         if (!$email) {
-            $email = array_shift($this->parseConfig($this->config)['emails']);
+            $email = array_shift($this->parseAppConfig($this->config)['emails']);
         }
         return $email;
     }
@@ -53,7 +53,7 @@ class Application extends Model
     {
         if (!$this->config) return false;
 
-        return $this->parseConfig($this->config)['fields'];
+        return $this->parseAppConfig($this->config)['fields'];
     }
 
 
