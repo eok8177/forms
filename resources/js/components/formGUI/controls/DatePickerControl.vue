@@ -75,7 +75,10 @@
           if(self.value.isTodayValue) {
             optionsDate['todayHighlight'] = true;
           }
-          $('#'+this.value.name).datepicker(optionsDate);
+          $('#'+this.value.name).datepicker(optionsDate)
+              .on('changeDate', function(e) {
+                  self.value.value = e.format(self.options.dateFormat);
+              });
         },
         methods: {
           dateDiff(stringDate) {
