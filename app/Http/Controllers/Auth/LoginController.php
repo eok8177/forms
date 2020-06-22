@@ -42,7 +42,19 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/redirect-to';
+    protected function redirectTo()
+    {
+        if (auth()->user()->role == 'admin') {
+            return '/admin/responses';
+        }
+        if (auth()->user()->role == 'manager') {
+            return '/admin/responses';
+        }
+        if (auth()->user()->role == 'user') {
+            return '/user';
+        }
+        return '/';
+    }
 
     /**
      * Create a new controller instance.
@@ -101,7 +113,8 @@ class LoginController extends Controller
 
         // Set the previous url that we came from to redirect to after successful login but only if is internal
         if(($urlPrevious != $urlBase . '/login') && (substr($urlPrevious, 0, strlen($urlBase)) === $urlBase)) {
-            session()->put('url.intended', $urlPrevious);
+            if(str_replace($urlBase, '', $urlPrevious) != '/')
+                session()->put('url.intended', $urlPrevious);
         }
 
         return view('auth.login');
