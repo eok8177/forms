@@ -112,12 +112,27 @@
             <a class="nav-link" href="{{ route('admin.responses') }}">
                 <i class="fa fa-file-text-o"></i> <span class="d-none d-md-inline">@lang('message.responses')</span>
             </a>
-          
-            {{-- <a class="nav-item nav-link {{ request()->is('*user*') ? 'active' : '' }}" href="{{route('admin.user.index')}}"><i class="fa fa-users"></i> @lang('message.users')</a> --}}
+
             @if(Auth::user()->role == 'admin')
               <a class="nav-item nav-link {{ request()->is('*form*') ? 'active' : '' }}" href="{{route('admin.form.index')}}"><i class="fa fa-list-alt"></i> @lang('message.forms')</a>
 
-              <a class="av-item nav-link {{ request()->is('*faq*') ? 'active' : '' }}" href="{{route('admin.faq.index')}}"><i class="fa fa-question-circle-o"></i> Faq</a>
+              <a href="{{ route('admin.group.index') }}" class="nav-item nav-link ml-2"><i class="fa fa-list"></i> @lang('message.formgroups')</a>
+              <a href="{{ route('admin.form-type.index') }}" class="nav-item nav-link ml-2"><i class="fa fa-list"></i> @lang('message.formtypes')</a>
+
+
+              <a class="nav-item nav-link {{ request()->is('*faq*') ? 'active' : '' }}" href="{{route('admin.faq.index')}}"><i class="fa fa-question-circle-o"></i> Faq</a>
+
+              <a class="nav-item nav-link" href="{{route('admin.user.index')}}"><i class="fa fa-users"></i> @lang('message.users')</a>
+
+              <a href="{{ route('admin.user.edit', ['user' => Auth::user()->id]) }}" class="nav-item nav-link"><i class="fa fa-gear"></i> @lang('message.profile')</a>
+
+              <a class="nav-item nav-link" href="{{route('admin.settings')}}"><i class="fa fa-cogs"></i> @lang('message.settings')</a>
+
+              <a href="{{ route('logout') }}" class="nav-item nav-link"
+                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                  <i class="fa fa-sign-out"></i> @lang('message.logout')
+              </a>
+
             @endif
           </div>
         </div>
