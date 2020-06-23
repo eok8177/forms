@@ -216,10 +216,12 @@
             uploadFiles() {
                 let self = this;
                 let done = Object.keys(self.files).length;
-                if (done == 0 && self.status === 'submitted') {
-                  self.postForm();
-                }
                 _.forEach(self.files, function(file,key) {
+                    //if file already uploaded
+                    if (typeof file.data === 'string' || file.data instanceof String) {
+                        done = done - 1;
+                        return true;
+                    }
                     var formData = new FormData();
                     formData.append('appid', self.appID);
                     formData.append('entryId', self.entryid);
@@ -241,6 +243,10 @@
                         }
                       ).catch((error) => console.log(error));
                 });
+                // submit form
+                if (done == 0 && self.status === 'submitted') {
+                  self.postForm();
+                }
                 return;
             },
 

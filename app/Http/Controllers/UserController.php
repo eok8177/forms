@@ -45,10 +45,10 @@ class UserController extends Controller
             ->where(function($q) {
                 $q->orWhere('status', 'rejected');
                 $q->orWhere('status', 'draft');
-                $q->orWhere(function($q) {
-                    $q->where('status', 'submitted');
-                    $q->where('to_be_approved', 1);
-                });
+                // $q->orWhere(function($q) {
+                //     $q->where('status', 'submitted');
+                //     $q->where('to_be_approved', 1);
+                // });
             })
             ->get();
 
@@ -156,7 +156,7 @@ class UserController extends Controller
                 $q->orWhere('status', 'accepted');
                 $q->orWhere(function($q) {
                     $q->where('status', 'submitted');
-                    $q->where('to_be_approved', 0);
+                    // $q->where('to_be_approved', 0);
                 });
             })
             ->get();
