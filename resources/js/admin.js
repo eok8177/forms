@@ -1,5 +1,9 @@
 require('./bootstrap');
 
+require('bootstrap-datepicker');
+
+window.moment = require('moment');
+
 // ---------- Methods ---------- //
 $(function () {
 
