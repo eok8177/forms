@@ -104,6 +104,19 @@ class Form extends Model
         return $this->parseFormConfig($this->config)['groups'];
     }
 
+	public function getFieldsData()
+	{
+		$fieldsData = $this->parseFormConfig($this->config)['fields'];
+		$result = [];
+		foreach($fieldsData as $fKey => $fValue) {
+			$result[strval(preg_replace("/[^0-9]/", '', $fKey))] = [
+				'label' => $fValue['label'],
+				'control_type' => $fValue['control_type'],
+			];
+		}
+		return $result;
+	}
+
     static function selectAppsList()
     {
         $forms = Application::select('form_id')->distinct()->pluck('form_id')->toArray();

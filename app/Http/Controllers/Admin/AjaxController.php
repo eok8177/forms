@@ -26,17 +26,12 @@ class AjaxController extends Controller
 			if ($request->input('model') == 'Form' && $item->$field == 0) {
 				$form = Form::find($request->input('id'));
 				if ($form) {
-					$formSections = $form->getFieldsAttribute();
-					$formMetaData = [];
-					foreach($formSections as $formSection) {
-						$formMetaData = array_merge($formMetaData, $formSection);
-					}
+					$fieldsArray = $form->getFieldsData();
 					$formData = (object)[
 						'portal_form_id' => $request->input('id'), 
 						'portal_form_name' => $form->name
 						];
-					$formData->portal_fields = json_encode($formMetaData);
-					
+					$formData->portal_fields = json_encode($fieldsArray);
 					// pass Portal Form definition into MARS
 					$api = new ApiCall;
 					$data = $api->newUpdateForm($formData);
