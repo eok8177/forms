@@ -34,7 +34,7 @@
 
 <body>
 
-  <div id="app" class="menu-closed">
+  <div id="app" class="">
 
     {{-- Navigation --}}
     <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
