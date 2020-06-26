@@ -54,7 +54,9 @@
 
         <div class="col-md-3 text-left">
           <a href="{{ route('admin.form.copy', $form->id) }}" class="btn fa fa-files-o" title="Duplicate Form"></a>
-          <a href="{{ route('admin.form.edit', $form->id) }}" class="btn fa fa-pencil" title="Edit"></a>
+
+          <a href="{{ route('admin.form.edit', $form->id) }}" class="btn fa fa-pencil {{$form->has_apps ? 'disabled' : ''}}" title="Edit"></a>
+
           <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'draft'])}}" 
             class="status btn fa {{$form->active() ? 'fa-check-circle' : 'fa-circle-o'}} {{$form->completed() ? '' : 'is-disabled'}} reload" 
             title="Toggle Draft"
