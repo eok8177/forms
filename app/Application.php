@@ -108,10 +108,11 @@ class Application extends Model
             } elseif ($field['type'] != 'html') {
                 if ($field['value'] !== NULL) 
                     $entry = $this->newEntry($fieldId, $field['label'], $field['value']);
-                    $data[$entry->id] = [
-                        'name' => $entry->name,
-                        'value' => $entry->value,
-                    ];
+                    // $data[$entry->id] = [
+                    //     'name' => $entry->name,
+                    //     'value' => $entry->value,
+                    // ];
+                    $data[$fieldId] = $entry->value;
             }
         }
 
