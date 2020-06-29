@@ -1,5 +1,9 @@
 {
+    "/js/components/form-gui-component~form-view-component.js": "/js/components/form-gui-component~form-view-component.js",
     "/js/admin.js": "/js/admin.js",
+    "/js/app.js": "/js/app.js",
     "/js/components/form-builder-component.js": "/js/components/form-builder-component.js",
+    "/js/components/form-gui-component.js": "/js/components/form-gui-component.js",
+    "/js/components/form-view-component.js": "/js/components/form-view-component.js",
     "/js/components/vendors~form-builder-component.js": "/js/components/vendors~form-builder-component.js"
 }
