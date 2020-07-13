@@ -1,12 +1,24 @@
-<div class="{{$class_col ?? 'col-md-2'}}">
-    <div class="list-group">
-	  <a class="list-group-item list-group-item-action {{$slug=='my-apps' ? 'active': ''}}" href="{{ route('user.index') }}">Dashboard</a>
-      <a class="list-group-item list-group-item-action {{$slug=='my-archive' ? 'active': ''}}" href="{{ route('user.archive') }}">My applications & services</a>
-	  <a class="list-group-item list-group-item-action {{$slug=='my-details' ? 'active' : ''}}" href="{{ route('user.edit') }}">Your profile</a>
-	  {{-- <a class="list-group-item list-group-item-action {{$slug=='security' ? 'active' : ''}}" href="/user/security">Security</a> --}}
-	  <a class="list-group-item list-group-item-action" href="#">Grants</a>
-	  <a class="list-group-item list-group-item-action" href="#">Help</a>
-	  <a class="list-group-item list-group-item-action" href="#">Contact</a>
-	  <a class="list-group-item list-group-item-action" href="https://www.rwav.com.au/" target="_blank">Back to RWAV</a>
-    </div>
-</div>
+<aside id="sidebar">
+  <a href="/" class="logo">MYRWAV</a>
+  <nav id="nav">
+    <ul>
+      <li class="{{$slug=='my-apps' ? 'active': ''}}"><a href="{{ route('user.index') }}">DASHBOARD</a></li>
+      <li class="{{$slug=='my-details' ? 'active': ''}}"><a href="{{ route('user.edit') }}">PROFILE</a></li>
+      <li class="{{$slug=='my-archive' ? 'active': ''}}"><a href="{{ route('user.archive') }}">GRANTS</a></li>
+      <li class=""><a href="#">HELP</a></li>
+      <li class=""><a href="#">CONTACT</a></li>
+      <li class=""><a href="/">BACK TO RWAV</a></li>
+      <li class="">
+        <a class="dropdown-item" href="{{ route('logout') }}"
+           onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+      </li>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+      </form>
+    </ul>
+  </nav>
+</aside>

@@ -1,59 +1,98 @@
-@extends('layouts.app')
+@extends('layouts.front')
 
 @section('content')
+<div class="main-holder">
 
-<div class="container">
-  <div class="row">
-    @include('user.parts.sidebar', ['class_col' => 'col-md-2', 'slug' => 'my-archive'])
-    <div class="col-md-10">
-	@if ($apps->count() > 0)
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Type</th>
-              <th scope="col">Details</th>
-              <th scope="col">Status</th>
-              <th scope="col">Date</th>
-            </tr>
-          </thead>
-          @foreach($apps as $app)
-            <tr>
-              <td>{{$app->form->type}}</td>
-              <td>{{$app->form->title}}</td>
-              <td>
-                @if($app->status == 'accepted')
-                <div class="dropdown">
-                  <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" id="approv_{{$app->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$app->status}}</button>
-                  <div class="dropdown-menu" aria-labelledby="approv_{{$app->id}}">
-                    @foreach($app->approvs as $approv)
-                    <div class="dropdown-item">
-                      <span class="small d-block">{{ date('Y-m-d H:i', strtotime($approv->created_at)) }}</span>
-                      <p>{{$approv->notes}}</p>
-                    </div>
-                    @endforeach
-                  </div>
-                </div>
-                @else
-                  {{$app->status}}
-                @endif
-              </td>
-              <td>{{ date('Y-m-d H:i', strtotime($app->updated_at)) }}</td>
-            </tr>
+  @include('user.parts.sidebar', ['slug' => 'my-archive'])
 
-          @endforeach
+  <div id="content">
 
-        </table>
-      </div>
-      @else
-          @lang('message.no_records').
-      @endif
+    <div class="info-panel">
+      <span><strong>Welcome back Sergey!</strong> You have <a href="#">five grant applications</a> that need action.</span>
+      <span class="close">close</span>
     </div>
 
+    <div class="dashboard-area tabs-area">
+      <h2>Your dashboard</h2>
+      <ul class="tabs">
+        <li class="tab01"><a href="#tab01">drafts</a></li>
+        <li><a href="#tab02">submited</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="tab01" class="tab-area">
+
+            @if ($apps->count() > 0)
+              <div class="table-holder">
+                <table>
+                  <thead>
+                    <tr>
+                      <th><span class="sort">TYPE</span></th>
+                      <th>DETAILS</th>
+                      <th><span class="sort">status</span></th>
+                      <th><span class="sort">date</span></th>
+                      <th>actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($apps as $app)
+                    <tr>
+                      <td>
+                        <span class="title">{{$app->form->type}}</span>
+                      </td>
+                      <td>
+                        <strong>{{$app->form->title}}</strong>
+                      </td>
+                      <td>
+                        @if($app->status == 'rejected')
+                          {{$app->status}}
+
+                            @foreach($app->approvs as $approv)
+                              <small>( {{$approv->notes}} )</small>
+                            @endforeach
+
+                        @else
+                          {{$app->status}}
+                        @endif
+                      </td>
+                      <td>
+                        <span class="date">{{ date('Y-m-d H:i', strtotime($app->updated_at)) }}</span>
+                      </td>
+                      <td>
+                        <div class="btns">
+                        @if($app->status == 'draft' || $app->status == 'rejected')
+                          <a href="{{ route('user.form', $app->id) }}" class="btn style01">Edit</a>
+                          <a href="{{ route('user.form.destroy', $app->id) }}" class="btn delete">DELETE</a>
+                        @endif
+                        </div>
+                      </td>
+                    </tr>
+
+                  @endforeach
+                  </tbody>
+                </table>
+              </div>
+              @else
+                  @lang('message.no_records').
+              @endif
+
+
+          <ul class="paging">
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li class="next"><a href="#">next</a></li>
+          </ul>
+        </div>
+      </div>
+
+
+
+
+    </div>
+
+
+    @include('user.parts.informBlock')
+
   </div>
-
 </div>
-
-
-
 @endsection
