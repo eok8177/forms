@@ -16,7 +16,7 @@
     <div class="tabs-area">
       <div class="tab-area">
         <div id="tab01" class="tab-area inner ui-state-active">
-          <form method="POST" action="{{ route('password.update') }}">
+          <form method="POST" action="{{ url('/password/email') }}">
             @csrf
             <div class="text-holder">
               <span class="label">E-Mail Address</span>
