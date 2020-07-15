@@ -423,6 +423,7 @@ h4 {
   font-size: 10px;
   box-sizing: border-box;
   display: inline-block;
+  cursor: pointer;
   vertical-align: top; }
   .btn:hover {
     text-decoration: none;
@@ -430,6 +431,11 @@ h4 {
   .btn.style01 {
     background: #DE6C26; }
 
+input[type=submit] {
+	border: none; 
+	display: inline-block; 
+	min-height: 32px;
+}
 .submit {
   display: block;
   border: none;
@@ -657,7 +663,7 @@ input[type=email] {
   display: block;
   border: none;
   background: none;
-  padding: 12px 19px;
+  padding: 12px;
   width: 100%;
   border: none;
   border: none;
@@ -695,6 +701,11 @@ textarea {
   resize: none;
   overflow: auto;
   border: none; }
+
+.form-group {
+  margin-bottom: 12px;
+  margin-top: 12px;
+}
 
 @media only screen and (max-width: 1200px) {
   .main-holder {

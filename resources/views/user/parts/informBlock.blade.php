@@ -5,7 +5,7 @@
       <div class="news slick-slider">
         <div class="block-new">
           <div class="img-holder">
-            <img src="images/img01.jpg" alt="">
+            <img src="/images/img01.jpg" alt="">
           </div>
           <div class="description">
             <span class="heading">Longer News Headline Here </span>
@@ -17,7 +17,7 @@
         </div>
         <div class="block-new">
           <div class="img-holder">
-            <img src="images/img01.jpg" alt="">
+            <img src="/images/img01.jpg" alt="">
           </div>
           <div class="description">
             <span class="heading">Longer News Headline Here </span>
@@ -29,7 +29,7 @@
         </div>
         <div class="block-new">
           <div class="img-holder">
-            <img src="images/img01.jpg" alt="">
+            <img src="/images/img01.jpg" alt="">
           </div>
           <div class="description">
             <span class="heading">Longer News Headline Here </span>
