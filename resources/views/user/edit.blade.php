@@ -1,68 +1,58 @@
-@extends('layouts.front')
+@extends('layouts.user')
 
 @section('content')
-<div class="main-holder">
+<div class="dashboard-area tabs-area">
 
-  @include('user.parts.sidebar', ['slug' => 'my-details'])
+    <h2>Profile</h2>
+    <div class="tab-content">
 
-  <div id="content">
+        {!! Form::open(['route' => ['user.update'], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 
-    <div class="dashboard-area tabs-area">
+          <input type="text" name="" class="autofeel-hack">
+          <input type="password" name="" class="autofeel-hack">
 
-        <h2>Profile</h2>
-        <div class="tab-content">
+          <div class="form-group">
+            <label for="name">{{Lang::get('message.first_name')}}</label>
+            <input type="text" name="first_name" value="{{$user->first_name}}" class="form-control">
+          </div>
 
-            {!! Form::open(['route' => ['user.update'], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+          <div class="form-group">
+            <label for="name">{{Lang::get('message.last_name')}}</label>
+            <input type="text" name="last_name" value="{{$user->last_name}}" class="form-control">
+          </div>
 
-              <input type="text" name="" class="autofeel-hack">
-              <input type="password" name="" class="autofeel-hack">
+          <div class="form-group">
+            <label for="email">{{Lang::get('message.email')}}</label>
+            <input type="text" name="email" value="{{$user->email}}" class="form-control">
+          </div>
 
-              <div class="form-group">
-                <label for="name">{{Lang::get('message.first_name')}}</label>
-                <input type="text" name="first_name" value="{{$user->first_name}}" class="form-control">
-              </div>
+          <p>&nbsp;</p>
 
-              <div class="form-group">
-                <label for="name">{{Lang::get('message.last_name')}}</label>
-                <input type="text" name="last_name" value="{{$user->last_name}}" class="form-control">
-              </div>
+          <div class="form-group">
+            <label for="">{{Lang::get('message.old_password')}}</label>
+            <input type="password" id="old_password" name="old_password" class="form-control">
+          </div>
 
-              <div class="form-group">
-                <label for="email">{{Lang::get('message.email')}}</label>
-                <input type="text" name="email" value="{{$user->email}}" class="form-control">
-              </div>
+          <div class="form-group">
+            <label for="">{{Lang::get('message.new_password')}}</label>
+            <input type="password" id="password" name="password" class="form-control">
+          </div>
 
-              <p>&nbsp;</p>
+          <div class="form-group">
+            <label for="">{{Lang::get('message.re_password')}}</label>
+            <input type="password" id="re_password" name="re_password" class="form-control">
+          </div>
 
-              <div class="form-group">
-                <label for="">{{Lang::get('message.old_password')}}</label>
-                <input type="password" id="old_password" name="old_password" class="form-control">
-              </div>
+          <div class="form-group btns">
+            <input type="submit" value="{{Lang::get('message.save')}}" class="btn style01">
+          </div>
+        {!! Form::close() !!}
 
-              <div class="form-group">
-                <label for="">{{Lang::get('message.new_password')}}</label>
-                <input type="password" id="password" name="password" class="form-control">
-              </div>
+    </div> <!-- .tab-content -->
 
-              <div class="form-group">
-                <label for="">{{Lang::get('message.re_password')}}</label>
-                <input type="password" id="re_password" name="re_password" class="form-control">
-              </div>
+</div> <!-- .dashboard-area -->
 
-              <div class="form-group btns">
-                <input type="submit" value="{{Lang::get('message.save')}}" class="btn style01">
-              </div>
-            {!! Form::close() !!}
-
-        </div> <!-- .tab-content -->
-
-    </div> <!-- .dashboard-area -->
-
-    @include('user.parts.informBlock')
-
-    </div> <!-- #content -->
-
-</div>
+@include('user.parts.informBlock')
 
 @endsection
 

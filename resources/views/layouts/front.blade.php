@@ -13,10 +13,11 @@
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@900&family=Work+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 
   <!-- Styles -->
-  <link media="all" rel="stylesheet" type="text/css" href="{{ asset('css/normalize.css') }}" >
   <link media="all" rel="stylesheet" type="text/css" href="{{ asset('css/slick.css') }}" >
+  <link media="all" rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" >
   <link media="all" rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -36,11 +37,9 @@
 </head>
 
 <body>
-  <div class="wrapper-holder">
+  <div class="wrapper-holder" id="app">
 
-    <div class="main">
-      @yield('content')
-    </div>
+    @yield('wrap')
 
     <footer id="footer">
       <div class="footer-holder">
@@ -76,13 +75,9 @@
   </div>
 
   <!-- Scripts -->
-  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-  <script>
-    Modernizr.addTest('flexboxtweener', Modernizr.testAllProps('flexAlign', 'end', true));
-  </script>
-  <script src="{{ asset('js/slick.min.js') }}"></script>
+  <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/jquery-ui.js') }}"></script>
+  <script src="{{ asset('js/slick.min.js') }}"></script>
   <script src="{{ asset('js/global.js') }}"></script>
 
   <script>

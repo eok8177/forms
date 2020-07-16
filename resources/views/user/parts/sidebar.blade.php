@@ -2,14 +2,14 @@
   <a href="/" class="logo">MYRWAV</a>
   <nav id="nav">
     <ul>
-      <li class="{{$slug=='my-apps' ? 'active': ''}}"><a href="{{ route('user.index') }}">DASHBOARD</a></li>
-      <li class="{{$slug=='my-details' ? 'active': ''}}"><a href="{{ route('user.edit') }}">PROFILE</a></li>
-      <li class="{{$slug=='my-archive' ? 'active': ''}}"><a href="{{ route('user.archive') }}">GRANTS</a></li>
+      <li class="{{ request()->is('*user') ? 'active' : '' }}"><a href="{{ route('user.index') }}">DASHBOARD</a></li>
+      <li class="{{ request()->is('*edit*') ? 'active' : '' }}"><a href="{{ route('user.edit') }}">PROFILE</a></li>
+      <li class="{{ request()->is('*archive*') ? 'active' : '' }}"><a href="{{ route('user.archive') }}">GRANTS</a></li>
       <li class=""><a href="#">HELP</a></li>
       <li class=""><a href="#">CONTACT</a></li>
       <li class=""><a href="/">BACK TO RWAV</a></li>
       <li class="">
-        <a class="dropdown-item" href="{{ route('logout') }}"
+        <a href="{{ route('logout') }}"
            onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">
             {{ __('Logout') }}
