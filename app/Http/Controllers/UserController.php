@@ -41,7 +41,12 @@ class UserController extends Controller
         $api = new ApiCall;
         $data = $api->getDashboard($user);
 
+        $order = $request->get('order', false);
+        $dir = $request->get('dir', 'asc');
+
         $apps = Application::where('user_id', $user->id)
+            ->join('forms', 'forms.id', '=', 'applications.form_id')
+            ->join('form_types', 'form_types.id', '=', 'forms.form_type_id')
             ->where(function($q) {
                 $q->orWhere('status', 'rejected');
                 $q->orWhere('status', 'draft');
@@ -49,12 +54,15 @@ class UserController extends Controller
                 //     $q->where('status', 'submitted');
                 //     $q->where('to_be_approved', 1);
                 // });
-            })
-            ->get();
+            });
+
+        if ($order == 'type')   $apps->orderBy('forms.form_types.name', $dir);
+        if ($order == 'status') $apps->orderBy('applications.status', $dir);
+        if ($order == 'date')   $apps->orderBy('applications.updated_at', $dir);
 
         return view('user.index', [
             'user' => $user,
-            'apps' => $apps,
+            'apps' => $apps->get(),
             'dataMars' => $data,
             'host' => $request->getHost()
         ]);

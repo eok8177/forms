@@ -507,6 +507,11 @@ h4 {
   -webkit-transform: rotate(135deg);
           transform: rotate(135deg);
 }
+.sort.desc:after {
+  top: 8px;
+  -webkit-transform: rotate(315deg);
+          transform: rotate(315deg);
+}
 
 .btn {
   min-width: 70px;

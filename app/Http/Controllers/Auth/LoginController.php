@@ -67,6 +67,21 @@ class LoginController extends Controller
     }
 
     /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+     protected function authenticated(Request $request, $user)
+     {
+        $message = '<strong>Welcome back '.$user->first_name.'!</strong> You have five grant applications that need action.';
+        $request->session()->flash('success', $message);
+        return redirect()->intended($this->redirectPath());
+     }
+
+
+    /**
      * Handle Social login request
      *
      * @return response

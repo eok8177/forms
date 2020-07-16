@@ -1,10 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.user')
 
 @section('content')
 
-<div class="container">
-  <h1>Form submitted</h1>
-  <div class="text">{!! $form->confirm_text !!}</div>
-</div>
+<h1>Form submitted</h1>
+<div class="text">{!! $form->confirm_text !!}</div>
 
 @endsection

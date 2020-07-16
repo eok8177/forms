@@ -12,14 +12,14 @@
     <div id="tab01" class="tab-area">
 
         @if ($apps->count() > 0)
-          <div class="table-holder">
+          <div class="table-holder" id="sortTable">
             <table>
               <thead>
                 <tr>
-                  <th><span class="sort">TYPE</span></th>
+                  <th><span class="sort" data-order="type">TYPE</span></th>
                   <th>DETAILS</th>
-                  <th><span class="sort">status</span></th>
-                  <th><span class="sort">date</span></th>
+                  <th><span class="sort" data-order="status">status</span></th>
+                  <th><span class="sort" data-order="date">date</span></th>
                   <th>actions</th>
                 </tr>
               </thead>
@@ -27,7 +27,7 @@
               @foreach($apps as $app)
                 <tr>
                   <td>
-                    <span class="title">{{$app->form->type}}</span>
+                    <span class="title" style="background-color: {{$app->form->types->color}}">{{$app->form->type}}</span>
                   </td>
                   <td>
                     <strong>{{$app->form->title}}</strong>
@@ -103,3 +103,32 @@
 
 
 @endsection
+
+@push('scripts')
+<style>
+  .sort {cursor: pointer;}
+</style>
+<script>
+$(function () {
+  let urlParams = new URLSearchParams(window.location.search);
+  let orderQuery = urlParams.get('order');
+  let dirQuery = urlParams.get('dir');
+  let dir = 'asc';
+
+  $("#sortTable .sort").each((i, el)=>{
+    let $el = $(el);
+    if (orderQuery == $el.data('order') && dirQuery == 'desc') {
+      $el.addClass('desc');
+    }
+    $el.click(()=>{
+      if (orderQuery == $el.data('order')) {
+        if (dirQuery == 'asc') {
+          dir = 'desc';
+        }
+      }
+      window.location.href = window.location.pathname+"?"+$.param({'order': $el.data('order'),'dir': dir});
+    });
+  });
+});
+</script>
+@endpush

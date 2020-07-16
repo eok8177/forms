@@ -8,10 +8,15 @@
 
     <div id="content">
 
-        <div class="info-panel">
-          <span><strong>Welcome back Sergey!</strong> You have <a href="#">five grant applications</a> that need action.</span>
-          <span class="close">close</span>
-        </div>
+
+          @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has($msg))
+            <div class="info-panel alert-{{ $msg }}">
+              <span>{!! Session::get($msg) !!}</span>
+              <span class="close">close</span>
+            </div>
+            @endif
+          @endforeach
 
         @yield('content')
 

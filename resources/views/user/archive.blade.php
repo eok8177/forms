@@ -27,7 +27,7 @@
               @foreach($apps as $app)
                 <tr>
                   <td>
-                    <span class="title">{{$app->form->type}}</span>
+                    <span class="title" style="background-color: {{$app->form->types->color}}">{{$app->form->type}}</span>
                   </td>
                   <td>
                     <strong>{{$app->form->title}}</strong>
