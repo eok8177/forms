@@ -11,11 +11,11 @@
     <span class="inform">To complete an RWAV form you need to have a MyRWAV account.  Login or register below:</span>
     <div class="tabs-area">
       <ul class="tabs inner">
-        <li><a href="#tab02">REGISTER</a></li>
         <li><a href="/login" class="link-tab">LOGIN</a></li>
+        <li><a href="#tab01">REGISTER</a></li>
       </ul>
       <div class="tab-area">
-        <div id="tab02" class="tab-area inner">
+        <div id="tab01" class="tab-area inner">
           <form role="form" method="POST" action="{{ url('/register') }}">
           @csrf
             <div class="text-holder">
@@ -124,6 +124,9 @@
 @push('scripts')
 <script>
 jQuery(document).ready(function($) {
+  $( ".tabs-area" ).tabs({
+    active: 1
+  });
   $(".link-tab").unbind('click');
 });
 </script>

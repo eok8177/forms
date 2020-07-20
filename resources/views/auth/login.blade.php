@@ -15,7 +15,7 @@
         <li><a href="/register" class="link-tab">REGISTER</a></li>
       </ul>
       <div class="tab-area">
-        <div id="tab01" class="tab-area inner ui-state-active">
+        <div id="tab01" class="tab-area inner">
           <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="text-holder">
@@ -57,6 +57,9 @@
 @push('scripts')
 <script>
 jQuery(document).ready(function($) {
+  $( ".tabs-area" ).tabs({
+    active: 0
+  });
   $(".link-tab").unbind('click');
 });
 </script>

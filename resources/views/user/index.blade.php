@@ -84,6 +84,61 @@
         <li class="next"><a href="#">next</a></li>
       </ul>
     </div>
+
+    <div id="tab02" class="tab-area">
+
+        @if ($submitted->count() > 0)
+          <div class="table-holder" id="sortTable">
+            <table>
+              <thead>
+                <tr>
+                  <th><span class="sort" data-order="type">TYPE</span></th>
+                  <th>DETAILS</th>
+                  <th><span class="sort" data-order="status">status</span></th>
+                  <th><span class="sort" data-order="date">date</span></th>
+                </tr>
+              </thead>
+              <tbody>
+              @foreach($submitted as $s_app)
+                <tr>
+                  <td>
+                    <span class="title" style="background-color: {{$s_app->form->types->color}}">{{$s_app->form->type}}</span>
+                  </td>
+                  <td>
+                    <strong>{{$s_app->form->title}}</strong>
+                  </td>
+                  <td>
+                    @if($s_app->status == 'rejected')
+                      {{$s_app->status}}
+
+                        @foreach($s_app->approvs as $s_approv)
+                          <small>( {{$s_approv->notes}} )</small>
+                        @endforeach
+
+                    @else
+                      {{$s_app->status}}
+                    @endif
+                  </td>
+                  <td>
+                    <span class="date">{{ date('Y-m-d H:i', strtotime($s_app->updated_at)) }}</span>
+                  </td>
+                </tr>
+
+              @endforeach
+              </tbody>
+            </table>
+          </div>
+          @else
+              @lang('message.no_records').
+          @endif
+
+
+      <ul class="paging">
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li class="next"><a href="#">next</a></li>
+      </ul>
+    </div>
   </div>
 
 
@@ -128,6 +183,10 @@ $(function () {
       }
       window.location.href = window.location.pathname+"?"+$.param({'order': $el.data('order'),'dir': dir});
     });
+  });
+
+  $( ".tabs-area" ).tabs({
+    active: 0
   });
 });
 </script>

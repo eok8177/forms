@@ -7,13 +7,6 @@ jQuery(document).ready(function($) {
     
 
 
-    
-    $( ".tabs-area" ).tabs({
-    active: 0
-  });
-
-
-    
   $('.news.slick-slider').slick({
          nextArrow: ('.slider-holder .next'),
       prevArrow: ('.slider-holder .prev'),
@@ -24,13 +17,6 @@ jQuery(document).ready(function($) {
      
      
     });
-      
-   
-
-     
-
-
-
 
 
 });
