@@ -674,8 +674,9 @@ h2.color {
 }
 .inform-blocks .block:first-child {
   -webkit-box-flex: 1;
-          flex: 1;
+  flex: 1;
   margin-right: 15px;
+  max-width: 87%;
 }
 
 .news {
@@ -937,6 +938,7 @@ textarea {
   .inform-blocks .block {
     width: 100%;
     margin-bottom: 20px;
+	max-width: 100%;
   }
 
   .news .block-new {
