@@ -75,8 +75,11 @@ class LoginController extends Controller
      */
      protected function authenticated(Request $request, $user)
      {
-        $message = '<strong>Welcome back '.$user->first_name.'!</strong> You have five grant applications that need action.';
-        $request->session()->flash('success', $message);
+        if ($user->role == 'user') {
+            $count = $user->draftApps()->count();
+            $message = '<strong>Welcome back '.$user->first_name.'!</strong> You have '.$count.' grant applications that need action.';
+            $request->session()->flash('success', $message);
+        }
         return redirect()->intended($this->redirectPath());
      }
 

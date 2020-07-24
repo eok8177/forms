@@ -78,4 +78,14 @@ class User extends Authenticatable // implements MustVerifyEmail
         }
         return $randomString;
     }
+
+    public function draftApps()
+    {
+        $apps = Application::where('user_id', $this->id)
+            ->where(function($q) {
+                $q->orWhere('status', 'rejected');
+                $q->orWhere('status', 'draft');
+        })->get();
+        return $apps;
+    }
 }
