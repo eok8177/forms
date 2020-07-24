@@ -12,6 +12,7 @@ use App\User;
 use App\Application;
 use App\ApiCall;
 use App\Setting;
+use App\Faq;
 
 class UserController extends Controller
 {
@@ -190,6 +191,14 @@ class UserController extends Controller
         return view('user.archive', [
             'user' => $user,
             'apps' => $apps,
+        ]);
+    }
+
+    public function faq()
+    {
+        return view('user.faq', [
+            'user' => $user = Auth::user(),
+            'faqs' => Faq::where('show', 1)->orderBy('order','asc')->get(),
         ]);
     }
 
