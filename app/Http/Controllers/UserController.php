@@ -47,6 +47,7 @@ class UserController extends Controller
         $apps = Application::where('user_id', $user->id)
             ->join('forms', 'forms.id', '=', 'applications.form_id')
             ->join('form_types', 'form_types.id', '=', 'forms.form_type_id')
+            ->select('applications.*')
             ->where(function($q) {
                 $q->orWhere('status', 'rejected');
                 $q->orWhere('status', 'draft');
@@ -55,6 +56,7 @@ class UserController extends Controller
         $submitted = Application::where('user_id', $user->id)
             ->join('forms', 'forms.id', '=', 'applications.form_id')
             ->join('form_types', 'form_types.id', '=', 'forms.form_type_id')
+            ->select('applications.*')
             ->where(function($q) {
                 $q->orWhere('status', 'accepted');
                 $q->orWhere(function($q) {
