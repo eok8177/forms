@@ -476,7 +476,7 @@ input[type=submit] {
 	display: inline-block; 
 	min-height: 32px;
 }
-.submit{
+.submit, .save{
 	display: block;
 	border: none;
 	outline: none;
@@ -497,6 +497,21 @@ input[type=submit] {
     	opacity: 0.8;
     }
 }
+.save {
+	background: $color04;
+}
+.btns-right {
+	margin-top: 20px;
+	button {
+		margin-left: 10px;
+	}
+}
+.btn-expand {
+	display: inline-block;
+	margin-left: 10px;
+	.open {}
+}
+
 .btns{
 	text-align: right;
 	.prev,
@@ -526,6 +541,35 @@ input[type=submit] {
 	}
 	.prev{
 		transform:rotate(180deg);
+	}
+}
+.btn-collapse {
+	background-color: $color03;
+	text-align: left;
+	width: 100%;
+	border: none;
+	padding: 10px 0;
+	position: relative;
+	&:hover, &:focus {
+		text-decoration: none;
+		outline: none;
+	}
+	&:after {
+		content: ">";
+		color: #fff;
+		position: absolute;
+		right: 10px;
+		top: 5px;
+		font-size: 40px;
+		font-weight: 700;
+		line-height: 40px;
+		transform: rotate(90deg);
+	}
+	&[aria-expanded=false] {
+		&:after {
+			transform: rotate(0deg);
+		}
+		background-color: $color04;
 	}
 }
 .paging{

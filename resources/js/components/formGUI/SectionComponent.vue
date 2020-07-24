@@ -1,7 +1,7 @@
 <template>
     <div class="section" v-if="show">
 
-      <button class="btn btn-link w-100 text-left bg-light btn-collapse"
+      <button class="btn-collapse"
           type="button"
           data-toggle="collapse"
           :data-target="'#'+section.name + '_gui_body'"
@@ -109,20 +109,3 @@
     }
 </script>
 
-<style lang="scss" module>
-    .btn-collapse {
-        position: relative;
-        &:hover, &:focus {text-decoration: none;}
-        &:after {
-            content: "-";
-            position: absolute;
-            right: 10px;
-            top: 2px;
-            font-size: 40px;
-            line-height: 40px;
-        }
-        &[aria-expanded="false"]:after {
-            content: "+";
-        }
-    }
-</style>

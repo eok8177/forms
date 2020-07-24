@@ -2,8 +2,8 @@
     <div v-if="form !== null">
 
         <div class="d-flex justify-content-end mb-2">
-            <button class="btn btn-outline-secondary btn-sm" @click="expandAllSections()">expand all</button>
-            <button class="btn btn-outline-secondary btn-sm" @click="collapseAllSections()">collapse all</button>
+            <a class="btn-expand" @click="expandAllSections()">expand all</a>
+            <a class="btn-expand open" @click="collapseAllSections()">collapse all</a>
         </div>
 
         <!-- collapse layout -->
@@ -15,12 +15,14 @@
             </section-component>
         </div>
 
-        <button @click="Submit()" class="btn btn-outline-secondary">Submit</button>
-        <button v-if="userid > 0" @click="SaveApps()" class="btn btn-outline-secondary">Save & fill later</button>
+        <div class="d-flex justify-content-end mb-2 btns-right">
+            <button v-if="userid > 0" @click="SaveApps()" class="save">Save application</button>
+            <button @click="Submit()" class="submit">Submit application</button>
+        </div>
 
         <div class="d-flex justify-content-end mb-2">
-            <button class="btn btn-outline-secondary btn-sm" @click="expandAllSections()">expand all</button>
-            <button class="btn btn-outline-secondary btn-sm" @click="collapseAllSections()">collapse all</button>
+            <a class="btn-expand" @click="expandAllSections()">expand all</a>
+            <a class="btn-expand open" @click="collapseAllSections()">collapse all</a>
         </div>
 
         <div v-if="msg">{{msg}}</div>

@@ -158,7 +158,7 @@ class UserController extends Controller
     public function form(Application $app)
     {
         return view('user.form', [
-            'form' => $app,
+            'app' => $app,
             'settings' => Setting::pluck('value', 'key'),
         ]);
     }
