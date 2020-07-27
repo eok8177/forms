@@ -367,6 +367,12 @@ h4{
 		color: #fff;
 		text-transform: uppercase;
 	}
+	.accordion {
+		h2 {
+			font-size: 20px;
+			font-weight: normal;
+		}
+	}
 }
 .aligncenter{
 	text-align: center;
@@ -558,10 +564,10 @@ input[type=submit] {
 		content: ">";
 		color: #fff;
 		position: absolute;
-		right: 10px;
+		right: 18px;
 		top: 8px;
-		font-size: 40px;
-		font-weight: 700;
+		font-size: 24px;
+		font-weight: normal;
 		line-height: 40px;
 		transform: rotate(90deg);
 	}
@@ -569,7 +575,7 @@ input[type=submit] {
 		&:after {
 			transform: rotate(0deg);
 		}
-		background-color: $color04;
+		background-color: $color03;
 	}
 }
 .paging{
