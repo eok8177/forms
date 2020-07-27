@@ -77,12 +77,6 @@
               @lang('message.no_records').
           @endif
 
-
-      <ul class="paging">
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li class="next"><a href="#">next</a></li>
-      </ul>
     </div>
 
     <div id="tab02" class="tab-area">
@@ -132,12 +126,6 @@
               @lang('message.no_records').
           @endif
 
-
-      <ul class="paging">
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li class="next"><a href="#">next</a></li>
-      </ul>
     </div>
   </div>
 
