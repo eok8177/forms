@@ -13,6 +13,7 @@ use App\Application;
 use App\ApiCall;
 use App\Setting;
 use App\Faq;
+use App\Form;
 
 class UserController extends Controller
 {
@@ -200,6 +201,12 @@ class UserController extends Controller
             'user' => $user = Auth::user(),
             'faqs' => Faq::where('show', 1)->orderBy('order','asc')->get(),
         ]);
+    }
+
+    protected function redirectToIndex(Form $form)
+    {
+        $msg = 'You draft "'.$form->name.'" updated.';
+        return redirect()->route('user.index')->with('success', $msg);
     }
 
 }

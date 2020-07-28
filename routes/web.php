@@ -80,6 +80,8 @@ Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user', 'admin', 
     Route::get('user/form/{app}', ['as' => 'user.form', 'uses' => 'UserController@form']);
     Route::delete('user/form/{app}', ['as' => 'user.form.destroy', 'uses' => 'UserController@destroy']);
     Route::get('user/faq', ['as' => 'user.faq', 'uses' => 'UserController@faq']);
+
+    Route::get('user/draft-saved/{form}', ['as' => 'user.draftSaved', 'uses' => 'UserController@redirectToIndex']);
 });
 
 

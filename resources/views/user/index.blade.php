@@ -58,18 +58,6 @@
                 </tr>
 
               @endforeach
-
-              @if (!(empty($dataMars)))
-              @foreach($dataMars as $obj)
-                <tr>
-                  <td>{{$obj->Type}}</td>
-                  <td></td>
-                  <td>{{$obj->Status}}</td>
-                  <td>{{ date('Y-m-d H:i', strtotime($obj->Date)) }}</td>
-                  <td></td>
-                </tr>
-              @endforeach
-              @endif
               </tbody>
             </table>
           </div>
@@ -119,6 +107,19 @@
                 </tr>
 
               @endforeach
+
+              @if (!(empty($dataMars)))
+              @foreach($dataMars as $obj)
+                <tr>
+                  <td>{{$obj->Type}}</td>
+                  <td></td>
+                  <td>{{$obj->Status}}</td>
+                  <td>{{ date('Y-m-d H:i', strtotime($obj->Date)) }}</td>
+                  <td></td>
+                </tr>
+              @endforeach
+              @endif
+
               </tbody>
             </table>
           </div>

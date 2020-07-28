@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.user')
 
 @section('content')
 
-<div class="container">
+<div class="dashboard-area tabs-area">
 
   @if($form)
   <h2>{{$form->title}}{{$form->draft ? ' [draft]' : ''}}</h2>

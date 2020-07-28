@@ -268,7 +268,8 @@
                       self.appID = response.data.appid;
                       self.redirect_url = response.data.redirect_url;
                       this.uploadFiles();
-                      self.msg = 'Form Saved';
+                      self.msg = 'You draft updated.';
+                      window.location.href = '/user/draft-saved/'+self.formid;
                     }
                   )
                   .catch(
