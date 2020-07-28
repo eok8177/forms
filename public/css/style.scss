@@ -515,6 +515,7 @@ input[type=submit] {
 .btn-expand {
 	display: inline-block;
 	margin-left: 10px;
+	text-decoration: underline !important;
 	.open {}
 }
 
@@ -566,16 +567,17 @@ input[type=submit] {
 		position: absolute;
 		right: 18px;
 		top: 8px;
+		font-family: "Rubik";
 		font-size: 24px;
 		font-weight: normal;
 		line-height: 40px;
 		transform: rotate(90deg);
 	}
 	&[aria-expanded=false] {
+		background-color: $color04;
 		&:after {
 			transform: rotate(0deg);
 		}
-		background-color: $color03;
 	}
 }
 .paging{
