@@ -16,10 +16,10 @@
             <table>
               <thead>
                 <tr>
-                  <th><span class="sort" data-order="type">TYPE</span></th>
+                  <th><span class="sort" data-tab="0" data-order="type">TYPE</span></th>
                   <th>DETAILS</th>
-                  <th><span class="sort" data-order="status">status</span></th>
-                  <th><span class="sort" data-order="date">date</span></th>
+                  <th><span class="sort" data-tab="0" data-order="status">status</span></th>
+                  <th><span class="sort" data-tab="0" data-order="date">date</span></th>
                   <th>actions</th>
                 </tr>
               </thead>
@@ -74,10 +74,10 @@
             <table>
               <thead>
                 <tr>
-                  <th><span class="sort" data-order="type">TYPE</span></th>
+                  <th><span class="sort" data-tab="1" data-order="type">TYPE</span></th>
                   <th>DETAILS</th>
-                  <th><span class="sort" data-order="status">status</span></th>
-                  <th><span class="sort" data-order="date">date</span></th>
+                  <th><span class="sort" data-tab="1" data-order="status">status</span></th>
+                  <th><span class="sort" data-tab="1" data-order="date">date</span></th>
                 </tr>
               </thead>
               <tbody>
@@ -158,6 +158,7 @@ $(function () {
   let orderQuery = urlParams.get('order');
   let dirQuery = urlParams.get('dir');
   let dir = 'asc';
+  let prevTab = {{ request()->get('tab', 0) }};
 
   $("#sortTable .sort").each((i, el)=>{
     let $el = $(el);
@@ -165,17 +166,17 @@ $(function () {
       $el.addClass('desc');
     }
     $el.click(()=>{
-      if (orderQuery == $el.data('order')) {
+      if (orderQuery == $el.data('order') && prevTab ==$el.data('tab')) {
         if (dirQuery == 'asc') {
           dir = 'desc';
         }
       }
-      window.location.href = window.location.pathname+"?"+$.param({'order': $el.data('order'),'dir': dir});
+      window.location.href = window.location.pathname+"?"+$.param({'order': $el.data('order'),'dir': dir, 'tab': $el.data('tab')});
     });
   });
 
   $( ".tabs-area" ).tabs({
-    active: 0
+    active: prevTab
   });
 });
 </script>
