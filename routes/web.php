@@ -82,6 +82,8 @@ Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user', 'admin', 
     Route::get('user/faq', ['as' => 'user.faq', 'uses' => 'UserController@faq']);
 
     Route::get('user/draft-saved/{form}', ['as' => 'user.draftSaved', 'uses' => 'UserController@redirectToIndex']);
+    Route::get('user/contact', ['as' => 'user.contact', 'uses' => 'UserController@contact']);
+    Route::post('user/contact', ['as' => 'user.contact', 'uses' => 'UserController@contactSend']);
 });
 
 

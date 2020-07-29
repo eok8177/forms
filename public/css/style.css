@@ -367,6 +367,37 @@ h4 {
   background: #DE6C26;
 }
 
+.tabs-style {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 14px;
+}
+.tabs-style.inner a {
+  min-width: 144px;
+  font-size: 12px;
+  padding: 21px;
+}
+.tabs-style li {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 4px;
+}
+.tabs-style span {
+  display: block;
+  padding: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #fff;
+  min-width: 196px;
+  text-align: center;
+  box-sizing: border-box;
+  background: #5F5959;
+}
+.tabs-style .active span {
+  background: #DE6C26;
+}
+
 .tab-area {
   background: #fff;
 }
@@ -414,6 +445,12 @@ h4 {
 .dashboard-area .accordion h2 {
   font-size: 20px;
   font-weight: normal;
+}
+.dashboard-area .title-wide {
+  background: #DE6C26;
+  color: #fff;
+  margin: 20px 0;
+  padding: 10px;
 }
 
 .aligncenter {

@@ -15,6 +15,8 @@ use App\Setting;
 use App\Faq;
 use App\Form;
 
+use Mail;
+
 class UserController extends Controller
 {
     public function redirectTo(Request $request)
@@ -207,6 +209,45 @@ class UserController extends Controller
     {
         $msg = 'You draft "'.$form->name.'" updated.';
         return redirect()->route('user.index')->with('success', $msg);
+    }
+
+    public function contact()
+    {
+        return view('user.contact', [
+            'user' => $user = Auth::user()
+        ]);
+    }
+
+    public function contactSend(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'message' => 'required'
+        ]);
+
+        $msg = "<h1>".$request->get('first_name')."</h1> <h2>".$request->get('last_name')."</h2><p>".$request->get('email',false)."<p>".$request->get('message');
+
+        $data = [];
+
+        // $data['to'] = env('MAIL_USERNAME');
+        $data['to'] = 'eok8177@gmail.com';
+
+        $data['subject'] = 'Contact';
+        $data['from_name'] = $request->get('first_name',false)." ".$request->get('last_name',false);
+        $data['from_email'] = $request->get('email',env('MAIL_FROM'));
+        $data['message'] = $msg;
+        $data['view'] = 'contact';
+
+
+        Mail::send('email.'.$data['view'], ['msg' => $data['message']], function ($m) use ($data) {
+          $m->from($data['from_email'], $data['from_name']);
+          $m->to($data['to'])->subject($data['subject']);
+        });
+
+        return redirect()->route('user.contact')->with('success', 'Thank You');
+
     }
 
 }

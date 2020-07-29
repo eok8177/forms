@@ -73,6 +73,9 @@ return [
     'new_formtype' => 'New Form Type',
 
     'formgroups' => 'Form Groups',
-    'new_formgroup' => 'New Form Group'
+    'new_formgroup' => 'New Form Group',
+
+    'send' => 'Send',
+    'message' => 'Your message',
 
 ];

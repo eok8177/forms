@@ -324,6 +324,38 @@ h4{
 		a{background: $color03;}
 	}
 }
+.tabs-style{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	font-size: 14px;
+	&.inner{
+		a{
+			min-width: 144px;
+			font-size: 12px;
+			padding: 21px;
+		}
+	}
+	li{
+		display: inline-block;
+		vertical-align: top;
+		margin-right: 4px;
+	}
+	span{
+		display: block;
+		padding: 14px;
+		text-transform: uppercase;
+		font-weight: 700;
+		color: #fff;
+		min-width: 196px;
+		text-align: center;
+		box-sizing: border-box;
+		background: $color04;
+	}
+	.active{
+		span{background: $color03;}
+	}
+}
 .tab-area{
 	background: #fff;
 	&.inner{
@@ -372,6 +404,12 @@ h4{
 			font-size: 20px;
 			font-weight: normal;
 		}
+	}
+	.title-wide {
+		background: $color03;
+		color: #fff;
+		margin: 20px 0;
+		padding: 10px;
 	}
 }
 .aligncenter{
