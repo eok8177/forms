@@ -3,9 +3,9 @@
 @section('content')
 <div class="dashboard-area tabs-area">
 
-  <h2>Contacr RWAV</h2>
+  <h2>Contact RWAV</h2>
   <ul class="tabs-style">
-    <li class="active"><span>SEND US A MEESAGE</span></li>
+    <li class="active"><span>SEND US A MESSAGE</span></li>
   </ul>
 
   <div class="tab-content">
