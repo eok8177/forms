@@ -231,8 +231,9 @@ class UserController extends Controller
 
         $data = [];
 
-        // $data['to'] = env('MAIL_USERNAME');
-        $data['to'] = 'eok8177@gmail.com';
+        $to_admin = Setting::where('key', 'admin_email')->first();
+
+        $data['to'] = $to_admin ? $to_admin->value : 'sergey.markov@gmail.com';
 
         $data['subject'] = 'Contact';
         $data['from_name'] = $request->get('first_name',false)." ".$request->get('last_name',false);
