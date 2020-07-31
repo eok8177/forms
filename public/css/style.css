@@ -136,6 +136,7 @@ input[type=text],
 input[type=password],
 input[type=file],
 input[type=submit],
+textarea.form-control,
 textarea {
   -webkit-appearance: none;
   outline: none;
@@ -880,6 +881,10 @@ h2.color {
 }
 
 textarea,
+textarea.form-control,
+select.form-control,
+input[type=number],
+input[type=time],
 input[type=password],
 input[type=text],
 input[type=tel],
@@ -903,6 +908,10 @@ input[type=email] {
   border: 1px solid #3B3232;
 }
 textarea.error,
+textarea.form-control.error,
+select.form-control.error,
+input[type=number].error,
+input[type=time].error,
 input[type=password].error,
 input[type=text].error,
 input[type=tel].error,
@@ -910,11 +919,19 @@ input[type=email].error {
   border-color: #d0021b;
 }
 textarea.successful,
+textarea.form-control.successful,
+select.form-control.successful,
+input[type=number].successful,
+input[type=time].successful,
 input[type=password].successful,
 input[type=text].successful,
 input[type=tel].successful,
 input[type=email].successful {
   border-color: #10b070;
+}
+
+select.form-control {
+  padding: 6px 12px;
 }
 
 textarea {
@@ -1096,4 +1113,46 @@ textarea {
 
 .upper-roman li:before {
   content: counter(item, upper-roman);
+}
+
+@media only screen and (min-width: 481px) {
+  .adaptive-table .hide-lg {
+    display: none;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .adaptive-table table {
+    width: 100%;
+    min-width: auto;
+  }
+  .adaptive-table th {
+    display: none;
+  }
+  .adaptive-table tr {
+    border-bottom: 1px solid #DEDEDE;
+  }
+  .adaptive-table td {
+    display: block;
+  }
+  .adaptive-table tr:nth-child(1) td, .adaptive-table tr td {
+    padding: 5px 10px;
+  }
+  .adaptive-table tr:nth-child(1) td:first-child, .adaptive-table tr td:first-child {
+    padding-top: 10px;
+  }
+  .adaptive-table tr:nth-child(1) td:last-child, .adaptive-table tr td:last-child {
+    padding-bottom: 10px;
+  }
+  .adaptive-table .inline-block {
+    display: inline-block;
+  }
+  .adaptive-table .title {
+    min-width: auto;
+    padding: 10px;
+  }
+
+  .inform-blocks .block:first-child {
+    margin-right: 0;
+    max-width: 100%;
+  }
 }

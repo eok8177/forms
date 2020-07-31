@@ -107,6 +107,7 @@ input[type=text],
 input[type=password],
 input[type=file],
 input[type=submit],
+textarea.form-control,
 textarea{
 	-webkit-appearance:none;
 	outline:none;
@@ -829,6 +830,10 @@ h2{
 
 }
 textarea,
+textarea.form-control,
+select.form-control,
+input[type=number],
+input[type=time],
 input[type=password],
 input[type=text],
 input[type=tel],
@@ -857,6 +862,9 @@ input[type=email]{
 	&.successful{
 		border-color: #10b070;
 	}
+}
+select.form-control {
+	padding: 6px 12px;
 }
 
 textarea{
@@ -981,3 +989,35 @@ textarea{
 .lower-roman li:before {content:counter(item, lower-roman);}
 .upper-roman li:before {content:counter(item, upper-roman);} 
 
+
+@media only screen and (min-width: 481px){
+	.adaptive-table {
+		.hide-lg {display: none;}
+	}
+}
+@media only screen and (max-width: 480px){
+	.adaptive-table {
+		table {
+			width: 100%;
+			min-width: auto;
+		}
+		th {display: none;}
+		tr {border-bottom: 1px solid $color05;}
+		td {display: block;}
+		tr:nth-child(1) td, tr td {
+			padding: 5px 10px;
+			&:first-child {padding-top: 10px;}
+			&:last-child {padding-bottom: 10px;}
+		}
+		.inline-block {display: inline-block;}
+		.title {
+			min-width: auto;
+			padding: 10px;
+		}
+	}
+
+	.inform-blocks .block:first-child {
+		margin-right: 0;
+		max-width: 100%;
+	}
+}

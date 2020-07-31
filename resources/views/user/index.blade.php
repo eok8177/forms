@@ -9,10 +9,10 @@
   </ul>
 
   <div class="tab-content">
-    <div id="tab01" class="tab-area">
+    <div id="tab01" class="tab-area" style="display: none;">
 
         @if ($apps->count() > 0)
-          <div class="table-holder" id="sortTable">
+          <div class="table-holder adaptive-table" id="sortTable">
             <table>
               <thead>
                 <tr>
@@ -32,7 +32,8 @@
                   <td>
                     <strong>{{$app->form->title}}</strong>
                   </td>
-                  <td>
+                  <td class="inline-block">
+                    <span class="hide-lg"><strong>Status:</strong></span>
                     @if($app->status == 'rejected')
                       {{$app->status}}
 
@@ -44,7 +45,8 @@
                       {{$app->status}}
                     @endif
                   </td>
-                  <td>
+                  <td class="inline-block">
+                    <span class="hide-lg"><strong>Date:</strong></span>
                     <span class="date">{{ date('Y-m-d H:i', strtotime($app->updated_at)) }}</span>
                   </td>
                   <td>
@@ -67,10 +69,10 @@
 
     </div>
 
-    <div id="tab02" class="tab-area">
+    <div id="tab02" class="tab-area" style="display: none;">
 
         @if ($submitted->count() > 0)
-          <div class="table-holder" id="sortTable">
+          <div class="table-holder adaptive-table" id="sortTable">
             <table>
               <thead>
                 <tr>
@@ -89,7 +91,8 @@
                   <td>
                     <strong>{{$s_app->form->title}}</strong>
                   </td>
-                  <td>
+                  <td class="inline-block">
+                    <span class="hide-lg"><strong>Status:</strong></span>
                     @if($s_app->status == 'rejected')
                       {{$s_app->status}}
 
@@ -101,7 +104,8 @@
                       {{$s_app->status}}
                     @endif
                   </td>
-                  <td>
+                  <td class="inline-block">
+                    <span class="hide-lg"><strong>Date:</strong></span>
                     <span class="date">{{ date('Y-m-d H:i', strtotime($s_app->updated_at)) }}</span>
                   </td>
                 </tr>
