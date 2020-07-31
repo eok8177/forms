@@ -3,9 +3,9 @@
 @section('content')
 <div class="dashboard-area tabs-area">
 
-  <h2>Contacr RWAV</h2>
+  <h2>Contact RWAV</h2>
   <ul class="tabs-style">
-    <li class="active"><span>SEND US A MEESAGE</span></li>
+    <li class="active"><span>SEND US A MESSAGE</span></li>
   </ul>
 
   <div class="tab-content">
@@ -22,7 +22,7 @@
       </div>
       <div class="col-md-6">
         <div id="map" class="map-responsive">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.603780617808!2d144.95150951580533!3d-37.82274867975089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642ccfada529f%3A0xc7ae9fd60c02a716!2sRural%20Workforce%20Agency%20Victoria!5e0!3m2!1suk!2sua!4v1596045292894!5m2!1suk!2sua" width="740" height="350" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.603780617808!2d144.95150951580533!3d-37.82274867975089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642ccfada529f%3A0xc7ae9fd60c02a716!2sRural%20Workforce%20Agency%20Victoria!5e0!3m2!1sen!2sau!4v1596074131124!5m2!1sen!2sau" width="740" height="350" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
         </div>
       </div>
     </div>
