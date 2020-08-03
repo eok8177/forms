@@ -56,9 +56,9 @@ trait FormConfig
                                         }
                                     }
                                     if (@$control['mapIt']) {
-                                        $fields[$control['fieldName']]['lat'] = $control['lat'];
-                                        $fields[$control['fieldName']]['lng'] = $control['lng'];
-                                        $fields[$control['fieldName']]['address'] = $control['address'];
+                                        @$fields[$control['fieldName']]['lat'] = $control['lat'];
+                                        @$fields[$control['fieldName']]['lng'] = $control['lng'];
+                                        @$fields[$control['fieldName']]['address'] = $control['address'];
                                     }
                                 } else {
                                     $fields[$control['fieldName']]['label'] = $control['label'];

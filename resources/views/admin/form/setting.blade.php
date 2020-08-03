@@ -11,6 +11,18 @@
   </div>
 
   <div class="form-group">
+    <label>Additional field</label>
+    <select class="form-control" name="additional_field">
+    @foreach($form->fields as $section => $fields)
+      <option disabled>--- {{$section}} ---</option>
+      @foreach($fields as $field => $label)
+        <option {{$form->additional_field == $field ? 'selected' : ''}} value="{{$field}}">{{$label}}</option>
+      @endforeach
+    @endforeach
+    </select>
+  </div>
+
+  <div class="form-group">
     <label for="title">{{Lang::get('message.title')}}</label>
     <input type="text" name="title" value="{{$form->title}}" class="form-control">
   </div>

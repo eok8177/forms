@@ -37,7 +37,7 @@ class Form extends Model
      */
     static function search($search, $trash = 0, $order = 'ASC')
     {
-        $forms = Form::Where('title','LIKE', '%'.$search.'%');
+        $forms = Form::Where('title','LIKE', '%'.$search.'%')->with('types', 'groups');
 
         return $forms->where('is_trash', $trash);
     }
@@ -76,8 +76,8 @@ class Form extends Model
     public function completed()
     {
         $completed = true;
-        if ($this->groups()->count() == 0) $completed = false;
-        if ($this->types()->count() == 0) $completed = false;
+        if (!$this->groups()->exists()) $completed = false;
+        if (!$this->types()->exists()) $completed = false;
         return $completed;
     }
 

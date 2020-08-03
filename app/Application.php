@@ -56,6 +56,14 @@ class Application extends Model
         return $this->parseAppConfig($this->config)['fields'];
     }
 
+    public function getAdditionalFieldAttribute()
+    {
+        $field = $this->form->additional_field;
+        $fields = $this->parseAppConfig($this->config)['fields'];
+
+        return $field ? $fields[$field]['value'] : false;
+    }
+
 
     /*
     * Save uploaded files path to config
@@ -214,7 +222,7 @@ class Application extends Model
         $filter['to'] = $request->input('to', false);
         $filter['search'] = $request->input('search', false);
 
-        $apps = Application::Where('status', '!=', 'deleted')->with('user');
+        $apps = Application::Where('status', '!=', 'deleted')->with('user', 'form');
 
         if ($filter['search']) {
             $searchValues = preg_split('/\s+/', $filter['search'], -1, PREG_SPLIT_NO_EMPTY);

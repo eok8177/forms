@@ -69,7 +69,7 @@
           {{$select_forms[$entry->form_id]}}
         </a>
       </div>
-      <div class="col-md-3">{{$entry->user->first_name}} {{$entry->user->last_name}}</div>
+      <div class="col-md-3">{{$entry->user->first_name}} {{$entry->user->last_name}}  {{$entry->additional_field}}</div>
       <div class="col-md-4">{{$entry->created_at}}</div>
       <div class="col-md-2 text-center">
         {{$entry->status}}
