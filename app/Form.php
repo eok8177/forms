@@ -65,8 +65,8 @@ class Form extends Model
     public function active()
     {
         $active = true;
-        if ($this->groups()->count() == 0) $active = false;
-        if ($this->types()->count() == 0) $active = false;
+        if ($this->groups()->exists()) $active = false;
+        if ($this->types()->exists()) $active = false;
         if ($this->draft == 1) $active = false;
         if ($this->is_trash == 1) $active = false;
 

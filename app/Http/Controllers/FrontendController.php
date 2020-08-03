@@ -45,7 +45,7 @@ class FrontendController extends Controller
 
     public function allForms()
     {
-        return view('all_forms', ['forms' => Form::where('draft', 0)->get()]);
+        return view('all_forms', ['forms' => Form::where('draft', 0)->with('types', 'groups')->get()]);
     }
 
 }
