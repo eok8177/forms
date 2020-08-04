@@ -17,8 +17,8 @@
 
   <!-- Styles -->
   <link media="all" rel="stylesheet" type="text/css" href="{{ asset('css/slick.css') }}" >
-  <link media="all" rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" >
-  <link media="all" rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
+  <link media="all" rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}?dev={{time()}}" >
+  <link media="all" rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}?dev={{time()}}" >
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152798417-1"></script>
@@ -75,7 +75,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/app.js') }}?dev={{time()}}"></script>
   <script src="{{ asset('js/jquery-ui.js') }}"></script>
   <script src="{{ asset('js/slick.min.js') }}"></script>
   <script src="{{ asset('js/global.js') }}"></script>

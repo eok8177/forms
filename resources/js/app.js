@@ -39,6 +39,14 @@ window.Vue = require('vue');
      )
  );
 
+ Vue.component(
+     'form-view-component', 
+     () => import(
+         /* webpackChunkName: "form-view-component" */
+         './components/FormViewComponent.vue'
+     )
+ );
+
 const app = new Vue({
     el: '#app',
 });

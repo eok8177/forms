@@ -80,6 +80,7 @@
                   <th>DETAILS</th>
                   <th><span class="sort" data-tab="1" data-order="status">status</span></th>
                   <th><span class="sort" data-tab="1" data-order="date">date</span></th>
+                  <th>actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -107,6 +108,11 @@
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Date:</strong></span>
                     <span class="date">{{ date('Y-m-d H:i', strtotime($s_app->updated_at)) }}</span>
+                  </td>
+                  <td>
+                    <div class="btns">
+                      <a href="{{ route('user.formView', $app->id) }}" class="btn style01">View</a>
+                    </div>
                   </td>
                 </tr>
 

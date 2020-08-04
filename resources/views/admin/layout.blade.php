@@ -12,7 +12,7 @@
 
   <!-- Styles -->
   <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/admin.css') }}?dev={{time()}}" rel="stylesheet">
   @stack('styles')
   <script>
     <!-- FontAwesome settings -->
@@ -171,7 +171,7 @@
   {{--  FOOTER  --}}
 
 <!-- Scripts -->
-<script src="{{ asset('js/admin.js') }}"></script>
+<script src="{{ asset('js/admin.js') }}?dev={{time()}}"></script>
 <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('vendor/unisharp/laravel-ckeditor/adapters/jquery.js') }}"></script>
 <script src="{{ asset('vendor/laravel-filemanager/js/lfm.js') }}"></script>

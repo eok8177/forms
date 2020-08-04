@@ -167,6 +167,14 @@ class UserController extends Controller
         ]);
     }
 
+    public function formView(Application $app)
+    {
+        return view('user.form_view', [
+            'app' => $app,
+            'settings' => Setting::pluck('value', 'key'),
+        ]);
+    }
+
     public function destroy(Application $app)
     {
         $app->status = 'deleted';
