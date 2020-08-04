@@ -35,11 +35,22 @@ class Form extends Model
     /**
      * Search forms
      */
-    static function search($search, $trash = 0, $order = 'ASC')
+    static function search($search = false, $trash = false, $draft = false, $order = 'ASC')
     {
-        $forms = Form::Where('title','LIKE', '%'.$search.'%')->with('types', 'groups');
+        $forms = Form::Where('title','LIKE', '%'.$search.'%')
+            ->with('types', 'groups', 'apps')
+            ->withCount(['groups', 'apps'])
+            ;
 
-        return $forms->where('is_trash', $trash);
+        if ($trash !== false) {
+            $forms->where('is_trash', $trash);
+        }
+
+        if ($draft !== false) {
+            $forms->where('draft', $draft);
+        }
+
+        return $forms;
     }
 
     public function email($type = false)
@@ -62,23 +73,23 @@ class Form extends Model
         return $this->hasOne(FormType::class, 'id', 'form_type_id');
     }
 
+    public function completed()
+    {
+        $completed = true;
+        // if ($this->groups()->count() == 0) $completed = false;
+        if ($this->groups_count == 0) $completed = false;
+        if ($this->form_type_id < 1) $completed = false;
+        return $completed;
+    }
+
     public function active()
     {
         $active = true;
-        if ($this->groups()->exists()) $active = false;
-        if ($this->types()->exists()) $active = false;
+        if (!$this->completed()) $active = false;
         if ($this->draft == 1) $active = false;
         if ($this->is_trash == 1) $active = false;
 
         return $active;
-    }
-
-    public function completed()
-    {
-        $completed = true;
-        if (!$this->groups()->exists()) $completed = false;
-        if (!$this->types()->exists()) $completed = false;
-        return $completed;
     }
 
     public function getTypeAttribute()
@@ -93,8 +104,7 @@ class Form extends Model
 
     public function getHasAppsAttribute()
     {
-        $apps = $this->hasMany(Application::class, 'form_id', 'id');
-        return $apps->count() > 0 ? true : false;
+        return $this->apps->count() > 0 ? true : false;
     }
 
     public function getFieldsAttribute()
