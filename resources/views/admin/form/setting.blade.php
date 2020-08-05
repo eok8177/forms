@@ -10,6 +10,7 @@
     <input type="text" name="name" value="{{$form->name}}" class="form-control" {{$form->draft == 0 ? 'readonly' : ''}}>
   </div>
 
+  @if($form->fields)
   <div class="form-group">
     <label>Additional field</label>
     <select class="form-control" name="additional_field">
@@ -21,6 +22,7 @@
     @endforeach
     </select>
   </div>
+  @endif
 
   <div class="form-group">
     <label for="title">{{Lang::get('message.title')}}</label>
