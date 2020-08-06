@@ -111,7 +111,7 @@
                   </td>
                   <td>
                     <div class="btns">
-                      <a href="{{ route('user.formView', $app->id) }}" class="btn style01">View</a>
+                      <a href="{{ route('user.formView', $s_app->id) }}" class="btn style01">View</a>
                     </div>
                   </td>
                 </tr>
