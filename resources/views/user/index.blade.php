@@ -19,7 +19,7 @@
                   <th><span class="sort" data-tab="0" data-order="type">TYPE</span></th>
                   <th>DETAILS</th>
                   <th><span class="sort" data-tab="0" data-order="status">status</span></th>
-                  <th><span class="sort" data-tab="0" data-order="date">date</span></th>
+                  <th><span class="sort" data-tab="0" data-order="date">Last Saved</span></th>
                   <th>actions</th>
                 </tr>
               </thead>
@@ -47,7 +47,7 @@
                   </td>
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Date:</strong></span>
-                    <span class="date">{{ date('Y-m-d H:i', strtotime($app->updated_at)) }}</span>
+                    <span class="date">{{ date('Y/m/d H:i', strtotime($app->updated_at)) }}</span>
                   </td>
                   <td>
                     <div class="btns">
@@ -107,7 +107,7 @@
                   </td>
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Date:</strong></span>
-                    <span class="date">{{ date('Y-m-d H:i', strtotime($s_app->updated_at)) }}</span>
+                    <span class="date">{{ date('Y/m/d H:i', strtotime($s_app->updated_at)) }}</span>
                   </td>
                   <td>
                     <div class="btns">
@@ -124,7 +124,7 @@
                   <td>{{$obj->Type}}</td>
                   <td></td>
                   <td>{{$obj->Status}}</td>
-                  <td>{{ date('Y-m-d H:i', strtotime($obj->Date)) }}</td>
+                  <td>{{ date('Y/m/d H:i', strtotime($obj->Date)) }}</td>
                   <td></td>
                 </tr>
               @endforeach
