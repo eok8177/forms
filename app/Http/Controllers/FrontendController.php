@@ -13,21 +13,24 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        return view('home', ['forms' => Form::where('draft', 0)->get()]);
+        return view('home', ['forms' => Form::search(false,0,0)->get()]);
     }
 
     public function success($id)
     {
         $form = Form::find($id);
         return view('success', [
-            'forms' => Form::where('draft', 0)->get(),
+            'forms' => Form::search(false,0,0)->get(),
             'form' => $form
         ]);
     }
 
     public function form(Request $request, $slug = '')
     {
-        $form = Form::where('slug', $slug)->first();
+        $form = Form::where('slug', $slug)
+            ->with('types', 'groups', 'apps')
+            ->withCount(['groups', 'apps'])
+            ->first();
         $user = Auth::user();
 
         if ($form && $form->login_only == 1 && !$user) {
@@ -36,7 +39,7 @@ class FrontendController extends Controller
         }
 
         return view('form', [
-            'forms' => Form::where('draft', 0)->get(),
+            'forms' => Form::search(false,0,0)->get(),
             'form' => $form,
             'settings' => Setting::pluck('value', 'key'),
             'user' => $user
