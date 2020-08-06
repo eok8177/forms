@@ -13,9 +13,9 @@
     :userid="{{Auth::user()->id ?? 0}}" >
 </form-gui-component>
 @elseif($app->start_date > date('Y-m-d H:i:s'))
-  <div class="text">{!! $app->pending_msg !!}</div>
+  <div class="py-2 px-2 bg-white">{!! $app->pending_msg !!}</div>
 @elseif($app->end_date < date('Y-m-d H:i:s'))
-  <div class="text">{!! $app->expired_msg !!}</div>
+  <div class="py-2 px-2 bg-white">{!! $app->expired_msg !!}</div>
 @endif
 
 </div>

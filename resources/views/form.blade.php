@@ -8,11 +8,11 @@
   <h2>{{$form->title}}{{$form->draft ? ' [draft]' : ''}}</h2>
 
     @if(!$form->active())
-      <div class="text">{{Lang::get('message.not_active_msg')}}</div>
+      <div class="py-2 px-2 bg-white">{{Lang::get('message.not_active_msg')}}</div>
     @elseif($form->shedule == 1 && $form->start_date > date('Y-m-d H:i:s'))
-      <div class="text">{!! $form->pending_msg !!}</div>
+      <div class="py-2 px-2 bg-white">{!! $form->pending_msg !!}</div>
     @elseif($form->shedule == 1 && $form->end_date < date('Y-m-d H:i:s'))
-      <div class="text">{!! $form->expired_msg !!}</div>
+      <div class="py-2 px-2 bg-white">{!! $form->expired_msg !!}</div>
     @else
       <form-gui-component class="py-2 px-2 bg-white"
         :form="{{$form->config ?? 'null'}}" 
@@ -22,7 +22,7 @@
       </form-gui-component>
     @endif
   @else
-    <div class="text">{{Lang::get('message.not_active_msg')}}</div>
+    <div class="py-2 px-2 bg-white">{{Lang::get('message.not_active_msg')}}</div>
   @endif
 
 </div>
