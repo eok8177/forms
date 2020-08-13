@@ -62,7 +62,7 @@ trait FormConfig
                                     }
                                 } else {
                                     $fields[$control['fieldName']]['label'] = $control['label'];
-                                    $fields[$control['fieldName']]['value'] = $control['value'];
+                                    $fields[$control['fieldName']]['value'] = @$control['value'];
                                 }
                             }
                         }

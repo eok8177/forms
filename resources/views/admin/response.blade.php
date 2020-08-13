@@ -7,8 +7,16 @@
     <h5>Responses</h5>
   </div>
 
+  <div class="btn-group">
+    <input type="text" id="search" class="form-control"
+      placeholder="Name Surname   Form name"
+      value="{{$search}}">
+    <button class="btn btn-outline-info" onclick="searchByName()">Search</button>
+  </div>
+
   <div class="row border-top border-bottom py-1 my-2 font-weight-bold align-items-center">
-    <div class="col-md-2">
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
       <div class="dropdown">
         <a class="btn btn-outline-info dropdown-toggle" href="#" role="button" id="dropdownForms" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ $select_forms[$form_id] }}</a>
 
@@ -17,14 +25,6 @@
             <button class="dropdown-item" onclick="setId({{$id}})">{{$item}}</button>
           @endforeach
         </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="btn-group">
-        <input type="text" id="search" class="form-control"
-          placeholder="Name Surname"
-          value="{{$search}}">
-        <button class="btn btn-outline-info" onclick="searchByName()">Search</button>
       </div>
     </div>
     <div class="col-md-4">
@@ -57,20 +57,27 @@
         </div>
       </div>
     </div>
-    <div class="col-md-1 text-center">
-      Actions
-    </div>
+  </div>
+
+  <div class="row border-bottom py-1 my-2 font-weight-bold align-items-center">
+    <div class="col-md-2">Form Type</div>
+    <div class="col-md-3">Form Name</div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2">Date Range</div>
+    <div class="col-md-2 text-center">Status</div>
+    <div class="col-md-1 text-center">Actions</div>
   </div>
 
   @foreach($entries as $entry)
-    <div class="row border-bottom mb-2 align-items-center">
+    <div class="row border-bottom mb-2 justify-content-center h-100">
       <div class="col-md-2">
-        <a href="{{ route('admin.entry', $entry->id) }}" class="btn" target="_blank" title="View Entry in new Tab">
-          {{$select_forms[$entry->form_id]}}
-        </a>
+        <span class="w-100 h-100 d-flex justify-content-center align-items-center" style="background-color: {{$entry->form->types->color}}; color: #fff;">{{$entry->form->type}}</span>
       </div>
-      <div class="col-md-3">{{$entry->user->first_name}} {{$entry->user->last_name}}  {{$entry->additional_field}}</div>
-      <div class="col-md-4">{{$entry->created_at}}</div>
+      <div class="col-md-3">
+          {{$entry->form->title}} <span class="text-muted">{{$entry->additional_field}}</span>
+      </div>
+      <div class="col-md-2">{{$entry->user->first_name}} {{$entry->user->last_name}}</div>
+      <div class="col-md-2">{{$entry->created_at}}</div>
       <div class="col-md-2 text-center">
         {{$entry->status}}
         @if($entry->status == 'submitted' && $entry->to_be_approved == 1)

@@ -225,13 +225,20 @@ class Application extends Model
         $apps = Application::Where('status', '!=', 'deleted')->with('user', 'form');
 
         if ($filter['search']) {
-            $searchValues = preg_split('/\s+/', $filter['search'], -1, PREG_SPLIT_NO_EMPTY);
-            foreach ($searchValues as $search) {
-                $apps->WhereHas('user', function ($query) use ($search) {
-                    $query->Where('first_name','LIKE', '%'.$search.'%')
-                        ->orWhere('last_name','LIKE', '%'.$search.'%');
+            $search = $filter['search'];
+            $searchValues = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
+
+            $apps->where(function ($q) use ($search, $searchValues) {
+                foreach ($searchValues as $item) {
+                    $q->orWhereHas('user', function ($query) use ($item) {
+                        $query->Where('first_name','LIKE', '%'.$item.'%')
+                            ->orWhere('last_name','LIKE', '%'.$item.'%');
+                    });
+                }
+                $q->orWhereHas('form', function ($q) use ($search) {
+                    $q->where('name','LIKE', '%'.$search.'%');
                 });
-            }
+            });
         }
 
         if ($filter['form_id'] > 0) {
@@ -256,6 +263,7 @@ class Application extends Model
                 $q->whereIn('group_id', $groupIds);
             })->pluck('id')->toArray();
             $apps->whereIn('form_id', $forms);
+            $apps->where('to_be_approved', 1);
         }
 
         return [
