@@ -61,6 +61,7 @@ jQuery(document).ready(function($) {
     active: 0
   });
   $(".link-tab").unbind('click');
+  $('#email').focus();
 });
 </script>
 @endpush
