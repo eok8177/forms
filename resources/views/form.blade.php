@@ -10,9 +10,9 @@
     @if(!$form->active())
       <div class="py-2 px-2 bg-white">{{Lang::get('message.not_active_msg')}}</div>
     @elseif($form->shedule == 1 && $form->start_date > date('Y-m-d H:i:s'))
-      <div class="py-2 px-2 bg-white">{!! $form->pending_msg !!}</div>
+      <div class="py-2 px-2 bg-white">Pending Form <p>{!! $form->pending_msg !!}</div>
     @elseif($form->shedule == 1 && $form->end_date < date('Y-m-d H:i:s'))
-      <div class="py-2 px-2 bg-white">{!! $form->expired_msg !!}</div>
+      <div class="py-2 px-2 bg-white">Expired Form <p>{!! $form->expired_msg !!}</div>
     @else
       <form-gui-component class="py-2 px-2 bg-white"
         :form="{{$form->config ?? 'null'}}" 
@@ -22,7 +22,7 @@
       </form-gui-component>
     @endif
   @else
-    <div class="py-2 px-2 bg-white">{{Lang::get('message.not_active_msg')}}</div>
+    <div class="py-2 px-2 bg-white">Form not exist</div>
   @endif
 
 </div>
