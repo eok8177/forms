@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ApplicationApproval extends Model
 {
     const STATUS = [
-        '0' => 'submited',
+        '0' => 'submitted',
         '1' => 'accepted',
        '-1' => 'rejected'
     ];

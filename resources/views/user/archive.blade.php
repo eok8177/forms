@@ -5,7 +5,7 @@
   <h2>Your dashboard</h2>
   <ul class="tabs">
     <li class="tab01"><a href="#tab01">drafts</a></li>
-    <li><a href="#tab02">submited</a></li>
+    <li><a href="#tab02">submitted</a></li>
   </ul>
 
   <div class="tab-content">
