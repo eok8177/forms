@@ -60,10 +60,10 @@
   </div>
 
   <div class="row border-bottom py-1 my-2 font-weight-bold align-items-center">
-    <div class="col-md-2">Form Type</div>
-    <div class="col-md-3">Form Name</div>
-    <div class="col-md-2"></div>
-    <div class="col-md-2">Date Range</div>
+    <div class="col-md-2">Type</div>
+    <div class="col-md-3">Details</div>
+    <div class="col-md-2">User</div>
+    <div class="col-md-2">Date</div>
     <div class="col-md-2 text-center">Status</div>
     <div class="col-md-1 text-center">Actions</div>
   </div>
