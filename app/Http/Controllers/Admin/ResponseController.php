@@ -52,8 +52,8 @@ class ResponseController extends Controller
         $appApprov->status = $status;
         $appApprov->save();
 
+		$app->createEntry();
         if ($app->status == 'accepted') {
-            $app->createEntry();
             $app->adminSubmitEmail();
             $app->userAcceptEmail();
         } elseif ($app->status == 'rejected') {
