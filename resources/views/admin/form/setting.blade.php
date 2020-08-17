@@ -165,6 +165,13 @@
       $("#datetimepicker1").on("change.datetimepicker", function (e) {
           $('#datetimepicker2').datetimepicker('minDate', e.date);
       });
+
+      $('#collapseShedule').on('shown.bs.collapse', function () {
+        $("#collapseShedule input, #collapseShedule textarea").prop('required',true);
+      });
+      $('#collapseShedule').on('hidden.bs.collapse', function () {
+        $("#collapseShedule input, #collapseShedule textarea").prop('required',false);
+      });
   });
 </script>
 @endpush
