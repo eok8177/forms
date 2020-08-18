@@ -120,16 +120,18 @@ class Application extends Model
             }
         }
 
-        $responseStatusID = 2; // submitted
-        // 6 (= 2 + 4) - for those which are Submitted and do not require Acceptance
-        $responseStatusID = ($this->to_be_approved != 1) ? 6 : $responseStatusID;
+        $responseStatusID = 2; // submitted == $this->status == 'submitted' && $app->to_be_approved == 0
+        $responseStatusID = ($this->status == 'submitted' && $this->to_be_approved != 1) ? 6 : $responseStatusID; // 6 (= 2 + 4) - for those which are Submitted and do not require Acceptance
+        $responseStatusID = ($this->status == 'accepted') ? 4 : $responseStatusID; // Accepted
+        $responseStatusID = ($this->status == 'rejected') ? 8 : $responseStatusID; // Rejected
+        // TODO * 32 - Deleted from Portal
         $msg = [
             'user_id' => $this->user_id,
             'form_id' => $this->form_id,
             'entry_id' => $entry_id,
             'response_status_id' => $responseStatusID,
-            'form_details' => $this->form->name,
-            'data' => $data,
+            'response_details' => $this->form->name,
+            'form_response' => $data,
         ];
 
         $api = new ApiCall;
