@@ -131,7 +131,7 @@ class Application extends Model
             'entry_id' => $entry_id,
             'response_status_id' => $responseStatusID,
             'response_details' => $this->form->name,
-            'form_response' => $data,
+            'form_response' => json_encode($data),
         ];
 
         $api = new ApiCall;
