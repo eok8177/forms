@@ -57,14 +57,14 @@
   <div class="custom-control custom-checkbox mb-2">
     {!! Form::hidden('shedule', 0) !!}
     {!! Form::checkbox('shedule', 1, $form->shedule, ['class' => 'custom-control-input', 'id' => 'shedule']) !!}
-    <label for="shedule" class="custom-control-label" data-toggle='collapse' data-target='#collapseShedule'>Shedule form</label>
+    <label for="shedule" class="custom-control-label" data-toggle='collapse' data-target='#collapseShedule'>Schedule form</label>
   </div>
 
   <div id='collapseShedule' class='collapse {{$form->shedule ? 'show' : ''}}'>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label>Shedule form start Date/Time</label>
+          <label>Schedule form start Date/Time</label>
             <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                 <input type="text" name="start_date" value="{{$form->start_date}}" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
                 <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
@@ -75,7 +75,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label>Shedule form end Date/Time</label>
+          <label>Schedule form end Date/Time</label>
             <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
                 <input name="end_date" value="{{$form->end_date}}" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
                 <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
