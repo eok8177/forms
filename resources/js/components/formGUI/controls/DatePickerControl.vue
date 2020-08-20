@@ -59,9 +59,9 @@
             //ToDo sceck default value
             // console.log(this.value);
 
-            this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
         },
         mounted() {
+          this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
           let self = this;
           let optionsDate = {
             format: self.options.dateFormat,
@@ -75,10 +75,12 @@
           if(self.value.isTodayValue) {
             optionsDate['todayHighlight'] = true;
           }
-          $('#'+this.value.name).datepicker(optionsDate)
-              .on('changeDate', function(e) {
-                  self.value.value = e.format(self.options.dateFormat);
-              });
+          if (!self.value.readonly) {
+            $('#'+this.value.name).datepicker(optionsDate)
+                .on('changeDate', function(e) {
+                    self.value.value = e.format(self.options.dateFormat);
+                });
+          }
         },
         methods: {
           dateDiff(stringDate) {
