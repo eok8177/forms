@@ -67,18 +67,6 @@
               </div>
             </div>
             <div class="text-holder">
-              <span class="label">Login</span>
-              <div class="text-frame">
-                <input id="login" type="text" class="{{ $errors->has('login') ? ' error' : '' }}" name="login" value="{{ old('login') }}" required>
-
-                @if ($errors->has('login'))
-                    <div class="invalid-feedback">
-                        <strong>{{ $errors->first('login') }}</strong>
-                    </div>
-                @endif
-              </div>
-            </div>
-            <div class="text-holder">
               <span class="label">Password</span>
               <div class="text-frame">
                 <input
