@@ -35,8 +35,8 @@
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Status:</strong></span>
                     @if($app->status == 'rejected')
-                      {{$app->status}}
-
+                      {{-- {{$app->status}} --}}
+                      Review Resubmit
                         @foreach($app->approvs as $approv)
                           <small>( {{$approv->notes}} )</small>
                         @endforeach
