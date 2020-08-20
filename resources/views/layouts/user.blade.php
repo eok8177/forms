@@ -2,7 +2,7 @@
 
 @section('wrap')
 <div class="main">
-  <div class="main-holder">
+  <div class="main-holder pr-xl-4">
 
     @include('user.parts.sidebar')
 
