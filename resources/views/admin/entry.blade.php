@@ -1,8 +1,9 @@
-@extends('admin.layout')
+@extends('admin.front_layout')
 
 @section('content')
+
 <div class="page-header row justify-content-between">
-<h5>{{$app->form->title}} &nbsp;&nbsp;&nbsp;<small>{{$app->user->first_name}} {{$app->user->last_name}}</small></h5>
+  <h5></h5>
   <div>
   @if($app->status == 'submitted' && $app->to_be_approved == 1 && (Auth::user()->role == 'manager' || Auth::user()->super_admin_to >= date("Y-m-d H:i:s")))
     <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#rejectModal" title="Approv or Reject Entry">Take action</button>
@@ -13,9 +14,12 @@
   </div>
 </div>
 
-<form-view-component class="py-2 px-2 bg-white"
-      :form="{{$app->config ?? 'null'}}" >
-</form-view-component>
+<div class="dashboard-area tabs-area">
+  <h2>{{$app->form->title}} &nbsp;&nbsp;&nbsp;<small>{{$app->user->first_name}} {{$app->user->last_name}}</small></h2>
+  <form-view-component class="py-2 px-2 bg-white"
+        :form="{{$app->config ?? 'null'}}" >
+  </form-view-component>
+</div>
 
 
 <!-- Modal -->
@@ -51,6 +55,8 @@
 {{-- {{dd($app->createEntry())}} --}}
 {{-- {{$app->userSubmitEmail()}} --}}
 
+
+
 @endsection
 
 @push('scripts')
@@ -58,4 +64,14 @@
   const DATE_FORMAT = '{{$settings['date_format'] ?? 'false'}}';
   const KEY_MAP = '{{$settings['key_map'] ?? 'false'}}';
 </script>
+@endpush
+
+@push('styles')
+<style>
+  .main-holder #content {z-index: auto;}
+  .dashboard-area {
+    position: relative;
+    z-index: 1;
+  }
+</style>
 @endpush
