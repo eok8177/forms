@@ -46,6 +46,9 @@ class FormController extends Controller
         $app->to_be_approved = $form->to_be_approved;
         $app->save();
 
+        $app->additional_field_value = $app->additional_field;
+        $app->save();
+
         return response()->json([
             'status' => 'OK',
             'appid' => $app->id,

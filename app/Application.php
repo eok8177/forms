@@ -245,6 +245,7 @@ class Application extends Model
                 $q->orWhereHas('form', function ($q) use ($search) {
                     $q->where('name','LIKE', '%'.$search.'%');
                 });
+                $q->orWhere('additional_field_value','LIKE', '%'.$search.'%');
             });
         }
 
