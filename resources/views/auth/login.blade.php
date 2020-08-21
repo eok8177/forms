@@ -5,7 +5,7 @@
 <div class="main-frame">
   <div class="block-info">
     <div class="top-panel">
-      <a href="#" class="logo"><img src="/images/01.svg" alt=""></a>
+      <a href="/" class="logo"><img src="/images/01.svg" alt=""></a>
       <span>MyRWAV</span>
     </div>
     <span class="inform">To complete an RWAV form you need to have a MyRWAV account.  Login or register below:</span>

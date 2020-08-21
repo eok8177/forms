@@ -9,7 +9,7 @@ use Illuminate\Auth\Notifications\VerifyEmail;
 
 use App\Notifications\NewPassword;
 
-class User extends Authenticatable // implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
