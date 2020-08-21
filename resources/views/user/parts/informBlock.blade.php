@@ -50,9 +50,38 @@
     <h2 class="color">GOT FEEDBACK</h2>
     <div class="box">
       <form action="#">
-        <textarea  cols="30" rows="10"></textarea>
-        <button class="submit">submit</button>
+        <textarea id="text" cols="30" rows="10"></textarea>
+        <div id="ok" style="display: none;color: #5087c8;">Thank You for feedback</div>
+        <div id="error" style="display: none; color: red;"></div>
+        <button id="btn_send" class="submit" onclick="sendMail();">submit</button>
       </form>
     </div>
   </div>
 </div>
+
+@push('scripts')
+<script>
+  window.sendMail = function() {
+      let text = $('#text').val();
+      let user = {{auth()->user()->id}};
+
+      if (text != '') {
+          $.post("/api/feedback-email", {
+              user: user,
+              text: text
+          }, function(res) {
+            console.log(res);
+            if (res.status == 'OK') {
+              $('#error').hide();
+              $('#ok').show();
+              $('#text').val('');
+              $('#btn_send').attr('disabled', true);
+            } else {
+              $('#error').text(res.error).show();
+              $('#ok').hide();
+            }
+          });
+      }
+  }
+</script>
+@endpush

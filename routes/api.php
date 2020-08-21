@@ -26,6 +26,8 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/save-apps',  ['uses' => 'FormController@saveApp']);
     Route::post('/get-coords',  ['uses' => 'FormController@getCoords']);
 
+    Route::post('/feedback-email',  ['uses' => 'EmailController@feedback']);
+
 });
 
 Route::group([
