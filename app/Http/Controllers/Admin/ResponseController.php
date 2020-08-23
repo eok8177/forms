@@ -75,6 +75,7 @@ class ResponseController extends Controller
 
     public function destroy(Application $app)
     {
+		$app->deleteEntry();
         $app->delete();
 
         return response()->json([
