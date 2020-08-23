@@ -140,6 +140,23 @@ class Application extends Model
         return true;
     }
 
+    public function deleteEntry()
+    {
+        $responseStatusID = 32;
+        $msg = [
+            'user_id' => $this->user_id,
+            'form_id' => $this->form_id,
+            'entry_id' => $entry_id,
+            'response_status_id' => $responseStatusID,
+            'response_details' => $this->form->name,
+            'form_response' => json_encode($data),
+        ];
+
+        $api = new ApiCall;
+        $res = $api->newResponse($msg);
+        return true;
+    }
+
     private function newEntry($fieldId, $label, $value)
     {
         $entry = new Entry;
