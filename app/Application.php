@@ -146,10 +146,10 @@ class Application extends Model
         $msg = [
             'user_id' => $this->user_id,
             'form_id' => $this->form_id,
-            'entry_id' => $entry_id,
+            'entry_id' => $this->entry_id,
             'response_status_id' => $responseStatusID,
             'response_details' => $this->form->name,
-            'form_response' => json_encode($data),
+            'form_response' => '',
         ];
 
         $api = new ApiCall;
