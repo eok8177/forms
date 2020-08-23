@@ -1,12 +1,12 @@
 <template>
     <div class="mt-2">
         <div class="col-md-12 rowItem" v-if="value.isDynamic">
-            <div class="float-right">
+            <div class="float-right" v-if="!admin">
                 <span class="add text-success" @click="addDynamicObj"><i class="fa fa-plus-circle"></i></span>
             </div>
 
             <div class="rowDynamicItem" v-for="(instance, index) in value.instances" :key="index" :class="'rowDynamic_' + index">
-                <div class="float-right">
+                <div class="float-right" v-if="!admin">
                     <span class="remove text-danger" @click="removeDynamicObj(index)"><i class="fa fa-times-circle"></i></span>
                 </div>
 
@@ -43,6 +43,7 @@
         data: () => ({
             dynamicTemplate: null,
             instances: {type: Object},
+            admin: false,
         }),
         methods: {
             addDynamicObj() {
@@ -96,6 +97,7 @@
         },
         mounted() {
             this.generateDynamic();
+            this.admin = this.$parent.$parent.admin;
         }
     }
 </script>
