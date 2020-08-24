@@ -35,12 +35,7 @@
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Status:</strong></span>
                     @if($app->status == 'rejected')
-                      {{-- {{$app->status}} --}}
                       Review Resubmit
-                        @foreach($app->approvs as $approv)
-                          <small>( {{$approv->notes}} )</small>
-                        @endforeach
-
                     @else
                       {{$app->status}}
                     @endif
@@ -94,16 +89,7 @@
                   </td>
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Status:</strong></span>
-                    @if($s_app->status == 'rejected')
                       {{$s_app->status}}
-
-                        @foreach($s_app->approvs as $s_approv)
-                          <small>( {{$s_approv->notes}} )</small>
-                        @endforeach
-
-                    @else
-                      {{$s_app->status}}
-                    @endif
                   </td>
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Date:</strong></span>
