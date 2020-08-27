@@ -20,7 +20,7 @@ class ResponseController extends Controller
 
         return view('admin.response', [
             'entries' => $apps->get(),
-            'select_forms' => Form::selectAppsList(),
+            'select_forms' => $filter['selectAppsList'],
             'form_id' => $filter['form_id'],
             'status' => $filter['status'],
             'user' => $filter['user'],

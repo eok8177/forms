@@ -70,7 +70,7 @@ class Form extends Model
 
     public function types()
     {
-        return $this->hasOne(FormType::class, 'id', 'form_type_id');
+        return $this->hasOne(FormType::class, 'id', 'form_type_id')->withDefault();
     }
 
     public function completed()
@@ -126,13 +126,5 @@ class Form extends Model
 		}
 		return $result;
 	}
-
-    static function selectAppsList()
-    {
-        $forms = Application::select('form_id')->distinct()->pluck('form_id')->toArray();
-
-        return [0 =>'All Forms'] + Form::whereIn('id',$forms)->pluck('title', 'id')->all();
-    }
-
 
 }

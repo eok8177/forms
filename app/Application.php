@@ -32,7 +32,7 @@ class Application extends Model
 
     public function form()
     {
-        return $this->belongsTo(Form::class, 'form_id');
+        return $this->belongsTo(Form::class, 'form_id')->withDefault();
     }
 
     public function approvs()
@@ -248,6 +248,18 @@ class Application extends Model
 
         $apps = Application::Where('status', '!=', 'deleted')->with('user', 'form');
 
+        if ($user->role == 'manager') {
+            $groupIds = $user->groups->pluck('id')->toArray();
+            $forms = Form::whereHas('groups', function($q) use ($groupIds) {
+                $q->whereIn('group_id', $groupIds);
+            })->pluck('id')->toArray();
+            $apps->whereIn('form_id', $forms);
+            $apps->where('to_be_approved', 1);
+        }
+
+        $selectAppsList = $apps->distinct()->pluck('form_id')->toArray();
+        $filter['selectAppsList'] = [0 =>'All Forms'] + Form::whereIn('id',$selectAppsList)->pluck('title', 'id')->all();
+
         if ($filter['search']) {
             $search = $filter['search'];
             $searchValues = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
@@ -266,10 +278,6 @@ class Application extends Model
             });
         }
 
-        if ($filter['form_id'] > 0) {
-            $apps->where('form_id', $filter['form_id']);
-        }
-
         if ($filter['status'] != Application::STATUS_ALL) {
             $apps->where('status', $filter['status']);
         }
@@ -282,13 +290,8 @@ class Application extends Model
             $apps->where('created_at', '<=', $filter['to']);
         }
 
-        if ($user->role == 'manager') {
-            $groupIds = $user->groups->pluck('id')->toArray();
-            $forms = Form::whereHas('groups', function($q) use ($groupIds) {
-                $q->whereIn('group_id', $groupIds);
-            })->pluck('id')->toArray();
-            $apps->whereIn('form_id', $forms);
-            $apps->where('to_be_approved', 1);
+        if ($filter['form_id'] > 0) {
+            $apps->where('form_id', $filter['form_id']);
         }
 
         return [
