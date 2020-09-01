@@ -97,8 +97,6 @@
 
 </div> <!-- .dashboard-area -->
 
-@include('user.parts.informBlock')
-
 @endsection
 
 @push('styles')
