@@ -78,7 +78,7 @@ class LoginController extends Controller
         if ($user->role == 'user') {
             $count = $user->draftApps()->count();
             if ($count > 0) {
-                $message = '<strong>Welcome back '.$user->first_name.'</strong>! You have '.$count.' item/s for attention.';
+                $message = '<strong>Welcome back '.$user->first_name.'!</strong> You have '.$count.' item/s for attention.';
                 $request->session()->flash('success', $message);
             }
         }
