@@ -86,7 +86,7 @@
       </div>
       <div class="col-md-1 text-center">
         @if($entry->status == 'submitted' || $entry->status == 'accepted' || $entry->status == 'rejected' || $entry->to_be_approved == 0)
-          <a href="{{ route('admin.entry', $entry->id) }}" class="btn fa fa-eye" target="_blank" title="View Entry in new Tab"></a>
+          <a href="{{ route('admin.entry', $entry->id) }}" class="btn fa fa-eye" target="_blank" title="View Response in new Tab"></a>
         @endif
         @if(Auth::user()->role == 'admin')
           <a href="{{ route('admin.app.destroy', ['app'=>$entry->id]) }}" class="btn fa fa-trash-o delete" title="Delete"></a>
