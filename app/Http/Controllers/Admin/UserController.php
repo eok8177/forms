@@ -162,7 +162,7 @@ class UserController extends Controller
     public function setSAdmin(Request $request)
     {
         $password = $request->input('password', false);
-        if ($password == 'Mon@2408!PT') { // TODO what password to use?
+        if ($password == env('SADMIN_PASSWORD', 'Mon@2408!PT123456')) {
 
             $time_to = date("Y-m-d H:i:s", strtotime('+1 hours'));
             $user = Auth::user();
