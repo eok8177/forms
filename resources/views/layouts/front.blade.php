@@ -16,6 +16,7 @@
   <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 
   <!-- Styles -->
+  <link media="all" rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" >
   <link media="all" rel="stylesheet" type="text/css" href="{{ asset('css/slick.css') }}" >
   <link media="all" rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}?dev={{time()}}" >
   <link media="all" rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}?dev={{time()}}" >

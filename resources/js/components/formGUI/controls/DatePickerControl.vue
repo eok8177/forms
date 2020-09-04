@@ -64,22 +64,23 @@
           this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
           let self = this;
           let optionsDate = {
-            format: self.options.dateFormat,
+            dateFormat: self.options.dateFormat,
+            onSelect: function(e) {
+              self.value.value = e;
+            }
           };
           if(self.value.maxDate) {
-            optionsDate['endDate'] = self.dateDiff(self.value.maxDate);
+            optionsDate['maxDate'] = self.dateDiff(self.value.maxDate);
           }
           if(self.value.minDate) {
-            optionsDate['startDate'] = self.dateDiff(self.value.minDate);
+            optionsDate['minDate'] = self.dateDiff(self.value.minDate);
           }
-          if(self.value.isTodayValue) {
-            optionsDate['todayHighlight'] = true;
-          }
+          // if(self.value.isTodayValue) {
+            // optionsDate['changeMonth'] = true;
+            optionsDate['changeYear'] = true;
+          // }
           if (!self.value.readonly) {
-            $('#'+this.value.name).datepicker(optionsDate)
-                .on('changeDate', function(e) {
-                    self.value.value = e.format(self.options.dateFormat);
-                });
+            $('#'+this.value.name).datepicker(optionsDate);
           }
         },
         methods: {
