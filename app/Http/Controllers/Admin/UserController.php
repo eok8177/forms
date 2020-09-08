@@ -56,8 +56,7 @@ class UserController extends Controller
     public function store(Request $request, User $user)
     {
         $request->validate([
-            'email' => 'required|unique:users',
-            'login' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
         ]);
 
         $data = $request->except('groups');
@@ -118,7 +117,6 @@ class UserController extends Controller
     {
         $request->validate([
             'email' => Rule::unique('users')->ignore($user->id),
-            'login' => Rule::unique('users')->ignore($user->id),
         ]);
 
         $data = $request->except('groups');

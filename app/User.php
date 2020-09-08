@@ -6,11 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Notifications\NewPassword;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use SoftDeletes;
     use Notifiable;
 
     /**
@@ -37,6 +39,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getNameAttribute()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
 
     public function hasAnyRole($roles)
     {

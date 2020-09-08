@@ -38,7 +38,7 @@
   </div>
 @foreach($users as $user)
   <div class="row border-bottom mb-2 align-items-center">
-    <div class="col"><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->login}}</a></div>
+    <div class="col"><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->name}}</a></div>
     <div class="col"><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->email}}</a></div>
     <div class="col text-center"><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->role}}</a></div>
     <div class="col-md-2 text-center"><a href="{{ route('admin.user.edit', ['user'=>$user->id]) }}" class="btn">{{$user->last_logged_in}}</a></div>
