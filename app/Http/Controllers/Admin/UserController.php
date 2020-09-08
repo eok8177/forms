@@ -78,6 +78,9 @@ class UserController extends Controller
 
         $user->update($data);
 
+        $api = new ApiCall;
+        $data = $api->newUser($user);
+
         // Groups attach
         if ($request->has('groups')) {
             $user->groups()->attach($request->input('groups'));
