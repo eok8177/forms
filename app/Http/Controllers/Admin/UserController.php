@@ -155,6 +155,9 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        $api = new ApiCall;
+        $data = $api->deleteUser($user);
+
         $user->delete();
 
         return response()->json([
