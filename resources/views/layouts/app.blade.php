@@ -66,8 +66,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    @if(Auth::user()->role == 'admin' || Auth::user()->role == 'manager')
+                                    @if(Auth::user()->role == 'admin')
                                     <a class="dropdown-item" href="{{ url('/admin/responses') }}">Dashboard</a>
+                                    @elseif(Auth::user()->role == 'manager')
+                                    <a class="dropdown-item" href="{{ url('/manager/responses') }}">Dashboard</a>
                                     @else
                                     <a class="dropdown-item" href="{{ url('/user') }}">Dashboard</a>
                                     @endif

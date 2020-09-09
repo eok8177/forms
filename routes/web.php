@@ -24,11 +24,11 @@ Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social'
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 
 // Manager
-Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin', 'manager'], 'namespace' => 'Admin', 'prefix' => 'admin'], function() {
+Route::group(['as' => 'manager.', 'middleware' => 'roles','roles' =>['manager'], 'namespace' => 'Manager', 'prefix' => 'manager'], function() {
 
     Route::get('responses', ['as' => 'responses', 'uses' => 'ResponseController@index']);
-    Route::get('entry/{app}', ['as' => 'entry', 'uses' => 'ResponseController@entry']);
-    Route::post('entry-status/{app}', ['as' => 'entryStatus', 'uses' => 'ResponseController@status']);
+    Route::get('response/{application}', ['as' => 'response', 'uses' => 'ResponseController@response']);
+    Route::post('response-status/{application}', ['as' => 'responseStatus', 'uses' => 'ResponseController@status']);
 
     Route::resource('user', 'UserController');
 });
@@ -63,6 +63,12 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
 
     Route::put('response/{app}/sendemail', ['as' => 'app.sendemail', 'uses' => 'ResponseController@sendEmail']);
     Route::delete('response/{app}', ['as' => 'app.destroy', 'uses' => 'ResponseController@destroy']);
+
+    Route::get('responses', ['as' => 'responses', 'uses' => 'ResponseController@index']);
+    Route::get('entry/{app}', ['as' => 'entry', 'uses' => 'ResponseController@entry']);
+    Route::post('entry-status/{app}', ['as' => 'entryStatus', 'uses' => 'ResponseController@status']);
+
+    Route::resource('user', 'UserController');
 });
 
 // User

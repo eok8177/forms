@@ -48,7 +48,7 @@ class LoginController extends Controller
             return '/admin/responses';
         }
         if (auth()->user()->role == 'manager') {
-            return '/admin/responses';
+            return '/manager/responses';
         }
         if (auth()->user()->role == 'user') {
             return '/user';
