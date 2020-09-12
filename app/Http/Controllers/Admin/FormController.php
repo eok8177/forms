@@ -11,6 +11,7 @@ use App\FormEmail;
 use App\Group;
 use App\FormType;
 use App\Setting;
+use App\ApiCall;
 
 
 class FormController extends Controller
@@ -113,6 +114,13 @@ class FormController extends Controller
 
     public function destroy(Form $form)
     {
+        $api = new ApiCall;
+        $formData = (object)[
+            'portal_form_id' => $form->id, 
+            'portal_form_name' => $form->name
+        ];
+        $data = $api->deleteForm($formData);
+
         $form->delete();
 
         return response()->json([

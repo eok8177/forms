@@ -48,6 +48,11 @@ class ApiCall
 		return $this->call('form-new-update', $formData);
 	}
 
+	public function deleteForm($formData)
+	{
+		return $this->call('form-delete', $formData);
+	}
+
     /**
      * 
      * 

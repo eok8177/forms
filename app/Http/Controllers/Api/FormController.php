@@ -91,7 +91,7 @@ class FormController extends Controller
             $app->adminSubmitEmail();
             $app->userSubmitEmail();
         } else {
-            $app->managersSubmitEmail();
+            $app->managerSubmitEmail();
         }
 
         return response()->json([
