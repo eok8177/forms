@@ -137,6 +137,7 @@
                     });
                     try { // calculate formula
                         this.control.value = eval(formula);
+                        this.control.value = Number((this.control.value).toFixed(2));
                     } catch (e) {
                         console.log('Formula Error');
                     }
