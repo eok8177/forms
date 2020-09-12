@@ -61,7 +61,7 @@
 
         },
         mounted() {
-          this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
+          this.value.readonly = this.$parent.$parent.$parent.$parent.admin || this.value.readonly;
           let self = this;
           let optionsDate = {
             dateFormat: self.options.dateFormat,

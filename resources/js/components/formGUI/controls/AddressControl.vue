@@ -96,7 +96,7 @@
           this.key = KEY_MAP;
           this.showMap();
           this.admin = this.$parent.$parent.$parent.$parent.admin;
-          this.value.readonly = this.admin;
+          this.value.readonly = this.admin || this.value.readonly;
         },
         methods: {
           showMap() {

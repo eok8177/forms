@@ -49,7 +49,7 @@
             if (!_.isEmpty(this.value.defaultValue)) {
                 this.value.value = this.value.defaultValue;
             }
-            this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
+            this.value.readonly = this.$parent.$parent.$parent.$parent.admin || this.value.readonly;
         },
         methods: {
             numberChange(e) {

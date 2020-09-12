@@ -60,7 +60,7 @@
                 this.value.value = window[field];
               }
             }
-            this.value.readonly = this.$parent.$parent.$parent.$parent.admin;
+            this.value.readonly = this.$parent.$parent.$parent.$parent.admin || this.value.readonly;
         }
     }
 </script>

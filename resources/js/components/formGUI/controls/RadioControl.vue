@@ -57,7 +57,7 @@
                     this.value.value = this.value.defaultValue;
                 }
             }
-            this.admin = this.$parent.$parent.$parent.$parent.admin;
+            this.admin = this.$parent.$parent.$parent.$parent.admin || this.value.readonly;
         }
     }
 </script>
