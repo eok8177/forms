@@ -213,7 +213,7 @@ class UserController extends Controller
         ]);
     }
 
-    protected function redirectToIndex(Form $form)
+    protected function draftSaved(Form $form)
     {
         $msg = 'You draft "'.$form->name.'" updated.';
         return redirect()->route('user.index')->with('success', $msg);

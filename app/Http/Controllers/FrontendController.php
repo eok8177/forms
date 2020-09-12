@@ -16,9 +16,13 @@ class FrontendController extends Controller
         return view('home', ['forms' => Form::search(false,0,0)->get()]);
     }
 
-    public function success($id)
+    public function success(Request $request, $id)
     {
         $form = Form::find($id);
+        $msg = "Thankyou ".Auth::user()->name;
+
+        $request->session()->flash('success', $msg);
+
         return view('success', [
             'forms' => Form::search(false,0,0)->get(),
             'form' => $form

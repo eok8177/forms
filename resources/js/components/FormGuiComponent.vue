@@ -248,6 +248,9 @@
                 // submit form
                 if (done == 0 && self.status === 'submitted') {
                   self.postForm();
+                } else { // only save Draft application
+                    self.msg = 'You draft updated.';
+                    window.location.href = '/user/draft-saved/'+self.formid;
                 }
                 return;
             },
@@ -268,8 +271,6 @@
                       self.appID = response.data.appid;
                       self.redirect_url = response.data.redirect_url;
                       this.uploadFiles();
-                      self.msg = 'You draft updated.';
-                      window.location.href = '/user/draft-saved/'+self.formid;
                     }
                   )
                   .catch(

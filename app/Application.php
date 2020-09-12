@@ -114,9 +114,10 @@ class Application extends Model
                     }
                 }
             } elseif ($field['type'] != 'html') {
-                if ($field['value'] !== NULL) 
+                if ($field['value'] !== NULL) {
                     $entry = $this->newEntry($fieldId, $field['label'], $field['value']);
                     $data[strval(preg_replace("/[^0-9]/", '', $fieldId))] = $entry->value;
+                }
             }
         }
 
