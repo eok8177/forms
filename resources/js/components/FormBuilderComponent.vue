@@ -1,10 +1,10 @@
 <template>
     <div class="builder">
-        <form-builder type="template" v-model="form"></form-builder>
-        <div class="mt-5">
+<!--         <div class="my-3 text-right">
             <div v-if="status" class="text-success mb-1">Config updated</div>
             <button class="btn btn-secondary" @click="saveConfig()">Save Form Settings</button>
-        </div>
+        </div> -->
+        <form-builder type="template" v-model="form"></form-builder>
     </div>
     
 </template>
