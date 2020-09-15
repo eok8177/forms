@@ -249,7 +249,7 @@
                 if (done == 0 && self.status === 'submitted') {
                   self.postForm();
                 } else { // only save Draft application
-                    self.msg = 'You draft updated.';
+                    self.msg = 'You draft is updated.';
                     window.location.href = '/user/draft-saved/'+self.formid;
                 }
                 return;
