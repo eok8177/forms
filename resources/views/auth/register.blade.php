@@ -16,7 +16,7 @@
       </ul>
       <div class="tab-area">
         <div id="tab01" class="tab-area inner">
-          <form role="form" method="POST" action="{{ url('/register') }}">
+          <form id="register-form" role="form" method="POST" action="{{ url('/register') }}">
           @csrf
             <div class="text-holder">
               <span class="label">First Name</span>
@@ -98,7 +98,10 @@
                 @endif
               </div>
             </div>
-            <button class="submit">Register</button>
+            <button class="g-recaptcha submit" 
+                    data-sitekey="6Le7FM0ZAAAAADK8CXj1ixP05Z0Aol4LoKJKWuvZ" 
+                    data-callback='onSubmit' 
+                    data-action='submit'>Register</button>
 
           </form>
         </div>
@@ -117,5 +120,10 @@ jQuery(document).ready(function($) {
   });
   $(".link-tab").unbind('click');
 });
+
+function onSubmit(token) {
+  document.getElementById("register-form").submit();
+}
 </script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
 @endpush
