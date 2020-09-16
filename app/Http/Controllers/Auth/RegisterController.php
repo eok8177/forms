@@ -55,7 +55,16 @@ class RegisterController extends Controller
             // 'login' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:4|confirmed',
-        ]);
+            'g-recaptcha-response' => 'required|recaptcha'
+        ], $this->messages());
+    }
+
+    protected function messages()
+    {
+        return [
+           'g-recaptcha-response.recaptcha' => 'Captcha verification failed',
+           'g-recaptcha-response.required' => 'Please complete the captcha'
+       ];
     }
 
     /**

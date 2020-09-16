@@ -96,10 +96,16 @@
                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                     </div>
                 @endif
+
+                @if ($errors->has('g-recaptcha-response'))
+                    <div class="invalid-feedback">
+                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                    </div>
+                @endif
               </div>
             </div>
             <button class="g-recaptcha submit" 
-                    data-sitekey="6Le7FM0ZAAAAADK8CXj1ixP05Z0Aol4LoKJKWuvZ" 
+                    data-sitekey="{{config('services.recaptcha.key')}}"
                     data-callback='onSubmit' 
                     data-action='submit'>Register</button>
 
