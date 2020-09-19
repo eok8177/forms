@@ -7,13 +7,8 @@
         </div>
 
         <div class="col-md-12">
-            <div class="form-group">
-                <label>Data Source</label> <br />
-                <!-- <label><input type="radio" name="isAjax" v-model="control.isAjax":value="false">Static Source</label> -->
-                <!-- <label><input type="radio" name="isAjax" v-model="control.isAjax" :value="true">Ajax Source</label> -->
-            </div>
-
-            <table class="table table-bordered table-striped" v-if="!control.isAjax">
+            <label>Data Source</label>
+            <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
                     <th class="text-center" width="10%">
@@ -38,27 +33,28 @@
                 </tbody>
             </table>
 
-            <div class="form-group" v-else>
-                <label>
-                    Ajax URL
-                    <a href="javascript:void(0)" @click="dataAjaxModal"><i class="fa fa-info-circle"></i></a>
+            <div class="form-group">
+                <label>Import from .csv 
+                    <small>[
+                    <a href="/files/select1.csv" target="_blank">example 1</a> ,
+                    <a href="/files/select2.csv" target="_blank">example 2</a>
+                    ]</small>
                 </label>
-                <input type="text" class="form-control ajaxDataUrl" v-model="control.ajaxDataUrl">
+                <input type="file" accept=".csv" @change="processFile($event)"/>
             </div>
+
         </div>
-        
-        <!-- <select-ajax-modal ref="SelectAjaxModal"></select-ajax-modal> -->
+
     </div>
 </template>
 
 <script>
-    import SelectAjaxModal from './common/SelectAjaxModal';
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
     import {FORM_CONSTANTS} from "sethFormBuilder/config/constants";
 
     export default {
         name: "SelectConfigComponent",
-        components: {SelectAjaxModal, FontAwesomeIcon},
+        components: {FontAwesomeIcon},
         props: {
             control: {
                 type: Object
@@ -71,27 +67,61 @@
             removeOption(index) {
                 this.control.dataOptions.splice(index, 1);
             },
-            dataAjaxModal(e) {
-                this.$refs.SelectAjaxModal.openModal();
-                this.$parent.sticky = '';
-            },
+
             setText(index) {
                 if (!this.control.dataOptions[index].text) {
                     this.control.dataOptions[index].text = this.control.dataOptions[index].id;
                 }
+            },
+            processFile(event) {
+                let self = this;
+                let file = event.target.files[0];
+                let reader = new FileReader();
+                reader.onload = function () {
+                  self.processData(reader.result);
+                };
+                // start reading the file. When it is done, calls the onload event defined above.
+                reader.readAsBinaryString(file);
+            },
+
+            processData(fileText) {
+                let self = this;
+                let fileTextLines = fileText.split(/\r\n|\n/);
+                let headers = fileTextLines[0].split(',');
+
+                for (let i=1; i<fileTextLines.length; i++) {
+                    let data = fileTextLines[i].split(',');
+                    if (data.length == headers.length) {
+
+                        let line = {};
+                        for (let j=0; j<headers.length; j++) {
+                            line[headers[j]] = data[j];
+                        }
+
+                        if ("Value" in line) {
+                            if (line.Value) {
+                                self.control.dataOptions.push(_.clone(FORM_CONSTANTS.OptionDefault));
+                                let index = self.control.dataOptions.length - 1;
+                                self.control.dataOptions[index].id = line.Value;
+
+                                if ("Text" in line) {
+                                    self.control.dataOptions[index].text = line.Text;
+                                } else {
+                                    self.control.dataOptions[index].text = line.Value;
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
+
         },
         mounted() {
             // add default options
-            if (this.control.dataOptions.length <= 0) {
-                this.addOption();
-            }
-            // let self = this;
-            // TODO not work
-            // $(this.$refs.SelectAjaxModal).on("hide.bs.modal", function(){
-            //     console.log('hide');
-            //     self.$parent.sticky = 'sticky';
-            // });
+            // if (this.control.dataOptions.length <= 0) {
+                // this.addOption();
+            // }
         },
     }
 </script>
