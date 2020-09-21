@@ -104,6 +104,21 @@
                 @endif
               </div>
             </div>
+
+            <div class="custom-control custom-checkbox mb-4 required">
+              <input type="checkbox" class="custom-control-input" id="agree" name="agree" required>
+              <label class="custom-control-label text-dark" for="agree">
+                I agree to the <a href="/privacy-policy/" target="_blank">RWAV Privacy Policy</a>*
+              </label>
+
+              @if ($errors->has('agree'))
+                  <div class="invalid-feedback">
+                      <strong>{{ $errors->first('agree') }}</strong>
+                  </div>
+              @endif
+            </div>
+
+
             <button class="g-recaptcha submit" 
                     data-sitekey="{{config('services.recaptcha.key')}}"
                     data-callback='onSubmit' 

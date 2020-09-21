@@ -19,6 +19,9 @@ Route::get('/all-forms', ['as' => 'front.all_forms', 'uses' => 'FrontendControll
 Auth::routes(['verify' => true]);
 Route::get('/redirect-to', ['as' => 'redirect', 'uses' => 'UserController@redirectTo']);
 
+Route::view('/privacy-policy', 'privacy-policy')->name('privacy-policy');
+
+
 // Social login
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
