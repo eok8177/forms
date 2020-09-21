@@ -57,8 +57,14 @@
                 let i = Object.keys(this.instances).length;
                 _.forEach(template, function(row, rowKey) {
                     _.forEach(row.controls, function(control, controlKey) {
-                        template[rowKey].controls[controlKey].name += i;
-                        template[rowKey].controls[controlKey].fieldName += i;
+
+                        // add modificator to Name & set dynamicControl flag
+                        let modName = '_d'+i;
+                        template[rowKey].controls[controlKey].modName = modName;
+                        template[rowKey].controls[controlKey].dynamicControl = true;
+
+                        template[rowKey].controls[controlKey].name += modName;
+                        template[rowKey].controls[controlKey].fieldName += modName;
                     });
                 });
 

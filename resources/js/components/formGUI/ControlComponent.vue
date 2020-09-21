@@ -85,6 +85,10 @@
                 fields.replace(/\s*\{.*?\}\s*/g, function(match, key, value){
                     let fieldId = match.replace(/\{([\s\S]+)\:/g, "");
                     fieldId = fieldId.replace(/\}/g, "");
+
+                    // for Dynamic Fields
+                    if ('dynamicControl' in self.control)  fieldId += self.control.modName;
+
                     self.formula = Object.assign(self.formula, {
                         [fieldId]: {
                             key: key,
@@ -135,6 +139,10 @@
                     formula = formula.replace(/\s*\{.*?\}\s*/g, function(match, key, value) {
                         let fieldId = match.replace(/\{([\s\S]+)\:/g, "");
                         fieldId = fieldId.replace(/\}/g, "");
+
+                        // for Dynamic Fields
+                        if ('dynamicControl' in self.control)  fieldId += self.control.modName;
+
                         return self.formula[fieldId].value; //fill formula by values
                     });
                     try { // calculate formula
