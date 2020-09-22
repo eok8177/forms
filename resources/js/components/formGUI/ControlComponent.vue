@@ -33,6 +33,8 @@
                 _.each(this.control.condition.rules, (rule, key) => {
                     self.rules[key] = false;
 
+                    if ('dynamicControl' in self.control) rule.fieldId += self.control.modName;
+
                     // add Event to target field
                     $('body').on('change', '[name="'+rule.fieldId+'"]', function(){
                         let valid = false;
