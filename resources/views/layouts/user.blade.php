@@ -2,9 +2,14 @@
 
 @section('wrap')
 <div class="main">
+  @guest
+  <div class="main-holder px-xl-4">
+  @else
   <div class="main-holder pr-xl-4">
 
     @include('user.parts.sidebar')
+  @endguest
+
 
     <div id="content">
 
