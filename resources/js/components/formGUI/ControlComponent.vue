@@ -132,8 +132,9 @@
                 this.formula[fieldId].value = value;
                 let self = this;
                 let runCalc = true;
-                _.each(this.formula, (item) => {
-                    if (!item.value) runCalc = false;
+                _.each(this.formula, (item,index) => {
+                    // get value from HTML input
+                    if (!$('[name="'+index+'"]').val()) runCalc = false;
                 });
                 this.control.value = '';
                 if (runCalc) {
@@ -145,11 +146,16 @@
                         // for Dynamic Fields
                         if ('dynamicControl' in self.control)  fieldId += self.control.modName;
 
-                        return self.formula[fieldId].value; //fill formula by values
+                        return $('[name="'+fieldId+'"]').val(); // get value from HTML input
+                        // return self.formula[fieldId].value; //fill formula by values
                     });
                     try { // calculate formula
                         this.control.value = eval(formula);
                         this.control.value = Number((this.control.value).toFixed(2));
+
+                        // set value to input element in HTML & fire change event
+                        $('[name="'+this.control.fieldName+'"]').val(this.control.value);
+                        $('[name="'+this.control.fieldName+'"]').change();
                     } catch (e) {
                         console.log('Formula Error');
                     }
