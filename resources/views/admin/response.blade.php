@@ -74,7 +74,7 @@
         <span class="w-100 h-100 d-flex justify-content-center align-items-center" style="background-color: {{$entry->form->types->color}}; color: #fff;">{{$entry->form->type}}</span>
       </div>
       <div class="col-md-3">
-          {{$entry->form->title}} <span class="text-muted">{{@$entry->additional_field}}</span>
+          {{$entry->form->title}} <span class="text-muted">{!! $entry->additional_field !!}</span>
       </div>
       <div class="col-md-2">{{$entry->user->first_name}} {{$entry->user->last_name}}</div>
       <div class="col-md-2">{{$entry->created_at}}</div>

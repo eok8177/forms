@@ -59,9 +59,18 @@ class Application extends Model
     public function getAdditionalFieldAttribute()
     {
         $field = $this->form->additional_field;
-        $fields = $this->parseAppConfig($this->config)['fields'];
+        if (!$field) return false;
 
-        return $field ? $fields[$field]['value'] : false;
+        $fields = $this->parseAppConfig($this->config)['fields'];
+        if (!array_key_exists($field, $fields)) return false;
+
+        $value = implode(' ', (array) $fields[$field]['value']);
+        $value = trim($value);
+
+        if ($fields[$field]['type'] == 'file') {
+            return '<a href="/'.$value.'" target="_blank">file</a>';
+        }
+        return $value;
     }
 
 

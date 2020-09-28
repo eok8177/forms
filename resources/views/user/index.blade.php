@@ -30,7 +30,7 @@
                     <span class="title" style="background-color: {{$app->form->types->color}}">{{$app->form->type}}</span>
                   </td>
                   <td>
-                    <strong>{{$app->form->title}} {{$app->additional_field}}</strong>
+                    <strong>{{$app->form->title}} {!! $app->additional_field !!}</strong>
                   </td>
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Status:</strong></span>
@@ -85,7 +85,7 @@
                     <span class="title" style="background-color: {{$s_app->form->types->color}}">{{$s_app->form->type}}</span>
                   </td>
                   <td>
-                    <strong>{{$s_app->form->title}} {{$s_app->additional_field}}</strong>
+                    <strong>{{$s_app->form->title}} {!! $s_app->additional_field !!}</strong>
                   </td>
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Status:</strong></span>
