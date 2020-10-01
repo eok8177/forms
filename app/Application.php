@@ -201,7 +201,7 @@ class Application extends Model
         return $this->sendEmail('user_reject');
     }
 
-    public function managersSubmitEmail()
+    public function managerSubmitEmail()
     {
         return $this->sendEmail('manager_submit');
     }
