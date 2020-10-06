@@ -115,4 +115,76 @@ trait FormConfig
             'groups' => $groups
         ];
     }
+
+
+    public function parseApp($config)
+    {
+        $data = [];
+
+        $config = json_decode($config, true);
+
+        foreach ($config['sections'] as $section) {
+            if (array_key_exists('rows', $section)) {
+
+                if ($section['isDynamic']) {
+                    $sectionName = strval(preg_replace("/[^0-9]/", '', $section['name']));
+
+                    foreach ($section['instances'] as $idInst => $instance) {
+                        $instanceID = $sectionName.'_'.$idInst;
+
+                        foreach ($instance as $sectionID => $section) {
+
+                            foreach ($section['controls'] as $control) {
+
+                                $fieldID = strval(preg_replace("/[^0-9]/", '', $control['fieldName']));
+
+                                if ($control['type'] == 'address') {
+                                    for ($i=1; $i <= 5; $i++) {
+                                        if ($control['show'.$i] && @$control['value'.$i]) {
+                                            $data[$instanceID][$fieldID.$i] = $control['value'.$i];
+                                        }
+                                    }
+                                } else {
+                                    if ($control['type'] != 'html') {
+                                        $value = is_array($control['value']) ? null : $control['value'];
+                                        $data[$instanceID][$fieldID] = $value;
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+                } else { // not Dynamic fields
+
+                    foreach ($section['rows'] as $row) {
+                        if (array_key_exists('controls', $row)) {
+                            foreach ($row['controls'] as $control) {
+
+                                $fieldID = strval(preg_replace("/[^0-9]/", '', $control['fieldName']));
+
+                                if ($control['type'] == 'address') {
+                                    for ($i=1; $i <= 5; $i++) {
+                                        if ($control['show'.$i] && @$control['value'.$i]) {
+                                            $data[$fieldID.$i] = $control['value'.$i];
+                                        }
+                                    }
+                                } else {
+                                    if ($control['type'] != 'html') {
+                                        $value = is_array($control['value']) ? null : $control['value'];
+                                        $data[$fieldID] = $value;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        return $data;
+    }
+
 }

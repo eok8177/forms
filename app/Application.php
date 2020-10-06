@@ -101,34 +101,7 @@ class Application extends Model
 
     public function createEntry()
     {
-        $entry_id = 1;
-        $last = Entry::latest()->first();
-        if ($last) {
-            $entry_id = $last->entry_id + 1;
-        }
-        $this->entry_id = $entry_id;
-        $this->save();
-
-        $data = [];
-
-        foreach ($this->fields as $fieldId => $field) {
-            if ($field['type'] == 'address') {
-                foreach ($field as $key => $value) {
-                    if ($key != 'type') {
-                        $entry = $this->newEntry($fieldId, $key, $value);
-                        $data[$entry->id] = [
-                            'name' => $entry->name,
-                            'value' => $entry->value,
-                        ];
-                    }
-                }
-            } elseif ($field['type'] != 'html') {
-                if ($field['value'] !== NULL) {
-                    $entry = $this->newEntry($fieldId, $field['label'], $field['value']);
-                    $data[strval(preg_replace("/[^0-9]/", '', $fieldId))] = $entry->value;
-                }
-            }
-        }
+        $data = $this->parseApp($this->config);
 
         $responseStatusID = 2; // submitted == $this->status == 'submitted' && $app->to_be_approved == 0
         $responseStatusID = ($this->status == 'submitted' && $this->to_be_approved != 1) ? 6 : $responseStatusID; // 6 (= 2 + 4) - for those which are Submitted and do not require Acceptance
@@ -138,11 +111,13 @@ class Application extends Model
         $msg = [
             'user_id' => $this->user_id,
             'form_id' => $this->form_id,
-            'entry_id' => $entry_id,
+            'entry_id' => $this->id,
             'response_status_id' => $responseStatusID,
             'response_details' => $this->form->name,
             'form_response' => json_encode($data),
         ];
+
+        // return $data;
 
         $api = new ApiCall;
         $res = $api->newResponse($msg);
