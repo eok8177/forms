@@ -176,6 +176,7 @@
                         }
                     }
                     if (control.type == 'file' && control.value) { // save files
+                        // TODO file from Dynamic section
                         self.files[control.name] = {
                             name: control.label,
                             data: control.value,
