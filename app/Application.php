@@ -128,6 +128,7 @@ class Application extends Model
     {
         $responseStatusID = 32;
         $msg = [
+            'active_user_id' => Auth::user()->id,
             'user_id' => $this->user_id,
             'form_id' => $this->form_id,
             'entry_id' => $this->entry_id,
