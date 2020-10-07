@@ -109,6 +109,7 @@ class Application extends Model
         $responseStatusID = ($this->status == 'rejected') ? 8 : $responseStatusID; // Rejected
         // TODO * 32 - Deleted from Portal
         $msg = [
+            'active_user_id' => ($responseStatusID == 2 || $responseStatusID == 6) ? $this->user_id : auth()->user()->id,
             'user_id' => $this->user_id,
             'form_id' => $this->form_id,
             'entry_id' => $this->id,
@@ -116,8 +117,6 @@ class Application extends Model
             'response_details' => $this->form->name,
             'form_response' => json_encode($data),
         ];
-
-        // return $data;
 
         $api = new ApiCall;
         $res = $api->newResponse($msg);
