@@ -1,7 +1,14 @@
 @extends('admin.layout')
 
 @section('content')
-<h2 class="page-header">@lang('message.form') <small>{{ $form->name }}</small></h2>
+<div class="page-header row justify-content-between">
+  <h2>@lang('message.form') <small>{{ $form->name }}</small></h2>
+
+  <div>
+      <a href="{{ route('admin.form.edit', $form->id) }}" class="btn fa fa-pencil {{$form->has_apps ? 'disabled' : ''}}" title="Edit"></a>
+      <a class="btn fa fa-gear" href="{{route('admin.form.setting',$form->id)}}" title="Setings"></a>
+  </div>
+</div>
 
 {!! Form::open(['route' => ['admin.form.email.store', $form->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 

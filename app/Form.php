@@ -114,6 +114,13 @@ class Form extends Model
         return $this->parseFormConfig($this->config)['groups'];
     }
 
+    public function getFieldsAlias()
+    {
+        if (!$this->config) return false;
+
+        return $this->parseFormConfig($this->config)['full'];
+    }
+
 	public function getFieldsData()
 	{
 		$fieldsData = $this->parseFormConfig($this->config)['fields'];
@@ -121,6 +128,7 @@ class Form extends Model
 		foreach($fieldsData as $fKey => $fValue) {
 			$result[strval(preg_replace("/[^0-9]/", '', $fKey))] = [
 				'label' => $fValue['label'],
+                'alias' => $fValue['alias'],
 				'control_type' => $fValue['control_type'],
 			];
 		}

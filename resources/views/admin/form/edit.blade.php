@@ -1,7 +1,16 @@
 @extends('admin.layout')
 
 @section('content')
-<h2 class="page-header">@lang('message.form') <small>{{ $form->title }}</small></h2>
+<div class="page-header row justify-content-between">
+  <h2>@lang('message.form') <small>{{ $form->title }}</small></h2>
+
+  <div>
+      <a class="btn fa fa-gear" href="{{route('admin.form.setting',$form->id)}}" title="Setings"></a>
+      <a class="btn fa fa-envelope-o" href="{{route('admin.form.email',$form->id)}}" title="Email Notification"></a>
+  </div>
+</div>
+
+
 
 <form-builder-component :formdata="{{$form->config ?? 'null'}}" :formid="{{$form->id}}"></form-builder-component>
 

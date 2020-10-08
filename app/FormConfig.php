@@ -82,6 +82,7 @@ trait FormConfig
         $config = json_decode($config, true);
         $groups = [];
         $fields = [];
+        $full = [];
 
         foreach ($config['sections'] as $section) {
             if (array_key_exists('rows', $section)) {
@@ -91,15 +92,31 @@ trait FormConfig
                             if ($control['type'] == 'address') {
                                 for ($i=1; $i <= 5; $i++) {
                                     $groups[$section['label']][$control['fieldName'].$i] = $control['label'.$i];
+
+                                    $full[$section['label']][$control['fieldName'].'_'.$i] = [
+                                        "label" => $control['label'.$i],
+                                        "alias" => $control['alias'].$i,
+                                        "control_type" => $control['type'],
+                                    ];
+
                                     $fields[$control['fieldName'].'_'.$i] = [
                                         "label" => $control['label'.$i],
+                                        "alias" => $control['alias'].$i,
                                         "control_type" => $control['type'],
                                     ];
                                 }
                             } else {
                                 $groups[$section['label']][$control['fieldName']] = $control['label'];
+
+                                $full[$section['label']][$control['fieldName']] = [
+                                    "label" => $control['label'],
+                                    "alias" => $control['alias'],
+                                    "control_type" => $control['type'],
+                                ];
+
                                 $fields[$control['fieldName']] = [
                                     "label" => $control['label'],
+                                    "alias" => $control['alias'],
                                     "control_type" => $control['type'],
                                 ];
                             }
@@ -112,7 +129,8 @@ trait FormConfig
 
         return [
             'fields' => $fields,
-            'groups' => $groups
+            'groups' => $groups,
+            'full' => $full,
         ];
     }
 
