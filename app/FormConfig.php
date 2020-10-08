@@ -95,13 +95,13 @@ trait FormConfig
 
                                     $full[$section['label']][$control['fieldName'].'_'.$i] = [
                                         "label" => $control['label'.$i],
-                                        "alias" => $control['alias'].$i,
+                                        "alias" => array_key_exists('alias', $control) ? $control['alias'].$i : $control['label'].$i,
                                         "control_type" => $control['type'],
                                     ];
 
                                     $fields[$control['fieldName'].'_'.$i] = [
                                         "label" => $control['label'.$i],
-                                        "alias" => $control['alias'].$i,
+                                        "alias" => array_key_exists('alias', $control) ? $control['alias'].$i : $control['label'].$i,
                                         "control_type" => $control['type'],
                                     ];
                                 }
@@ -110,13 +110,13 @@ trait FormConfig
 
                                 $full[$section['label']][$control['fieldName']] = [
                                     "label" => $control['label'],
-                                    "alias" => $control['alias'],
+                                    "alias" => array_key_exists('alias', $control) ? $control['alias'] : $control['label'],
                                     "control_type" => $control['type'],
                                 ];
 
                                 $fields[$control['fieldName']] = [
                                     "label" => $control['label'],
-                                    "alias" => $control['alias'],
+                                    "alias" => array_key_exists('alias', $control) ? $control['alias'] : $control['label'],
                                     "control_type" => $control['type'],
                                 ];
                             }
