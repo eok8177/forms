@@ -148,6 +148,7 @@
         },
         mounted() {
             this.setValue(this.value);
+            console.log('FormBuilder: mounted src/FormBuilder');
         }
     }
 </script>

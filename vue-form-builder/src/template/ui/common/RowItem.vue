@@ -11,6 +11,7 @@
                    @dblclick.native="openConfig(control)"
                    @removeItem="removeItem"
                    :ref="control.name"
+                   :data-alias="control.alias"
                    :label-position="labelPosition">
         </component>
     </div>
@@ -48,6 +49,8 @@
                 controlInfo.name = _.domUniqueID('f_');
                 controlInfo.label = FORM_CONSTANTS.Type[controlType].label;
                 controlInfo.fieldName = controlInfo.name; // same for both
+
+                controlInfo.alias = controlInfo.label + '_' + controlInfo.name; // unique for alias
 
                 if (controlInfo.type == 'html') { // set full width to HTML Block
                     controlInfo.className = 'col-md-12';
@@ -215,6 +218,12 @@
                 // check if existed name in this section
                 if (control.fieldName !== oldControl.fieldName && ControlHandler.isControlNameExisted(self.row.name, control.fieldName)) {
                     SethPhatToaster.error("This field Name is already existed in the current section.");
+                    return;
+                }
+
+                // check if existed alias in this section
+                if (control.alias !== oldControl.alias && ControlHandler.isControlAliasExisted(self.row.name, control.alias)) {
+                    SethPhatToaster.error("This field Alias is already existed in the current section.");
                     return;
                 }
 

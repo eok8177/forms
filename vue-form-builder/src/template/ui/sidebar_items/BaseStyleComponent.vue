@@ -23,6 +23,11 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label>Alias</label>
+            <input type="text" class="form-control" v-model="control.alias">
+        </div>
+
         <div class="row mt-2">
             <div class="col-md-12">
                 <div class="form-group">

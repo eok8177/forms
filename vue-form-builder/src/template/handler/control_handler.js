@@ -17,6 +17,11 @@ ControlHandler.isControlNameExisted = function (rowID, controlName) {
     return controls.length >= 1;
 };
 
+ControlHandler.isControlAliasExisted = function (rowID, alias) {
+    var controls = $(`#${rowID}`).parents(".sectionBody").find(`[data-alias='${alias}']`);
+    return controls.length >= 1;
+};
+
 export {
     ControlHandler
 }

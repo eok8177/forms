@@ -1,12 +1,7 @@
 <template>
     <div class="builder">
-<!--         <div class="my-3 text-right">
-            <div v-if="status" class="text-success mb-1">Config updated</div>
-            <button class="btn btn-secondary" @click="saveConfig()">Save Form Settings</button>
-        </div> -->
         <form-builder type="template" v-model="form"></form-builder>
     </div>
-    
 </template>
 
 <script>
@@ -24,6 +19,7 @@
         },
         mounted() {
             this.form = this.formdata;
+            console.log('FormBuilder: mounted resources/js/components/FormBuilderComponent');
         },
         methods: {
             saveConfig: function() {
