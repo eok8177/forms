@@ -115,14 +115,13 @@ class Application extends Model
             'form_id' => $this->form_id,
             'entry_id' => $this->id,
             'response_status_id' => $responseStatusID,
-            'response_details' => $this->form->name
+            'response_details' => $this->form->name,
+			'form_response' => json_encode($data)
         ];
         
         // if rejected or accepted - notes field is mandatory
         if ($this->status == 'accepted' || $this->status == 'rejected') {
             $msg['processed_comments'] = isset($this->approvs()->latest()->first()->notes) ? $this->approvs()->latest()->first()->notes : 'no reason specified';
-        } else {
-            $msg['form_response'] = json_encode($data);
         }
 
         $api = new ApiCall;
