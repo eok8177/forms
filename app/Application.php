@@ -107,6 +107,7 @@ class Application extends Model
         $responseStatusID = ($this->status == 'submitted' && $this->to_be_approved != 1) ? 6 : $responseStatusID; // 6 (= 2 + 4) - for those which are Submitted and do not require Acceptance
         $responseStatusID = ($this->status == 'accepted') ? 4 : $responseStatusID; // Accepted
         $responseStatusID = ($this->status == 'rejected') ? 8 : $responseStatusID; // Rejected
+        
         // TODO * 32 - Deleted from Portal
         $msg = [
             'active_user_id' => ($responseStatusID == 2 || $responseStatusID == 6) ? $this->user_id : auth()->user()->id,
@@ -114,9 +115,15 @@ class Application extends Model
             'form_id' => $this->form_id,
             'entry_id' => $this->id,
             'response_status_id' => $responseStatusID,
-            'response_details' => $this->form->name,
-            'form_response' => json_encode($data),
+            'response_details' => $this->form->name
         ];
+        
+        // if rejected or accepted - notes field is mandatory
+        if ($this->status == 'accepted' || $this->status == 'rejected') {
+            $msg['processed_comments'] = isset($this->approvs()->latest()->first()->notes) ? $this->approvs()->latest()->first()->notes : 'no reason specified';
+        } else {
+            $msg['form_response'] = json_encode($data);
+        }
 
         $api = new ApiCall;
         $res = $api->newResponse($msg);
