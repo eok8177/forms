@@ -44,20 +44,6 @@
       </div>
 
       <div class="custom-control custom-checkbox custom-control-inline">
-        {!! Form::hidden('draft', 0) !!}
-        {!! Form::checkbox('draft', 1, $form->draft, ['class' => 'custom-control-input', 'id' => 'draft']) !!}
-        <label for="draft" class="custom-control-label">{{Lang::get('message.draft')}}</label>
-      </div>
-
-      <div class="custom-control custom-checkbox custom-control-inline">
-        {!! Form::hidden('is_trash', 0) !!}
-        {!! Form::checkbox('is_trash', 1, $form->is_trash, ['class' => 'custom-control-input', 'id' => 'is_trash']) !!}
-        <label for="is_trash" class="custom-control-label">{{Lang::get('message.trash')}}</label>
-      </div>
-
-      <hr>
-
-      <div class="custom-control custom-checkbox custom-control-inline">
         {!! Form::hidden('to_be_approved', 0) !!}
         {!! Form::checkbox('to_be_approved', 1, $form->to_be_approved, ['class' => 'custom-control-input', 'id' => 'to_be_approved']) !!}
         <label for="to_be_approved" class="custom-control-label">To be Approved/Rejected by admin</label>
