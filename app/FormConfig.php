@@ -80,9 +80,10 @@ trait FormConfig
     public function parseFormConfig($config)
     {
         $config = json_decode($config, true);
-        $groups = [];
-        $fields = [];
-        $full = [];
+        $groups = []; // for macros: email & additional field
+        $fields = []; // for API when form activated
+        $full = []; // with groups & alias for admin/form/settings Alias show
+        $alias = []; // parse alias for unque check
 
         foreach ($config['sections'] as $section) {
             if (array_key_exists('rows', $section)) {
@@ -91,35 +92,34 @@ trait FormConfig
                         foreach ($row['controls'] as $control) {
                             if ($control['type'] == 'address') {
                                 for ($i=1; $i <= 5; $i++) {
-                                    $groups[$section['label']][$control['fieldName'].$i] = $control['label'.$i];
-
-                                    $full[$section['label']][$control['fieldName'].'_'.$i] = [
-                                        "label" => $control['label'.$i],
-                                        "alias" => array_key_exists('alias', $control) ? $control['alias'].$i : $control['label'].$i,
-                                        "control_type" => $control['type'],
-                                    ];
+                                    // $groups[$section['label']][$control['fieldName'].$i] = $control['label'.$i];
 
                                     $fields[$control['fieldName'].'_'.$i] = [
+                                        "fieldName" => $control['fieldName'],
                                         "label" => $control['label'.$i],
-                                        "alias" => array_key_exists('alias', $control) ? $control['alias'].$i : $control['label'].$i,
+                                        "alias" => array_key_exists('alias', $control) ? $control['alias'].$i : ($control['label'] ? $control['label'].$i : $control['fieldName'].$i),
                                         "control_type" => $control['type'],
                                     ];
                                 }
                             } else {
-                                $groups[$section['label']][$control['fieldName']] = $control['label'];
-
-                                $full[$section['label']][$control['fieldName']] = [
-                                    "label" => $control['label'],
-                                    "alias" => array_key_exists('alias', $control) ? $control['alias'] : $control['label'],
-                                    "control_type" => $control['type'],
-                                ];
+                                // $groups[$section['label']][$control['fieldName']] = $control['label'];
 
                                 $fields[$control['fieldName']] = [
+                                    "fieldName" => $control['fieldName'],
                                     "label" => $control['label'],
-                                    "alias" => array_key_exists('alias', $control) ? $control['alias'] : $control['label'],
+                                    "alias" => array_key_exists('alias', $control) ? $control['alias'] : ($control['label'] ? $control['label'] : $control['fieldName']),
                                     "control_type" => $control['type'],
                                 ];
                             }
+                            $groups[$section['label']][$control['fieldName']] = $control['label'];
+                            // address block has One alias
+                            $full[$section['label']][$control['fieldName']] = [
+                                "fieldName" => $control['fieldName'],
+                                "label" => $control['label'] ? $control['label'] : $control['fieldName'],
+                                "alias" => array_key_exists('alias', $control) ? $control['alias'] : $control['label'],
+                                "control_type" => $control['type'],
+                            ];
+                            $alias[$control['fieldName']] = array_key_exists('alias', $control) ? $control['alias'] : ($control['label'] ? $control['label'] : $control['fieldName']);
                         }
                     }
                 }
@@ -131,10 +131,11 @@ trait FormConfig
             'fields' => $fields,
             'groups' => $groups,
             'full' => $full,
+            'alias' => $alias,
         ];
     }
 
-
+    // for API when submit form
     public function parseApp($config)
     {
         $data = [];
@@ -203,6 +204,32 @@ trait FormConfig
         }
 
         return $data;
+    }
+
+
+    // update alias value in Form config (json) from admin/form/settings
+    public function updateConfigAlias($config, $alias)
+    {
+        $config = json_decode($config, true);
+
+        foreach ($config['sections'] as $sectionID => $section) {
+            if (array_key_exists('rows', $section)) {
+
+                foreach ($section['rows'] as $rowID => $row) {
+                    if (array_key_exists('controls', $row)) {
+                        foreach ($row['controls'] as $controlID => $control) {
+                            $fieldID = $control['fieldName'];
+                            if (array_key_exists($fieldID, $alias)) {
+                                $config['sections'][$sectionID]['rows'][$rowID]['controls'][$controlID]['alias'] = $alias[$fieldID];
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return json_encode($config);
     }
 
 }

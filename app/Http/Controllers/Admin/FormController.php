@@ -143,4 +143,10 @@ class FormController extends Controller
 
         return redirect()->route('admin.form.index')->with('success', 'Form duplicated');
     }
+
+    public function alias(Request $request, Form $form)
+    {
+        $form->updateAlias($request->except(['_method','_token']));
+        return redirect()->route('admin.form.setting', ['form' => $form->id])->with('success', 'Form alias updated');
+    }
 }

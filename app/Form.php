@@ -92,6 +92,18 @@ class Form extends Model
         return $active;
     }
 
+    public function notUniqueAlias()
+    {
+        $notUnique = false;
+        $alias = $this->parseFormConfig($this->config)['alias'];
+
+        $counts = array_count_values($alias);
+        foreach ($counts as $name => $count) {
+            if ($count > 1) $notUnique = true;
+        }
+        return $notUnique;
+    }
+
     public function getTypeAttribute()
     {
         return $this->types->name;
@@ -134,5 +146,13 @@ class Form extends Model
 		}
 		return $result;
 	}
+
+
+    public function updateAlias($alias)
+    {
+        $this->config = $this->updateConfigAlias($this->config, $alias);
+        $this->save();
+        return;
+    }
 
 }

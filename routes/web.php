@@ -49,6 +49,7 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
     Route::put('form/{form}/email', ['as' => 'form.email.store', 'uses' => 'FormController@emailStore']);
     Route::get('form/{form}/copy', ['as' => 'form.copy', 'uses' => 'FormController@copy']);
     Route::post('ajax/form/{id}', ['as' => 'ajax.form', 'uses' => 'AjaxController@form']);
+    Route::put('form/{form}/alias', ['as' => 'form.alias', 'uses' => 'FormController@alias']);
 
     Route::resource('page', 'PageController');
     Route::resource('faq', 'FaqController');

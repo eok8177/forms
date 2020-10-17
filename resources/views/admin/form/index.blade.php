@@ -47,6 +47,7 @@
               {{$form->id}} - {{$form->name}}
               {{$form->draft ? ' [draft]' : ''}}
               {{$form->completed() ? '' : ' [not completed]'}}
+              {{$form->notUniqueAlias() ? ' [aliases are NOT unique]' : ''}}
             </a>
         </div>
 
@@ -58,7 +59,7 @@
           <a href="{{ route('admin.form.edit', $form->id) }}" class="btn fa fa-pencil {{$form->has_apps ? 'disabled' : ''}}" title="Edit"></a>
 
           <a href="{{route('admin.ajax.status', ['id' => $form->id, 'model' => 'Form', 'field' => 'draft'])}}" 
-            class="status btn fa {{$form->active() ? 'fa-check-circle' : 'fa-circle-o'}} {{$form->completed() ? '' : 'is-disabled'}} reload" 
+            class="status btn fa {{$form->active() ? 'fa-check-circle' : 'fa-circle-o'}} {{$form->completed() ? '' : 'is-disabled'}} reload {{$form->notUniqueAlias() ? 'is-disabled' : ''}}" 
             title="Toggle Draft"
           ></a>
           <a class="btn fa fa-gear" href="{{route('admin.form.setting',$form->id)}}" title="Setings"></a>

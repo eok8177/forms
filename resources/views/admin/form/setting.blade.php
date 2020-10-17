@@ -11,7 +11,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-8 col-lg-6">
     {!! Form::open(['route' => ['admin.form.update', $form->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 
       <div class="form-group">
@@ -43,17 +43,17 @@
         {!! Form::textarea('description', $form->description, ['class' => 'form-control', 'rows' => '2']) !!}
       </div>
 
-      <div class="custom-control custom-checkbox custom-control-inline">
+      {{-- <div class="custom-control custom-checkbox custom-control-inline">
         {!! Form::hidden('draft', 0) !!}
         {!! Form::checkbox('draft', 1, $form->draft, ['class' => 'custom-control-input', 'id' => 'draft']) !!}
         <label for="draft" class="custom-control-label">{{Lang::get('message.draft')}}</label>
-      </div>
+      </div> --}}
 
-      <div class="custom-control custom-checkbox custom-control-inline">
+      {{-- <div class="custom-control custom-checkbox custom-control-inline">
         {!! Form::hidden('is_trash', 0) !!}
         {!! Form::checkbox('is_trash', 1, $form->is_trash, ['class' => 'custom-control-input', 'id' => 'is_trash']) !!}
         <label for="is_trash" class="custom-control-label">{{Lang::get('message.trash')}}</label>
-      </div>
+      </div> --}}
 
       <hr>
 
@@ -157,14 +157,39 @@
     {!! Form::close() !!}
   </div>
 
-  <div class="col-md-4">
-    <h5>Labels <span class="text-muted"><---></span> Alias</h5>
-    @foreach($form->getFieldsAlias() as $section => $fields)
-      <h6 class="text-muted">{{$section}}</h6>
-      @foreach($fields as $field)
-        <p>{{$field['label']}} <span class="text-muted"><---></span> {{$field['alias']}}</p>
-      @endforeach
-    @endforeach
+  <div class="col-md-4 col-lg-6">
+    {!! Form::open(['route' => ['admin.form.alias', $form->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+      <table class="table" id="aliases">
+        <thead>
+          <tr>
+            <th>Labels</th>
+            <th>Alias</th>
+          </tr>
+        </thead>
+
+        @foreach($form->getFieldsAlias() as $section => $fields)
+        <thead class="thead-light">
+          <tr>
+            <th colspan="2">{{$section}}</th>
+          </tr>
+        </thead>
+          @foreach($fields as $field)
+            <tr>
+              <td width="30%">{{$field['label']}}</td>
+              <td width="70%">
+                <input type="text" name="{{$field['fieldName']}}" value="{{$field['alias']}}" class="form-control">
+              </td>
+            </tr>
+          @endforeach
+        @endforeach
+
+      </table>
+
+      <div class="form-group mt-4">
+        <button type="submit" class="btn btn-outline-secondary">Update alias</button>
+      </div>
+    {!! Form::close() !!}
+
   </div>
 </div>
 
@@ -179,6 +204,16 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
 <script>
+  function highlightDuplicates() {
+    $('#aliases').find('input').each(function() {
+      if ($('#aliases').find('input[value="' + $(this).val() + '"]').length > 1) {
+        $(this).addClass('is-invalid');
+      } else {
+        $(this).removeClass('is-invalid');
+      }
+    });
+  }
+
   $(function () {
       $('#datetimepicker1').datetimepicker({
         format: 'YYYY-MM-DD HH:mm:ss'
@@ -196,6 +231,13 @@
       $('#collapseShedule').on('hidden.bs.collapse', function () {
         $("#collapseShedule input, #collapseShedule textarea").prop('required',false);
       });
+
+
+      highlightDuplicates();
+      $('#aliases').find('input').bind('input',function() {
+          $(this).attr('value',this.value)
+      });
+      $('#aliases').find('input').on('input',highlightDuplicates);
   });
 </script>
 @endpush
