@@ -21,7 +21,7 @@ class FormController extends Controller
         $search = $request->input('search', false);
 		$trash = $request->input('trash', 0);
         $form_type_id = $request->input('form_type_id', 0);
-		$forms = Form::search($search, $trash);
+		$forms = Form::search($search, $trash)->orderBy('id', 'desc');
 
         if ($form_type_id > 0) {
             $forms->where('form_type_id', $form_type_id);
