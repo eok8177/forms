@@ -1,13 +1,11 @@
 <template>
     <div class="mt-2">
         <div class="col-md-12 rowItem" v-if="value.isDynamic">
-            <div class="float-right" v-if="!admin">
-                <span class="add text-success" @click="addDynamicObj"><i class="fa fa-plus-circle"></i></span>
-            </div>
+
 
             <div class="rowDynamicItem" v-for="(instance, index) in value.instances" :key="index" :class="'rowDynamic_' + index">
                 <div class="float-right" v-if="!admin">
-                    <span class="remove text-danger" @click="removeDynamicObj(index)"><i class="fa fa-times-circle"></i></span>
+                    <button type="button" class="remove btn danger" @click="removeDynamicObj(index)">delete</button>
                 </div>
 
                 <hr  v-if="index > 0">
@@ -19,6 +17,10 @@
                                        :label-position="value.labelPosition">
                     </control-component>
                 </div>
+            </div>
+
+            <div class="text-right mb-4" v-if="!admin">
+                <button type="button" class="add btn success" @click="addDynamicObj">add new</button>
             </div>
         </div>
 

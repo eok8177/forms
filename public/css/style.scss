@@ -519,8 +519,11 @@ h4{
     	text-decoration: none;
     	opacity: 0.8;
     }
-    &.style01{
+    &.style01, &.danger{
     	background: $color03;
+    }
+    &.success {
+    	background: $link-color;
     }
 }
 input[type=submit] {
