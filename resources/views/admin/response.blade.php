@@ -79,9 +79,16 @@
       <div class="col-md-2">{{$entry->user->first_name}} {{$entry->user->last_name}}</div>
       <div class="col-md-2">{{$entry->created_at}}</div>
       <div class="col-md-2 text-center">
-        {{$entry->status}}
         @if($entry->status == 'submitted' && $entry->to_be_approved == 1)
-          <span class="small d-block">must be approved</span>
+          For Review
+        @elseif($entry->status == 'rejected')
+          Rejected
+        @elseif($entry->status == 'draft')
+          Draft
+        @elseif($entry->status == 'accepted')
+          Accepted
+        @else
+          Submitted
         @endif
       </div>
       <div class="col-md-1 text-center">

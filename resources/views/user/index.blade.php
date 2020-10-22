@@ -36,8 +36,10 @@
                     <span class="hide-lg"><strong>Status:</strong></span>
                     @if($app->status == 'rejected')
                       Review Resubmit
+                    @elseif($app->status == 'draft')
+                      Draft
                     @else
-                      {{$app->status}}
+                      Submitted
                     @endif
                   </td>
                   <td class="inline-block">
@@ -89,7 +91,13 @@
                   </td>
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Status:</strong></span>
-                      {{$s_app->status}}
+                      @if($s_app->status == 'rejected')
+                        Review Resubmit
+                      @elseif($s_app->status == 'draft')
+                        Draft
+                      @else
+                        Submitted
+                      @endif
                   </td>
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Date:</strong></span>

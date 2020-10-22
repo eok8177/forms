@@ -82,8 +82,14 @@
             <div class="col-md-2 text-center">
               @if($app->status == 'submitted' && $app->to_be_approved == 1)
                 For Review
+              @elseif($app->status == 'rejected')
+                Rejected
+              @elseif($app->status == 'draft')
+                Draft
+              @elseif($app->status == 'accepted')
+                Accepted
               @else
-                {{$app->status}}
+                Submitted
               @endif
             </div>
             <div class="col-md-1 text-center">

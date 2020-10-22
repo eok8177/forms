@@ -34,14 +34,11 @@
                   </td>
                   <td>
                     @if($app->status == 'rejected')
-                      {{$app->status}}
-
-                        @foreach($app->approvs as $approv)
-                          <small>( {{$approv->notes}} )</small>
-                        @endforeach
-
+                      Review Resubmit
+                    @elseif($app->status == 'draft')
+                      Draft
                     @else
-                      {{$app->status}}
+                      Submitted
                     @endif
                   </td>
                   <td>
