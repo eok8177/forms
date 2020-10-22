@@ -156,6 +156,9 @@ class UserController extends Controller
         $api = new ApiCall;
         $data = $api->deleteUser($user);
 
+        $user->email = $user->email.'_'.time();
+        $user->save();
+
         $user->delete();
 
         return response()->json([
