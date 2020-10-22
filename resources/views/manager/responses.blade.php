@@ -80,9 +80,10 @@
             <div class="col-md-2">{{$app->user->first_name}} {{$app->user->last_name}}</div>
             <div class="col-md-2">{{$app->created_at}}</div>
             <div class="col-md-2 text-center">
-              {{$app->status}}
               @if($app->status == 'submitted' && $app->to_be_approved == 1)
-                <span class="small d-block">must be approved</span>
+                For Review
+              @else
+                {{$app->status}}
               @endif
             </div>
             <div class="col-md-1 text-center">
