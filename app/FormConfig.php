@@ -18,6 +18,8 @@ trait FormConfig
                     foreach ($section['instances'] as $idInst => $instance) {
                         foreach ($instance as $section) {
                             foreach ($section['controls'] as $control) {
+                                if ($control['type'] == 'html') continue;
+
                                 $fields[$idInst.'_'.$control['fieldName']]['type'] = $control['type'];
 
                                 if (array_key_exists('isEmail', $control) && $control['isEmail']) {
@@ -42,6 +44,8 @@ trait FormConfig
                     foreach ($section['rows'] as $row) {
                         if (array_key_exists('controls', $row)) {
                             foreach ($row['controls'] as $control) {
+
+                                if ($control['type'] == 'html') continue;
 
                                 $fields[$control['fieldName']]['type'] = $control['type'];
 
@@ -90,9 +94,10 @@ trait FormConfig
                 foreach ($section['rows'] as $row) {
                     if (array_key_exists('controls', $row)) {
                         foreach ($row['controls'] as $control) {
+                            if ($control['type'] == 'html') continue;
+
                             if ($control['type'] == 'address') {
                                 for ($i=1; $i <= 5; $i++) {
-                                    // $groups[$section['label']][$control['fieldName'].$i] = $control['label'.$i];
 
                                     $fields[$control['fieldName'].'_'.$i] = [
                                         "fieldName" => $control['fieldName'],
@@ -102,7 +107,6 @@ trait FormConfig
                                     ];
                                 }
                             } else {
-                                // $groups[$section['label']][$control['fieldName']] = $control['label'];
 
                                 $fields[$control['fieldName']] = [
                                     "fieldName" => $control['fieldName'],
@@ -154,6 +158,7 @@ trait FormConfig
                         foreach ($instance as $sectionID => $section) {
 
                             foreach ($section['controls'] as $control) {
+                                if ($control['type'] == 'html') continue;
 
                                 $fieldID = strval(preg_replace("/[^0-9]/", '', $control['fieldName']));
 
@@ -179,6 +184,7 @@ trait FormConfig
                     foreach ($section['rows'] as $row) {
                         if (array_key_exists('controls', $row)) {
                             foreach ($row['controls'] as $control) {
+                                if ($control['type'] == 'html') continue;
 
                                 $fieldID = strval(preg_replace("/[^0-9]/", '', $control['fieldName']));
 
