@@ -1,7 +1,8 @@
 <template>
     <div class="mt-2">
-        <div class="col-md-12 rowItem" v-if="value.isDynamic">
+        <div class="sub-header" v-html="value.subHeader"></div>
 
+        <div class="col-md-12 rowItem" v-if="value.isDynamic">
 
             <div class="rowDynamicItem" v-for="(instance, index) in value.instances" :key="index" :class="'rowDynamic_' + index">
                 <div class="float-right" v-if="!admin">
@@ -31,6 +32,8 @@
                                :label-position="value.labelPosition">
             </control-component>
         </div>
+
+        <div class="sub-footer" v-html="value.subFooter"></div>
 
     </div>
 </template>
