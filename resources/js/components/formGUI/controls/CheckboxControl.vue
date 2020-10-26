@@ -17,18 +17,19 @@
             </label>
             <span v-if="value.required" style="color:red;">*</span>
         </div>
-        <div class="form-check" v-else :class="{'required':value.required} + value.cssClass">
+        <div class="custom-control custom-switch" v-else :class="{'required':value.required} + value.cssClass">
             <input type="checkbox"
-               class="form-check-input"
+               class="custom-control-input"
                :id = "value.name + '_gui_control'"
                :readonly="value.readonly"
                :name="value.fieldName"
+               :required="value.required"
                value="1"
                :disabled="admin"
                v-model="value.value" />
 
             <label :for="value.name + '_gui_control'"
-                   class="form-check-label"
+                   class="custom-control-label"
                    :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}"
                    v-html="value.label">
             </label>

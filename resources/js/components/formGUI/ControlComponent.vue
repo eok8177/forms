@@ -29,6 +29,7 @@
 
             if (this.control.isConditional) {
                 this.show = this.control.condition.action_type == 'show' ? false : true;
+                this.control.invisible = !this.show;
 
                 _.each(this.control.condition.rules, (rule, key) => {
                     self.rules[key] = false;
@@ -127,6 +128,7 @@
                     }
                 });
                 this.show = this.control.condition.action_type == 'show' ? show : !show;
+                this.control.invisible = !this.show;
             },
             calcField(fieldId, value) {
                 this.formula[fieldId].value = value;

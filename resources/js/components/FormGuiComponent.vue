@@ -156,8 +156,6 @@
                         $('body [name="'+control.name+'"]').removeClass('is-invalid');
                         if (control.required) {
                             if (control.type != 'address' && !control.value) {
-                                self.validForm = false;
-                                self.validSection = false;
                                 valid = false
                                 $('body [name="'+control.name+'"]').addClass('is-invalid');
                             }
@@ -166,12 +164,15 @@
                                 for (var j = 1; j <= 5; j++) {
                                     $('body [name="'+control.name+j+'"]').removeClass('is-invalid');
                                     if (control['show'+j] && !control['value'+j] && j != 2) {
-                                        self.validForm = false;
-                                        self.validSection = false;
                                         valid = false
                                         $('body [name="'+control.name+j+'"]').addClass('is-invalid');
                                     }
                                 }
+                            }
+                            if (control.invisible) valid = true; // disable validation on condition field
+                            if (!valid) {
+                                self.validSection = false;
+                                self.validForm = false;
                             }
                         }
                     }
@@ -211,6 +212,7 @@
                     }
 
                     if (!valid) {
+                        console.log('not valid: '+control.label);
                         $('#'+self.form.sections[section].name + '_gui_body').collapse('show');
                     }
                 });
