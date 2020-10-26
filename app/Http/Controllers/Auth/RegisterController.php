@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             // 'login' => 'required|string|max:255|unique:users',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users|emailcheck',
             'password' => 'required|string|min:4|confirmed',
             'g-recaptcha-response' => 'required|recaptcha',
             'agree' => 'required'
@@ -64,7 +64,8 @@ class RegisterController extends Controller
     {
         return [
            'g-recaptcha-response.recaptcha' => 'Captcha verification failed',
-           'g-recaptcha-response.required' => 'Please complete the captcha'
+           'g-recaptcha-response.required' => 'Please complete the captcha',
+           'email.emailcheck' => 'Not valid email address',
        ];
     }
 
