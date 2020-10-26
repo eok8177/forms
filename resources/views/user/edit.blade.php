@@ -23,7 +23,7 @@
 
           <div class="form-group">
             <label for="email">{{Lang::get('message.email')}}</label>
-            <input type="text" name="email" value="{{$user->email}}" class="form-control">
+            <input type="text" readonly value="{{$user->email}}" class="form-control">
           </div>
 
           <p>&nbsp;</p>
