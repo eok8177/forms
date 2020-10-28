@@ -15,6 +15,8 @@
             </section-component>
         </div>
 
+        <div class="d-flex justify-content-end mb-2 text-danger">{{errorMsg}}</div>
+
         <div class="d-flex justify-content-end mb-2 btns-right">
             <button v-if="userid > 0" @click="SaveApps()" class="save">Save</button>
             <button @click="Submit()" class="submit">Submit</button>
@@ -81,6 +83,7 @@
             appID: '',
             admin: false,
             msg: '',
+            errorMsg: '',
         }),
         methods: {
             updateInstances(index, instance) {
@@ -121,6 +124,8 @@
                 if (this.validForm) {
                     this.status = 'submitted';
                     this.SaveApps();
+                } else {
+                    this.errorMsg = 'Please address issues highlighted and try again';
                 }
             },
 
@@ -154,6 +159,7 @@
                     let valid = true;
                     if (control.type != 'file' && control.type != 'html') {
                         $('body [name="'+control.name+'"]').removeClass('is-invalid');
+                        $('body #'+control.name).hide();
                         if (control.required) {
                             if (control.type != 'address' && !control.value) {
                                 valid = false
@@ -173,6 +179,7 @@
                             if (!valid) {
                                 self.validSection = false;
                                 self.validForm = false;
+                                $('body #'+control.name).show();
                             }
                         }
                     }

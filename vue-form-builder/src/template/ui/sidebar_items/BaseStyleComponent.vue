@@ -45,6 +45,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="form-group">
+            <label>Error message</label>
+            <input type="text" class="form-control" v-model="control.errorMsg">
+        </div>
     </div>
 </template>
 

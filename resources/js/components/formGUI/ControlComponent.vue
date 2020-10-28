@@ -3,6 +3,8 @@
         <component :is="controlInstance" v-model="control" :label-position="labelPosition"></component>
 
         <div v-if="control.description" class="description">{{control.description}}</div>
+
+        <div :id="control.name" class="text-danger" style="display: none;">{{control.errorMsg}}</div>
     </div>
 </template>
 

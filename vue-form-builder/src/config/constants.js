@@ -88,7 +88,8 @@ FORM_CONSTANTS.Control = {
     text: '', // HTML Block
     cssClass: '', // custom CSS Class
 
-    isCalculated: false // is isCalculated data or not
+    isCalculated: false, // is isCalculated data or not
+    errorMsg: 'Please fill this' // msg when control not valid
 };
 
 FORM_CONSTANTS.Type = {
