@@ -4,7 +4,7 @@
 
         <div v-if="control.description" class="description">{{control.description}}</div>
 
-        <div :id="control.name" class="text-danger" style="display: none;">{{control.errorMsg}}</div>
+        <div :class="control.name" class="text-danger error-msg" style="display: none;">{{control.errorMsg}}</div>
     </div>
 </template>
 

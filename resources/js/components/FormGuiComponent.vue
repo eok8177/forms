@@ -18,8 +18,8 @@
         <div class="d-flex justify-content-end mb-2 text-danger">{{errorMsg}}</div>
 
         <div class="d-flex justify-content-end mb-2 btns-right">
-            <button v-if="userid > 0" @click="SaveApps()" class="save">Save</button>
-            <button @click="Submit()" class="submit">Submit</button>
+            <button v-if="userid > 0" @click="SaveApps()" class="save" :disabled="disabledBtn">Save</button>
+            <button @click="Submit()" class="submit" :disabled="disabledBtn">Submit</button>
         </div>
 
         <div class="d-flex justify-content-end mb-2">
@@ -84,6 +84,8 @@
             admin: false,
             msg: '',
             errorMsg: '',
+            disabledBtn: false,
+            regEmail: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
         }),
         methods: {
             updateInstances(index, instance) {
@@ -159,10 +161,10 @@
                     let valid = true;
                     if (control.type != 'file' && control.type != 'html') {
                         $('body [name="'+control.name+'"]').removeClass('is-invalid');
-                        $('body #'+control.name).hide();
+                        $('body .error-msg.'+control.name).hide();
                         if (control.required) {
                             if (control.type != 'address' && !control.value) {
-                                valid = false
+                                valid = false;
                                 $('body [name="'+control.name+'"]').addClass('is-invalid');
                             }
                             // Validate Address block
@@ -170,16 +172,22 @@
                                 for (var j = 1; j <= 5; j++) {
                                     $('body [name="'+control.name+j+'"]').removeClass('is-invalid');
                                     if (control['show'+j] && !control['value'+j] && j != 2) {
-                                        valid = false
+                                        valid = false;
                                         $('body [name="'+control.name+j+'"]').addClass('is-invalid');
                                     }
+                                }
+                            }
+                            if (control.isEmail) {
+                                if (!self.regEmail.test(control.value)) {
+                                    valid = false;
+                                    $('body [name="'+control.name+'"]').addClass('is-invalid');
                                 }
                             }
                             if (control.invisible) valid = true; // disable validation on condition field
                             if (!valid) {
                                 self.validSection = false;
                                 self.validForm = false;
-                                $('body #'+control.name).show();
+                                $('body .error-msg.'+control.name).show(); //show error message
                             }
                         }
                     }
@@ -267,6 +275,7 @@
 
             SaveApps() {
                 this.parseForm(-1);
+                this.disabledBtn = true;
                 let self = this;
                 axios.post('/api/save-apps', {
                     userid: this.userid,
