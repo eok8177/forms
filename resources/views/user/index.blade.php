@@ -44,7 +44,7 @@
                   </td>
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Date:</strong></span>
-                    <span class="date">{{ date('Y/m/d H:i', strtotime($app->updated_at)) }}</span>
+                    <span class="date">{{ date('d/m/Y H:i', strtotime($app->updated_at)) }}</span>
                   </td>
                   <td>
                     <div class="btns">
@@ -101,7 +101,7 @@
                   </td>
                   <td class="inline-block">
                     <span class="hide-lg"><strong>Date:</strong></span>
-                    <span class="date">{{ date('Y/m/d H:i', strtotime($s_app->updated_at)) }}</span>
+                    <span class="date">{{ date('d/m/Y H:i', strtotime($s_app->updated_at)) }}</span>
                   </td>
                   <td>
                     <div class="btns">
