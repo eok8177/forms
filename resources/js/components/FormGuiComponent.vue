@@ -16,8 +16,8 @@
         </div>
 
         <div class="d-flex justify-content-end mb-2 btns-right">
-            <button v-if="userid > 0" @click="SaveApps()" class="save">Save application</button>
-            <button @click="Submit()" class="submit">Submit application</button>
+            <button v-if="userid > 0" @click="SaveApps()" class="save">Save</button>
+            <button @click="Submit()" class="submit">Submit</button>
         </div>
 
         <div class="d-flex justify-content-end mb-2">
