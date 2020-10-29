@@ -45,8 +45,8 @@ class UserController extends Controller
         $api = new ApiCall;
         $data = $api->getDashboard($user);
 
-        $order = $request->get('order', false);
-        $dir = $request->get('dir', 'asc');
+        $order = $request->get('order', 'date');
+        $dir = $request->get('dir', 'desc');
 
         $apps = Application::where('user_id', $user->id)
             ->join('forms', 'forms.id', '=', 'applications.form_id')
