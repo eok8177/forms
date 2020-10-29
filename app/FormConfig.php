@@ -33,8 +33,8 @@ trait FormConfig
                                         }
                                     }
                                 } else {
-                                    $fields[$idInst.'_'.$control['fieldName']]['label'] = $control['label'];
-                                    $fields[$idInst.'_'.$control['fieldName']]['value'] = $control['value'];
+                                    $fields[$idInst.'_'.$control['fieldName']]['label'] = @$control['label'];
+                                    $fields[$idInst.'_'.$control['fieldName']]['value'] = @$control['value'];
                                 }
                             }
                         }
