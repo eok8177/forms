@@ -49,7 +49,7 @@
       @endif
     </div>
     <div class="col-md-2 text-center">
-      @if ($user->email_verified_at == NULL && $user->role == 'manager')
+      @if ($user->email_verified_at == NULL)
       <button href="{{route('admin.user.sendemail', ['id' => $user->id])}}" class="sendemail btn fa fa-envelope-o" title="Send Verification Email"></button>
       @endif
       <a href="{{route('admin.ajax.setTime', ['id' => $user->id, 'model' => 'User', 'field' => 'email_verified_at'])}}" class="status btn fa fa-{{$user->email_verified_at == NULL ? 'times-circle' : 'check-circle'}}" title="Toggle Email verified"></a>
