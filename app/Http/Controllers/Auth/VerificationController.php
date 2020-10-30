@@ -61,8 +61,6 @@ class VerificationController extends Controller
             event(new Verified($request->user()));
         }
 
-        $user->sendNewPasswordEmail();
-
         return redirect($this->redirectPath());
     }
 }
