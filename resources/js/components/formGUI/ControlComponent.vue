@@ -38,46 +38,11 @@
 
                     if ('dynamicControl' in self.control) rule.fieldId += self.control.modName;
 
+                    // set condition when form loaded
+                    self.conditionField(rule, key);
                     // add Event to target field
                     $('body').on('change', '[name="'+rule.fieldId+'"]', function(){
-                        let valid = false;
-                        let ruleValue = rule.value;
-                        let numVal = parseFloat($(this).val());
-                        let stringVal = $(this).val().toString();
-                        if($(this).attr('type') == "checkbox") stringVal = this.checked ? 1 : 0;
-
-                        if($(this).attr('data-type') == "datepicker") {
-                            ruleValue = parseFloat(moment(rule.value, DATE_FORMAT.toUpperCase()).valueOf());
-                            numVal = parseFloat(moment(stringVal, DATE_FORMAT.toUpperCase()).valueOf());
-                            stringVal = moment(stringVal, DATE_FORMAT.toUpperCase()).valueOf();
-                        }
-
-                        switch(rule.operator) {
-                          case 'is':
-                            if (stringVal == ruleValue) valid = true;
-                            break;
-                          case 'is_not':
-                            if (stringVal != ruleValue) valid = true;
-                            break;
-                          case 'greater':
-                            if (numVal > ruleValue) valid = true;
-                            break;
-                          case 'less':
-                            if (numVal < ruleValue) valid = true;
-                            break;
-                          case 'contain':
-                            if (stringVal.indexOf(ruleValue) >= 0) valid = true;
-                            break;
-                          case 'start':
-                            if (stringVal.startsWith(ruleValue)) valid = true;
-                            break;
-                          case 'end':
-                            if (stringVal.endsWith(ruleValue)) valid = true;
-                            break;
-                          default:
-                            valid = false;
-                        }
-                        self.toggleField(key, valid);
+                        self.conditionField(rule, key);
                     });
 
                 });
@@ -106,7 +71,7 @@
                 // set events to terget fields
                 _.each(this.formula, (field, key) => {
                     $('body').on('change', '[name="'+key+'"]', function(){
-                        self.calcField(key, $(this).val());
+                        self.calcField(key); // Calc when changed values
                     });
                 });
             }
@@ -132,9 +97,52 @@
                 this.show = this.control.condition.action_type == 'show' ? show : !show;
                 this.control.invisible = !this.show;
             },
-            calcField(fieldId, value) {
-                this.formula[fieldId].value = value;
+            conditionField(rule, key) {
                 let self = this;
+                let field = self.searchInForm(rule.fieldId); // get control from form object
+                let valid = false;
+                let ruleValue = rule.value;
+                let numVal = parseFloat(field.value);
+                let stringVal = field.value ? field.value.toString() : '';
+                if(field.type == "checkbox") stringVal = field.value ? 1 : 0;
+
+                if(field.type == "datepicker") {
+                    ruleValue = parseFloat(moment(rule.value, DATE_FORMAT.toUpperCase()).valueOf());
+                    numVal = parseFloat(moment(stringVal, DATE_FORMAT.toUpperCase()).valueOf());
+                    stringVal = moment(stringVal, DATE_FORMAT.toUpperCase()).valueOf();
+                }
+
+                switch(rule.operator) {
+                  case 'is':
+                    if (stringVal == ruleValue) valid = true;
+                    break;
+                  case 'is_not':
+                    if (stringVal != ruleValue) valid = true;
+                    break;
+                  case 'greater':
+                    if (numVal > ruleValue) valid = true;
+                    break;
+                  case 'less':
+                    if (numVal < ruleValue) valid = true;
+                    break;
+                  case 'contain':
+                    if (stringVal.indexOf(ruleValue) >= 0) valid = true;
+                    break;
+                  case 'start':
+                    if (stringVal.startsWith(ruleValue)) valid = true;
+                    break;
+                  case 'end':
+                    if (stringVal.endsWith(ruleValue)) valid = true;
+                    break;
+                  default:
+                    valid = false;
+                }
+                self.toggleField(key, valid);
+            },
+            calcField(fieldId) {
+                let self = this;
+                let value = self.searchInForm(fieldId).value; // get control from form object
+                self.formula[fieldId].value = value;
                 let runCalc = true;
                 _.each(this.formula, (item,index) => {
                     // get value from HTML input
@@ -164,7 +172,35 @@
                         console.log('Formula Error');
                     }
                 }
-            }
+            },
+
+            // search control in form object by fieldName
+            searchInForm(fieldName) {
+                let self = this;
+                let field = false;
+                _.forEach(this.$parent.$parent.$parent.form.sections, function(section, key) {
+                    if (section.isDynamic) { // search in Dynamic section
+                        _.forEach(section.instances, function(instance) {
+                            _.forEach(instance, function(value) {
+                                _.forEach(row.controls, function(control) {
+                                    if (control.fieldName == fieldName) {
+                                        field = control;
+                                    }
+                                });
+                            });
+                        });
+                    } else {
+                        _.forEach(section.rows, function(row) {
+                            _.forEach(row.controls, function(control) {
+                                if (control.fieldName == fieldName) {
+                                    field = control;
+                                }
+                            });
+                        });
+                    }
+                });
+                return field;
+            },
         }
     }
 </script>
