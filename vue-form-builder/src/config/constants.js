@@ -22,7 +22,7 @@ FORM_CONSTANTS.Section = {
     rows: [],
 
     // config
-    labelPosition: "left", // left or top
+    labelPosition: "top", // left or top
 
     // for dynamic
     isDynamic: false,
