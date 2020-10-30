@@ -10,6 +10,8 @@
                    :readonly="value.readonly"
                    :name="value.fieldName"
                    :required="value.required"
+                   v-on:blur="dateChanged"
+                   :placeholder="options.placeholder"
                    v-model="value.value" />
            </div>
         </div>
@@ -24,6 +26,8 @@
                :readonly="value.readonly"
                :name="value.fieldName"
                :required="value.required"
+               v-on:blur="dateChanged"
+               :placeholder="options.placeholder"
                v-model="value.value" />
         </div>
     </div>
@@ -40,6 +44,7 @@
         created() {
             // set date format
             this.options.dateFormat = DATE_FORMAT;
+            this.options.placeholder = $.datepicker.formatDate(this.options.dateFormat, new Date());
 
             // if this control already have value, set it (value => default value => settings)
             if (!_.isEmpty(this.value.value)) {
@@ -101,6 +106,15 @@
             if (shift >= 0) shift = '+'+shift;
 
             return shift + 'd';
+          },
+          dateChanged() {
+            // check date format when input
+            try {
+                $.datepicker.parseDate(this.options.dateFormat, this.value.value);
+            }
+            catch (e) {
+              this.value.value = '';
+            }
           }
         }
     }
