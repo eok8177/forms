@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 use App\ApiCall;
 
@@ -92,5 +93,18 @@ class RegisterController extends Controller
 		$data = $api->newUser($user);
 		
         return $user;
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        auth()->guard()->logout();
+        return redirect()->route('front.index')->with('success', 'PLEASE CONFIRM YOUR REGISTRATION <br>In a few moments you will receive an e-mail with a confirmation link for you to complete your registration.');
     }
 }
