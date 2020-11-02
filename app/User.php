@@ -9,6 +9,8 @@ use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Notifications\NewPassword;
+use App\Notifications\PasswordReset;
+use App\Notifications\EmailVerify;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -62,20 +64,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Group::class);
     }
 
-
-    public function sendVerifyEmail()
-    {
-        return $this->notify(new VerifyEmail);
-    }
-
-    public function sendNewPasswordEmail()
-    {
-        $password = $this->generateRandomString();
-        $this->password = bcrypt($password);
-        $this->save();
-        return $this->notify(new NewPassword($password));
-    }
-
     private function generateRandomString($length = 8) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -94,5 +82,37 @@ class User extends Authenticatable implements MustVerifyEmail
                 $q->orWhere('status', 'draft');
         })->get();
         return $apps;
+    }
+
+
+    // Notifications
+
+    public function sendNewPasswordEmail()
+    {
+        $password = $this->generateRandomString();
+        $this->password = bcrypt($password);
+        $this->save();
+        return $this->notify(new NewPassword($password));
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordReset($token, $this));
+    }
+
+    /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new EmailVerify($this));
     }
 }

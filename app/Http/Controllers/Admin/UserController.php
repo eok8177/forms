@@ -183,7 +183,7 @@ class UserController extends Controller
     public function sendVerifyEmail($id)
     {
         $user = User::find($id);
-        $user->sendVerifyEmail();
+        $user->sendEmailVerificationNotification();
 
         return response()->json('success', 200);
     }

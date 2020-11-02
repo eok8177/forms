@@ -20,7 +20,7 @@ class EmailController extends Controller
 
         $data = [];
 
-        $data['to'] = Setting::where('key', 'admin_email')->first()->value;
+        $data['to'] = Setting::where('key', 'feedback_email')->first()->value;
 
         $data['subject'] = 'Rwav Feedback';
 
