@@ -251,6 +251,10 @@ class Application extends Model
         $selectAppsList = $apps->distinct()->pluck('form_id')->toArray();
         $filter['selectAppsList'] = [0 =>'All Forms'] + Form::whereIn('id',$selectAppsList)->pluck('title', 'id')->all();
 
+        if (!array_key_exists($filter['form_id'], $filter['selectAppsList'])) {
+            $filter['form_id'] = 0;
+        }
+
         if ($filter['search']) {
             $search = $filter['search'];
             $searchValues = preg_split('/\s+/', $search, -1, PREG_SPLIT_NO_EMPTY);
