@@ -54,6 +54,8 @@
 
           <a class="nav-link {{ request()->is('*faq*') ? 'active' : '' }}" href="{{route('admin.faq.index')}}"><i class="fa fa-question-circle-o"></i> Faq</a>
 
+          <a class="nav-link {{ request()->is('*news*') ? 'active' : '' }}" href="{{route('admin.news.index')}}"><i class="fa fa-newspaper-o"></i> News</a>
+
           @endif
 
         </div>
@@ -121,6 +123,8 @@
 
 
               <a class="nav-item nav-link {{ request()->is('*faq*') ? 'active' : '' }}" href="{{route('admin.faq.index')}}"><i class="fa fa-question-circle-o"></i> Faq</a>
+
+              <a class="nav-item nav-link {{ request()->is('*news*') ? 'active' : '' }}" href="{{route('admin.news.index')}}"><i class="fa fa-newspaper-o"></i> News</a>
 
               <a class="nav-item nav-link" href="{{route('admin.user.index')}}"><i class="fa fa-users"></i> @lang('message.users')</a>
 

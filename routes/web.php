@@ -53,6 +53,7 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
 
     Route::resource('page', 'PageController');
     Route::resource('faq', 'FaqController');
+    Route::resource('news', 'NewsController');
 
     Route::post('user/sadmin', ['as' => 'user.sadmin', 'uses' => 'UserController@setSAdmin']);
     Route::put('users/sendemail/{id}', ['as' => 'user.sendemail', 'uses' => 'UserController@sendVerifyEmail']);
@@ -100,9 +101,4 @@ Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user', 'admin', 
 
 
 //Image resize & crop on view:  http://image.intervention.io/
-Route::get('/resize/{w}/{h}',function($w=null, $h=null){
-  $img = Illuminate\Support\Facades\Request::input("img");
-  return \Image::make(public_path(urldecode($img)))->fit($w, $h, function ($constraint) {
-      $constraint->upsize();
-  })->response('jpg');
-});
+Route::get('/resize/{w}/{h}','ImageController@index')->name('resize');

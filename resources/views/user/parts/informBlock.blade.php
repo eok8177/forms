@@ -1,44 +1,25 @@
+@php
+    $news = \App\News::front();
+@endphp
+
 <div class="inform-blocks">
   <div class="block">
     <h2 class="color">LATEST RWAV NEWS</h2>
     <div class="slider-holder">
       <div class="news slick-slider">
+        @foreach($news as $item)
         <div class="block-new">
           <div class="img-holder">
-            <img src="/images/img01.jpg" alt="">
+            <img src="/resize/240/188/?img={{ urlencode($item->image) }}" alt="{{$item->title}}">
           </div>
           <div class="description">
-            <span class="heading">Longer News Headline Here </span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eleifend ante vitae tristique rhoncus. 
-              In imperdiet interdum ex vitae euismod. Et cursus velit, quis tristique eros. Fusce aliquet 
-            pulvinar tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-            <a href="#">Read More</a>
+            <span class="heading">{{$item->title}}</span>
+            <div>{!! $item->preview !!}</div>
+            <a href="{{$item->url}}" target="_blank">Read More</a>
           </div>
         </div>
-        <div class="block-new">
-          <div class="img-holder">
-            <img src="/images/img01.jpg" alt="">
-          </div>
-          <div class="description">
-            <span class="heading">Longer News Headline Here </span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eleifend ante vitae tristique rhoncus. 
-              In imperdiet interdum ex vitae euismod. Et cursus velit, quis tristique eros. Fusce aliquet 
-            pulvinar tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-            <a href="#">Read More</a>
-          </div>
-        </div>
-        <div class="block-new">
-          <div class="img-holder">
-            <img src="/images/img01.jpg" alt="">
-          </div>
-          <div class="description">
-            <span class="heading">Longer News Headline Here </span>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eleifend ante vitae tristique rhoncus. 
-              In imperdiet interdum ex vitae euismod. Et cursus velit, quis tristique eros. Fusce aliquet 
-            pulvinar tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-            <a href="#">Read More</a>
-          </div>
-        </div>
+        @endforeach
+
       </div>
       <div class="btns">
         <a href="#" class="prev">prev</a>

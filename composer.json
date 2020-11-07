@@ -15,6 +15,7 @@
         "egulias/email-validator": "^2.1",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.5",
+        "intervention/imagecache": "^2.5",
         "laravel/framework": "^7.0",
         "laravel/helpers": "^1.1",
         "laravel/socialite": "^4.2",
