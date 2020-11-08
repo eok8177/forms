@@ -142,6 +142,7 @@ class Form extends Model
 				'label' => $fValue['label'],
                 'alias' => $fValue['alias'],
 				'control_type' => $fValue['control_type'],
+                'section' => $fValue['section'],
 			];
 		}
 		return $result;

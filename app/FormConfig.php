@@ -104,6 +104,7 @@ trait FormConfig
                                         "label" => $control['label'.$i],
                                         "alias" => array_key_exists('alias', $control) ? $control['alias'].$i : ($control['label'] ? $control['label'].$i : $control['fieldName'].$i),
                                         "control_type" => $control['type'],
+                                        "section" => $section['name'],
                                     ];
                                 }
                             } else {
@@ -113,6 +114,7 @@ trait FormConfig
                                     "label" => $control['label'],
                                     "alias" => array_key_exists('alias', $control) ? $control['alias'] : ($control['label'] ? $control['label'] : $control['fieldName']),
                                     "control_type" => $control['type'],
+                                    "section" => $section['name'],
                                 ];
                             }
                             $groups[$section['label']][$control['fieldName']] = $control['label'];
