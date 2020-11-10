@@ -89,6 +89,7 @@ trait FormConfig
         $full = []; // with groups & alias for admin/form/settings Alias show
         $alias = []; // parse alias for unque check
 
+        if ($config)
         foreach ($config['sections'] as $section) {
             if (array_key_exists('rows', $section)) {
                 foreach ($section['rows'] as $row) {
