@@ -12,10 +12,10 @@
   <label>Image</label>
   <div id="holder"><img src="/resize/175/88/?img={{ urlencode($news->image) }}"></div>
   <a id="lfm" data-input="thumbnail" data-preview="holder" class="lfm btn btn-sm btn-outline-primary mt-2">
-    <i class="fa fa-picture-o"></i> Выбрать
+    <i class="fa fa-picture-o"></i> Select
   </a>
   <a id="delete-image" class="btn btn-sm btn-outline-danger {{($news->image) ? '' : 'hidden'}} mt-2">
-    <i class="fa fa-trash-o"></i> Удалить
+    <i class="fa fa-trash-o"></i> Delete
   </a>
   <input id="thumbnail" class="form-control" type="hidden" name="image" value="{{ $news->image }}">
 
