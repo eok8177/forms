@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Illuminate\Support\Carbon;
+
 trait FormConfig
 {
     public function parseAppConfig($config)
@@ -32,6 +34,9 @@ trait FormConfig
                                             $fields[$idInst.'_'.$control['fieldName']][$control['label'.$i]] = $control['value'.$i];
                                         }
                                     }
+                                } elseif ($control['type'] == 'datepicker') {
+                                    $fields[$idInst.'_'.$control['fieldName']]['label'] = @$control['label'];
+                                    $fields[$idInst.'_'.$control['fieldName']]['value'] = $this->parseDate($control['dateFormat'] , $control['value']);
                                 } else {
                                     $fields[$idInst.'_'.$control['fieldName']]['label'] = @$control['label'];
                                     $fields[$idInst.'_'.$control['fieldName']]['value'] = @$control['value'];
@@ -64,6 +69,9 @@ trait FormConfig
                                         @$fields[$control['fieldName']]['lng'] = $control['lng'];
                                         @$fields[$control['fieldName']]['address'] = $control['address'];
                                     }
+                                } elseif ($control['type'] == 'datepicker') {
+                                    $fields[$control['fieldName']]['label'] = @$control['label'];
+                                    $fields[$control['fieldName']]['value'] = $this->parseDate($control['dateFormat'] , $control['value']);
                                 } else {
                                     $fields[$control['fieldName']]['label'] = $control['label'];
                                     $fields[$control['fieldName']]['value'] = @$control['value'];
@@ -171,6 +179,8 @@ trait FormConfig
                                             $data[$instanceID][$fieldID.$i] = $control['value'.$i];
                                         }
                                     }
+                                } elseif ($control['type'] == 'datepicker') {
+                                    $data[$instanceID][$fieldID] = $this->parseDate($control['dateFormat'] , $control['value']);
                                 } else {
                                     if ($control['type'] != 'html') {
                                         $value = is_array($control['value']) ? null : $control['value'];
@@ -197,6 +207,8 @@ trait FormConfig
                                             $data[$fieldID.$i] = $control['value'.$i];
                                         }
                                     }
+                                } elseif ($control['type'] == 'datepicker') {
+                                    $data[$fieldID] = $this->parseDate($control['dateFormat'] , $control['value']);
                                 } else {
                                     if ($control['type'] != 'html') {
                                         $value = is_array($control['value']) ? null : $control['value'];
@@ -239,6 +251,23 @@ trait FormConfig
         }
 
         return json_encode($config);
+    }
+
+    private function parseDate($dateFormat , $value)
+    {
+        $dateFormat = str_replace('yyyy', 'Y', $dateFormat);
+        $dateFormat = str_replace('yy', 'Y', $dateFormat);
+        $dateFormat = str_replace('mm', 'm', $dateFormat);
+        $dateFormat = str_replace('dd', 'd', $dateFormat);
+
+        try {
+            $dateValue = Carbon::createFromFormat($dateFormat, $value);
+            $dateValue = $dateValue->format('Y-m-d');
+        } catch (\Exception $e) {
+            return '';
+        }
+
+        return $dateValue;
     }
 
 }
