@@ -61,7 +61,7 @@
 
   <div class="row border-bottom py-1 my-2 font-weight-bold align-items-center">
     <div class="col-md-2">Type</div>
-    <div class="col-md-3">Details</div>
+    <div class="col-md-3">ID - Details</div>
     <div class="col-md-2">User</div>
     <div class="col-md-2">Date</div>
     <div class="col-md-2 text-center">Status</div>
@@ -74,7 +74,7 @@
         <span class="w-100 h-100 d-flex justify-content-center align-items-center" style="background-color: {{$entry->form->types->color}}; color: #fff;">{{$entry->form->type}}</span>
       </div>
       <div class="col-md-3">
-          {{$entry->form->title}} <span class="text-muted">{!! $entry->additional_field !!}</span>
+          {{$entry->id}} - {{$entry->form->title}} <span class="text-muted">{!! $entry->additional_field !!}</span>
       </div>
       <div class="col-md-2">{{$entry->user->first_name}} {{$entry->user->last_name}}</div>
       <div class="col-md-2">{{$entry->created_at->format('Y-m-d')}}</div>
