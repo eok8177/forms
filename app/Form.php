@@ -121,14 +121,14 @@ class Form extends Model
 
     public function getFieldsAttribute()
     {
-        if (!$this->config) return false;
+        if (!$this->config) return [];
 
         return $this->parseFormConfig($this->config)['groups'];
     }
 
     public function getFieldsAlias()
     {
-        if (!$this->config) return false;
+        if (!$this->config) return [];
 
         return $this->parseFormConfig($this->config)['full'];
     }
