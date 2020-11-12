@@ -49,6 +49,9 @@ class FormController extends Controller
 
         $form = $form->create($request->all());
 
+        $form->login_only = 1;
+        $form->save();
+
         return redirect()->route('admin.form.edit', ['form' => $form->id])->with('success', 'Form created');
     }
 
