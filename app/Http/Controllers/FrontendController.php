@@ -37,9 +37,13 @@ class FrontendController extends Controller
             ->first();
         $user = Auth::user();
 
-        if ($form && $form->login_only == 1 && !$user) {
-            $request->session()->put('redirectTo', '/form/'.$slug);
-            return redirect()->route('login');
+        if ($form && $form->login_only == 1) {
+            if (!$user) {
+                $request->session()->put('redirectTo', '/form/'.$slug);
+                return redirect()->route('login');
+            } elseif ($user->email_verified_at == NULL) {
+                return redirect()->route('verification.notice');
+            }
         }
 
         return view('form', [
