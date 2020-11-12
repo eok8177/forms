@@ -12,14 +12,22 @@
 
 {!! Form::open(['route' => ['admin.form.email.store', $form->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 
+  <div class="custom-control custom-checkbox custom-control-inline">
+    {!! Form::hidden('login_only', 0) !!}
+    {!! Form::checkbox('login_only', 1, $form->login_only, ['class' => 'custom-control-input', 'id' => 'login_only']) !!}
+    <label for="login_only" class="custom-control-label">Require user to be logged in</label>
+  </div>
+  <hr>
+
   @foreach($types as $type => $typeName)
 
-  <div class="custom-control custom-checkbox mb-2">
+  <div class="custom-control custom-checkbox mb-2" id="headerType_{{$type}}">
     <input name="{{$type}}[active]" type="hidden" value="0">
     <input id="active_{{$type}}" name="{{$type}}[active]" type="checkbox" value="1" class="custom-control-input" {{$form_emails[$type]->active ? 'checked' : ''}}>
     <label for="active_{{$type}}" class="custom-control-label" data-toggle='collapse' data-target='#collapseType_{{$type}}'>{{$typeName}}</label>
+
+    <hr>
   </div>
-  <hr>
 
   <div id='collapseType_{{$type}}' class='collapse {{$form_emails[$type]->active ? 'show' : ''}}'>
 
@@ -96,6 +104,27 @@
       let text = field.val();
       text = text + ' ' + $(this).attr('data-macro') + ' ';
       field.val(text);
+    });
+
+    function loginOnlyChecked() {
+      if ( $('#login_only').is(':checked') ) {
+        $('#headerType_user_submit').show();
+        $('#headerType_user_accept').show();
+        $('#headerType_user_reject').show();
+      } else {
+        $('#headerType_user_submit').hide();
+        $('#headerType_user_accept').hide();
+        $('#headerType_user_reject').hide();
+        $('#collapseType_user_submit').collapse('hide');
+        $('#collapseType_user_accept').collapse('hide');
+        $('#collapseType_user_reject').collapse('hide');
+        $('#active_user_submit, #active_user_accept, #active_user_reject').prop('checked', false);
+      }
+    };
+
+    loginOnlyChecked();
+    $('#login_only').change(function(){
+      loginOnlyChecked();
     });
   });
 </script>

@@ -108,9 +108,12 @@ class FormController extends Controller
 
     public function emailStore(Request $request, Form $form)
     {
-        foreach ($request->except(['_token', '_method']) as $key => $item) {
+        foreach ($request->except(['_token', '_method', 'login_only']) as $key => $item) {
             $form->email($key)->update($item);
         }
+
+        $form->login_only = $request->get('login_only',0);
+        $form->save();
 
         return redirect()->route('admin.form.email', ['form' => $form->id])->with('success', 'Form Emails updated');
     }
