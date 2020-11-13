@@ -5,7 +5,7 @@
   <h2>@lang('message.form') <small>{{ $form->title }}</small></h2>
 
   <div>
-      <a class="btn fa fa-gear" href="{{route('admin.form.setting',$form->id)}}" title="Setings"></a>
+      <a class="btn fa fa-gear" href="{{route('admin.form.setting',$form->id)}}" title="Settings"></a>
       <a class="btn fa fa-envelope-o" href="{{route('admin.form.email',$form->id)}}" title="Email Notification"></a>
   </div>
 </div>
