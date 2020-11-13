@@ -77,7 +77,7 @@
           {{$entry->id}} - {{$entry->form->title}} <span class="text-muted">{!! $entry->additional_field !!}</span>
       </div>
       <div class="col-md-2">{{$entry->user->first_name}} {{$entry->user->last_name}}</div>
-      <div class="col-md-2">{{$entry->created_at->format('Y-m-d')}}</div>
+      <div class="col-md-2">{{$entry->created_at}}</div>
       <div class="col-md-2 text-center">
         @if($entry->status == 'submitted' && $entry->to_be_approved == 1)
           For Review
