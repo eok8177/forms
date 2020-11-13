@@ -17,6 +17,7 @@
     {!! Form::checkbox('login_only', 1, $form->login_only, ['class' => 'custom-control-input', 'id' => 'login_only']) !!}
     <label for="login_only" class="custom-control-label">Require user to be logged in</label>
   </div>
+  <p>&nbsp;</p>
   <hr>
 
   @foreach($types as $type => $typeName)
