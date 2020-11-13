@@ -171,7 +171,14 @@ trait FormConfig
                             foreach ($section['controls'] as $control) {
                                 if ($control['type'] == 'html') continue;
 
-                                $fieldID = strval(preg_replace("/[^0-9]/", '', $control['fieldName']));
+                                // remove suffix starting with `_d0`
+                                $controlFieldName = $control['fieldName'];
+                                $_dSuffixPosition = strrpos($controlFieldName, '_d');
+                                if($_dSuffixPosition !== false) {
+                                    $controlFieldName = substr($controlFieldName, 0, $_dSuffixPosition);
+                                }
+
+                                $fieldID = strval(preg_replace("/[^0-9]/", '', $controlFieldName));
 
                                 if ($control['type'] == 'address') {
                                     for ($i=1; $i <= 5; $i++) {
