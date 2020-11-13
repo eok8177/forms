@@ -78,6 +78,7 @@ class UserController extends Controller
         $user->update($data);
 
         $api = new ApiCall;
+        $user->active_user_id = Auth::user()->id;
         $data = $api->newUser($user);
 
         // Groups attach
@@ -137,6 +138,7 @@ class UserController extends Controller
 
         $user->update($data);
         $api = new ApiCall;
+        $user->active_user_id = Auth::user()->id;
         $data = $api->updateUser($user);
 
         if (Auth::user()->role == 'admin') {
@@ -154,6 +156,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $api = new ApiCall;
+        $user->active_user_id = Auth::user()->id;
         $data = $api->deleteUser($user);
 
         $user->email = $user->email.'_'.time();
