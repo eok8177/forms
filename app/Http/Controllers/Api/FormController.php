@@ -62,7 +62,8 @@ class FormController extends Controller
         $fieldId = $request->get('fieldId');
         $formId = $request->get('formId');
         if ($fieldName = $request->get('fieldName')) {
-            $filename = $request->file->store('uploads/'.$formId.'/'.$appid.'/', 'public');
+            $file = $request->file;
+            $filename = $file->storeAs('uploads/'.$formId.'/'.$appid, $file->getClientOriginalName(), 'public');
 
             $app = Application::where('id', $appid)->first();
             if ($app) {
