@@ -45,7 +45,6 @@
             // set date format
             this.options.dateFormat = DATE_FORMAT;
             this.value.dateFormat = DATE_FORMAT;
-            this.options.placeholder = $.datepicker.formatDate(this.options.dateFormat, new Date());
 
             // if this control already have value, set it (value => default value => settings)
             if (!_.isEmpty(this.value.value)) {
