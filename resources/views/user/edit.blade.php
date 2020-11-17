@@ -28,10 +28,10 @@
 
           <p>&nbsp;</p>
 
-          <div class="form-group">
+          {{-- <div class="form-group">
             <label for="">{{Lang::get('message.old_password')}}</label>
             <input type="password" id="old_password" name="old_password" class="form-control">
-          </div>
+          </div> --}}
 
           <div class="form-group">
             <label for="">{{Lang::get('message.new_password')}}</label>
@@ -67,19 +67,17 @@
 @push('scripts')
   <script>
     $(function () {
-      var old_password = document.getElementById("old_password")
-        , password = document.getElementById("password")
+      var password = document.getElementById("password")
         , re_password = document.getElementById("re_password");
 
       function validatePassword(){
-        if(old_password.value.length > 0 && password.value != re_password.value) {
+        if(password.value != re_password.value) {
           re_password.setCustomValidity("Passwords Don't Match");
         } else {
           re_password.setCustomValidity('');
         }
       }
 
-      old_password.onchange = validatePassword;
       password.onchange = validatePassword;
       re_password.onkeyup = validatePassword;
     });
