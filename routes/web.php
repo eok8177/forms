@@ -27,7 +27,7 @@ Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social'
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 
 // Manager
-Route::group(['as' => 'manager.', 'middleware' => 'roles','roles' =>['manager'], 'namespace' => 'Manager', 'prefix' => 'manager'], function() {
+Route::group(['as' => 'manager.', 'middleware' => 'roles','roles' =>['manager', 'admin'], 'namespace' => 'Manager', 'prefix' => 'manager'], function() {
 
     Route::get('responses', ['as' => 'responses', 'uses' => 'ResponseController@index']);
     Route::get('response/{application}', ['as' => 'response', 'uses' => 'ResponseController@response']);
