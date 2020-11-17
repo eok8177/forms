@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Jobs\SendEmail;
 use App\ApiCall;
 use App\FormConfig;
+use App\Setting;
 
 class Application extends Model
 {
@@ -189,11 +190,22 @@ class Application extends Model
 
     private function sendEmail($type)
     {
+        // email sends only loggedIn users with active email template in form Settings
+        // get template from `form_emails` table
         $email = $this->form->email($type);
         if (!$email) return false;
-        if (!$email->send_to) return false;
-        if (!$email->from_email) return false;
+        if ($email->active != 1) return false;
 
+        // from Template or Settings
+        $from_settings = Setting::where('key', 'from_email')->first();
+        $from_email = $email->from_email ? $email->from_email : $from_settings->value;
+
+        $from_name = $email->from_name ? $email->from_name : 'RVAW';
+
+        // to `user.email`
+        $to_email = $this->user->email;
+
+        // replase macros in message
         $find = false;
         $replace = false;
         $fields = $this->fields;
@@ -207,13 +219,13 @@ class Application extends Model
 
         $message = str_replace($find, $replace, $email->message);
 
-        $view = 'email.client';
+        // $view = 'email.client';
         $data = [];
 
-        $data['to'] = $email->send_to ? $email->send_to : $this->email;
+        $data['from_email'] = $from_email;
+        $data['from_name'] = $from_name;
+        $data['to'] = $to_email;
         $data['subject'] = $email->subject;
-        $data['from_name'] = $email->from_name;
-        $data['from_email'] = $email->from_email;
         $data['message'] = $message;
 
         SendEmail::dispatch($data);
