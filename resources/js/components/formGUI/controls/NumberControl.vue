@@ -62,8 +62,8 @@
                 } else {
                     this.value.value = parseInt(val);
                 }
-                if (this.value.value < this.value.minValue) this.value.value = this.value.minValue;
-                if (this.value.value > this.value.maxValue) this.value.value = this.value.maxValue;
+                if (!_.isEmpty(this.value.minValue) && this.value.value < this.value.minValue) this.value.value = this.value.minValue;
+                if (!_.isEmpty(this.value.maxValue) && this.value.value > this.value.maxValue) this.value.value = this.value.maxValue;
             },
             isNumber(e) {
               let theEvent = e || window.event;
