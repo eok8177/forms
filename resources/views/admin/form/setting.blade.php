@@ -92,6 +92,12 @@
         </div>
       </div>
 
+      <div class="custom-control custom-checkbox custom-control-inline">
+        {!! Form::hidden('login_only', 0) !!}
+        {!! Form::checkbox('login_only', 1, $form->login_only, ['class' => 'custom-control-input', 'id' => 'login_only']) !!}
+        <label for="login_only" class="custom-control-label">Require user to be logged in</label>
+      </div>
+
       <div class="form-group mt-3">
         <label>Confirmation message on screen</label>
         {!! Form::textarea('confirm_text', $form->confirm_text, ['class' => 'form-control', 'rows' => '3']) !!}
