@@ -29,9 +29,11 @@ trait FormConfig
                                     $emails[$control['label']] = $control['value'];
                                 }
                                 if ($control['type'] == 'address') {
+                                    $fields[$idInst.'_'.$control['fieldName']]['value'] = '';
                                     for ($i=1; $i <= 5; $i++) {
                                         if ($control['show'.$i] && @$control['value'.$i]) {
                                             $fields[$idInst.'_'.$control['fieldName']][$control['label'.$i]] = $control['value'.$i];
+                                            $fields[$idInst.'_'.$control['fieldName']]['value'] .= $control['value'.$i].'';
                                         }
                                     }
                                 } elseif ($control['type'] == 'datepicker') {
@@ -59,9 +61,11 @@ trait FormConfig
                                     $emails[$control['label']] = $control['value'];
                                 }
                                 if ($control['type'] == 'address') {
+                                    $fields[$control['fieldName']]['value'] = '';
                                     for ($i=1; $i <= 5; $i++) {
                                         if ($control['show'.$i] && @$control['value'.$i]) {
                                             $fields[$control['fieldName']][$control['label'.$i]] = $control['value'.$i];
+                                            $fields[$control['fieldName']]['value'] .= $control['value'.$i].' ';
                                         }
                                     }
                                     if (@$control['mapIt']) {
