@@ -184,10 +184,15 @@
                                 }
                             }
                             if (control.invisible) valid = true; // disable validation on condition field
-                            if (!valid) {
-                                self.validSection = false;
-                                self.validForm = false;
-                                $('body .error-msg.'+control.name).show(); //show error message
+                        }
+                    }
+                    if (control.type == 'file') {
+                        $('body [name="'+control.name+'"]').removeClass('is-invalid');
+                        $('body .error-msg.'+control.name).hide();
+                        if (control.required) {
+                            if (!control.value) {
+                                valid = false;
+                                $('body [name="'+control.name+'"]').addClass('is-invalid');
                             }
                         }
                     }
@@ -198,6 +203,11 @@
                             data: control.value,
                             fieldId: control.fieldName,
                         };
+                    }
+                    if (!valid) {
+                        self.validSection = false;
+                        self.validForm = false;
+                        $('body .error-msg.'+control.name).show(); //show error message
                     }
                     //fill from address block
                     if (control.type == 'address') {
