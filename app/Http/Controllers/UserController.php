@@ -103,6 +103,8 @@ class UserController extends Controller
         $user = Auth::user();
 
         $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => Rule::unique('users')->ignore($user->id),
         ]);
 
