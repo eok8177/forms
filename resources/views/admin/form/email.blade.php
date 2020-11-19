@@ -45,6 +45,7 @@
     <div class="form-group">
       <label>Send To</label>
       <input type="text" name="{{$type}}[send_to]" value="{{$form_emails[$type]->send_to}}" class="form-control">
+      <small>Please separate emails by comma</small>
     </div>
 
     <div class="form-group">
