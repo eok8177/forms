@@ -144,6 +144,7 @@
   </div>
 
   <div class="col-md-4 col-lg-6">
+    @if($form->getFieldsAlias())
     {!! Form::open(['route' => ['admin.form.alias', $form->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
       <table class="table" id="aliases">
         <thead>
@@ -175,7 +176,7 @@
         <button type="submit" class="btn btn-outline-secondary">Update alias</button>
       </div>
     {!! Form::close() !!}
-
+    @endif
   </div>
 </div>
 
