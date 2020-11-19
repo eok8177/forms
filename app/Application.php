@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Egulias\EmailValidator\EmailValidator;
+use Egulias\EmailValidator\Validation\DNSCheckValidation;
+use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
+use Egulias\EmailValidator\Validation\RFCValidation;
+
 use App\Jobs\SendEmail;
 use App\ApiCall;
 use App\FormConfig;
@@ -205,6 +210,39 @@ class Application extends Model
         // to `user.email`
         $to_email = $this->user->email;
 
+        // parse $email->send_to
+        $send_to = [];
+        if ($email->send_to) {
+            $sendtoArrayy = explode(',', preg_replace('/\s+/', '', $email->send_to));
+            foreach ($sendtoArrayy as $send_to_item) {
+                if ($this->emailValidate($send_to_item)) $send_to[] = $send_to_item;
+            }
+        }
+
+        if ($type == 'admin_submit') {
+            if ($send_to) {
+                $to_email = $send_to;
+            } else {
+                // admin_submit
+                $to_email = Setting::where('key', 'feedback_email')->first()->value;
+            }
+        }
+        if ($type == 'manager_submit') {
+            if ($send_to) {
+                $to_email = $send_to;
+            } else {
+                // managers
+                $to_email = [];
+                $groups = $this->form->groups;
+                foreach ($groups as $group) {
+                    foreach ($group->managers as $manager) {
+                        $to_email[] = $manager->email;
+                    }
+                }
+
+            }
+        }
+
         // replase macros in message
         $find = false;
         $replace = false;
@@ -305,6 +343,18 @@ class Application extends Model
             $apps->orderBy('id', $order),
             $filter
         ];
+    }
+
+
+    private function emailValidate($email)
+    {
+        $validator = new EmailValidator();
+        $multipleValidations = new MultipleValidationWithAnd([
+            new RFCValidation(),
+            new DNSCheckValidation()
+        ]);
+
+        return $validator->isValid($email, $multipleValidations);
     }
 
 }
