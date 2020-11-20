@@ -15,16 +15,13 @@ class UserController extends Controller
 {
     public function edit(User $user)
     {
-        $readonly = false;
         // restrict edit other users by manager
         if (Auth::user()->id != $user->id) {
             return redirect()->route('manager.responses');
         }
 
         return view('manager.profile', [
-            'user' => $user,
-            'groups' => Group::all(),
-            'readonly' => $readonly
+            'user' => $user
         ]);
     }
 
@@ -34,20 +31,10 @@ class UserController extends Controller
             'email' => Rule::unique('users')->ignore($user->id),
         ]);
 
-        $data = $request->except('groups');
-
         if ($request->has('password') && $data['password']) {
             $data['password'] = bcrypt($data['password']);
         } else {
             unset($data['password']);
-        }
-
-        $email_verified = $data['email_verified'];
-        unset($data['email_verified']);
-        if ($email_verified == 1 && $user->email_verified_at == NULL) {
-            $data['email_verified_at'] = date('yy-m-d h:i:s');
-        } elseif ($email_verified == 0) {
-            $data['email_verified_at'] = NULL;
         }
 
         $user->update($data);

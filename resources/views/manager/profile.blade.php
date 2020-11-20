@@ -1,6 +1,10 @@
 @extends('manager.layout')
 
 @section('content')
+
+<input type="text" name="" class="autofeel-hack">
+<input type="password" name="" class="autofeel-hack">
+
 <div class="dashboard-area tabs-area">
 
     <h2>Profile</h2>
