@@ -31,6 +31,8 @@ class UserController extends Controller
             'email' => Rule::unique('users')->ignore($user->id),
         ]);
 
+        $data = $request->all();
+
         if ($request->has('password') && $data['password']) {
             $data['password'] = bcrypt($data['password']);
         } else {
