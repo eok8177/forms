@@ -33,10 +33,21 @@ class UserController extends Controller
 
         $data = $request->all();
 
-        if ($request->has('password') && $data['password']) {
+        // Password
+        if ($data['old_password']) {
+            if (!Hash::check($data['old_password'], $user->password)) {
+                return redirect()->route('user.edit')->with('danger', 'Wrong old password');
+            }
+            if (!$data['password']) {
+                return redirect()->route('user.edit')->with('danger', 'Password must be setup');
+            }
             $data['password'] = bcrypt($data['password']);
+            unset($data['old_password']);
+            unset($data['re_password']);
         } else {
+            unset($data['old_password']);
             unset($data['password']);
+            unset($data['re_password']);
         }
 
         $user->update($data);
