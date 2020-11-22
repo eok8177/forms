@@ -18,12 +18,12 @@
 
         <div class="form-group">
           <label for="name">{{Lang::get('message.first_name')}}</label>
-          <input type="text" name="first_name" value="{{$user->first_name}}" class="form-control">
+          <input type="text" name="first_name" value="{{$user->first_name}}" class="form-control" required>
         </div>
 
         <div class="form-group">
           <label for="name">{{Lang::get('message.last_name')}}</label>
-          <input type="text" name="last_name" value="{{$user->last_name}}" class="form-control">
+          <input type="text" name="last_name" value="{{$user->last_name}}" class="form-control" required>
         </div>
 
         <div class="form-group">
