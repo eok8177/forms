@@ -67,7 +67,7 @@ return [
     'answer' => 'Answer',
     'draft' => 'Draft',
 
-    'not_active_msg' => 'Sorry, this form does not exist or is not active.',
+    'not_active_msg' => 'Sorry, this form is not available at this time.',
 
     'formtypes' => 'Form Types',
     'new_formtype' => 'New Form Type',
