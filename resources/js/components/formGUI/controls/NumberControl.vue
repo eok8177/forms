@@ -57,11 +57,14 @@
             numberChange(e) {
                 let val = e.target.value;
 
-                if (this.value.isInteger === false) {
-                    this.value.value = parseFloat(val).toFixed(this.value.decimalPlace);
-                } else {
-                    this.value.value = parseInt(val);
+                if (!_.isEmpty(val)) {
+                  if (this.value.isInteger === false) {
+                      this.value.value = parseFloat(val).toFixed(this.value.decimalPlace);
+                  } else {
+                      this.value.value = parseInt(val);
+                  }
                 }
+
                 if (!_.isEmpty(this.value.minValue) && this.value.value < this.value.minValue) this.value.value = this.value.minValue;
                 if (!_.isEmpty(this.value.maxValue) && this.value.value > this.value.maxValue) this.value.value = this.value.maxValue;
             },
