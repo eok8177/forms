@@ -110,7 +110,19 @@
           dateChanged() {
             // check date format when input
             try {
-                $.datepicker.parseDate(this.options.dateFormat, this.value.value);
+                let now = $.datepicker.parseDate(this.options.dateFormat, this.value.value);
+
+                if(this.value.maxDate) {
+                  let [day, month, year] = this.value.maxDate.split("\/");
+                  let max = new Date(year, month - 1, day);
+                  if (max < now) this.value.value = '';
+                }
+
+                if(this.value.minDate) {
+                  let [day, month, year] = this.value.minDate.split("\/");
+                  let min = new Date(year, month - 1, day);
+                  if (min > now) this.value.value = '';
+                }
             }
             catch (e) {
               this.value.value = '';
