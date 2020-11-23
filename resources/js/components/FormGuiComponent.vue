@@ -95,7 +95,12 @@
 
             toggleSection(index) {
                 // parse & validate previous sections
-                this.parseForm(index);
+
+                if ($('#'+this.formdata.sections[index].name + '_gui_body').hasClass('show')) {
+                    this.parseForm(index);
+                } else {
+                    $('#'+this.formdata.sections[index].name + '_gui_body').collapse('toggle');
+                }
 
                 if (this.formdata.sections[index].valid) {
                     $('#'+this.formdata.sections[index].name + '_gui_body').collapse('toggle');
