@@ -73,7 +73,7 @@ class Application extends Model
         $value = implode(' ', (array) $fields[$field]['value']);
         $value = trim($value);
 
-        if ($fields[$field]['type'] == 'file') {
+        if ($fields[$field]['type'] == 'file' && $value) {
             return '<a href="/'.$value.'" target="_blank">file</a>';
         }
         return $value;

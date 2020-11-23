@@ -85,6 +85,7 @@
             msg: '',
             errorMsg: '',
             disabledBtn: false,
+            redirect: true,
             regEmail: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
         }),
         methods: {
@@ -278,12 +279,18 @@
                   self.postForm();
                 } else { // only save Draft application
                     self.msg = 'You draft is updated.';
-                    window.location.href = '/user/draft-saved/'+self.formid;
+                    if (self.redirect)
+                        window.location.href = '/user/draft-saved/'+self.formid;
                 }
                 return;
             },
 
-            SaveApps() {
+            SaveApps(notRedirect) {
+                if (notRedirect) {
+                    this.redirect = false;
+                } else {
+                    this.redirect = true;
+                }
                 this.parseForm(-1);
                 this.disabledBtn = true;
                 let self = this;

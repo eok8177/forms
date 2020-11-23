@@ -14,8 +14,9 @@
                      @change="processFile($event)"
                      />
                      <small v-if="value.extensions || value.maxSize" class="form-text text-muted">Accepted: {{value.extensions}}  max {{value.maxSize}}MB</small>
-              <div v-if="typeof value.value === 'string' || value.value instanceof String">
+              <div v-if="typeof value.value === 'string' || value.value instanceof String" class="link-file">
                 <a :href="'/'+value.value" target="_blank">{{getFileName()}}</a>
+                <button class="btn-delete" @click="deleteFile()">x</button>
               </div>
               <div class="text-danger error-msg" v-if="msg">{{msg}}</div>
           </div>
@@ -33,8 +34,9 @@
                  />
                  <small v-if="value.extensions || value.maxSize" class="form-text text-muted">Accepted: {{value.extensions}}  max {{value.maxSize}}MB</small>
 
-        <div v-if="typeof value.value === 'string' || value.value instanceof String">
+        <div v-if="typeof value.value === 'string' || value.value instanceof String" class="link-file">
          <a :href="'/'+value.value" target="_blank">{{getFileName()}}</a>
+         <button class="btn-delete" @click="deleteFile()">x</button>
         </div>
         <div class="text-danger error-msg" v-if="msg">{{msg}}</div>
       </div>
@@ -42,6 +44,7 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
         name: "FileControl",
         props: ['value', 'labelPosition'],
@@ -89,6 +92,9 @@
             this.msg = '';
             let valid = false;
 
+            // rule not has ext
+            if (!this.value.extensions) return true;
+
             let name = e.target.files[0].name;
             let ext = name.match(/\.([^\.]+)$/)[1];
             ext = '.' + ext;
@@ -102,10 +108,36 @@
             if (!valid) this.msg = 'Wrong file extension';
             return valid;
           },
+
+          deleteFile() {
+            axios.post('/api/delete-file', {
+                file: this.value.value,
+                appid: this.$parent.$parent.$parent.$parent.appid
+              })
+              .then(
+                (response) => {
+                  this.value.value = false;
+                  this.$parent.$parent.$parent.$parent.SaveApps(true);
+                }
+              )
+              .catch(
+                (error) => console.log(error)
+              );
+          }
         }
     }
 </script>
 
 <style scoped>
+  .link-file {
+    padding-top: 10px;
+  }
+  .btn-delete {
+    background: transparent;
+    color: red;
+    border: none;
+    outline: none;
+    margin-left: 16px;
+  }
 
 </style>

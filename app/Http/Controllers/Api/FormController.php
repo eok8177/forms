@@ -146,4 +146,18 @@ class FormController extends Controller
         return response()->json([], 204);
     }
 
+    public function deleteFile(Request $request)
+    {
+        $appid = $request->get('appid', 0);
+        $app = Application::findOrFail($appid);
+
+        $file = $request->get('file', '');
+
+        Storage::disk('public')->delete('uploads/'.$app->form_id.'/'.$app->id, $file);
+
+        return response()->json([
+            'status' => 'OK'
+        ], 200);
+    }
+
 }
