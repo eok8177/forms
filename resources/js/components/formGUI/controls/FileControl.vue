@@ -13,7 +13,11 @@
                      :max-size="value.maxSize"
                      @change="processFile($event)"
                      />
-                     <small v-if="value.extensions || value.maxSize" class="form-text text-muted">Accepted: {{value.extensions}}  max {{value.maxSize}}MB</small>
+                     <small v-if="value.extensions || value.maxSize" class="form-text text-muted">
+                         <span v-if="value.extensions">Accepted file types: {{value.extensions}}</span>
+                         <span v-if="value.extensions && value.maxSize">, </span>
+                         <span v-if="value.maxSize">Max file size: {{value.maxSize}}MB</span>
+                     </small>
               <div v-if="typeof value.value === 'string' || value.value instanceof String" class="link-file">
                 <a :href="'/'+value.value" target="_blank">{{getFileName()}}</a>
                 <button class="btn-delete" @click="deleteFile()">x</button>
@@ -84,7 +88,7 @@
 
             if (parseFloat(size) <= parseFloat(maxSize)) valid = true;
 
-            if (!valid) this.msg = 'File size to much';
+            if (!valid) this.msg = 'File size is too large';
             return valid;
           },
           checkFileType(e)
@@ -105,7 +109,7 @@
               });
             }
 
-            if (!valid) this.msg = 'Wrong file extension';
+            if (!valid) this.msg = 'Wrong file type';
             return valid;
           },
 
