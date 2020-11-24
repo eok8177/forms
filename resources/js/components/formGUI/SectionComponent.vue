@@ -32,6 +32,7 @@
 
             if (this.section.isConditional) {
                 this.show = this.section.condition.action_type == 'show' ? false : true;
+                this.section.invisible = !this.show;
 
                 _.each(this.section.condition.rules, (rule, key) => {
                     self.rules[key] = false;
@@ -100,6 +101,7 @@
                     }
                 });
                 this.show = this.section.condition.action_type == 'show' ? show : !show;
+                this.section.invisible = !this.show;
             },
 
             toggleSection() {

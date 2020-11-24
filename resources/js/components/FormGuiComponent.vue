@@ -155,7 +155,11 @@
                             self.fillSubmitData(row.controls, key);
                         });
                     }
+                    // disable validation on condition Section
+                    if (section.invisible) self.validSection = true;
+
                     self.formdata.sections[key]['valid'] = self.validSection;
+                    if (!self.validSection) self.validForm = false;
                 });
             },
 
@@ -212,7 +216,6 @@
                     }
                     if (!valid) {
                         self.validSection = false;
-                        self.validForm = false;
                         $('body .error-msg.'+control.name).show(); //show error message
                     }
                     //fill from address block
@@ -292,6 +295,7 @@
 
             SaveApps(notRedirect) {
                 if (notRedirect) {
+                    //send App to server without page redirect
                     this.redirect = false;
                 } else {
                     this.redirect = true;
