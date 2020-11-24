@@ -19,7 +19,7 @@ class FrontendController extends Controller
     public function success(Request $request, $id)
     {
         $form = Form::find($id);
-        $msg = "Thankyou ".Auth::user()->name;
+        $msg = "Thank you ".Auth::user()->name;
 
         $request->session()->flash('success', $msg);
 
