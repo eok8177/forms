@@ -11,6 +11,7 @@
                    :name="value.fieldName"
                    :required="value.required"
                    v-on:blur="dateChanged"
+                   v-on:keyup.enter="dateChanged"
                    :placeholder="options.placeholder"
                    v-model="value.value" />
            </div>
@@ -27,6 +28,7 @@
                :name="value.fieldName"
                :required="value.required"
                v-on:blur="dateChanged"
+               v-on:keyup.enter="dateChanged"
                :placeholder="options.placeholder"
                v-model="value.value" />
         </div>
@@ -84,8 +86,17 @@
             // optionsDate['changeMonth'] = true;
             optionsDate['changeYear'] = true;
           // }
+
           if (!self.value.readonly) {
-            $('#'+this.value.name).datepicker(optionsDate);
+            $('#'+this.value.name).bind('keydown', function (event) {
+              if (event.which == 13) {
+                let e = jQuery.Event('keydown');
+                e.which = 9;//tab 
+                e.keyCode = 9;
+                $(this).trigger(e);
+                return false;
+              }
+            }).datepicker(optionsDate);
           }
         },
         methods: {
