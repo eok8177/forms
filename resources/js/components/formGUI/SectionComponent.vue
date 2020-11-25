@@ -37,39 +37,12 @@
                 _.each(this.section.condition.rules, (rule, key) => {
                     self.rules[key] = false;
 
+                    // toggle section on init
+                    self.conditionField(rule, key);
+
                     // add Event to target field
                     $('body').on('change', '[name="'+rule.fieldId+'"]', function(){
-                        let valid = false;
-                        let numVal = parseFloat($(this).val());
-                        let stringVal = $(this).val().toString();
-                        if($(this).attr('type') == "checkbox") stringVal = this.checked ? 1 : 0;
-
-                        switch(rule.operator) {
-                          case 'is':
-                            if (stringVal == rule.value) valid = true;
-                            break;
-                          case 'is_not':
-                            if (stringVal != rule.value) valid = true;
-                            break;
-                          case 'greater':
-                            if (numVal > rule.value) valid = true;
-                            break;
-                          case 'less':
-                            if (numVal < rule.value) valid = true;
-                            break;
-                          case 'contain':
-                            if (stringVal.indexOf(rule.value) >= 0) valid = true;
-                            break;
-                          case 'start':
-                            if (stringVal.startsWith(rule.value)) valid = true;
-                            break;
-                          case 'end':
-                            if (stringVal.endsWith(rule.value)) valid = true;
-                            break;
-                          default:
-                            valid = false;
-                        }
-                        self.toggleField(key, valid);
+                        self.conditionField(rule, key);
                     });
 
                 });
@@ -106,7 +79,80 @@
 
             toggleSection() {
                 this.$parent.toggleSection(this.index);
-            }
+            },
+
+            // search control in form object by fieldName
+            searchInForm(fieldName) {
+                let self = this;
+                let field = false;
+                _.forEach(this.$parent.form.sections, function(section, key) {
+                    if (section.isDynamic) { // search in Dynamic section
+                        _.forEach(section.instances, function(instance) {
+                            _.forEach(instance, function(value) {
+                                _.forEach(row.controls, function(control) {
+                                    if (control.fieldName == fieldName) {
+                                        field = control;
+                                    }
+                                });
+                            });
+                        });
+                    } else {
+                        _.forEach(section.rows, function(row) {
+                            _.forEach(row.controls, function(control) {
+                                if (control.fieldName == fieldName) {
+                                    field = control;
+                                }
+                            });
+                        });
+                    }
+                });
+                return field;
+            },
+
+            // condition Field logic
+            conditionField(rule, key) {
+                let self = this;
+                let field = self.searchInForm(rule.fieldId); // get control from form object
+                let valid = false;
+                let ruleValue = rule.value;
+                let numVal = parseFloat(field.value);
+                let stringVal = field.value ? field.value.toString() : '';
+                if(field.type == "checkbox") stringVal = field.value ? 1 : 0;
+
+                if(field.type == "datepicker") {
+                    ruleValue = parseFloat(moment(rule.value, DATE_FORMAT.toUpperCase()).valueOf());
+                    numVal = parseFloat(moment(stringVal, DATE_FORMAT.toUpperCase()).valueOf());
+                    stringVal = moment(stringVal, DATE_FORMAT.toUpperCase()).valueOf();
+                }
+
+                switch(rule.operator) {
+                  case 'is':
+                    if (stringVal == rule.value) valid = true;
+                    break;
+                  case 'is_not':
+                    if (stringVal != rule.value) valid = true;
+                    break;
+                  case 'greater':
+                    if (numVal > rule.value) valid = true;
+                    break;
+                  case 'less':
+                    if (numVal < rule.value) valid = true;
+                    break;
+                  case 'contain':
+                    if (stringVal.indexOf(rule.value) >= 0) valid = true;
+                    break;
+                  case 'start':
+                    if (stringVal.startsWith(rule.value)) valid = true;
+                    break;
+                  case 'end':
+                    if (stringVal.endsWith(rule.value)) valid = true;
+                    break;
+                  default:
+                    valid = false;
+                }
+                self.toggleField(key, valid);
+            },
+
         }
     }
 </script>
