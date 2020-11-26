@@ -8,7 +8,7 @@
       <a href="/" class="logo"><img src="/images/01.svg" alt=""></a>
       <span>MyRWAV</span>
     </div>
-    <span class="inform">To complete an RWAV form you need to have a MyRWAV account.  Login or register below:</span>
+    <span class="inform">To complete an RWAV form you need to have a MyRWAV account. Login or register below.</span>
     <div class="tabs-area">
       <ul class="tabs inner">
         <li><a href="#tab01">LOGIN</a></li>
@@ -43,7 +43,9 @@
               </div>
             </div>
             <div class="text-holder">
-                <span class="comments">If you have a MYRWAV account and are logging in for the first time since 8th December, you will need to reset your password.</span>
+                <span class="comments">
+                    <span class="attention_color">Note: </span> If you have a MYRWAV account and are logging in for the first time since 8th December, you will need to reset your password.
+                </span>
             </div>
             <button type="submit" class="submit">LOGIN</button>
             <div class="aligncenter">
