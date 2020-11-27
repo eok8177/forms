@@ -164,12 +164,12 @@ $(function () {
   let dir = 'asc';
   let prevTab = {{ request()->get('tab', 0) }};
 
-  $("#sortTable .sort").each((i, el)=>{
+  $("#sortTable .sort").each(function(i, el) {
     let $el = $(el);
     if (orderQuery == $el.data('order') && dirQuery == 'desc') {
       $el.addClass('desc');
     }
-    $el.click(()=>{
+    $el.click(function() {
       if (orderQuery == $el.data('order') && prevTab ==$el.data('tab')) {
         if (dirQuery == 'asc') {
           dir = 'desc';
