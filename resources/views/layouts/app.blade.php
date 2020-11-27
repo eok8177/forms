@@ -26,6 +26,7 @@
 
       gtag('config', 'UA-152798417-1');
     </script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
     @stack('styles')
 </head>
 <body>
