@@ -20,7 +20,7 @@
                      </small>
               <div v-if="typeof value.value === 'string' || value.value instanceof String" class="link-file">
                 <a :href="'/'+value.value" target="_blank">{{getFileName()}}</a>
-                <button class="btn-delete" @click="deleteFile()">x</button>
+                <button v-if="!admin" class="btn-delete" @click="deleteFile()">x</button>
               </div>
               <div class="text-danger error-msg" v-if="msg">{{msg}}</div>
           </div>
@@ -40,7 +40,7 @@
 
         <div v-if="typeof value.value === 'string' || value.value instanceof String" class="link-file">
          <a :href="'/'+value.value" target="_blank">{{getFileName()}}</a>
-         <button class="btn-delete" @click="deleteFile()">x</button>
+         <button v-if="!admin" class="btn-delete" @click="deleteFile()">x</button>
         </div>
         <div class="text-danger error-msg" v-if="msg">{{msg}}</div>
       </div>
