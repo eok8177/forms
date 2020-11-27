@@ -285,7 +285,7 @@
                 // submit form
                 if (done == 0 && self.status === 'submitted') {
                   self.postForm();
-                } else { // only save Draft application
+                } else if (self.status != 'submitted') { // only save Draft application
                     if (self.redirect)
                         window.location.href = '/user/draft-saved/'+self.formid;
                     else
