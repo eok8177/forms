@@ -36,12 +36,13 @@
                 _.each(this.control.condition.rules, (rule, key) => {
                     self.rules[key] = false;
 
-                    if ('dynamicControl' in self.control) rule.fieldId += self.control.modName;
+                    rule.modName = '';
+                    if ('dynamicControl' in self.control) rule.modName = self.control.modName;
 
                     // set condition when form loaded
                     self.conditionField(rule, key);
                     // add Event to target field
-                    $('body').on('change', '[name="'+rule.fieldId+'"]', function(){
+                    $('body').on('change', '[name="'+rule.fieldId+rule.modName+'"]', function(){
                         self.conditionField(rule, key);
                     });
 
@@ -57,7 +58,7 @@
                     fieldId = fieldId.replace(/\}/g, "");
 
                     // for Dynamic Fields
-                    if ('dynamicControl' in self.control)  fieldId += self.control.modName;
+                    if ('dynamicControl' in self.control) fieldId += self.control.modName;
 
                     self.formula = Object.assign(self.formula, {
                         [fieldId]: {
@@ -68,8 +69,10 @@
                     });
                 });
 
-                // set events to terget fields
-                _.each(this.formula, (field, key) => {
+                _.each(self.formula, (field, key) => {
+                    self.calcField(key); // Calc when started
+
+                    // set events to terget fields
                     $('body').on('change', '[name="'+key+'"]', function(){
                         self.calcField(key); // Calc when changed values
                     });
@@ -99,7 +102,7 @@
             },
             conditionField(rule, key) {
                 let self = this;
-                let field = self.searchInForm(rule.fieldId); // get control from form object
+                let field = self.searchInForm(rule.fieldId+rule.modName); // get control from form object
                 let valid = false;
                 let ruleValue = rule.value;
                 let numVal = parseFloat(field.value);
@@ -145,8 +148,8 @@
                 self.formula[fieldId].value = value;
                 let runCalc = true;
                 _.each(this.formula, (item,index) => {
-                    // get value from HTML input
-                    if (!$('[name="'+index+'"]').val()) runCalc = false;
+                    // get value from HTML input OR from this.formula[fieldId].value
+                    if ( !$('[name="'+index+'"]').val() && !self.formula[index].value ) runCalc = false;
                 });
                 this.control.value = '';
                 if (runCalc) {
@@ -156,10 +159,12 @@
                         fieldId = fieldId.replace(/\}/g, "");
 
                         // for Dynamic Fields
-                        if ('dynamicControl' in self.control)  fieldId += self.control.modName;
+                        if ('dynamicControl' in self.control) fieldId += self.control.modName;
 
-                        return $('[name="'+fieldId+'"]').val(); // get value from HTML input
-                        // return self.formula[fieldId].value; //fill formula by values
+                        let val = $('[name="'+fieldId+'"]').val();  // get value from HTML input
+                        if (!val) val = self.formula[fieldId].value; // OR from this.formula[fieldId].value
+
+                        return val;
                     });
                     try { // calculate formula
                         this.control.value = eval(formula);
