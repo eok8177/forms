@@ -93,16 +93,34 @@ class Application extends Model
         $config = json_decode($this->config, true);
 
         foreach ($config['sections'] as $idSection => $section) {
-            if (array_key_exists('rows', $section)) {
-                foreach ($section['rows'] as $idRow => $row) {
-                    if (array_key_exists('controls', $row)) {
-                        foreach ($row['controls'] as $idControl => $control) {
-                            if ($control['fieldName'] == $fieldName) {
-                                $config['sections'][$idSection]['rows'][$idRow]['controls'][$idControl]['value'] = $value;
+            if ($section['isDynamic']) {
+
+                foreach ($section['instances'] as $idInst => $instance) {
+                    foreach ($instance as $sectionID => $section) {
+                        if (array_key_exists('controls', $section)) {
+                            foreach ($section['controls'] as $idControl => $control) {
+                                if ($control['fieldName'] == $fieldName) {
+                                    $config['sections'][$idSection]['instances'][$idInst][$sectionID]['controls'][$idControl]['value'] = $value;
+                                }
                             }
                         }
                     }
                 }
+
+            } else {
+
+                if (array_key_exists('rows', $section)) {
+                    foreach ($section['rows'] as $idRow => $row) {
+                        if (array_key_exists('controls', $row)) {
+                            foreach ($row['controls'] as $idControl => $control) {
+                                if ($control['fieldName'] == $fieldName) {
+                                    $config['sections'][$idSection]['rows'][$idRow]['controls'][$idControl]['value'] = $value;
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
         }
         $this->config = json_encode($config);

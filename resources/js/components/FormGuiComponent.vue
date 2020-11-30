@@ -291,6 +291,7 @@
                     else
                         self.msg = 'You draft is updated.';
                 }
+                this.disabledBtn = false;
                 return;
             },
 
