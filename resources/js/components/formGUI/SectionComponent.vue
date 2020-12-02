@@ -88,7 +88,7 @@
                 _.forEach(this.$parent.form.sections, function(section, key) {
                     if (section.isDynamic) { // search in Dynamic section
                         _.forEach(section.instances, function(instance) {
-                            _.forEach(instance, function(value) {
+                             _.forEach(instance, function(row) {
                                 _.forEach(row.controls, function(control) {
                                     if (control.fieldName == fieldName) {
                                         field = control;
