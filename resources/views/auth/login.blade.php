@@ -44,7 +44,7 @@
             </div>
             <div class="text-holder">
                 <span class="comments">
-                    <span class="attention_color">Note: </span> If you have a MYRWAV account and are logging in for the first time since 8th December, you will need to reset your password.
+                    <span class="attention_color">Note: </span> If you have a MYRWAV account and are logging in for the first time since 8th December, you will need to reset your password. <a href="{{ route('password.request') }}">Click here to reset</a>.
                 </span>
             </div>
             <button type="submit" class="submit">LOGIN</button>
