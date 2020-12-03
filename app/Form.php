@@ -126,6 +126,13 @@ class Form extends Model
         return $this->parseFormConfig($this->config)['groups'];
     }
 
+    public function staticFields()
+    {
+        if (!$this->config) return [];
+
+        return $this->parseFormStaticSections($this->config);
+    }
+
     public function getFieldsAlias()
     {
         if (!$this->config) return [];

@@ -154,6 +154,29 @@ trait FormConfig
         ];
     }
 
+    public function parseFormStaticSections($config)
+    {
+        $config = json_decode($config, true);
+        $groups = []; // for macros: email & additional field
+
+        if ($config)
+        foreach ($config['sections'] as $section) {
+            if ($section['isDynamic']) continue;
+            if (array_key_exists('rows', $section)) {
+                foreach ($section['rows'] as $row) {
+                    if (array_key_exists('controls', $row)) {
+                        foreach ($row['controls'] as $control) {
+                            if ($control['type'] == 'html') continue;
+                            $groups[$section['label']][$control['fieldName']] = $control['label'];
+                        }
+                    }
+                }
+            }
+        }
+
+        return $groups;
+    }
+
     // for API when submit form
     public function parseApp($config)
     {

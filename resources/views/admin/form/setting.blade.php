@@ -19,11 +19,11 @@
         <input type="text" name="name" value="{{$form->name}}" class="form-control" {{$form->draft == 0 ? 'readonly' : ''}}>
       </div>
 
-      @if($form->fields)
+      @if($form->staticFields())
       <div class="form-group">
         <label>Additional field</label>
         <select class="form-control" name="additional_field">
-        @foreach($form->fields as $section => $fields)
+        @foreach($form->staticFields() as $section => $fields)
           <option disabled>--- {{$section}} ---</option>
           @foreach($fields as $field => $label)
             <option {{$form->additional_field == $field ? 'selected' : ''}} value="{{$field}}">{{$label}}</option>
