@@ -87,13 +87,14 @@ class FormController extends Controller
         $appid = $request->get('appid', 0);
         $app = Application::find($appid);
 
-		$app->createEntry();
+        $app->createEntry();
         if ($app->to_be_approved == 0) {
             $app->adminSubmitEmail();
-            $app->userSubmitEmail();
         } else {
             $app->managerSubmitEmail();
         }
+        // send email to user regardless response is needed to be approved/rejected
+        $app->userSubmitEmail();
 
         return response()->json([
             'status' => 'OK'

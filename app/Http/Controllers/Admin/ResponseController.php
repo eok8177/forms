@@ -66,7 +66,7 @@ class ResponseController extends Controller
     public function sendEmail(Application $app)
     {
         echo "Run: ".date('i:s')."\n";
-        $app->userSubmitEmail();
+        //$app->userSubmitEmail();
         $app->userAcceptEmail();
         $app->adminSubmitEmail();
         $app->userRejectEmail();
