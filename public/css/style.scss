@@ -208,6 +208,9 @@ h4{
 	    margin: 0 27px 0 0;
 	    box-sizing: border-box;
 	    padding: 50px 30px 50px 114px;
+		.logo {
+			text-decoration: none;
+		}
 	}
 	#content{
 		position: relative;
@@ -818,6 +821,28 @@ h2{
 	.logo-link{
 		font-weight: 700;
 		font-size: 20px;
+	}
+	.social_media {
+		float: right;
+		display: block;
+		padding-top: 16px;
+		font-size: 24px;
+		width: auto;
+		color: #24231e;
+	}
+	.social_media li:first-child {
+		margin-left: 0px;
+	}
+	.social_media li:not(:last-child) {
+		margin-right: 5px;
+	}
+	.social_media li {
+		display: block;
+		float: left;
+		width: 27px;
+		margin-left: 12px;
+		margin-right: 4px;
+		text-align: center;
 	}
 }
 .footer-holder{

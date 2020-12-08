@@ -40,8 +40,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <a class="nav-link" href="{{route('front.all_forms')}}">All Forms</a>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">

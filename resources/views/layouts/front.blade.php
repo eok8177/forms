@@ -45,7 +45,7 @@
 
     <footer id="footer">
       <div class="footer-holder">
-        <a href="/" class="footer-logo"><img src="/images/01.svg" alt=""></a>
+        <a href="https://www.rwav.com.au/" class="footer-logo"><img src="/images/01.svg" alt=""></a>
         <div class="columns">
           <div class="column">
             <span class="heading">Rural Workforce Agency Victoria</span>
@@ -70,7 +70,14 @@
 
       <div class="column">
         <span class="heading">Find us on social media:</span>
-        <span><a href="/" class="logo-link">RWAVictoria</a></span>
+        <span>
+<ul class="social_media show">
+    <li><a href="https://www.facebook.com/RWAVictoria" target="_blank" class="facebook" title="Follow us on Facebook"><i class="fa fa-facebook"></i></a></li>
+    <li><a href="https://twitter.com/RWAVictoria" target="_blank" class="twitter" title="Follow us on Twitter"><i class="fa fa-twitter"></i></a></li>
+    <li><a href="https://www.linkedin.com/company/657176" target="_blank" class="linkedin" title="Follow us on Linkedin"><i class="fa fa-linkedin"></i></a></li>
+    <li><a href="https://www.instagram.com/rwavictoria/" target="_blank" class="linkedin" title="Follow us on Instagram"><i class="fa fa-instagram"></i></a></li>
+</ul>
+
       </div>
     </footer>
 
