@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', ['as' => 'front.index', 'uses' => 'FrontendController@index']);
+Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user', 'admin', 'manager']], function() {
+    Route::get('/', ['as' => 'front.index', 'uses' => 'FrontendController@index']);
+});
 Route::get('/success/{id}', ['as' => 'front.success', 'uses' => 'FrontendController@success']);
 Route::get('/form/{id?}', ['as' => 'front.form', 'uses' => 'FrontendController@form']);
 Route::get('/all-forms', ['as' => 'front.all_forms', 'uses' => 'FrontendController@allForms']);
