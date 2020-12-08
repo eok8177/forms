@@ -44,7 +44,7 @@
       <div class="main-holder pr-xl-4">
 
         <aside id="sidebar">
-          <a href="/" class="logo">MYRWAV</a>
+          <a href="" class="logo">MYRWAV</a>
           <nav id="nav">
             <ul>
 

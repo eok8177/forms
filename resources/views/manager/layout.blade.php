@@ -5,7 +5,7 @@
   <div class="main-holder pr-xl-4">
 
     <aside id="sidebar">
-      <a href="/" class="logo">MYRWAV</a>
+      <a href="" class="logo">MYRWAV</a>
       <nav id="nav">
         <ul>
           <li class="{{ request()->is('*manager') ? 'active' : '' }}"><a href="{{ route('manager.responses') }}">Responses</a></li>
