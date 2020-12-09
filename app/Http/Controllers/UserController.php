@@ -25,7 +25,7 @@ class UserController extends Controller
         if ($user->role == 'admin') {
             return redirect('/admin/responses');
         } elseif ($user->role == 'manager') {
-            return redirect('/admin/responses');
+            return redirect('/manager/responses');
         } elseif ($user->role == 'user') {
             $redirectTo = $request->session()->get('redirectTo', '/user');
             if (!$user->email_verified_at) {
