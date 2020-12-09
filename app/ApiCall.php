@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\ApiLog;
+
+
 class ApiCall
 {
     public function test()
@@ -87,6 +90,12 @@ class ApiCall
         curl_close($ch);
 
         $res = json_decode($result);
+
+        $apiLog = new ApiLog;
+        $apiLog->method = $method;
+        $apiLog->response = $result;
+        $apiLog->save();
+
         if (isset($res->status) && $res->status == 'OK') return $res->data; else return false;
     }
 }
