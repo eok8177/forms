@@ -113,7 +113,7 @@
               @endforeach
 
               @if (!(empty($dataMars)))
-              @foreach($dataMars as $obj)
+              @foreach(@$dataMars as $obj)
                 <tr>
                   <td>{{$obj->Type}}</td>
                   <td></td>

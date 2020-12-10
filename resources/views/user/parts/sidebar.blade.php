@@ -1,5 +1,5 @@
 <aside id="sidebar">
-  <a href="" class="logo">MYRWAV</a>
+  <span href="" class="logo">MYRWAV</span>
   <nav id="nav">
     <ul>
       <li class="{{ request()->is('*user') ? 'active' : '' }}"><a href="{{ route('user.index') }}">DASHBOARD</a></li>

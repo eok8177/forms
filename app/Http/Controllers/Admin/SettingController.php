@@ -12,7 +12,6 @@ class SettingController extends Controller
     {
         $dateFormats = [
             'dd/mm/yy' => 'dd/mm/yy',
-			'dd/mm/yyyy' => 'dd/mm/yyyy',
             'dd-mm-yy' => 'dd-mm-yy',
             'mm/dd/yy' => 'mm/dd/yy',
             'mm-dd-yy' => 'mm-dd-yy',
