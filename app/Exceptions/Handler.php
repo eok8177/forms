@@ -46,6 +46,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+
+        if ($exception instanceof TokenMismatchException && $request->getRequestUri() === '/logout') {
+            return redirect('/');
+        }
+
         return parent::render($request, $exception);
     }
 }
