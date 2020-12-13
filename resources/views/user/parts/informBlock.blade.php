@@ -28,7 +28,7 @@
     </div>
   </div>
   <div class="block">
-    <h2 class="color">GOT FEEDBACK</h2>
+    <h2 class="color">DO YOU HAVE FEEDBACK?</h2>
     <div class="box">
       <form action="#">
         <textarea id="text" cols="30" rows="10"></textarea>
