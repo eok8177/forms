@@ -16,7 +16,7 @@ class CreateApiLogsTable extends Migration
         Schema::create('api_logs', function (Blueprint $table) {
             $table->id();
             $table->string('method')->nullable();
-            $table->string('payload')->nullable();
+            $table->text('payload')->nullable();
             $table->text('response')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
