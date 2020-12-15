@@ -105,6 +105,6 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         auth()->guard()->logout();
-        return redirect()->route('front.index')->with('success', 'PLEASE CONFIRM YOUR REGISTRATION <br>In a few moments you will receive an e-mail with a confirmation link for you to complete your registration.');
+        return redirect()->route('front.registered')->with('success', 'PLEASE CONFIRM YOUR REGISTRATION <br>In a few moments you will receive an e-mail with a confirmation link for you to complete your registration.');
     }
 }
