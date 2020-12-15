@@ -131,6 +131,7 @@
 
               <a href="{{ route('admin.user.edit', ['user' => Auth::user()->id]) }}" class="nav-item nav-link"><i class="fa fa-gear"></i> @lang('message.profile')</a>
 
+              <a class="nav-item nav-link" href="{{route('admin.apilogs')}}"><i class="fa fa-lightbulb-o"></i> @lang('message.apilogs')</a>
               <a class="nav-item nav-link" href="{{route('admin.settings')}}"><i class="fa fa-cogs"></i> @lang('message.settings')</a>
 
               <a href="{{ route('logout') }}" class="nav-item nav-link"

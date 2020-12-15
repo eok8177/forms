@@ -78,4 +78,6 @@ return [
     'send' => 'Send',
     'message' => 'Your message',
 
+    'apilogs' => 'API Logs',
+
 ];
