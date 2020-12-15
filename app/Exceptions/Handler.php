@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use App\ErrorLog;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +47,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+      $data = [
+        'url' => $request->getRequestUri(),
+      ];
+      $log = ErrorLog::log($data);
 
       if ($exception instanceof TokenMismatchException) {
            if ($request->getRequestUri()==='/logout') {
