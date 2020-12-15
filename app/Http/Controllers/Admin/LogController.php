@@ -18,4 +18,12 @@ class LogController extends Controller
         ]);
     }
 
+    public function apilogs()
+    {
+        $logs = ApiLog::failled();
+        return view('admin.logs.index', [
+            'logs' => $logs,
+        ]);
+    }
+
 }

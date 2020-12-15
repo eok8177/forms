@@ -15,4 +15,11 @@ class ApiLog extends Model
 
     const UPDATED_AT = null; //and updated by default null set
 
+    static function failled()
+    {
+        $logs = ApiLog::where('response','LIKE', '%"response_status":"0"%')->get();
+
+        return $logs;
+    }
+
 }

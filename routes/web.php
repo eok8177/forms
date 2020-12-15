@@ -81,6 +81,8 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
     Route::post('entry-status/{app}', ['as' => 'entryStatus', 'uses' => 'ResponseController@status']);
 
     Route::resource('user', 'UserController');
+
+    Route::get('apilogs', ['as' => 'apilogs', 'uses' => 'LogController@apilogs']);
 });
 
 // User
