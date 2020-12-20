@@ -13,6 +13,7 @@
             </div>
             <div class="col-md-8">
                 <input :type="value.isEmail ? 'email' : 'text'"
+                       ref="input"
                        class="form-control"
                        :readonly="value.readonly"
                        v-if="!value.isMultiLine"
@@ -30,6 +31,7 @@
             <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline, 'required': value.required}" v-html="value.label"></label>
 
             <input :type="value.isEmail ? 'email' : 'text'"
+                   ref="input"
                    class="form-control"
                    :readonly="value.readonly"
                    v-if="!value.isMultiLine"
@@ -61,6 +63,11 @@
               }
             }
             this.value.readonly = this.$parent.$parent.$parent.$parent.admin || this.value.readonly;
+
+            if (this.value.mask) {
+              console.log(this.$refs.input);
+              $(this.$refs.input).mask(this.value.mask);
+            }
         }
     }
 </script>
