@@ -49,6 +49,8 @@ class Handler extends ExceptionHandler
     {
       $data = [
         'url' => $request->getRequestUri(),
+        'method' => $request->getMethod(),
+        'error' => $exception->getMessage(),
       ];
       $log = ErrorLog::log($data);
 

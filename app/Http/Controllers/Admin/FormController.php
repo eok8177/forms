@@ -45,6 +45,7 @@ class FormController extends Controller
     {
         $request->validate([
             'title' => 'required',
+            'name' => 'required|unique:forms',
         ]);
 
         $form = $form->create($request->all());
