@@ -2,9 +2,13 @@
 
 @section('content')
 
-<div class="page-header row justify-content-between">
+<div class="d-flex mb-3 justify-content-between">
   <h5></h5>
   <div>
+  @if($app->approvs->count())
+    <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#historyModal" title="History approvs">History</button>
+  @endif
+
   @if($app->status == 'submitted' && $app->to_be_approved == 1)
     <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#rejectModal" title="Approv or Reject Entry">Take action</button>
   @endif
@@ -41,6 +45,35 @@
           <button type="submit" name="status" value="1" class="btn btn-outline-success">Accept</button>
         </div>
       {!! Form::close() !!}
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="historyModalLabel">History</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          @foreach($app->approvs as $approv)
+          <tr>
+            <td>{{$approv->created_at}}</td>
+            <td>{{$approv->status == '-1' ? 'Rejected' : 'Accepted'}}</td>
+            <td>{{$approv->notes}}</td>
+          </tr>
+          @endforeach
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">Close</button>
+      </div>
     </div>
   </div>
 </div>
