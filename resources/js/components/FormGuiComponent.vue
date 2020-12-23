@@ -124,6 +124,7 @@
                     $('#'+section.name + '_gui_body').collapse('hide');
                 });
             },
+            // Submti Form
             Submit() {
                 // parse all form object
                 this.parseForm(-1);
@@ -204,10 +205,19 @@
                                 valid = false;
                                 $('body [name="'+control.name+'"]').addClass('is-invalid');
                                 if (control.invisible) valid = true; // disable validation on condition field
+                            } else {
+                                if (!(control.value instanceof File) ) {
+                                    // if empty string
+                                    // when file not saved in last session
+                                    if (control.value.length == 0) {
+                                        valid = false;
+                                        $('body [name="'+control.name+'"]').addClass('is-invalid');
+                                    }
+                                }
                             }
                         }
                     }
-                    if (control.type == 'file' && control.value) { // save files
+                    if (control.type == 'file' && control.value instanceof File) { // save files
                         self.files[control.name] = {
                             name: control.label,
                             data: control.value,
@@ -257,7 +267,7 @@
                 let done = Object.keys(self.files).length;
                 _.forEach(self.files, function(file,key) {
                     //if file already uploaded
-                    if (typeof file.data === 'string' || file.data instanceof String) {
+                    if (typeof file.data === 'string' || !(file.data instanceof File) ) {
                         done = done - 1;
                         return true;
                     }
@@ -295,6 +305,7 @@
                 return;
             },
 
+            // Save Draft
             SaveApps(notRedirect) {
                 if (notRedirect) {
                     //send App to server without page redirect
