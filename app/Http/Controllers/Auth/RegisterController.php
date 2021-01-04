@@ -87,6 +87,7 @@ class RegisterController extends Controller
             // 'avatar' => $data['avatar'],
             'password' => bcrypt($data['password']),
         ]);
+        $user->active_user_id = $user->id;
 
         // pass data into MARS
         $api = new ApiCall;
