@@ -271,6 +271,10 @@
                         done = done - 1;
                         return true;
                     }
+
+                    //change FileName if has restricted symbols
+                    let fileName = file.data.name.replace(/[/\?%*:|"<>]/g, '-');
+
                     var formData = new FormData();
                     formData.append('appid', self.appID);
                     formData.append('entryId', self.entryid);
@@ -278,7 +282,7 @@
                     formData.append('formId', self.formid);
                     formData.append('fieldName', file.name);
                     formData.append('fieldId', file.fieldId);
-                    formData.append('file', file.data);
+                    formData.append('file', file.data, fileName);
                     axios.post('/api/upload-file', formData, {
                         headers: {
                           'Content-Type': 'multipart/form-data'
