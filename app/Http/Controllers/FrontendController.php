@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Application;
 use App\Form;
 use App\Setting;
 
@@ -18,14 +19,14 @@ class FrontendController extends Controller
 
     public function success(Request $request, $id)
     {
-        $form = Form::find($id);
-        $msg = "Thank you ".Auth::user()->name;
+        $app = Application::find($id);
+        $msg = "Thank you ".$app->user->name;
 
         $request->session()->flash('success', $msg);
 
         return view('success', [
             'forms' => Form::search(false,0,0)->get(),
-            'form' => $form
+            'form' => $app->form
         ]);
     }
 

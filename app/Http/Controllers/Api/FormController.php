@@ -52,7 +52,7 @@ class FormController extends Controller
         return response()->json([
             'status' => 'OK',
             'appid' => $app->id,
-            'redirect_url' => $form->redirect_url ? $form->redirect_url : '/success/'.$formid,
+            'redirect_url' => $form->redirect_url ? $form->redirect_url : '/success/'.$app->id,
         ], 200);
     }
 
