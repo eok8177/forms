@@ -273,7 +273,7 @@
                     }
 
                     //change FileName if has restricted symbols
-                    let fileName = file.data.name.replace(/[/\?%*:|"<>]/g, '-');
+                    let fileName = file.data.name.replace(/[/\?%*:|"<>#]/g, '-');
 
                     var formData = new FormData();
                     formData.append('appid', self.appID);
