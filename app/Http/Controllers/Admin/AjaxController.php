@@ -102,7 +102,7 @@ class AjaxController extends Controller
 
             $item = $model::find($request->input('id'));
 
-            $item->$field = $item->$field == NULL ? date('yy-m-d h:i:s') : NULL;
+            $item->$field = $item->$field == NULL ? date('Y-m-d h:i:s') : NULL;
             $item->save();
 
             $response = [

@@ -70,7 +70,7 @@ class UserController extends Controller
         $email_verified = $data['email_verified'];
         unset($data['email_verified']);
         if ($email_verified == 1) {
-            $data['email_verified_at'] = date('yy-m-d h:i:s');
+            $data['email_verified_at'] = date('Y-m-d h:i:s');
         }
 
         $user = $user->create($data);
@@ -131,7 +131,7 @@ class UserController extends Controller
         $email_verified = $data['email_verified'];
         unset($data['email_verified']);
         if ($email_verified == 1 && $user->email_verified_at == NULL) {
-            $data['email_verified_at'] = date('yy-m-d h:i:s');
+            $data['email_verified_at'] = date('Y-m-d h:i:s');
         } elseif ($email_verified == 0) {
             $data['email_verified_at'] = NULL;
         }
