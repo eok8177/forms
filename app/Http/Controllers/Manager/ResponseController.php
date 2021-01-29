@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\ApiLog;
 use App\Application;
 use App\ApplicationApproval;
 use App\Entry;
@@ -51,6 +52,17 @@ class ResponseController extends Controller
         $appApprov->notes = $request->input('notes', NULL);
         $appApprov->status = $status;
         $appApprov->save();
+
+        ApiLog::saveLog([
+            'method' => 'Manager set status',
+            'user_id' => $application->user_id,
+            'form_id' => $application->form_id,
+            'application_id' => $application->id,
+            'response' => [
+                'status' => $application->status,
+                'notes' => $appApprov->notes
+            ]
+        ]);
 
 		$application->createEntry();
         if ($application->status == 'accepted') {

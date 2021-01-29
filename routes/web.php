@@ -34,7 +34,7 @@ Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social'
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 
 // Manager
-Route::group(['as' => 'manager.', 'middleware' => ['roles', 'verified'],'roles' =>['manager'], 'namespace' => 'Manager', 'prefix' => 'manager'], function() {
+Route::group(['as' => 'manager.', 'middleware' => ['roles', 'verified'],'roles' =>['admin','manager'], 'namespace' => 'Manager', 'prefix' => 'manager'], function() {
 
     Route::get('responses', ['as' => 'responses', 'uses' => 'ResponseController@index']);
     Route::get('response/{application}', ['as' => 'response', 'uses' => 'ResponseController@response']);
@@ -86,7 +86,7 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
 });
 
 // User
-Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user']], function() {
+Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'user']], function() {
 	Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index']);
 	
     Route::get('user/edit', ['as' => 'user.edit', 'uses' => 'UserController@edit']);

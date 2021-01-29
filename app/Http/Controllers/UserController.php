@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\User;
+use App\ApiLog;
 use App\Application;
 use App\ApiCall;
 use App\Setting;
@@ -155,6 +156,16 @@ class UserController extends Controller
     {
         $app->status = 'deleted';
         $app->save();
+
+        ApiLog::saveLog([
+            'method' => 'user delete Application',
+            'user_id' => $app->user_id,
+            'form_id' => $app->form_id,
+            'application_id' => $app->id,
+            'response' => [
+                'status' => $app->status
+            ]
+        ]);
 
         return response()->json([
             'status' => 'success'

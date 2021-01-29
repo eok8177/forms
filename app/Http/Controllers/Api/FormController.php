@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use App\ApiLog;
 use App\Form;
 use App\Entry;
 use App\Application;
@@ -23,25 +24,32 @@ class FormController extends Controller
 
     public function saveApp(Request $request)
     {
-        $appid = $request->get('appid', 0);
+        $appid = $request->get('appid', false);
         $userid = $request->get('userid', 0);
         $formid = $request->get('formid');
         $status = $request->get('status');
-        $entryid = $request->get('entryid', NULL);
         $data = $request->input('data', false);
 
-        $app = Application::where('id', $appid)->first();
+        $form = Form::findOrFail($formid);
 
-        if ($appid == 0) {
-            $app = new Application;
-        }
+        $app = Application::firstOrCreate([
+            'id' => $appid,
+            'user_id' => $userid,
+            'form_id' => $form->id
+        ]);
 
-        $form = Form::where('id', $formid)->first();
+        ApiLog::saveLog([
+            'method' => 'Save Application',
+            'user_id' => $userid,
+            'form_id' => $form->id,
+            'application_id' => $app->id,
+            'payload' => $data,
+            'response' => [
+                'status' => $status
+            ]
+        ]);
 
-        $app->user_id = $userid;
-        $app->form_id = $formid;
         $app->status = $status;
-        $app->entry_id = $entryid;
         $app->config = json_encode($data);
         $app->to_be_approved = $form->to_be_approved;
         $app->save();
@@ -61,20 +69,29 @@ class FormController extends Controller
         $appid = $request->get('appid', 0);
         $fieldId = $request->get('fieldId');
         $formId = $request->get('formId');
+        $app = Application::where('id', $appid)->firstOrFail();
+
         if ($fieldName = $request->get('fieldName') && $file = $request->file) {
 
             $filename = $file->storeAs('uploads/'.$formId.'/'.$appid, $file->getClientOriginalName(), 'public');
 
-            $app = Application::where('id', $appid)->first();
-            if ($app) {
-                $app->updateConfig($fieldId, $filename);
+            ApiLog::saveLog([
+                'method' => 'upload File',
+                'user_id' => $app->user_id,
+                'form_id' => $app->form_id,
+                'application_id' => $app->id,
+                'payload' => ['fieldName' => $request->get('fieldName')],
+                'response' => ['file' => $filename]
+            ]);
 
-                return response()->json([
-                    'status' => 'OK',
-                    'file' => $filename,
-                    'fieldId' => $fieldId,
-                ], 200);
-            }
+            $app->updateConfig($fieldId, $filename);
+
+            return response()->json([
+                'status' => 'OK',
+                'file' => $filename,
+                'fieldId' => $fieldId,
+            ], 200);
+
         }
 
         return response()->json([
@@ -85,7 +102,14 @@ class FormController extends Controller
     public function postForm(Request $request)
     {
         $appid = $request->get('appid', 0);
-        $app = Application::find($appid);
+        $app = Application::findOrFail($appid);
+
+        ApiLog::saveLog([
+            'method' => 'Submit Application',
+            'user_id' => $app->user_id,
+            'form_id' => $app->form_id,
+            'application_id' => $app->id
+        ]);
 
         $app->createEntry();
         if ($app->to_be_approved == 0) {

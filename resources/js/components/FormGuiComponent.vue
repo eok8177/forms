@@ -77,7 +77,6 @@
             validForm: true,
             validSection: true,
             files: {},
-            entryid: '',
             status: 'draft',
             redirect_url: '/',
             appID: '',
@@ -277,7 +276,6 @@
 
                     var formData = new FormData();
                     formData.append('appid', self.appID);
-                    formData.append('entryId', self.entryid);
                     formData.append('userid', self.userid);
                     formData.append('formId', self.formid);
                     formData.append('fieldName', file.name);
@@ -324,7 +322,6 @@
                     userid: this.userid,
                     formid: this.formid,
                     appid:  this.appID,
-                    entryid: this.entryid,
                     status: this.status,
                     data: this.form
                   })
