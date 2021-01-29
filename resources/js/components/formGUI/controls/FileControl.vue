@@ -81,15 +81,18 @@
           checkFileSize(e)
           {
             this.msg = '';
-            let valid = false;
 
             let maxSize = this.value.maxSize || 2;
             let size = e.target.files[0].size/1024/1024;
 
-            if (parseFloat(size) <= parseFloat(maxSize)) valid = true;
+            if (parseFloat(size) <= parseFloat(maxSize) && parseFloat(size) > 0) {
+              return true;
+            }
 
-            if (!valid) this.msg = 'File size is too large';
-            return valid;
+            if (parseFloat(size) > parseFloat(maxSize)) this.msg = 'File size is too large';
+            if (parseFloat(size) == 0) this.msg = 'File has zerro size';
+
+            return false;
           },
           checkFileType(e)
           {
