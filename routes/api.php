@@ -27,6 +27,8 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/get-coords',  ['uses' => 'FormController@getCoords']);
     Route::post('/delete-file',  ['uses' => 'FormController@deleteFile']);
 
+    Route::post('/log',  ['uses' => 'FormController@log']);
+
     Route::post('/feedback-email',  ['uses' => 'EmailController@feedback']);
 
 });

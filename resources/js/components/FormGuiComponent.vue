@@ -292,18 +292,51 @@
                             self.postForm();
                           }
                         }
-                      ).catch((error) => console.log(error));
+                      ).catch((error) => {
+                        let msg = {};
+                        if (error.response) {
+                          msg = {
+                            'fileName': fileName,
+                            'type': 'Request made and server responded',
+                            'data': error.response.data,
+                            'status': error.response.status,
+                            'headers': error.response.headers
+                          };
+                        } else if (error.request) {
+                          msg = {
+                            'fileName': fileName,
+                            'type': 'The request was made but no response was received',
+                            'request': error.request
+                          };
+                        } else {
+                          msg = {
+                            'fileName': fileName,
+                            'type': 'Something happened in setting up the request that triggered an Error',
+                            'request': error.message
+                          };
+                        }
+                        // post error to Log
+                        axios.post('/api/log', {
+                            'type': 'Error upload file',
+                            'error': error,
+                            'appid': self.appID,
+                            'msg': msg
+                        });
+                        self.errorMsg = 'Can`t upload file';
+                    });
                 });
                 // submit form
                 if (done == 0 && self.status === 'submitted') {
                   self.postForm();
-                } else if (self.status != 'submitted') { // only save Draft application
-                    if (self.redirect)
+                // only save Draft application
+                } else if (self.status != 'submitted') {
+                    if (self.redirect) {
                         window.location.href = '/user/draft-saved/'+self.formid;
-                    else
+                    } else {
                         self.msg = 'You draft is updated.';
+                        this.disabledBtn = false;
+                    }
                 }
-                this.disabledBtn = false;
                 return;
             },
 

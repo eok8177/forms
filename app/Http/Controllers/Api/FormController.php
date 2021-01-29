@@ -95,7 +95,7 @@ class FormController extends Controller
         }
 
         return response()->json([
-            'status' => 'not found file',
+            'error' => 'file not uploaded to Server',
         ], 400);
     }
 
@@ -179,6 +179,29 @@ class FormController extends Controller
         $file = $request->get('file', '');
 
         Storage::disk('public')->delete('uploads/'.$app->form_id.'/'.$app->id, $file);
+
+        return response()->json([
+            'status' => 'OK'
+        ], 200);
+    }
+
+    public function log(Request $request)
+    {
+        $type = $request->get('type', false);
+        $appid = $request->get('appid', false);
+        $error = $request->get('error', false);
+        $msg = $request->get('msg', false);
+
+        $app = Application::where('id', $appid)->first();
+
+        ApiLog::saveLog([
+            'method' => $type,
+            'user_id' => $app ? $app->user_id : NULL,
+            'form_id' => $app ? $app->form_id : NULL,
+            'application_id' => $app ? $app->id : NULL,
+            'payload' => $msg,
+            'response' => $error
+        ]);
 
         return response()->json([
             'status' => 'OK'
