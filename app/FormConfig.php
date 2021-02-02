@@ -13,6 +13,7 @@ trait FormConfig
 
         $config = json_decode($config, true);
 
+        if ($config)
         foreach ($config['sections'] as $section) {
             if (array_key_exists('rows', $section)) {
 
