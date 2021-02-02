@@ -80,7 +80,10 @@ class FormController extends Controller
                 'user_id' => $app->user_id,
                 'form_id' => $app->form_id,
                 'application_id' => $app->id,
-                'payload' => ['fieldName' => $request->get('fieldName')],
+                'payload' => [
+                    'fieldId' => $request->get('fieldId'),
+                    'fieldName' => $request->get('fieldName')
+                ],
                 'response' => ['file' => $filename]
             ]);
 
@@ -108,7 +111,8 @@ class FormController extends Controller
             'method' => 'Submit Application',
             'user_id' => $app->user_id,
             'form_id' => $app->form_id,
-            'application_id' => $app->id
+            'application_id' => $app->id,
+            'payload' => $app
         ]);
 
         $app->createEntry();
@@ -179,6 +183,15 @@ class FormController extends Controller
         $file = $request->get('file', '');
 
         Storage::disk('public')->delete('uploads/'.$app->form_id.'/'.$app->id, $file);
+
+        ApiLog::saveLog([
+            'method' => 'Delete File',
+            'user_id' => $app->user_id,
+            'form_id' => $app->form_id,
+            'application_id' => $app->id,
+            'payload' => $app,
+            'response' => ['file' => $file]
+        ]);
 
         return response()->json([
             'status' => 'OK'
