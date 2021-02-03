@@ -93,7 +93,7 @@ class ApiCall
 
         $apiLog = new ApiLog;
         $apiLog->method = $method;
-        $apiLog->response = $result;
+        $apiLog->response = json_encode($result);
         $apiLog->save();
 
         if (isset($res->status) && $res->status == 'OK') return $res->data; else return false;
