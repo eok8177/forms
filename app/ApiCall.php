@@ -75,7 +75,7 @@ class ApiCall
             CURLOPT_FRESH_CONNECT => 1,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FORBID_REUSE => 1,
-            CURLOPT_TIMEOUT => 4,
+            CURLOPT_TIMEOUT => 60,
             CURLOPT_HTTPHEADER => $headers
         );
 
@@ -83,17 +83,28 @@ class ApiCall
             $options[CURLOPT_POSTFIELDS] = json_encode($postData);
         }
 
+        // store in API_log straight before the actual CURL call
+        // $apiLog1 = new ApiLog;
+        // $apiLog1->method = $method . ' before';
+        // $apiLog1->save();
+
 
         $ch = curl_init();
         curl_setopt_array($ch, $options);
         $result = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $r = '';
+        if ($httpCode != 200) {
+            $r = curl_error($ch);
+        }
         curl_close($ch);
 
         $res = json_decode($result);
 
         $apiLog = new ApiLog;
         $apiLog->method = $method;
-        $apiLog->response = json_encode($result);
+        $apiLog->payload = json_encode($postData);
+        $apiLog->response = json_encode($result).$r;
         $apiLog->save();
 
         if (isset($res->status) && $res->status == 'OK') return $res->data; else return false;
