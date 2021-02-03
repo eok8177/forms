@@ -92,6 +92,7 @@ class Application extends Model
     {
         $config = json_decode($this->config, true);
 
+        $toUpdate = false;
         foreach ($config['sections'] as $idSection => $section) {
             if ($section['isDynamic']) {
 
@@ -101,6 +102,7 @@ class Application extends Model
                             foreach ($section['controls'] as $idControl => $control) {
                                 if ($control['fieldName'] == $fieldName) {
                                     $config['sections'][$idSection]['instances'][$idInst][$sectionID]['controls'][$idControl]['value'] = $value;
+                                    $toUpdate = true;
                                 }
                             }
                         }
@@ -115,6 +117,7 @@ class Application extends Model
                             foreach ($row['controls'] as $idControl => $control) {
                                 if ($control['fieldName'] == $fieldName) {
                                     $config['sections'][$idSection]['rows'][$idRow]['controls'][$idControl]['value'] = $value;
+                                    $toUpdate = true;
                                 }
                             }
                         }
@@ -123,9 +126,12 @@ class Application extends Model
 
             }
         }
-        $this->config = json_encode($config);
-        $this->save();
-        return true;
+        if ($toUpdate) {
+            $this->config = json_encode($config);
+            $this->updated_at = date('Y-m-d H:i:s');
+            $this->save();
+            return true;
+        }
     }
 
     public function createEntry()
