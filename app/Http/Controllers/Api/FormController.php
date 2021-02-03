@@ -71,9 +71,13 @@ class FormController extends Controller
         $formId = $request->get('formId');
         $app = Application::where('id', $appid)->firstOrFail();
 
+        $config_before = json_decode($app->config);
+
         if ($fieldName = $request->get('fieldName') && $file = $request->file) {
 
             $filename = $file->storeAs('uploads/'.$formId.'/'.$appid, $file->getClientOriginalName(), 'public');
+
+            $app->updateConfig($fieldId, $filename);
 
             ApiLog::saveLog([
                 'method' => 'upload File',
@@ -82,12 +86,14 @@ class FormController extends Controller
                 'application_id' => $app->id,
                 'payload' => [
                     'fieldId' => $request->get('fieldId'),
-                    'fieldName' => $request->get('fieldName')
+                    'fieldName' => $request->get('fieldName'),
+                    'config_before' => $config_before
                 ],
-                'response' => ['file' => $filename]
+                'response' => [
+                    'file' => $filename,
+                    'config_after' => json_decode($app->config)
+                ]
             ]);
-
-            $app->updateConfig($fieldId, $filename);
 
             return response()->json([
                 'status' => 'OK',
@@ -112,7 +118,7 @@ class FormController extends Controller
             'user_id' => $app->user_id,
             'form_id' => $app->form_id,
             'application_id' => $app->id,
-            'payload' => $app
+            'payload' => json_decode($app->config)
         ]);
 
         $app->createEntry();
@@ -189,7 +195,7 @@ class FormController extends Controller
             'user_id' => $app->user_id,
             'form_id' => $app->form_id,
             'application_id' => $app->id,
-            'payload' => $app,
+            'payload' => json_decode($app->config),
             'response' => ['file' => $file]
         ]);
 
