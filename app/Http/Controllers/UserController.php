@@ -5,18 +5,18 @@
 * Controller (based on MVC architecture) for all incoming requests made by user
 * 
 * List of methods:
-* - redirectTo(Request $request) | 
-* - index(Request $request)
-* - edit()
-* - update(Request $request)
-* - form(Application $app)
-* - formView(Application $app)
-* - destroy(Application $app)
-* - archive(Request $request)
-* - faq()
-* - draftSaved(Form $form)
-* - contact()
-* - contactSend(Request $request)
+* - redirectTo(Request $request) | Redirects to the different URL based on the role of logged in user (GET method)
+* - index(Request $request) | Show dashboard details: draft & submitted responses
+* - edit() | Edit personal details
+* - update(Request $request) | Update personal details
+* - form(Application $app) | TOREVIEW
+* - formView(Application $app) | Preview submitted response
+* - destroy(Application $app) | Delete draft response by user
+* - archive(Request $request) | TOREVIEW
+* - faq() | TOREVIEW
+* - draftSaved(Form $form) | Save draft
+* - contact() | TOREVIEW
+* - contactSend(Request $request) | TOREVIEW
 * - 
 */
 
@@ -74,16 +74,16 @@ class UserController extends Controller
 
     /**
     * Description:
-    * 
+    * Show dashboard details: draft & submitted responses
     *
     * List of parameters:
     * - $request : Request
     *
     * Return:
-    * 
+    * view content
     *
     * Examples of usage:
-    * - 
+    * - <baseUrl>/user
     */
     public function index(Request $request)
     {
@@ -136,25 +136,20 @@ class UserController extends Controller
             'host' => $request->getHost()
         ]);
     }
-	
-	// public function security()
-	// {
-	// 	return view('user.security', ['user' => Auth::user()]);
-	// }
 
 
     /**
     * Description:
-    * 
+    * Edit personal details
     *
     * List of parameters:
     * - none
     *
     * Return:
-    * 
+    * view content
     *
     * Examples of usage:
-    * - 
+    * - <baseUrl>/user/edit
     */
     public function edit()
     {
@@ -164,16 +159,16 @@ class UserController extends Controller
 
     /**
     * Description:
-    * 
+    * Update personal details
     *
     * List of parameters:
     * - $request : Request
     *
     * Return:
-    * 
+    * view content
     *
     * Examples of usage:
-    * - 
+    * - go to <baseUrl>/user/edit and click "Save"
     */
     public function update(Request $request)
     {
@@ -215,13 +210,13 @@ class UserController extends Controller
 
     /**
     * Description:
-    * 
+    * TOREVIEW
     *
     * List of parameters:
     * - $app : Application
     *
     * Return:
-    * 
+    * view content
     *
     * Examples of usage:
     * - 
@@ -237,13 +232,13 @@ class UserController extends Controller
 
     /**
     * Description:
-    * 
+    * Preview submitted response
     *
     * List of parameters:
     * - $app : Application
     *
     * Return:
-    * 
+    * view content
     *
     * Examples of usage:
     * - 
@@ -259,13 +254,13 @@ class UserController extends Controller
 
     /**
     * Description:
-    * 
+    * Delete draft response by user
     *
     * List of parameters:
     * - $app : Application
     *
     * Return:
-    * 
+    * Response: {status: 'success'}
     *
     * Examples of usage:
     * - 
@@ -293,13 +288,13 @@ class UserController extends Controller
 
     /**
     * Description:
-    * 
+    * TOREVIEW
     *
     * List of parameters:
     * - $request : Request
     *
     * Return:
-    * 
+    * view content
     *
     * Examples of usage:
     * - 
@@ -327,13 +322,13 @@ class UserController extends Controller
 
     /**
     * Description:
-    * 
+    * TOREVIEW
     *
     * List of parameters:
     * - none
     *
     * Return:
-    * 
+    * view content
     *
     * Examples of usage:
     * - 
@@ -349,13 +344,13 @@ class UserController extends Controller
 
     /**
     * Description:
-    * 
+    * Save draft
     *
     * List of parameters:
     * - $form : Form
     *
     * Return:
-    * 
+    * view content
     *
     * Examples of usage:
     * - 
@@ -369,13 +364,13 @@ class UserController extends Controller
 
     /**
     * Description:
-    * 
+    * TOREVIEW
     *
     * List of parameters:
     * - none
     *
     * Return:
-    * 
+    * view content
     *
     * Examples of usage:
     * - 
@@ -390,13 +385,13 @@ class UserController extends Controller
 
     /**
     * Description:
-    * 
+    * TOREVIEW
     *
     * List of parameters:
     * - $request : Request
     *
     * Return:
-    * 
+    * view content
     *
     * Examples of usage:
     * - 
