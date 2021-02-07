@@ -1,5 +1,15 @@
 <?php
 
+/**
+* Description:
+* Controller (based on MVC architecture) to manage manager's personal details
+* 
+* List of methods:
+* - edit(User $user) | Edit personal details by manager
+* - update(Request $request, User $user) | Update manager's personal details (PUT method)
+*
+*/
+
 namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
@@ -14,9 +24,23 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    /**
+    * Description:
+    * Edit personal details by manager
+    *
+    * List of parameters:
+    * - $user : User
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - <baseUrl>manager/user/16/edit
+    */
     public function edit(User $user)
     {
-        // restrict edit other users by manager
+        // prevent edit other users details by the manager
         if (Auth::user()->id != $user->id) {
             return redirect()->route('manager.responses');
         }
@@ -26,6 +50,21 @@ class UserController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * Update manager's personal details (PUT method)
+    *
+    * List of parameters:
+    * - $request : Request
+    * - $user : User
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - <baseUrl>/manager/user/16/edit and click "Save"
+    */
     public function update(Request $request, User $user)
     {
         $request->validate([

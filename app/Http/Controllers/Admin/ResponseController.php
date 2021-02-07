@@ -1,5 +1,17 @@
 <?php
 
+/**
+* Description:
+* Controller (based on MVC architecture) for responses viewed by admin
+* 
+* List of methods:
+* - index(Request $request) | Show the list of responses
+* - entry(Application $app) | View detailed response
+* - status(Request $request, Application $app) | Set status of the response to "rejected" (-1) or "accepted" (1)
+* - sendEmail(Application $app)
+* - destroy(Application $app) | Delete response
+*/
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -14,6 +26,20 @@ use App\Setting;
 
 class ResponseController extends Controller
 {
+
+    /**
+    * Description:
+    * Show the list of responses
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - 
+    */
     public function index(Request $request)
     {
         list($apps, $filter) = Application::search($request);
@@ -30,6 +56,20 @@ class ResponseController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * View detailed response
+    *
+    * List of parameters:
+    * - $app : Application
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - <baseUrl>/admin/entry/1080
+    */
     public function entry(Application $app)
     {
         return view('admin.entry', [
@@ -38,6 +78,22 @@ class ResponseController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * Set status of the response to "rejected" (-1) or "accepted" (1)
+    * TOREVIEW -- PS: NOT to be avaible for admin
+    *
+    * List of parameters:
+    * - $request : Request
+    * - $app : Application
+    *
+    * Return:
+    * view content - list of responses, see index()
+    *
+    * Examples of usage:
+    * - 
+    */
     public function status(Request $request, Application $app)
     {
         $status = $request->input('status', 0);
@@ -63,6 +119,20 @@ class ResponseController extends Controller
         return redirect()->route('admin.responses');
     }
 
+
+    /**
+    * Description:
+    * 
+    *
+    * List of parameters:
+    * - $app : Application
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function sendEmail(Application $app)
     {
         echo "Run: ".date('i:s')."\n";
@@ -73,6 +143,20 @@ class ResponseController extends Controller
         return $app->id;
     }
 
+
+    /**
+    * Description:
+    * Delete response
+    *
+    * List of parameters:
+    * - $app : Application
+    *
+    * Return:
+    * Response: {status: 'success'}
+    *
+    * Examples of usage:
+    * - Go to <baseUrl>/admin/responses and click to trash icon at any item in the list
+    */
     public function destroy(Application $app)
     {
 		$app->deleteEntry();

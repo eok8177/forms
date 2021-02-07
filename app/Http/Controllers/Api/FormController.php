@@ -1,5 +1,19 @@
 <?php
 
+/**
+* Description:
+* Controller (based on MVC architecture) for responses
+* 
+* List of methods:
+* - index() | Generates dummy response
+* - saveApp(Request $request) | Save entry as draft (POST method)
+* - uploadFile(Request $request) | Upload file for the entry (POST method)
+* - postForm(Request $request) | Post entry (POST Method)
+* - getCoords(Request $request) | Retrieve inputed by the client address's latitude and longitude values (POST Method)
+* - deleteFile(Request $request) | Delete uploaded file from the entry  (POST Method)
+* - log(Request $request) | Store error into logs table (POST Method)
+*/
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -14,6 +28,20 @@ use App\Application;
 
 class FormController extends Controller
 {
+
+    /**
+    * Description:
+    * Generates dummy response
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * Response: status=200, {type: 'Get', status: 'OK'}
+    *
+    * Examples of usage:
+    * - 
+    */
     public function index()
     {
         return response()->json([
@@ -22,6 +50,20 @@ class FormController extends Controller
         ], 200);
     }
 
+
+    /**
+    * Description:
+    * Save entry as draft (POST method)
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * Response: status code = 200, {status: 'OK', appid: <ID of entry>, 'redirect_url' : <URL where to be redirected>}
+    *
+    * Examples of usage:
+    * - 
+    */
     public function saveApp(Request $request)
     {
         $appid = $request->get('appid', false);
@@ -64,6 +106,20 @@ class FormController extends Controller
         ], 200);
     }
 
+
+    /**
+    * Description:
+    * Upload file for the entry (POST method)
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * Response: status=200, {status: 'OK', file: <filename>, fieldId: <fieldId>}
+    *
+    * Examples of usage:
+    * - Any entry with "File upload" component added
+    */
     public function uploadFile(Request $request)
     {
         $appid = $request->get('appid', 0);
@@ -108,6 +164,20 @@ class FormController extends Controller
         ], 400);
     }
 
+
+    /**
+    * Description:
+    * Post entry (POST Method)
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * Response: status=200, {status: 'OK'}
+    *
+    * Examples of usage:
+    * - Click "Submit" on any open entry
+    */
     public function postForm(Request $request)
     {
         $appid = $request->get('appid', 0);
@@ -135,6 +205,21 @@ class FormController extends Controller
         ], 200);
     }
 
+
+    /**
+    * Description:
+    * Retrieve inputed by the client address's latitude and longitude values (POST Method)
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * Response: status=200, {status: 'OK', lat: $lat, lng: $lng, address: $formatted_address}
+    * if unsuccessful call of Google MAPS API - Response: status=204
+    *
+    * Examples of usage:
+    * - add address control via the form builder
+    */
     public function getCoords(Request $request)
     {
         $key = $request->get('key', false);
@@ -181,6 +266,20 @@ class FormController extends Controller
         return response()->json([], 204);
     }
 
+
+    /**
+    * Description:
+    * Delete uploaded file from the entry (POST Method)
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * Response: status=200, {status: 'OK'}
+    *
+    * Examples of usage:
+    * - delete any uploaded file from the entry
+    */
     public function deleteFile(Request $request)
     {
         $appid = $request->get('appid', 0);
@@ -204,6 +303,20 @@ class FormController extends Controller
         ], 200);
     }
 
+
+    /**
+    * Description:
+    * Store error into logs table (POST Method)
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * Response: status=200, {status: 'OK'}
+    *
+    * Examples of usage:
+    * - submit new entry
+    */
     public function log(Request $request)
     {
         $type = $request->get('type', false);

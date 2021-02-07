@@ -1,5 +1,16 @@
 <?php
 
+/**
+* Description:
+* Controller (based on MVC architecture) for all AJAX calls
+* 
+* List of methods:
+* - status(Request $request) | Change status of the form to live/draft
+* - reorder(Request $request)
+* - form(Request $request, $id)
+* - setTime(Request $request)
+*/
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -9,6 +20,20 @@ use App\ApiCall;
 
 class AjaxController extends Controller
 {
+
+    /**
+    * Description:
+    * Change status of the form to live/draft
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * JSON: {id: $id, status: <new status ID>}
+    *
+    * Examples of usage:
+    * Login as an admin, go to "Forms", under Actions it's available by clicking to circle icon
+    */
     public function status(Request $request)
     {
         if($request->ajax()){
@@ -48,6 +73,20 @@ class AjaxController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
+
+    /**
+    * Description:
+    * TOREVIEW
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function reorder(Request $request)
     {
         if($request->ajax()){
@@ -76,6 +115,21 @@ class AjaxController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
+
+    /**
+    * Description:
+    * TOREVIEW
+    *
+    * List of parameters:
+    * - $request : Request
+    * - $id : integer
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function form(Request $request, $id)
     {
 
@@ -92,6 +146,19 @@ class AjaxController extends Controller
     }
 
 
+    /**
+    * Description:
+    * TOREVIEW
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function setTime(Request $request)
     {
         if($request->ajax()){

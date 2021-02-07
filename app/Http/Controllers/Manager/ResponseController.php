@@ -1,5 +1,15 @@
 <?php
 
+/**
+* Description:
+* Controller (based on MVC architecture) for responses made by user
+* 
+* List of methods:
+* - index(Request $request) | Show list of responses made by user
+* - response(Application $application) | Show response details
+* - status(Request $request, Application $application) | Set status of the response to "rejected" (-1) or "accepted" (1)
+*/
+
 namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
@@ -15,6 +25,19 @@ use App\Setting;
 
 class ResponseController extends Controller
 {
+    /**
+    * Description:
+    * Show list of responses made by user
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - <baseUrl>/admin/responses
+    */
     public function index(Request $request)
     {
         list($apps, $filter) = Application::search($request);
@@ -31,6 +54,20 @@ class ResponseController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * Show response details
+    *
+    * List of parameters:
+    * - $application : Application
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - <baseUrl>/manager/response/1080
+    */
     public function response(Application $application)
     {
         return view('manager.response', [
@@ -39,6 +76,26 @@ class ResponseController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * Set status of the response to "rejected" (-1) or "accepted" (1)
+    *
+    * List of parameters:
+    * - $request : Request
+	* - $application : Application
+    *
+    * Return:
+    * view content - list of responses, see index()
+    *
+    * Examples of usage:
+    * - This feature is avaiable only for responses required to be approved by manager.
+    * This can be replicated by the following steps:
+    * Login as a manager. Select such response from the list of responses <baseUrl>/manager/responses
+    * It should appear a button at the top-right corner "action", by clicking where
+    * you should see a popup window with empty textarea and two buttons: Accept, Reject
+    * By clicking any of these two buttons status() method is triggered
+    */
     public function status(Request $request, Application $application)
     {
         $status = $request->input('status', 0);

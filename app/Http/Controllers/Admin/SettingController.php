@@ -1,5 +1,16 @@
 <?php
 
+/**
+* Description:
+* Controller (based on MVC architecture) for the settings management
+* All the methods are available only for the admin
+* 
+* List of methods:
+* - index() | Show the list of available settings
+* - update(Request $request) | Update settings
+* - crypt($value) | testing crypting (debug purposes) 
+*/
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -8,6 +19,20 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
+
+    /**
+    * Description:
+    * Show the list of available settings
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - <baseUrl>/admin/settings
+    */
     public function index()
     {
         $dateFormats = [
@@ -25,12 +50,39 @@ class SettingController extends Controller
     }
 
 
+    /**
+    * Description:
+    * Update settings
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - go to <baseUrl>/admin/settings and click "Save"
+    */
     public function update(Request $request)
     {
         Setting::updateSettings($request->except('_token'));
         return redirect()->route('admin.settings')->with('success', 'Updated');
     }
 
+
+    /**
+    * Description:
+    * testing crypting (debug purposes)
+    *
+    * List of parameters:
+    * - $value : string
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function crypt($value)
     {
         $ciphering = "AES-128-CTR"; // Store the cipher method

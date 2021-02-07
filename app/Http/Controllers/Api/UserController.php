@@ -1,5 +1,15 @@
 <?php
 
+/**
+* Description:
+* Controller (based on MVC architecture) for users
+* 
+* List of methods:
+* - index(Request $request) | Show list of users
+* - test(Request $request)
+* - 
+*/
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -10,6 +20,20 @@ use App\ApiCall;
 
 class UserController extends Controller
 {
+
+    /**
+    * Description:
+    * Show list of users
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * Response: status=200, {status: 'OK', count:<total users>, data:$data}
+    *
+    * Examples of usage:
+    * - 
+    */
     public function index(Request $request)
     {
         // TODO if need get entries only by user privilegies
@@ -30,6 +54,20 @@ class UserController extends Controller
         ], 200);
     }
 
+
+    /**
+    * Description:
+    * TOREVIEW
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function test(Request $request)
     {
         $user_id = $request->get('user', false);

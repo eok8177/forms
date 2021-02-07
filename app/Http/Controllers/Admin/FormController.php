@@ -1,5 +1,25 @@
 <?php
 
+/**
+* Description:
+* Controller (based on MVC architecture) for the management of form definitions
+* All the methods are available only for the admin
+* 
+* List of methods:
+* - index(Request $request) | show the list of forms
+* - create() | Create new form
+* - store(Request $request, Form $form) | Store just created new form (POST method)
+* - show(Form $form) | Preview the form 
+* - edit(Form $form) | Edit the form definition
+* - setting(Form $form) | View form's settings
+* - update(Request $request, Form $form) | Update form definitions (PUT method)
+* - email(Form $form) | View email notification settings for the form
+* - emailStore(Request $request, Form $form) | Update email notification settings for the form (PUT method) 
+* - destroy(Form $form) | Delete form definition page (DELETE method)
+* - copy(Form $form) | Duplicate the form definitions
+* - alias(Request $request, Form $form)
+*/
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -16,6 +36,20 @@ use App\ApiCall;
 
 class FormController extends Controller
 {
+
+    /**
+    * Description:
+    * show the list of forms
+    *
+    * List of parameters:
+    * -  $request : Request
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - <baseUrl>/admin/form
+    */
     public function index(Request $request)
     {
         $search = $request->input('search', false);
@@ -36,11 +70,40 @@ class FormController extends Controller
 			]);
     }
 
+
+    /**
+    * Description:
+    * Create new form
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - <baseUrl>/admin/form/create
+    */
     public function create()
     {
         return view('admin.form.create', ['form' => new Form]);
     }
 
+
+    /**
+    * Description:
+    * Store just created new form (POST method)
+    *
+    * List of parameters:
+    * - $request : Request
+    * - $form : Form
+    *
+    * Return:
+    * view content, redirects to detailed form definition
+    *
+    * Examples of usage:
+    * - create new form, prefill it and click "Save"
+    */
     public function store(Request $request, Form $form)
     {
         $request->validate([
@@ -56,11 +119,39 @@ class FormController extends Controller
         return redirect()->route('admin.form.edit', ['form' => $form->id])->with('success', 'Form created');
     }
 
+
+    /**
+    * Description:
+    * Preview the form 
+    *
+    * List of parameters:
+    * - $form : Form
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - go to the list of forms <baseUrl>/admin/form, then click to the eye icon from the Actions column
+    */
     public function show(Form $form)
     {
         return redirect()->route('admin.form.index');
     }
 
+
+    /**
+    * Description:
+    * Edit the form definition
+    *
+    * List of parameters:
+    * - $form : Form
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - <baseUrl>/admin/form/4/edit
+    */
     public function edit(Form $form)
     {
         return view('admin.form.edit', [
@@ -69,6 +160,20 @@ class FormController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * View form's settings
+    *
+    * List of parameters:
+    * - $form : Form
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - <baseUrl>/admin/form/4/setting
+    */
     public function setting(Form $form)
     {
         return view('admin.form.setting', [
@@ -78,6 +183,21 @@ class FormController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * Update form definitions (PUT method)
+    *
+    * List of parameters:
+    * - $request : Request
+    * - $form : Form
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - Go to <baseUrl>/admin/form/4/edit and click "Save"
+    */
     public function update(Request $request, Form $form)
     {
         $form->slug = null;
@@ -92,6 +212,20 @@ class FormController extends Controller
         return redirect()->route('admin.form.setting', ['form' => $form->id])->with('success', 'Form settings updated');
     }
 
+
+    /**
+    * Description:
+    * View email notification settings for the form
+    *
+    * List of parameters:
+    * - $form : Form
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - <baseUrl>/admin/form/4/email
+    */
     public function email(Form $form)
     {
         $types = FormEmail::TYPES;
@@ -107,6 +241,21 @@ class FormController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * Update email notification settings for the form (PUT method) 
+    *
+    * List of parameters:
+    * - $request : Request
+    * - $form : Form
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - Go to <baseUrl>/admin/form/4/email and click "Save"
+    */
     public function emailStore(Request $request, Form $form)
     {
         foreach ($request->except(['_token', '_method', 'login_only']) as $key => $item) {
@@ -119,6 +268,20 @@ class FormController extends Controller
         return redirect()->route('admin.form.email', ['form' => $form->id])->with('success', 'Form Emails updated');
     }
 
+
+    /**
+    * Description:
+    * Delete form definition page (DELETE method)
+    *
+    * List of parameters:
+    * - $form : Form
+    *
+    * Return:
+    * Response: {status: 'success'}
+    *
+    * Examples of usage:
+    * - Go to <baseUrl>/admin/form and click to trash icon at any form in the list
+    */
     public function destroy(Form $form)
     {
         $api = new ApiCall;
@@ -135,6 +298,20 @@ class FormController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * Duplicate the form definitions
+    *
+    * List of parameters:
+    * - $form : Form
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - 
+    */
     public function copy(Form $form)
     {
         $groups = $form->groups->pluck('id');
@@ -151,6 +328,21 @@ class FormController extends Controller
         return redirect()->route('admin.form.index')->with('success', 'Form duplicated');
     }
 
+
+    /**
+    * Description:
+    * TOREVIEW
+    *
+    * List of parameters:
+    * - $request : Request
+    * - $form : Form
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function alias(Request $request, Form $form)
     {
         $form->updateAlias($request->except(['_method','_token']));

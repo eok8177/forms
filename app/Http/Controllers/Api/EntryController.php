@@ -1,5 +1,15 @@
 <?php
 
+/**
+* Description:
+* Controller (based on MVC architecture) for entries
+* 
+* List of methods:
+* - test(Request $request) | Generates dummy response (for debug purposes only)
+* - index(Request $request)
+* - 
+*/
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -9,6 +19,20 @@ use App\Entry;
 
 class EntryController extends Controller
 {
+
+    /**
+    * Description:
+    * Generates dummy response (for debug purposes only)
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * Response: status=200, {type: 'Get', status: 'OK', user: <user's details>}
+    *
+    * Examples of usage:
+    * - 
+    */
     public function test(Request $request)
     {
         return response()->json([
@@ -18,6 +42,20 @@ class EntryController extends Controller
         ], 200);
     }
 
+
+    /**
+    * Description:
+    * TOREVIEW
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function index(Request $request)
     {
         // TODO if need get entries only by user privilegies
@@ -54,29 +92,3 @@ class EntryController extends Controller
     }
 
 }
-
-
-    /*
-    *  Call api like this method:
-    *
-    *  $ curl -X POST localhost:8000/api/entries \
-    *   -H "Content-type: application/json" \
-    *   -H "Authorization: Bearer [api_token]"
-    *
-    *   api_token - from DB users.api_token
-    */
-
-
-    /*
-    * Response Codes:
-    *    200: OK. The standard success code and default option.
-    *    201: Object created. Useful for the store actions.
-    *    204: No content. When an action was executed successfully, but there is no content to return.
-    *    206: Partial content. Useful when you have to return a paginated list of resources.
-    *    400: Bad request. The standard option for requests that fail to pass validation.
-    *    401: Unauthorized. The user needs to be authenticated.
-    *    403: Forbidden. The user is authenticated, but does not have the permissions to perform an action.
-    *    404: Not found. This will be returned automatically by Laravel when the resource is not found.
-    *    500: Internal server error. Ideally you're not going to be explicitly returning this, but if something unexpected breaks, this is what your user is going to receive.
-    *    503: Service unavailable. Pretty self explanatory, but also another code that is not going to be returned explicitly by the application.
-    */

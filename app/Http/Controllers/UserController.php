@@ -1,5 +1,25 @@
 <?php
 
+/**
+* Description:
+* Controller (based on MVC architecture) for all incoming requests made by user
+* 
+* List of methods:
+* - redirectTo(Request $request) | 
+* - index(Request $request)
+* - edit()
+* - update(Request $request)
+* - form(Application $app)
+* - formView(Application $app)
+* - destroy(Application $app)
+* - archive(Request $request)
+* - faq()
+* - draftSaved(Form $form)
+* - contact()
+* - contactSend(Request $request)
+* - 
+*/
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -20,6 +40,20 @@ use Mail;
 
 class UserController extends Controller
 {
+
+    /**
+    * Description:
+    * Redirects to the different URL based on the role of logged in user (GET method)
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - when response is saved (not sent yet), this method is called, see the usage specified in method FormController.saveApp()
+    */
     public function redirectTo(Request $request)
     {
         $user =Auth::user();
@@ -37,6 +71,20 @@ class UserController extends Controller
         }
     }
 
+
+    /**
+    * Description:
+    * 
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function index(Request $request)
     {
         $user =Auth::user();
@@ -94,11 +142,39 @@ class UserController extends Controller
 	// 	return view('user.security', ['user' => Auth::user()]);
 	// }
 
+
+    /**
+    * Description:
+    * 
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function edit()
     {
         return view('user.edit', ['user' => Auth::user()]);
     }
 
+
+    /**
+    * Description:
+    * 
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -132,10 +208,24 @@ class UserController extends Controller
 
         $api = new ApiCall;
         $data = $api->updateUser($user);
-	
+    
         return redirect()->route('user.edit')->with('success', 'User updated');
     }
 
+
+    /**
+    * Description:
+    * 
+    *
+    * List of parameters:
+    * - $app : Application
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function form(Application $app)
     {
         return view('user.form', [
@@ -144,6 +234,20 @@ class UserController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * 
+    *
+    * List of parameters:
+    * - $app : Application
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function formView(Application $app)
     {
         return view('user.form_view', [
@@ -152,6 +256,20 @@ class UserController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * 
+    *
+    * List of parameters:
+    * - $app : Application
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function destroy(Application $app)
     {
         $app->status = 'deleted';
@@ -172,6 +290,20 @@ class UserController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * 
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function archive(Request $request)
     {
         $user = Auth::user();
@@ -192,6 +324,20 @@ class UserController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * 
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function faq()
     {
         return view('user.faq', [
@@ -200,12 +346,40 @@ class UserController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * 
+    *
+    * List of parameters:
+    * - $form : Form
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     protected function draftSaved(Form $form)
     {
         $msg = 'You draft "'.$form->name.'" updated.';
         return redirect()->route('user.index')->with('success', $msg);
     }
 
+
+    /**
+    * Description:
+    * 
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function contact()
     {
         return view('user.contact', [
@@ -213,6 +387,20 @@ class UserController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * 
+    *
+    * List of parameters:
+    * - $request : Request
+    *
+    * Return:
+    * 
+    *
+    * Examples of usage:
+    * - 
+    */
     public function contactSend(Request $request)
     {
         $request->validate([

@@ -1,5 +1,16 @@
 <?php
 
+/**
+* Description:
+* Controller (based on MVC architecture) for all front-end requests
+* 
+* List of methods:
+* - success(Request $request, $id) | method to show "Thank you <logged-in user>" succesful message at <baseUrl>/success/{id}  (GET method)
+* - form(Request $request, $id) | method to show form definition at <baseUrl>/form/{id?} (GET method)
+* - allForms() | show all non-trashed not-draft forms at <baseUrl>/all-forms (GET method)
+* - RegisterThankYou() | navigate to "thank you for the registration" page (GET method)
+*/
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -17,6 +28,20 @@ class FrontendController extends Controller
         return view('home', ['forms' => Form::search(false,0,0)->get()]);
     }
 
+    /**
+    * Description:
+    * method to show "Thank you <logged-in user>" succesful message at <baseUrl>/success/{id}  (GET method)
+    *
+    * List of parameters:
+    * - $request : Request
+    * - $id : int
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - when response is saved (not sent yet), this method is called, see the usage specified in method FormController.saveApp()
+    */
     public function success(Request $request, $id)
     {
         $app = Application::find($id);
@@ -30,6 +55,21 @@ class FrontendController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * method to show form definition at <baseUrl>/form/{id?}, some forms can be viewed only by logged-in users (GET method)
+    *
+    * List of parameters:
+    * - $request : Request
+    * - $slug : string
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - 
+    */
     public function form(Request $request, $slug = '')
     {
         $form = Form::where('slug', $slug)
@@ -55,6 +95,20 @@ class FrontendController extends Controller
         ]);
     }
 
+
+    /**
+    * Description:
+    * show all non-trashed not-draft forms at <baseUrl>/all-forms (GET method)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * view content
+    *
+    * Examples of usage:
+    * - https://myrwav.rwav.com.au/all-forms
+    */
     public function allForms()
     {
         return view('all_forms', ['forms' => Form::search(false,0,0)->get()]);
