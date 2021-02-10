@@ -1,5 +1,20 @@
 <?php
 
+/**
+* Description:
+* Class with all API calls in one place 
+* 
+* List of methods:
+* - newUser($user) | trigger create new user in MARS
+* - updateUser($user) | trigger update user in MARS
+* - deleteUser($user) | trigger delete user's details in MARS
+* - getDashboard() | get dashboard details from MARS
+* - newResponse($responseData = null) | create/update response
+* - newUpdateForm($formData) | create/update form definition
+* - deleteForm($formData) | delete form definition
+* - call($method = false, $postData = false, $type = 'POST') | Generic API call
+*/
+
 namespace App;
 
 use App\ApiLog;
@@ -13,54 +28,143 @@ class ApiCall
     }
 
     /**
-     * User
-     */
+    * Description:
+    * trigger create new user in MARS
+    *
+    * List of parameters:
+    * - $user : User
+    *
+    * Return:
+    *
+    * Example of usage:
+    * see method Http/Controllers/UserController.store()
+    */
     public function newUser($user)
     {
         return $this->call('user-new', $user);
     }
 
+
+    /**
+    * Description:
+    * trigger update user in MARS
+    *
+    * List of parameters:
+    * - $user : User
+    *
+    * Return:
+    *
+    * Example of usage:
+    * see method Http/Controllers/UserController.update()
+    */
     public function updateUser($user)
     {
         return $this->call('user-update', $user);
     }
 
+
+    /**
+    * Description:
+    * trigger delete user's details in MARS
+    *
+    * List of parameters:
+    * - $user : User
+    *
+    * Return:
+    *
+    * Example of usage:
+    * see method Http/Controllers/UserController.destroy()
+    */
     public function deleteUser($user)
     {
         return $this->call('user-delete', $user);
     }
 
+
     /**
-     * Dashboard
-     */
+    * Description:
+    * get dashboard details from MARS
+    *
+    * List of parameters:
+    * none
+    *
+    * Return:
+    *
+    * Example of usage:
+    * see method Http/Controllers/UserController.index()
+    */
     public function getDashboard()
     {
         return $this->call('get-dashboard', false, 'GET');
     }
-	
+
+
     /**
-     * Response
-     */
+    * Description:
+    * create/update response
+    *
+    * List of parameters:
+    *
+    * Return:
+    *
+    * Example of usage:
+    * see method app/Application.createEntry()
+    */
     public function newResponse($responseData = null)
     {
-		return $this->call('response-new', $responseData);
+        return $this->call('response-new', $responseData);
     }
 
-	public function newUpdateForm($formData)
-	{
-		return $this->call('form-new-update', $formData);
-	}
-
-	public function deleteForm($formData)
-	{
-		return $this->call('form-delete', $formData);
-	}
 
     /**
-     * 
-     * 
-     * @return false|array
-     */
+    * Description:
+    * create/update form definition
+    *
+    * List of parameters:
+    *
+    * Return:
+    *
+    * Example of usage:
+    * see method Http/Controllers/Admin/AjaxController.status()
+    */
+    public function newUpdateForm($formData)
+    {
+        return $this->call('form-new-update', $formData);
+    }
+
+
+    /**
+    * Description:
+    * delete form definition
+    *
+    * List of parameters:
+    * - $formData: object{ 'portal_form_id' => <formID>, 'portal_form_name' => <formName> }
+    *
+    * Return:
+    *
+    * Example of usage:
+    * see method Http/Controllers/Admin/FormController.destroy()
+    */
+    public function deleteForm($formData)
+    {
+        return $this->call('form-delete', $formData);
+    }
+
+    /**
+    * Description:
+    * Generic API call
+    * 
+    * List of parameters:
+    * - $method : false|string
+    * - $postData : boolean
+    * - $type : string (POST|GET)
+    *
+    * Return:
+    * false|array
+    *
+    * Example of usage:
+    * this method is widely used within ApiCall (this file) class
+    */
     private function call($method = false, $postData = false, $type = 'POST')
     {
         $url = env('API_HOST', 'http://37.53.93.30:9302') . "/api/". $method;
