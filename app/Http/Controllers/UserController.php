@@ -57,6 +57,9 @@ class UserController extends Controller
     public function redirectTo(Request $request)
     {
         $user =Auth::user();
+        if (!$user) {
+            return redirect('/login');
+        }
         if ($user->role == 'admin') {
             return redirect('/admin/responses');
         } elseif ($user->role == 'manager') {

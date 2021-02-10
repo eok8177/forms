@@ -45,6 +45,9 @@ class FrontendController extends Controller
     public function success(Request $request, $id)
     {
         $app = Application::find($id);
+        if (!$app) {
+            return redirect('/');
+        }
         $msg = "Thank you ".$app->user->name;
 
         $request->session()->flash('success', $msg);
