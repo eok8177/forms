@@ -1,5 +1,15 @@
 <?php
 
+/**
+* Description:
+* Model (based on MVC architecture) for applications (entries)
+* 
+* List of methods:
+* - updateConfig($fieldName, $value) | Save uploaded files paths into applications.config
+* - createEntry() | create new entry
+* - deleteEntry() | delete entry
+*/
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -85,8 +95,19 @@ class Application extends Model
     }
 
 
-    /*
-    * Save uploaded files path to config
+    /** 
+    * Description:
+    * Save uploaded files paths into applications.config
+    *
+    * List of parameters:
+    * - $fileName : string
+    * - $value: string
+    * 
+    * Return: 
+    * true
+    *
+    * Example of usage:
+    * see method Http\Controller\Api\FormController.uploadFile()
     */
     public function updateConfig($fieldName, $value)
     {
@@ -134,6 +155,19 @@ class Application extends Model
         }
     }
 
+    /**
+    * Descriptioin:
+    * create new entry
+    * 
+    * List of parameters:
+    * none
+    *
+    * Return:
+    * true
+    * 
+    * Example of usage:
+    * see method Http\Controller\Api\FormController.postForm()
+    */
     public function createEntry()
     {
         $data = $this->parseApp($this->config);
@@ -151,7 +185,7 @@ class Application extends Model
             'entry_id' => $this->id,
             'response_status_id' => $responseStatusID,
             'response_details' => $this->form->name,
-			'form_response' => json_encode($data)
+            'form_response' => json_encode($data)
         ];
         
         // if rejected or accepted - notes field is mandatory
@@ -165,6 +199,19 @@ class Application extends Model
         return true;
     }
 
+
+    /**
+    * Description:
+    * Delete entry
+    *
+    * List of parameters:
+    *
+    * Return:
+    * true 
+    *
+    * Examples of usage:
+    * see method Http\Controller\Admin\ResponseController.destroy()
+    */
     public function deleteEntry()
     {
         $responseStatusID = 32;
@@ -183,6 +230,18 @@ class Application extends Model
         return true;
     }
 
+
+    /**
+    * Description:
+    * TOREVIEW
+    *
+    * List of parameters:
+    *
+    * Return:
+    * 
+    * Examples of usage:
+    *
+    */
     private function newEntry($fieldId, $label, $value)
     {
         $entry = new Entry;
