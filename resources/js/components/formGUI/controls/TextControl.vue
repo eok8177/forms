@@ -49,6 +49,7 @@
 </template>
 
 <script>
+  import Inputmask from "inputmask";
     export default {
         name: "TextControl",
         props: ['value', 'labelPosition'],
@@ -66,7 +67,9 @@
 
             if (this.value.mask) {
               console.log(this.$refs.input);
-              $(this.$refs.input).mask(this.value.mask);
+              console.log(this.value.mask);
+              let im = new Inputmask(this.value.mask);
+              im.mask(this.$refs.input);
             }
         }
     }
