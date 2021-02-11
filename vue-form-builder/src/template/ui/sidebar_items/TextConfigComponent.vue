@@ -17,7 +17,7 @@
         </div>
 
         <div class="d-flex justify-content-between mt-2">
-            <label style="white-space: nowrap;">Mask&nbsp;<span type="button" class="btn btn-sm btn-outline-info" data-container="body" data-html="true" data-toggle="popover" data-placement="bottom" title="Example masks" data-content="date: '00/00/0000' <br> time: '00:00:00' <br> phones: '(00) 0000-0000' <br> mixed: 'AAA 000-S0S' <br> more by url: http://igorescobar.github.io/jQuery-Mask-Plugin/docs.html">?</span>
+            <label style="white-space: nowrap;">Mask&nbsp;<span type="button" class="btn btn-sm btn-outline-info" data-container="body" data-html="true" data-toggle="popover" data-placement="bottom" title="Example masks" data-content="date: '99/99/9999' <br> time: '99:99:99' <br> phones: '(99) 9999-9999' <br> mixed: 'AAA 999-AAA' <br> more by url: https://github.com/robinherbots/inputmask">?</span>
             </label> &nbsp;
             <input type="text" name="mask" v-model="control.mask" class="form-control">
         </div>
