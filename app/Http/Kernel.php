@@ -1,5 +1,13 @@
 <?php
 
+/**
+* Description:
+* Kernel class
+* 
+* List of methods:
+* none
+*/
+
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;

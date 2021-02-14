@@ -6,7 +6,6 @@
 * 
 * List of methods:
 * - feedback(Request $request)
-*
 */
 
 namespace App\Http\Controllers\Api;

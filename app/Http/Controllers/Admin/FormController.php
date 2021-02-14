@@ -15,7 +15,7 @@
 * - update(Request $request, Form $form) | Update form definitions (PUT method)
 * - email(Form $form) | View email notification settings for the form
 * - emailStore(Request $request, Form $form) | Update email notification settings for the form (PUT method) 
-* - destroy(Form $form) | Delete form definition page (DELETE method)
+* - destroy(Form $form) | Delete form definition (DELETE method)
 * - copy(Form $form) | Duplicate the form definitions
 * - alias(Request $request, Form $form)
 */
@@ -53,9 +53,9 @@ class FormController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search', false);
-		$trash = $request->input('trash', 0);
+        $trash = $request->input('trash', 0);
         $form_type_id = $request->input('form_type_id', 0);
-		$forms = Form::search($search, $trash)->orderBy('id', 'desc');
+        $forms = Form::search($search, $trash)->orderBy('id', 'desc');
 
         if ($form_type_id > 0) {
             $forms->where('form_type_id', $form_type_id);
@@ -178,8 +178,8 @@ class FormController extends Controller
     {
         return view('admin.form.setting', [
             'form' => $form,
-			'groups' => Group::all(),
-			'form_types' => FormType::pluck('name', 'id')
+            'groups' => Group::all(),
+            'form_types' => FormType::pluck('name', 'id')
         ]);
     }
 

@@ -1,5 +1,14 @@
 <?php
 
+/**
+* Description:
+* Kernel (console) class
+* 
+* List of methods:
+* - schedule(Schedule $schedule) | define the application's command schedule
+* - commands() | register the commands for the application
+*/
+
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
@@ -17,22 +26,32 @@ class Kernel extends ConsoleKernel
     ];
 
     /**
-     * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
-     */
+    * Description:
+    * define the application's command schedule
+    *
+    * List of parameters:
+    * - $schedule : Illuminate\Console\Scheduling\Schedule
+    *
+    * Return:
+    * none
+    */
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')
         //          ->hourly();
     }
 
+
     /**
-     * Register the commands for the application.
-     *
-     * @return void
-     */
+    * Description:
+    * register the commands for the application
+    *
+    * List of parameters:
+    * none
+    *
+    * Return:
+    * none
+    */
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');

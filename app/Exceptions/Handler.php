@@ -1,5 +1,14 @@
 <?php
 
+/**
+* Description:
+* Handler class (inherited from base ExceptionHandler)
+* 
+* List of methods:
+* - report(Throwable $exception) | Report or log an exception
+* - render($request, Throwable $exception) | Render an exception into an HTTP response
+*/
+
 namespace App\Exceptions;
 
 use Throwable;
@@ -28,23 +37,31 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Report or log an exception.
-     *
-     * @param  \Throwable  $exception
-     * @return void
-     */
+    * Description:
+    * Report or log an exception
+    *
+    * List of parameters:
+    * - $exception : Throwable  
+    * 
+    * Return:
+    * void
+    */
     public function report(Throwable $exception)
     {
         parent::report($exception);
     }
 
     /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
-     * @return \Illuminate\Http\Response
-     */
+    * Description:
+    * Render an exception into an HTTP response
+    *
+    * List of parameters:
+    * - $request : Request
+    * - $exception : Throwable
+    *
+    * Return:
+    * view content
+    */
     public function render($request, Throwable $exception)
     {
       $data = [
