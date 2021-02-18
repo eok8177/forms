@@ -1,5 +1,19 @@
 <?php
 
+/**
+* Description:
+* Model (based on MVC architecture) for users
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+* 
+* List of methods:
+* - draftApps() | get draft applications for particular user
+*/
+
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -74,6 +88,19 @@ class User extends Authenticatable implements MustVerifyEmail
         return $randomString;
     }
 
+    /**
+    * Description:
+    * get draft applications for particular user
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * object
+    *
+    * Examples of usage:
+    * see method app/Http/Controllers/Auth/LoginController.authenticated()
+    */
     public function draftApps()
     {
         $apps = Application::where('user_id', $this->id)

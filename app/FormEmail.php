@@ -1,5 +1,19 @@
 <?php
 
+/**
+* Description:
+* Model (based on MVC architecture) for email templates defined for each form definition
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+* 
+* List of methods:
+* - none
+*/
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;

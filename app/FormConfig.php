@@ -1,11 +1,41 @@
 <?php
 
+/**
+* Description:
+* Form config trait (methods that can be used in a concrete class)
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+* 
+* List of methods:
+* - parseAppConfig($config) | parse application's config
+* - parseFormConfig($config) | parse form's config
+* - parseFormStaticSections($config)
+* - parseApp($config) | parse application's details (for API when form is submitted)
+* - updateConfigAlias($config, $alias) | update alias value in Form config (json) from admin/form/settings
+* - parseDate($dateFormat , $value)
+*/
+
 namespace App;
 
 use Illuminate\Support\Carbon;
 
 trait FormConfig
 {
+
+    /**
+    * Description:
+    * parse application's config
+    *
+    * List of parameters:
+    * - none
+    *
+    * Example of usage:
+    * see method app/Application.getAdditionalFieldAttribute()
+    */
     public function parseAppConfig($config)
     {
         $fields = [];
@@ -94,6 +124,16 @@ trait FormConfig
         ];
     }
 
+    /**
+    * Description:
+    * parse form's config
+    *
+    * List of parameters:
+    * - none
+    *
+    * Example of usage:
+    * see method app/Form.notUniqueAlias()
+    */
     public function parseFormConfig($config)
     {
         $config = json_decode($config, true);
@@ -155,6 +195,17 @@ trait FormConfig
         ];
     }
 
+
+    /**
+    * Description:
+    * parse form's config
+    *
+    * List of parameters:
+    * - none
+    *
+    * Example of usage:
+    * 
+    */
     public function parseFormStaticSections($config)
     {
         $config = json_decode($config, true);
@@ -178,7 +229,16 @@ trait FormConfig
         return $groups;
     }
 
-    // for API when submit form
+    /**
+    * Description:
+    * parse application's details (for API when form is submitted)
+    *
+    * List of parameters:
+    * $config: string
+    *
+    * Example of usage:
+    * see method app/Application.createEntry()
+    */
     public function parseApp($config)
     {
         $data = [];
@@ -262,8 +322,17 @@ trait FormConfig
         return $data;
     }
 
-
-    // update alias value in Form config (json) from admin/form/settings
+    /**
+    * Description:
+    * update alias value in Form config (json) from admin/form/settings
+    *
+    * List of parameters:
+    * - $config: string
+    * - $alias : string
+    *
+    * Example of usage:
+    *
+    */ 
     public function updateConfigAlias($config, $alias)
     {
         $config = json_decode($config, true);

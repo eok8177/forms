@@ -1,5 +1,20 @@
 <?php
 
+/**
+* Description:
+* Model (based on MVC architecture) with all API logs
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+* 
+* List of methods:
+* - failled() | get list of all failed logs
+* - saveLog($data) | create new record in API logs
+*/
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +30,18 @@ class ApiLog extends Model
 
     const UPDATED_AT = null; //and updated by default null set
 
+    /**
+    * Description:
+    * get list of all failed logs
+    *
+    * List of parameters:
+    * none
+    *
+    * Return:
+    * 
+    * Example of usage:
+    * see method Http/Controllers/Admin/LogController.apilogs()
+    */
     static function failled()
     {
         $logs = ApiLog::where('response','LIKE', '%"response_status":"0"%')->get();
@@ -22,6 +49,19 @@ class ApiLog extends Model
         return $logs;
     }
 
+
+    /**
+    * Description:
+    * create new record in API logs
+    *
+    * List of parameters:
+    * $data : object
+    *
+    * Return:
+    * 
+    * Example of usage:
+    * see method Http/Controllers/Manager/ResponseController.status()
+    */
     static function saveLog($data)
     {
         $log = new ApiLog;

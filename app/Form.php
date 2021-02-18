@@ -1,5 +1,24 @@
 <?php
 
+/**
+* Description:
+* Model (based on MVC architecture) for form definitions
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+* 
+* List of methods:
+* - search($search = false, $trash = false, $draft = false, $order = 'ASC') | search forms
+* - completed() | Is form completed?
+* - active() | Is form active?
+* - notUniqueAlias() | Is form alias unique?
+* - getFieldsData() | get fields meta-data and fields values
+* - updateAlias($alias) | update alias value in Form config (json)
+*/
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -33,8 +52,21 @@ class Form extends Model
     }
 
     /**
-     * Search forms
-     */
+    * Description:
+    * Search forms
+    *
+    * List of parameters:
+    * - $search : boolean - string keyword to search
+    * - $trash : boolean - search for trashed forms?
+    * - $draft : boolean - search for drafts as well?
+    * - $order : string  - ASC|DESC
+    *
+    * Return:
+    * - list of forms
+    *
+    * Example of usage:
+    * see method app/Http/Controllers/FrontendController-commented.form()
+    */
     static function search($search = false, $trash = false, $draft = false, $order = 'ASC')
     {
         $forms = Form::Where('title','LIKE', '%'.$search.'%')
@@ -73,6 +105,20 @@ class Form extends Model
         return $this->hasOne(FormType::class, 'id', 'form_type_id')->withDefault();
     }
 
+    /**
+    * Description:
+    * Is form completed?
+    * Only completed forms can by published
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * - boolean
+    *
+    * Example of usage:
+    * see view resources/views/admin/form/index.blade.php
+    */
     public function completed()
     {
         $completed = true;
@@ -82,6 +128,19 @@ class Form extends Model
         return $completed;
     }
 
+    /**
+    * Description:
+    * Is form active?
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * - boolean
+    *
+    * Example of usage:
+    * see view resources/views/admin/form/index.blade.php
+    */
     public function active()
     {
         $active = true;
@@ -92,6 +151,19 @@ class Form extends Model
         return $active;
     }
 
+    /**
+    * Description:
+    * Is form alias unique?
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * - boolean
+    *
+    * Example of usage:
+    * see view resources/views/admin/form/index.blade.php
+    */
     public function notUniqueAlias()
     {
         $notUnique = false;
@@ -140,22 +212,44 @@ class Form extends Model
         return $this->parseFormConfig($this->config)['full'];
     }
 
-	public function getFieldsData()
-	{
-		$fieldsData = $this->parseFormConfig($this->config)['fields'];
-		$result = [];
-		foreach($fieldsData as $fKey => $fValue) {
-			$result[strval(preg_replace("/[^0-9]/", '', $fKey))] = [
-				'label' => $fValue['label'],
+    /**
+    * Description:
+    * get fields meta-data and fields values
+    * 
+    * List of parameters:
+    * - none
+    *
+    * Example of usage:
+    * see method Http/Controllers/Admin/AjaxController.status()
+    */
+    public function getFieldsData()
+    {
+        $fieldsData = $this->parseFormConfig($this->config)['fields'];
+        $result = [];
+        foreach($fieldsData as $fKey => $fValue) {
+            $result[strval(preg_replace("/[^0-9]/", '', $fKey))] = [
+                'label' => $fValue['label'],
                 'alias' => $fValue['alias'],
-				'control_type' => $fValue['control_type'],
+                'control_type' => $fValue['control_type'],
                 'section' => $fValue['section'],
-			];
-		}
-		return $result;
-	}
+            ];
+        }
+        return $result;
+    }
 
 
+    /** 
+    * Description:
+    *  update alias value in Form config (json)
+    *
+    * List of parameters:
+    * - $user : string
+    *
+    * Return:
+    * null
+    *
+    * see method Http/Controllers/Admin/FormController.alias()
+    */
     public function updateAlias($alias)
     {
         $this->config = $this->updateConfigAlias($this->config, $alias);

@@ -2,7 +2,7 @@
 
 /**
 * Description:
-* Class with all API calls in one place 
+* Model (based on MVC architecture) with all API calls in one place 
 *
 * Copyright: Rural Workforce Agency, Victoria (RWAV)
 * Contact email: rwavsupport@rwav.com.au

@@ -1,5 +1,19 @@
 <?php
 
+/**
+* Description:
+* Model (based on MVC architecture) for entry (submittion made by user)
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+* 
+* List of methods:
+* - none
+*/
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
