@@ -6,6 +6,7 @@
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label1"></label>
           <div class="input-group">
               <input type="text" class="form-control"
+                 ref="input1"
                  v-model="value.value1"
                  :readonly="value.readonly"
                  :name="value.fieldName + '1'"
@@ -18,6 +19,7 @@
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label2"></label>
           <div class="input-group">
               <input type="text" class="form-control"
+                 ref="input2"
                  v-model="value.value2"
                  :readonly="value.readonly"
                  :name="value.fieldName + '2'"
@@ -30,6 +32,7 @@
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label3"></label>
           <div class="input-group">
               <input type="text" class="form-control"
+                 ref="input3"
                  v-model="value.value3"
                  :readonly="value.readonly"
                  :name="value.fieldName + '3'"
@@ -42,6 +45,7 @@
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label4"></label>
           <div class="input-group">
               <input type="text" class="form-control"
+                 ref="input4"
                  v-model="value.value4"
                  :readonly="value.readonly"
                  :name="value.fieldName + '4'"
@@ -54,6 +58,7 @@
           <label :class="{'bold': value.labelBold, 'italic': value.labelItalic, 'underline': value.labelUnderline}" v-html="value.label5"></label>
           <div class="input-group">
               <input type="text" class="form-control"
+                 ref="input5"
                  v-model="value.value5"
                  :readonly="value.readonly"
                  :name="value.fieldName + '5'"
@@ -81,6 +86,7 @@
 </template>
 
 <script>
+    import Inputmask from "inputmask";
     import axios from 'axios';
     export default {
         name: "AddressControl",
@@ -97,6 +103,27 @@
           this.showMap();
           this.admin = this.$parent.$parent.$parent.$parent.admin;
           this.value.readonly = this.admin || this.value.readonly;
+
+          if (this.value.show1 && this.value.mask1) {
+            let im1 = new Inputmask(this.value.mask1);
+            im1.mask(this.$refs.input1);
+          }
+          if (this.value.show2 && this.value.mask2) {
+            let im2 = new Inputmask(this.value.mask2);
+            im2.mask(this.$refs.input2);
+          }
+          if (this.value.show3 && this.value.mask3) {
+            let im3 = new Inputmask(this.value.mask3);
+            im3.mask(this.$refs.input3);
+          }
+          if (this.value.show4 && this.value.mask4) {
+            let im4 = new Inputmask(this.value.mask4);
+            im4.mask(this.$refs.input4);
+          }
+          if (this.value.show5 && this.value.mask5) {
+            let im5 = new Inputmask(this.value.mask5);
+            im5.mask(this.$refs.input5);
+          }
         },
         methods: {
           showMap() {
