@@ -4,6 +4,12 @@
 * Description:
 * Controller (based on MVC architecture) for the management of form definitions
 * All the methods are available only for the admin
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
 * - index(Request $request) | show the list of forms

@@ -3,6 +3,12 @@
 /**
 * Description:
 * Authenticate middleware
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
 * - redirectTo($request) | Get the path the user should be redirected to when they are not authenticated

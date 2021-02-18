@@ -3,6 +3,12 @@
 /**
 * Description:
 * Controller (based on MVC architecture) for responses made by user
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
 * - index(Request $request) | Show list of responses made by user

@@ -4,6 +4,12 @@
 * Description:
 * Controller (based on MVC architecture) for all AJAX calls
 * 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*
 * List of methods:
 * - status(Request $request) | Change status of the form to live/draft
 * - reorder(Request $request)

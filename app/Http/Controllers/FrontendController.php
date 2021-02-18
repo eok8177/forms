@@ -3,6 +3,12 @@
 /**
 * Description:
 * Controller (based on MVC architecture) for all front-end requests
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
 * - success(Request $request, $id) | method to show "Thank you <logged-in user>" succesful message at <baseUrl>/success/{id}  (GET method)

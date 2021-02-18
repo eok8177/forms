@@ -3,6 +3,12 @@
 /**
 * Description:
 * Debugbar middelware - show or hide an debug info panel at the bottom of the browser
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
 * - handle($request, Closure $next) | Handle an incoming request

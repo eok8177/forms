@@ -3,6 +3,12 @@
 /**
 * Description:
 * Controller (based on MVC architecture) to manage manager's personal details
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
 * - edit(User $user) | Edit personal details by manager

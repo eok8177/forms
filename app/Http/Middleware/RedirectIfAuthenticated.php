@@ -3,6 +3,12 @@
 /**
 * Description:
 * Middleware intended to redirect a user to their default authenticated page
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
 * - handle($request, Closure $next, $guard = null) | Handle an incoming request

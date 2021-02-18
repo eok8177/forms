@@ -3,6 +3,12 @@
 /**
 * Description:
 * Controller (based on MVC architecture) for all incoming requests made by user
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
 * - redirectTo(Request $request) | Redirects to the different URL based on the role of logged in user (GET method)

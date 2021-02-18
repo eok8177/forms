@@ -3,6 +3,12 @@
 /**
 * Description:
 * Image processor
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
 * - index(Request $request, $w = 0, $h = 0) | Generate JPG file based on the input image file and optionally passed new width or height params

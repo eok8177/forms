@@ -3,6 +3,12 @@
 /**
 * Description:
 * Middleware to check against any role passed to it
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
 * - handle($request, Closure $next) | Handle an incoming request
