@@ -50,6 +50,11 @@ class ResponseController extends Controller
     {
         list($apps, $filter) = Application::search($request);
 
+        // check all apps for zerro file size
+        foreach ($apps->get() as $app) {
+            $app->checkFiles();
+        }
+
         return view('admin.response', [
             'entries' => $apps->get(),
             'select_forms' => $filter['selectAppsList'],

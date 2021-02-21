@@ -93,6 +93,9 @@
               @endif
             </div>
             <div class="col-md-1 text-center">
+              @if($app->has_alert)
+                <i class="fa fa-exclamation-triangle" aria-hidden="true" title="{{$app->has_alert}}"></i>
+              @endif
               @if($app->status == 'submitted' || $app->status == 'accepted' || $app->status == 'rejected' || $app->to_be_approved == 0)
                 <a href="{{ route('manager.response', $app->id) }}" class="btn fa fa-eye" target="_blank" title="View Response in new Tab"></a>
               @endif

@@ -92,6 +92,9 @@
         @endif
       </div>
       <div class="col-md-1 text-center">
+        @if($entry->has_alert)
+          <i class="fa fa-exclamation-triangle" aria-hidden="true" title="{{$entry->has_alert}}"></i>
+        @endif
         @if($entry->status == 'submitted' || $entry->status == 'accepted' || $entry->status == 'rejected' || $entry->to_be_approved == 0)
           <a href="{{ route('admin.entry', $entry->id) }}" class="btn fa fa-eye" target="_blank" title="View Response in new Tab"></a>
         @endif

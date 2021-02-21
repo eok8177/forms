@@ -374,4 +374,46 @@ trait FormConfig
         return $dateValue;
     }
 
+    /**
+    * Description:
+    * parse names of files from application's config
+    *
+    * List of parameters:
+    * - $config: string
+    *
+    * Return:
+    * - $files: array
+    *
+    * Example of usage:
+    * see method app/Application.checkFiles()
+    */ 
+    public function parseFiles($config)
+    {
+        $config = json_decode($config, true);
+        $files = [];
+
+        foreach ($config['sections'] as $sectionID => $section) {
+            if (array_key_exists('rows', $section)) {
+
+                foreach ($section['rows'] as $rowID => $row) {
+                    if (array_key_exists('controls', $row)) {
+                        foreach ($row['controls'] as $controlID => $control) {
+                            if ($control['type'] == 'file') {
+                                $files[$control['fieldName']] = [
+                                    'fieldName' => $control['fieldName'],
+                                    'value' => $control['value'],
+                                    'alias' => $control['alias'],
+                                    'label' => $control['label'],
+                                ];
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return $files;
+    }
+
 }

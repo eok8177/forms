@@ -15,6 +15,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\DNSCheckValidation;
@@ -92,6 +93,52 @@ class Application extends Model
             return '<a href="/'.$value.'" target="_blank">'.$this->_getFileName($value).'</a>';
         }
         return $value;
+    }
+
+    /** 
+    * Description:
+    * Check zerro size of uploaded files
+    *
+    * Return: 
+    * error: json
+    *
+    * Example of usage:
+    * see method Http\Controller\Api\FormController.postForm()
+    */
+    public function checkFiles()
+    {
+        if (!$this->config) return false;
+        $error = false;
+
+        $files = $this->parseFiles($this->config);
+        foreach ($files as $fieldName => $field) {
+            if ($field['value'] && Storage::disk('public')->exists($field['value'])) {
+                if (Storage::disk('public')->size($field['value']) == 0) {
+                    $error[] = [
+                        'fieldName' => $fieldName,
+                        'value' => $field['value'],
+                        'alias' => $field['alias'],
+                        'label' => $field['label'],
+                    ];
+                }
+            }
+        }
+
+        $this->alert = $error ? json_encode($error) : NULL;
+        $this->save();
+
+        return $this->alert;
+    }
+
+    public function getHasAlertAttribute()
+    {
+        if (!$this->alert) return false;
+
+        $msg = false;
+        foreach (json_decode($this->alert) as $alert) {
+            $msg .= ' '.$alert->alias;
+        }
+        return $msg;
     }
 
 
