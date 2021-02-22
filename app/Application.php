@@ -419,32 +419,6 @@ class Application extends Model
 
     /**
     * Description:
-    * TOREVIEW
-    *
-    * List of parameters:
-    *
-    * Return:
-    * true
-    * 
-    * Examples of usage:
-    *
-    */
-    private function newEntry($fieldId, $label, $value)
-    {
-        $entry = new Entry;
-        $entry->entry_id = $this->entry_id;
-        $entry->form_id = $this->form_id;
-        $entry->field_id = $fieldId;
-        $entry->user_id = $this->user_id;
-        $entry->name = $label;
-        $entry->value = $value;
-        $entry->save();
-        return $entry;
-    }
-
-
-    /**
-    * Description:
     * send email to the admin
     *
     * List of parameters:
@@ -631,9 +605,16 @@ class Application extends Model
 
 
     /**
-    * Search
-    * return Two objects
-    * TOREVIEW
+    * Description:
+    * Search apps
+    *
+    * Return
+    * $apps | object
+    * $filter | array used filters
+    *
+    * Example of usage:
+    * app/Http/Controllers/Admin/ResponseController.index()
+    * app/Http/Controllers/Manager/ResponseController.index()
     */
     static function search($request = false, $order = 'DESC')
     {
