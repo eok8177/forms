@@ -25,7 +25,6 @@ use Illuminate\Support\Facades\Auth;
 use App\ApiLog;
 use App\Application;
 use App\ApplicationApproval;
-use App\Entry;
 use App\Form;
 use App\Setting;
 

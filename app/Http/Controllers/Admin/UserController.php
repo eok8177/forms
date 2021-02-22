@@ -158,25 +158,6 @@ class UserController extends Controller
 
     /**
     * Description:
-    * TOREVIEW
-    *
-    * List of parameters:
-    * - $user : User
-    *
-    * Return:
-    * 
-    *
-    * Examples of usage:
-    * - 
-    */
-    public function show(User $user)
-    {
-        return redirect()->route('admin.user.index');
-    }
-
-
-    /**
-    * Description:
     * Edit user's details
     *
     * List of parameters:

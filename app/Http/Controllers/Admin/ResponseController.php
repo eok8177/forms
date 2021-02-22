@@ -13,7 +13,6 @@
 * List of methods:
 * - index(Request $request) | Show the list of responses
 * - entry(Application $app) | View detailed response
-* - status(Request $request, Application $app) | Set status of the response to "rejected" (-1) or "accepted" (1)
 * - sendEmail(Application $app)
 * - destroy(Application $app) | Delete response
 */
@@ -26,7 +25,6 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Application;
 use App\ApplicationApproval;
-use App\Entry;
 use App\Form;
 use App\Setting;
 
@@ -87,47 +85,6 @@ class ResponseController extends Controller
             'app' => $app,
             'settings' => Setting::pluck('value', 'key')
         ]);
-    }
-
-
-    /**
-    * Description:
-    * Set status of the response to "rejected" (-1) or "accepted" (1)
-    * TOREVIEW -- PS: NOT to be avaible for admin
-    *
-    * List of parameters:
-    * - $request : Request
-    * - $app : Application
-    *
-    * Return:
-    * view content - list of responses, see index()
-    *
-    * Examples of usage:
-    * - 
-    */
-    public function status(Request $request, Application $app)
-    {
-        $status = $request->input('status', 0);
-
-        $appApprov = new ApplicationApproval;
-
-        $app->status = ApplicationApproval::STATUS[$status];
-        $app->save();
-
-        $appApprov->application_id = $app->id;
-        $appApprov->notes = $request->input('notes', NULL);
-        $appApprov->status = $status;
-        $appApprov->save();
-
-        $app->createEntry();
-        if ($app->status == 'accepted') {
-            $app->adminSubmitEmail();
-            $app->userAcceptEmail();
-        } elseif ($app->status == 'rejected') {
-            $app->userRejectEmail();
-        }
-
-        return redirect()->route('admin.responses');
     }
 
 

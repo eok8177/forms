@@ -82,7 +82,7 @@ class AjaxController extends Controller
 
     /**
     * Description:
-    * TOREVIEW
+    * Change order pages in admin via ajax
     *
     * List of parameters:
     * - $request : Request
@@ -91,7 +91,8 @@ class AjaxController extends Controller
     * 
     *
     * Examples of usage:
-    * - 
+    * resources/views/admin/faq/index.blade.php
+    * resources/views/admin/news/index.blade.php
     */
     public function reorder(Request $request)
     {
@@ -124,7 +125,7 @@ class AjaxController extends Controller
 
     /**
     * Description:
-    * TOREVIEW
+    * Admin save form config
     *
     * List of parameters:
     * - $request : Request
@@ -134,7 +135,7 @@ class AjaxController extends Controller
     * 
     *
     * Examples of usage:
-    * - 
+    * resources/js/components/FormBuilderComponent.vue
     */
     public function form(Request $request, $id)
     {
@@ -154,7 +155,7 @@ class AjaxController extends Controller
 
     /**
     * Description:
-    * TOREVIEW
+    * Admin -> User Set Toggle Email verified
     *
     * List of parameters:
     * - $request : Request
@@ -163,7 +164,7 @@ class AjaxController extends Controller
     * 
     *
     * Examples of usage:
-    * - 
+    * resources/views/admin/user/index.blade.php
     */
     public function setTime(Request $request)
     {

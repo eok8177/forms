@@ -37,13 +37,5 @@ Route::group([
     'middleware' => 'auth:api',
     'namespace' => 'Api'
   ], function() {
-    Route::get('test', 'EntryController@test');
-    Route::post('entries', 'EntryController@index');
-
     Route::post('users', 'UserController@index');
-});
-
-
-Route::group(['namespace' => 'Api'], function() {
-    Route::get('user-test', 'UserController@test');
 });

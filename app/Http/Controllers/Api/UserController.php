@@ -12,7 +12,6 @@
 * 
 * List of methods:
 * - index(Request $request) | Show list of users
-* - test(Request $request)
 * - 
 */
 
@@ -59,39 +58,6 @@ class UserController extends Controller
             'data' => $users->get()
         ], 200);
     }
-
-
-    /**
-    * Description:
-    * TOREVIEW
-    *
-    * List of parameters:
-    * - $request : Request
-    *
-    * Return:
-    * 
-    *
-    * Examples of usage:
-    * - 
-    */
-    public function test(Request $request)
-    {
-        $user_id = $request->get('user', false);
-
-        if ($user_id) {
-            $user = User::where('id',$user_id)->firstOrFail();
-        }
-
-        $api = new ApiCall;
-        $data = $api->newUser($this->test_data);
-
-        return response()->json([
-            'type' => 'Get',
-            'status' => 'OK',
-            'data' => $data
-        ], 200);
-    }
-
 
 
     private $test_data = [

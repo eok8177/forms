@@ -337,7 +337,7 @@ class FormController extends Controller
 
     /**
     * Description:
-    * TOREVIEW
+    * Admin form setting: Update Alias
     *
     * List of parameters:
     * - $request : Request
@@ -347,7 +347,7 @@ class FormController extends Controller
     * 
     *
     * Examples of usage:
-    * - 
+    * resources/views/admin/form/setting.blade.php
     */
     public function alias(Request $request, Form $form)
     {

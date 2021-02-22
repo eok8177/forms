@@ -28,7 +28,6 @@ use Illuminate\Support\Facades\Storage;
 
 use App\ApiLog;
 use App\Form;
-use App\Entry;
 use App\Application;
 
 

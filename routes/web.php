@@ -78,7 +78,6 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
 
     Route::get('responses', ['as' => 'responses', 'uses' => 'ResponseController@index']);
     Route::get('entry/{app}', ['as' => 'entry', 'uses' => 'ResponseController@entry']);
-    Route::post('entry-status/{app}', ['as' => 'entryStatus', 'uses' => 'ResponseController@status']);
 
     Route::resource('user', 'UserController');
 
@@ -92,10 +91,7 @@ Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'user']]
     Route::get('user/edit', ['as' => 'user.edit', 'uses' => 'UserController@edit']);
 	Route::put('user/update', ['as' => 'user.update', 'uses' => 'UserController@update']);
 
-    Route::get('user/archive', ['as' => 'user.archive', 'uses' => 'UserController@archive']);
 
-	// Route::get('user/security', ['as' => 'user.security', 'uses' => 'UserController@security']);
-	// Route::put('user/update_security', ['as' => 'user.update_security', 'uses' => 'UserController@update_security']);
 
     Route::get('user/form/{app}', ['as' => 'user.form', 'uses' => 'UserController@form']);
     Route::delete('user/form/{app}', ['as' => 'user.form.destroy', 'uses' => 'UserController@destroy']);
