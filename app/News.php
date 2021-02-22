@@ -11,7 +11,7 @@
 * Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
-* - front() | TOREVIEW
+* - front() | get active records
 */
 
 namespace App;
@@ -30,12 +30,12 @@ class News extends Model
 
     /**
     * Description:
-    * TOREVIEW
+    * get active records
     *
     * Return:
     *
     * Example of usage:
-    *
+    * resources/views/user/parts/informBlock.blade.php
     */
     public static function front()
     {

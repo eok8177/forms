@@ -12,7 +12,7 @@
 * 
 * List of methods:
 * - forms() | reference to all forms with this form type (Object-Relational Mapper)
-* - getColorAttribute($value) | TOREVIEW
+* - getColorAttribute($value) | Get color of Form Type
 */
 
 namespace App;
@@ -47,12 +47,14 @@ class FormType extends Model
 
     /**
     * Description:
-    * TOREVIEW
+    * Get color of Form Type
     *
     * Return:
+    * string color
     *
     * Example of usage:
-    *
+    * app/Http/Controllers/Admin/FormTypeController.edit()
+    * resources/views/admin/response.blade.php ...
     */
     public function getColorAttribute($value)
     {

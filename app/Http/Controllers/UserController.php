@@ -15,14 +15,13 @@
 * - index(Request $request) | Show dashboard details: draft & submitted responses
 * - edit() | Edit personal details
 * - update(Request $request) | Update personal details
-* - form(Application $app) | TOREVIEW
+* - form(Application $app) | Edit application in user cabinet
 * - formView(Application $app) | Preview submitted response
 * - destroy(Application $app) | Delete draft response by user
-* - archive(Request $request) | TOREVIEW
-* - faq() | TOREVIEW
+* - faq() | Help in user cabinet
 * - draftSaved(Form $form) | Save draft
-* - contact() | TOREVIEW
-* - contactSend(Request $request) | TOREVIEW
+* - contact() | Show Contact page in cabinet
+* - contactSend(Request $request) | Save message from form on Contact page
 * - 
 */
 
@@ -219,7 +218,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * TOREVIEW
+    * edit application in user cabinet
     *
     * List of parameters:
     * - $app : Application
@@ -228,7 +227,7 @@ class UserController extends Controller
     * view content
     *
     * Examples of usage:
-    * - 
+    * routes.web : user/form/{app}
     */
     public function form(Application $app)
     {
@@ -295,43 +294,11 @@ class UserController extends Controller
     }
 
 
-    /**
-    * Description:
-    * TOREVIEW
-    *
-    * List of parameters:
-    * - $request : Request
-    *
-    * Return:
-    * view content
-    *
-    * Examples of usage:
-    * - 
-    */
-    public function archive(Request $request)
-    {
-        $user = Auth::user();
-
-        $apps = Application::where('user_id', $user->id)
-            ->where(function($q) {
-                $q->orWhere('status', 'accepted');
-                $q->orWhere(function($q) {
-                    $q->where('status', 'submitted');
-                    // $q->where('to_be_approved', 0);
-                });
-            })
-            ->get();
-
-        return view('user.archive', [
-            'user' => $user,
-            'apps' => $apps,
-        ]);
-    }
 
 
     /**
     * Description:
-    * TOREVIEW
+    * Help in user cabinet
     *
     * List of parameters:
     * - none
@@ -340,7 +307,7 @@ class UserController extends Controller
     * view content
     *
     * Examples of usage:
-    * - 
+    * route : user/faq
     */
     public function faq()
     {
@@ -373,7 +340,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * TOREVIEW
+    * Show Contact page in cabinet
     *
     * List of parameters:
     * - none
@@ -382,7 +349,7 @@ class UserController extends Controller
     * view content
     *
     * Examples of usage:
-    * - 
+    * route : /user/contact
     */
     public function contact()
     {
@@ -394,7 +361,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * TOREVIEW
+    * Save message from form on Contact page
     *
     * List of parameters:
     * - $request : Request
@@ -403,7 +370,7 @@ class UserController extends Controller
     * view content
     *
     * Examples of usage:
-    * - 
+    * route : /user/contact
     */
     public function contactSend(Request $request)
     {
