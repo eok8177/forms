@@ -13,7 +13,7 @@
 * List of methods:
 * - parseAppConfig($config) | parse application's config
 * - parseFormConfig($config) | parse form's config
-* - parseFormStaticSections($config)
+* - parseFormStaticSections($config) | parse form's static sections
 * - parseApp($config) | parse application's details (for API when form is submitted)
 * - updateConfigAlias($config, $alias) | update alias value in Form config (json) from admin/form/settings
 * - parseDate($dateFormat , $value)
@@ -199,13 +199,13 @@ trait FormConfig
 
     /**
     * Description:
-    * parse form's config
+    * parse form's static sections
     *
     * List of parameters:
     * - none
     *
     * Example of usage:
-    * 
+    * see method app/Form.staticFields()
     */
     public function parseFormStaticSections($config)
     {
