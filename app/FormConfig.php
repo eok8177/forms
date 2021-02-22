@@ -403,12 +403,14 @@ trait FormConfig
                     if (array_key_exists('controls', $row)) {
                         foreach ($row['controls'] as $controlID => $control) {
                             if ($control['type'] == 'file') {
-                                $files[$control['fieldName']] = [
-                                    'fieldName' => $control['fieldName'],
-                                    'value' => $control['value'],
-                                    'alias' => $control['alias'],
-                                    'label' => $control['label'],
-                                ];
+                                if (array_key_exists('value', $control)) {
+                                    $files[$control['fieldName']] = [
+                                        'fieldName' => $control['fieldName'],
+                                        'value' => $control['value'],
+                                        'alias' => $control['alias'],
+                                        'label' => $control['label'],
+                                    ];
+                                }
                             }
                         }
                     }
