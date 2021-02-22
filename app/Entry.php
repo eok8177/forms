@@ -11,7 +11,7 @@
 * Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
-* - none
+* - form() | reference to application's form definition (Object-Relational Mapper)
 */
 
 namespace App;
@@ -27,6 +27,18 @@ class Entry extends Model
      */
     protected $guarded = [];
 
+    /**
+    * Description:
+    * reference to application's form definition (Object-Relational Mapper)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    *
+    * Example of usage:
+    *
+    */
     public function form()
     {
         return $this->belongsTo(Form::class, 'form_id');

@@ -12,9 +12,19 @@
 * 
 * List of methods:
 * - search($search = false, $trash = false, $draft = false, $order = 'ASC') | search forms
+* - email($type = false) | get email template of $type
+* - emails() | reference to email templates setup for the form (Object-Relational Mapper)
+* - groups() | reference to the form groups (Object-Relational Mapper)
+* - types() | reference to the form type (Object-Relational Mapper)
 * - completed() | Is form completed?
 * - active() | Is form active?
 * - notUniqueAlias() | Is form alias unique?
+* - getTypeAttribute() | get form type name (Laravel Accessor)
+* - apps() | reference to applications (submittions) made with this form definition (Object-Relational Mapper)
+* - getHasAppsAttribute() | are there any submissions made for this form definition?
+* - getFieldsAttribute() | get form groups for this form definition
+* - staticFields() | get the list of static form groups with nested fields
+* - getFieldsAlias() | get fields aliases
 * - getFieldsData() | get fields meta-data and fields values
 * - updateAlias($alias) | update alias value in Form config (json)
 */
@@ -85,25 +95,86 @@ class Form extends Model
         return $forms;
     }
 
+
+    /**
+    * Description:
+    * get email template of $type
+    *
+    * List of parameters:
+    * $type : string
+    *
+    * Return:
+    * FormEmail
+    *
+    * Example of usage:
+    * see method Application.sendEmail()
+    */
     public function email($type = false)
     {
+        // TODO why $type=false? not empty
         return $this->emails()->where('type', $type)->first();
     }
 
+
+    /**
+    * Description:
+    * reference to email templates setup for the form (Object-Relational Mapper)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * object | list of objects
+    *
+    * Example of usage:
+    * see method email()
+    */
     public function emails()
     {
         return $this->hasMany(FormEmail::class, 'form_id');
     }
 
+
+    /**
+    * Description:
+    * reference to the form groups (Object-Relational Mapper)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * object | list of objects
+    *
+    * Example of usage:
+    * see method Http/Controllers/Admin/FormController.update()
+    */
     public function groups()
     {
         return $this->belongsToMany(Group::class);
     }
 
+
+    /**
+    * Description:
+    * reference to the form type (Object-Relational Mapper)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * object
+    *
+    * Example of usage:
+    * object | list of objects
+    *
+    * Example of usage:
+    * TOADD
+    */
     public function types()
     {
         return $this->hasOne(FormType::class, 'id', 'form_type_id')->withDefault();
     }
+
 
     /**
     * Description:
@@ -128,6 +199,7 @@ class Form extends Model
         return $completed;
     }
 
+
     /**
     * Description:
     * Is form active?
@@ -150,6 +222,7 @@ class Form extends Model
 
         return $active;
     }
+
 
     /**
     * Description:
@@ -176,21 +249,77 @@ class Form extends Model
         return $notUnique;
     }
 
+
+    /**
+    * Description:
+    * get form type name (Laravel Accessor)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * string
+    *
+    * Example of usage:
+    * see resources/views/admin/response.blade.php
+    */
     public function getTypeAttribute()
     {
         return $this->types->name;
     }
 
+
+    /**
+    * Description:
+    * reference to applications (submittions) made with this form definition (Object-Relational Mapper)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * object | list of objects
+    *
+    * Example of usage:
+    *
+    */
     public function apps()
     {
         return $this->hasMany(Application::class, 'form_id', 'id');
     }
 
+
+    /**
+    * Description:
+    * are there any submissions made for this form definition?
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * boolean
+    *
+    * Example of usage:
+    * see resources/views/admin/form/email.blade.php
+    */
     public function getHasAppsAttribute()
     {
         return $this->apps->count() > 0 ? true : false;
     }
 
+
+    /**
+    * Description:
+    * get form groups for this form definition
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * array
+    *
+    * Example of usage:
+    * see resources/views/admin/form/email.blade.php
+    */
     public function getFieldsAttribute()
     {
         if (!$this->config) return [];
@@ -198,6 +327,20 @@ class Form extends Model
         return $this->parseFormConfig($this->config)['groups'];
     }
 
+
+    /**
+    * Description:
+    * get the list of static form groups with nested fields
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * array
+    *
+    * Example of usage:
+    * see resources/views/admin/form/setting.blade.php
+    */
     public function staticFields()
     {
         if (!$this->config) return [];
@@ -205,12 +348,27 @@ class Form extends Model
         return $this->parseFormStaticSections($this->config);
     }
 
+
+    /**
+    * Description:
+    * get fields aliases
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * array
+    *
+    * Example of usage:
+    * see resources/views/admin/form/setting.blade.php
+    */
     public function getFieldsAlias()
     {
         if (!$this->config) return [];
 
         return $this->parseFormConfig($this->config)['full'];
     }
+
 
     /**
     * Description:

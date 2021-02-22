@@ -3,11 +3,33 @@
 /**
 * Description:
 * Model (based on MVC architecture) for applications (entries)
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
+* - user() | reference to application user's details (Object-Relational Mapper)
+* - form() | reference to application form's details (Object-Relational Mapper)
+* - approvs() | reference to application's approval history (Object-Relational Mapper)
+* - getEmailAttribute() | get applicaiton's email - user's email or first control of type='email' in the application (Laravel Accessor)
+* - getFieldsAttribute() | get a list of fields ['type', 'label', 'value'] (Laravel Accessor)
+* - _getFileName($fileNameFullPath) | remove invalid symbols from filename
+* - getAdditionalFieldAttribute() | reference to the additional field's detail in the format: ['type', 'label', 'value'] (Laravel Accessor)
+* - checkFiles() | Check uploaded files for empty ones
+* - getHasAlertAttribute() | are there any alert for this application? (Laravel Accessor)
 * - updateConfig($fieldName, $value) | Save uploaded files paths into applications.config
 * - createEntry() | create new entry
 * - deleteEntry() | delete entry
+* - adminSubmitEmail() | send email to the admin
+* - userSubmitEmail() | send email to the user
+* - userAcceptEmail() | send email to the user once the application is accepted
+* - userRejectEmail() | send email to the user once the application is rejected
+* - managerSubmitEmail() | send email to the manager once the application is submitted
+* - sendEmail($type) | prepare and send particular email based on email template details stored in form_emails.type=$type
+* - emailValidate($email) | check if email is valid
 */
 
 namespace App;
@@ -42,21 +64,77 @@ class Application extends Model
      */
     protected $guarded = [];
 
+
+    /**
+    * Description:
+    * reference to application user's details (Object-Relational Mapper)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * object|list of objects
+    *
+    * Example of usage:
+    * see method getEmailAttribute()
+    */
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id')->withDefault();
     }
 
+
+    /**
+    * Description:
+    * reference to application form's details (Object-Relational Mapper)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * object|list of objects
+    *
+    * Example of usage:
+    * see method getAdditionalFieldAttribute()
+    */
     public function form()
     {
         return $this->belongsTo(Form::class, 'form_id')->withDefault();
     }
 
+
+    /**
+    * Description:
+    * reference to application's approval history (Object-Relational Mapper)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * object | list of objects
+    *
+    * Example of usage:
+    * see method createEntry()
+    */
     public function approvs()
     {
         return $this->hasMany(ApplicationApproval::class);
     }
 
+
+    /**
+    * Description:
+    * get applicaiton's email - user's email or first control of type='email' in the application (Laravel Accessor)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * string
+    *
+    * Example of usage:
+    * TOADD
+    */
     public function getEmailAttribute()
     {
         $email = $this->user->email;
@@ -66,6 +144,20 @@ class Application extends Model
         return $email;
     }
 
+
+    /**
+    * Description:
+    * get a list of fields ['type', 'label', 'value'] (Laravel Accessor)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * false|array
+    *
+    * Example of usage:
+    * see resources/views/admin/form/email.blade.php
+    */
     public function getFieldsAttribute()
     {
         if (!$this->config) return false;
@@ -73,11 +165,39 @@ class Application extends Model
         return $this->parseAppConfig($this->config)['fields'];
     }
 
+
+    /**
+    * Description:
+    * remove invalid symbols from filename
+    *
+    * List of parameters:
+    * $fileNameFllPath : string
+    *
+    * Return:
+    * - string
+    *
+    * Example of usage:
+    * see method getAdditionalFieldAttribute()
+    */
     private function _getFileName($fileNameFullPath)
     {
         return preg_replace('/\w+\/\d+\/\d+\//i', "", $fileNameFullPath);
     }
 
+
+    /**
+    * Description:
+    * reference to the additional field's detail in the format: ['type', 'label', 'value'] (Laravel Accessor)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * false|array
+    *
+    * Example of usage:
+    * see resources/views/admin/response.blade.php
+    */
     public function getAdditionalFieldAttribute()
     {
         $field = $this->form->additional_field;
@@ -95,11 +215,15 @@ class Application extends Model
         return $value;
     }
 
+
     /** 
     * Description:
-    * Check zerro size of uploaded files
+    * Check uploaded files for empty ones
     *
-    * Return: 
+    * List of parameters:
+    * false|array
+    *
+    * Return:
     * error: json
     *
     * Example of usage:
@@ -130,6 +254,20 @@ class Application extends Model
         return $this->alert;
     }
 
+
+    /**
+    * Description:
+    * are there any alert for this application? (Laravel Accessor)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * false|string
+    *
+    * Example of usage:
+    * see resources/views/manager/responses.blade.php
+    */
     public function getHasAlertAttribute()
     {
         if (!$this->alert) return false;
@@ -207,7 +345,7 @@ class Application extends Model
     * create new entry
     * 
     * List of parameters:
-    * none
+    * - none
     *
     * Return:
     * true
@@ -252,6 +390,7 @@ class Application extends Model
     * Delete entry
     *
     * List of parameters:
+    * - none
     *
     * Return:
     * true 
@@ -285,6 +424,7 @@ class Application extends Model
     * List of parameters:
     *
     * Return:
+    * true
     * 
     * Examples of usage:
     *
@@ -302,32 +442,115 @@ class Application extends Model
         return $entry;
     }
 
-    // TODO check info what sending
+
+    /**
+    * Description:
+    * send email to the admin
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * true
+    *
+    * Example of usage:
+    * see method Http/Controllers/Admin/ResponseController.status()
+    */
     public function adminSubmitEmail()
     {
+        // TODO check info what sending
         return $this->sendEmail('admin_submit');
     }
 
+
+    /**
+    * Description:
+    * send email to the user
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * true
+    *
+    * Example of usage:
+    * see method Http/Controllers/Api/FormController.postForm()
+    */
     public function userSubmitEmail()
     {
         return $this->sendEmail('user_submit');
     }
 
+
+    /**
+    * Description:
+    * send email to the user once the application is accepted
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * true
+    *
+    * Example of usage:
+    * see method Http/Controllers/Admin/ResponseController.status()
+    */
     public function userAcceptEmail()
     {
         return $this->sendEmail('user_accept');
     }
 
+
+    /**
+    * Description:
+    * send email to the user once the application is rejected
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    *
+    * Example of usage:
+    * see method Http/Controllers/Admin/ResponseController.status()
+    */
     public function userRejectEmail()
     {
         return $this->sendEmail('user_reject');
     }
 
+
+    /**
+    * Description:
+    * send email to the manager once the application is submitted
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * true
+    *
+    * Example of usage:
+    * ses Http/Controllers/Manager/ResponseController.status()
+    */
     public function managerSubmitEmail()
     {
         return $this->sendEmail('manager_submit');
     }
 
+
+    /**
+    * Description:
+    * prepare and send particular email based on email template details stored in form_emails.type=$type
+    *
+    * List of parameters:
+    * $type | string
+    *
+    * Return:
+    * true
+    *
+    * Example of usage:
+    * see method managerSubmitEmail()
+    */
     private function sendEmail($type)
     {
         // email sends only loggedIn users with active email template in form Settings
@@ -340,7 +563,7 @@ class Application extends Model
         $from_settings = Setting::where('key', 'from_email')->first();
         $from_email = $email->from_email ? $email->from_email : $from_settings->value;
 
-        $from_name = $email->from_name ? $email->from_name : 'RVAW';
+        $from_name = $email->from_name ? $email->from_name : 'RWAV';
 
         // to `user.email`
         $to_email = $this->user->email;
@@ -408,9 +631,10 @@ class Application extends Model
 
 
     /**
-     * Search
-     * return Two objects
-     */
+    * Search
+    * return Two objects
+    * TOREVIEW
+    */
     static function search($request = false, $order = 'DESC')
     {
         $user = Auth::user();
@@ -481,6 +705,19 @@ class Application extends Model
     }
 
 
+    /**
+    * Description:
+    * check if email is valid
+    *
+    * List of parameters:
+    * $email : string
+    *
+    * Return:
+    * boolean
+    *
+    * Example of usage:
+    * see method sendEmail()
+    */
     private function emailValidate($email)
     {
         $validator = new EmailValidator();

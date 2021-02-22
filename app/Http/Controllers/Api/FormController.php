@@ -190,7 +190,7 @@ class FormController extends Controller
         $app = Application::findOrFail($appid);
 
         $alert = $app->checkFiles();
-        // $alert can send to manager | admin
+        // $alert can be sent to manager | admin
 
         ApiLog::saveLog([
             'method' => 'Submit Application',

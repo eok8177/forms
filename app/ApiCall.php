@@ -92,7 +92,7 @@ class ApiCall
     * get dashboard details from MARS
     *
     * List of parameters:
-    * none
+    * - none
     *
     * Return:
     *

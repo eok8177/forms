@@ -127,7 +127,7 @@ class ResponseController extends Controller
             ]
         ]);
 
-		$application->createEntry();
+        $application->createEntry();
         if ($application->status == 'accepted') {
             $application->managerSubmitEmail();
             $application->userAcceptEmail();

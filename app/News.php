@@ -11,7 +11,7 @@
 * Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
-* - none
+* - front() | TOREVIEW
 */
 
 namespace App;
@@ -27,6 +27,16 @@ class News extends Model
      */
     protected $guarded = [];
 
+
+    /**
+    * Description:
+    * TOREVIEW
+    *
+    * Return:
+    *
+    * Example of usage:
+    *
+    */
     public static function front()
     {
         return News::where('show', 1)->orderBy('order', 'asc')->get();

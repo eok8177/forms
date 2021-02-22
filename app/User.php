@@ -11,7 +11,14 @@
 * Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
+* - getNameAttribute() | get user's first name and last name (Laravel Accessor)
+* - hasAnyRole($roles) | Are there any role assign for this user?
+* - groups() | reference to list of groups current user belongs (Object-Relational Mapper)
+* - generateRandomString($length = 8) | generate random string
 * - draftApps() | get draft applications for particular user
+* - sendNewPasswordEmail() | send new password via email
+* - sendPasswordResetNotification($token) | send the password reset notification
+* - sendEmailVerificationNotification() | send the email verification notification
 */
 
 namespace App;
@@ -56,11 +63,36 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+
+    /**
+    * Description:
+    * get user's first name and last name (Laravel Accessor)
+    *
+    * Return:
+    * string
+    *
+    * Example of usage:
+    * see method Http/Controllers/FrontendController.success()
+    */
     public function getNameAttribute()
     {
         return $this->first_name.' '.$this->last_name;
     }
 
+
+    /**
+    * Description:
+    * Are there any role assign for this user?
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * boolean
+    *
+    * Example of usage:
+    * see method Http/Middleware/CheckRole.handle()
+    */
     public function hasAnyRole($roles)
     {
         if (is_array($roles)) {
@@ -73,11 +105,38 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
+
+    /**
+    * Description:
+    * reference to list of groups current user belongs (Object-Relational Mapper)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    *
+    * Example of usage:
+    *
+    */
     public function groups()
     {
         return $this->belongsToMany(Group::class);
     }
 
+
+    /**
+    * Description:
+    * generate random string
+    *
+    * List of parameters:
+    * - $length: integer (default 8)
+    *
+    * Return:
+    * string
+    *
+    * Example of usage:
+    * see sendNewPasswordEmail()
+    */
     private function generateRandomString($length = 8) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -114,6 +173,19 @@ class User extends Authenticatable implements MustVerifyEmail
 
     // Notifications
 
+    /**
+    * Description:
+    * send new password via email
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * object
+    *
+    * Example of usage:
+    * navigate to <baseUrl>/password/reset
+    */
     public function sendNewPasswordEmail()
     {
         $password = $this->generateRandomString();
@@ -122,22 +194,39 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->notify(new NewPassword($password));
     }
 
+
     /**
-     * Send the password reset notification.
-     *
-     * @param  string  $token
-     * @return void
-     */
+    * Description:
+    * send the password reset notification
+    *
+    * List of parameters:
+    * $token : string
+    *
+    * Return:
+    * - void
+    *
+    * Example of usage:
+    * used by laravel internally
+    */
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new PasswordReset($token, $this));
     }
 
+
     /**
-     * Send the email verification notification.
-     *
-     * @return void
-     */
+    * Description:
+    * send the email verification notification
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * - void
+    *
+    * Example of usage:
+    * used by laravel internally
+    */
     public function sendEmailVerificationNotification()
     {
         $this->notify(new EmailVerify($this));

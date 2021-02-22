@@ -35,7 +35,7 @@ class ApiLog extends Model
     * get list of all failed logs
     *
     * List of parameters:
-    * none
+    * - none
     *
     * Return:
     * 

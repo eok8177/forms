@@ -12,7 +12,6 @@
 * 
 * List of methods:
 * - index(Request $request, $w = 0, $h = 0) | Generate JPG file based on the input image file and optionally passed new width or height params
-* 
 */
 
 namespace App\Http\Controllers;

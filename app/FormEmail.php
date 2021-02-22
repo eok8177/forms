@@ -11,7 +11,10 @@
 * Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
-* - none
+* - form() | reference to "parent" form definition details (Object-Relational Mapper)
+* - setSubjectAttribute($value) | set email's subject (Laravel Accessor)
+* - replaceMacro($string) | macros replacement for $string
+* - messageFields() | get email body fields to be replaced
 */
 
 namespace App;
@@ -34,16 +37,52 @@ class FormEmail extends Model
      */
     protected $guarded = [];
 
+
+    /**
+    * Description:
+    * reference to "parent" form definition details (Object-Relational Mapper)
+    *
+    * Return:
+    * object
+    *
+    * Example of usage:
+    * TOADD
+    */
     public function form()
     {
         return $this->belongsTo(Form::class, 'form_id');
     }
 
+
+    /**
+    * Description:
+    * set email's subject (Laravel Accessor)
+    *
+    * Return:
+    * void
+    *
+    * Example of usage:
+    * see method Http/Controllers/Api/EmailController.feedback()
+    */
     public function setSubjectAttribute($value)
     {
         $this->attributes['subject'] = $this->replaceMacro($value);
     }
 
+
+    /**
+    * Description:
+    * macros replacement for $string
+    *
+    * List of parameters:
+    * $string | string
+    *
+    * Return:
+    * string
+    *
+    * Example of usage:
+    * see setSubjectAttribute()
+    */
     public function replaceMacro($string)
     {
 
@@ -58,6 +97,20 @@ class FormEmail extends Model
         return str_replace($find,$replace,$string);
     }
 
+
+    /**
+    * Description:
+    * get email body fields to be replaced
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * array
+    *
+    * Example of usage:
+    * see method Application.sendEmail()
+    */
     public function messageFields()
     {
         preg_match_all("/\[([^\]]*)\]/", $this->message, $matches);

@@ -11,7 +11,8 @@
 * Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
-* - none
+* - empty() | is this group used for any form or user?
+* - managers() | reference to users-managers (Object-Relational Mapper)
 */
 
 namespace App;
@@ -27,6 +28,20 @@ class Group extends Model
      */
     protected $guarded = [];
 
+
+    /**
+    * Description:
+    * is this group used for any form or user?
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * boolean
+    *
+    * Example of usage:
+    * see resources/views/admin/groupe/index.blade.php
+    */
     public function empty()
     {
         $forms = $this->belongsToMany(Form::class);
@@ -35,6 +50,20 @@ class Group extends Model
         return ($forms->count() == 0 && $users->count() == 0) ? true : false;
     }
 
+
+    /**
+    * Description:
+    * reference to users-managers (Object-Relational Mapper)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * oject | list of objects
+    *
+    * Example of usage:
+    * see method Http/Controllers/Admin/GroupController.store()
+    */
     public function managers()
     {
         return $this->belongsToMany(User::class)->where('role', 'manager');

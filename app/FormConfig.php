@@ -124,6 +124,7 @@ trait FormConfig
         ];
     }
 
+
     /**
     * Description:
     * parse form's config
@@ -229,6 +230,7 @@ trait FormConfig
         return $groups;
     }
 
+
     /**
     * Description:
     * parse application's details (for API when form is submitted)
@@ -322,6 +324,7 @@ trait FormConfig
         return $data;
     }
 
+
     /**
     * Description:
     * update alias value in Form config (json) from admin/form/settings
@@ -373,6 +376,7 @@ trait FormConfig
 
         return $dateValue;
     }
+
 
     /**
     * Description:

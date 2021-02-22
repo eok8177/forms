@@ -50,7 +50,7 @@ class ResponseController extends Controller
     {
         list($apps, $filter) = Application::search($request);
 
-        // check all apps for zerro file size
+        // check all apps (responses) for attachments with zero file sizes
         foreach ($apps->get() as $app) {
             $app->checkFiles();
         }
@@ -119,7 +119,7 @@ class ResponseController extends Controller
         $appApprov->status = $status;
         $appApprov->save();
 
-		$app->createEntry();
+        $app->createEntry();
         if ($app->status == 'accepted') {
             $app->adminSubmitEmail();
             $app->userAcceptEmail();

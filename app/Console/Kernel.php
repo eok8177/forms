@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
     * - $schedule : Illuminate\Console\Scheduling\Schedule
     *
     * Return:
-    * none
+    * - none
     */
     protected function schedule(Schedule $schedule)
     {
@@ -47,10 +47,10 @@ class Kernel extends ConsoleKernel
     * register the commands for the application
     *
     * List of parameters:
-    * none
+    * - none
     *
     * Return:
-    * none
+    * - none
     */
     protected function commands()
     {
