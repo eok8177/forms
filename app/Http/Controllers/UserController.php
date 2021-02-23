@@ -11,17 +11,17 @@
 * Sergey Markov | SergeyM@rwav.com.au
 * 
 * List of methods:
-* - redirectTo(Request $request) | Redirects to the different URL based on the role of logged in user (GET method)
-* - index(Request $request) | Show dashboard details: draft & submitted responses
-* - edit() | Edit personal details
-* - update(Request $request) | Update personal details
-* - form(Application $app) | Edit application in user cabinet
-* - formView(Application $app) | Preview submitted response
-* - destroy(Application $app) | Delete draft response by user
-* - faq() | Help in user cabinet
-* - draftSaved(Form $form) | Save draft
-* - contact() | Show Contact page in cabinet
-* - contactSend(Request $request) | Save message from form on Contact page
+* - redirectTo(Request $request) | redirects to the different URL based on the role of logged in user (GET method)
+* - index(Request $request) | show dashboard details: draft & submitted responses
+* - edit() | edit personal details
+* - update(Request $request) | update personal details
+* - form(Application $app) | edit application's details
+* - formView(Application $app) | preview submitted response
+* - destroy(Application $app) | delete draft response by user
+* - faq() | show FAQ
+* - draftSaved(Form $form) | save draft
+* - contact() | show Contact page
+* - contactSend(Request $request) | save message from Contact us page
 * - 
 */
 
@@ -48,7 +48,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * Redirects to the different URL based on the role of logged in user (GET method)
+    * redirects to the different URL based on the role of logged in user (GET method)
     *
     * List of parameters:
     * - $request : Request
@@ -82,7 +82,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * Show dashboard details: draft & submitted responses
+    * show dashboard details: draft & submitted responses
     *
     * List of parameters:
     * - $request : Request
@@ -148,7 +148,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * Edit personal details
+    * edit personal details
     *
     * List of parameters:
     * - none
@@ -167,7 +167,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * Update personal details
+    * update personal details
     *
     * List of parameters:
     * - $request : Request
@@ -218,7 +218,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * edit application in user cabinet
+    * edit application's details
     *
     * List of parameters:
     * - $app : Application
@@ -240,7 +240,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * Preview submitted response
+    * preview submitted response
     *
     * List of parameters:
     * - $app : Application
@@ -262,7 +262,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * Delete draft response by user
+    * delete draft response by user
     *
     * List of parameters:
     * - $app : Application
@@ -298,7 +298,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * Help in user cabinet
+    * show FAQ
     *
     * List of parameters:
     * - none
@@ -307,7 +307,7 @@ class UserController extends Controller
     * view content
     *
     * Examples of usage:
-    * route : user/faq
+    * navigate to <baseUrl>/user/faq
     */
     public function faq()
     {
@@ -320,7 +320,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * Save draft
+    * save draft
     *
     * List of parameters:
     * - $form : Form
@@ -340,7 +340,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * Show Contact page in cabinet
+    * show Contact us page
     *
     * List of parameters:
     * - none
@@ -349,7 +349,7 @@ class UserController extends Controller
     * view content
     *
     * Examples of usage:
-    * route : /user/contact
+    * navigate to <baseUrl>/user/contact
     */
     public function contact()
     {
@@ -361,7 +361,7 @@ class UserController extends Controller
 
     /**
     * Description:
-    * Save message from form on Contact page
+    * save message from Contact us page
     *
     * List of parameters:
     * - $request : Request
@@ -370,7 +370,7 @@ class UserController extends Controller
     * view content
     *
     * Examples of usage:
-    * route : /user/contact
+    * navigate to <baseUrl>/user/contact
     */
     public function contactSend(Request $request)
     {

@@ -11,10 +11,10 @@
 * Sergey Markov | SergeyM@rwav.com.au
 *
 * List of methods:
-* - status(Request $request) | Change status of the form to live/draft
-* - reorder(Request $request)
-* - form(Request $request, $id)
-* - setTime(Request $request)
+* - status(Request $request) | change status of the form to live/draft
+* - reorder(Request $request) | change pages order in admin via AJAX
+* - form(Request $request, $id) | admin save form config
+* - setTime(Request $request) | admin -> User Set Toggle Email verified
 */
 
 namespace App\Http\Controllers\Admin;
@@ -29,7 +29,7 @@ class AjaxController extends Controller
 
     /**
     * Description:
-    * Change status of the form to live/draft
+    * change status of the form to live/draft
     *
     * List of parameters:
     * - $request : Request
@@ -82,13 +82,13 @@ class AjaxController extends Controller
 
     /**
     * Description:
-    * Change order pages in admin via ajax
+    * change pages order in admin via AJAX
     *
     * List of parameters:
     * - $request : Request
     *
     * Return:
-    * 
+    * view content
     *
     * Examples of usage:
     * resources/views/admin/faq/index.blade.php
@@ -125,14 +125,14 @@ class AjaxController extends Controller
 
     /**
     * Description:
-    * Admin save form config
+    * admin save form config
     *
     * List of parameters:
     * - $request : Request
     * - $id : integer
     *
     * Return:
-    * 
+    * response in JSON format
     *
     * Examples of usage:
     * resources/js/components/FormBuilderComponent.vue
@@ -155,13 +155,13 @@ class AjaxController extends Controller
 
     /**
     * Description:
-    * Admin -> User Set Toggle Email verified
+    * admin -> User Set Toggle Email verified
     *
     * List of parameters:
     * - $request : Request
     *
     * Return:
-    * 
+    * response in JSON format
     *
     * Examples of usage:
     * resources/views/admin/user/index.blade.php

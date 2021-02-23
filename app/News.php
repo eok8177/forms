@@ -32,7 +32,11 @@ class News extends Model
     * Description:
     * get active records
     *
+    * List of parameters:
+    * - none
+    *
     * Return:
+    * object | list of objects
     *
     * Example of usage:
     * resources/views/user/parts/informBlock.blade.php

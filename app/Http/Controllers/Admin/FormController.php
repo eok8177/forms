@@ -23,7 +23,7 @@
 * - emailStore(Request $request, Form $form) | Update email notification settings for the form (PUT method) 
 * - destroy(Form $form) | Delete form definition (DELETE method)
 * - copy(Form $form) | Duplicate the form definitions
-* - alias(Request $request, Form $form)
+* - alias(Request $request, Form $form) | admin form setting: update alias
 */
 
 namespace App\Http\Controllers\Admin;
@@ -337,7 +337,7 @@ class FormController extends Controller
 
     /**
     * Description:
-    * Admin form setting: Update Alias
+    * admin form setting: update alias
     *
     * List of parameters:
     * - $request : Request

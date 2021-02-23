@@ -12,7 +12,7 @@
 * 
 * List of methods:
 * - forms() | reference to all forms with this form type (Object-Relational Mapper)
-* - getColorAttribute($value) | Get color of Form Type
+* - getColorAttribute($value) | get form type's color
 */
 
 namespace App;
@@ -33,6 +33,9 @@ class FormType extends Model
     * Description:
     * reference to all forms with this form type (Object-Relational Mapper)
     *
+    * List of parameters:
+    * - none
+    *
     * Return:
     * object | list of objects
     *
@@ -47,14 +50,18 @@ class FormType extends Model
 
     /**
     * Description:
-    * Get color of Form Type
+    * get form type's color
+    * If not specified return black color
+    *
+    * List of parameters:
+    * - $value : string
     *
     * Return:
-    * string color
+    * string
     *
     * Example of usage:
-    * app/Http/Controllers/Admin/FormTypeController.edit()
-    * resources/views/admin/response.blade.php ...
+    * see method app/Http/Controllers/Admin/FormTypeController.edit()
+    * see resources/views/admin/response.blade.php
     */
     public function getColorAttribute($value)
     {

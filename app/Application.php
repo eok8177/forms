@@ -606,15 +606,19 @@ class Application extends Model
 
     /**
     * Description:
-    * Search apps
+    * Search applications
     *
-    * Return
-    * $apps | object
+    * List of parameters:
+    * - $request : Request
+    * - $order : string  - ASC|DESC
+    *
+    * Return:
+    * $apps : object
     * $filter | array used filters
     *
     * Example of usage:
-    * app/Http/Controllers/Admin/ResponseController.index()
-    * app/Http/Controllers/Manager/ResponseController.index()
+    * see method app/Http/Controllers/Admin/ResponseController.index()
+    * see method app/Http/Controllers/Manager/ResponseController.index()
     */
     static function search($request = false, $order = 'DESC')
     {
