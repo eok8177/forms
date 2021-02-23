@@ -91,7 +91,7 @@ class UserController extends Controller
     * view content
     *
     * Examples of usage:
-    * - <baseUrl>/user
+    * navigate to <baseUrl>/user
     */
     public function index(Request $request)
     {
@@ -157,7 +157,7 @@ class UserController extends Controller
     * view content
     *
     * Examples of usage:
-    * - <baseUrl>/user/edit
+    * navigate to <baseUrl>/user/edit
     */
     public function edit()
     {
@@ -176,7 +176,7 @@ class UserController extends Controller
     * view content
     *
     * Examples of usage:
-    * - go to <baseUrl>/user/edit and click "Save"
+    * navigate to <baseUrl>/user/edit and click "Save"
     */
     public function update(Request $request)
     {
@@ -227,7 +227,7 @@ class UserController extends Controller
     * view content
     *
     * Examples of usage:
-    * routes.web : user/form/{app}
+    * navigate to <baseUrl>/user/form/{app}
     */
     public function form(Application $app)
     {
