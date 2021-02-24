@@ -90,7 +90,7 @@
             }
 
             if (parseFloat(size) > parseFloat(maxSize)) this.msg = 'File size is too large';
-            if (parseFloat(size) == 0) this.msg = 'File has zerro size';
+            if (parseFloat(size) == 0) this.msg = 'File is empty';
 
             return false;
           },
@@ -109,9 +109,9 @@
               ext = nameParts[0];
             }
 
-            if (this.value.extensions) {
+            if (this.value.extensions && ext) {
               this.value.extensions.split(',').forEach(function(item) {
-                if (item == ext) valid = true;
+                if (item.toUpperCase() == ext.toUpperCase()) valid = true;
               });
             }
 
