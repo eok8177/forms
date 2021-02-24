@@ -396,26 +396,50 @@ trait FormConfig
         $config = json_decode($config, true);
         $files = [];
 
-        foreach ($config['sections'] as $sectionID => $section) {
+        foreach ($config['sections'] as $section) {
             if (array_key_exists('rows', $section)) {
 
-                foreach ($section['rows'] as $rowID => $row) {
-                    if (array_key_exists('controls', $row)) {
-                        foreach ($row['controls'] as $controlID => $control) {
-                            if ($control['type'] == 'file') {
-                                if (array_key_exists('value', $control)) {
-                                    $files[$control['fieldName']] = [
-                                        'fieldName' => $control['fieldName'],
-                                        'value' => $control['value'],
-                                        'alias' => $control['alias'],
-                                        'label' => $control['label'],
-                                    ];
+                if ($section['isDynamic']) {
+                    $sectionName = strval(preg_replace("/[^0-9]/", '', $section['name']));
+
+                    foreach ($section['instances'] as $idInst => $instance) {
+                        $instanceID = $sectionName.'_'.$idInst;
+                        foreach ($instance as $sectionID => $section) {
+                            foreach ($section['controls'] as $control) {
+                                if ($control['type'] == 'file') {
+                                    if (array_key_exists('value', $control)) {
+                                        $files[$control['fieldName']] = [
+                                            'fieldName' => $control['fieldName'],
+                                            'value' => $control['value'],
+                                            'alias' => $instanceID.'_'.$control['label'],
+                                            'label' => $control['label'],
+                                        ];
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
+                } else { // not Dynamic fields
+
+                    foreach ($section['rows'] as $row) {
+                        if (array_key_exists('controls', $row)) {
+                            foreach ($row['controls'] as $control) {
+                                if ($control['type'] == 'file') {
+                                    if (array_key_exists('value', $control)) {
+                                        $files[$control['fieldName']] = [
+                                            'fieldName' => $control['fieldName'],
+                                            'value' => $control['value'],
+                                            'alias' => $control['alias'],
+                                            'label' => $control['label'],
+                                        ];
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
             }
         }
 
