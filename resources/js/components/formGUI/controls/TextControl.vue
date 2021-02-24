@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Text Control
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div>
       <div v-if="value.hidden">

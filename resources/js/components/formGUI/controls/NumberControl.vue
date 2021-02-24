@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Number Control
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div>
         <div class="row" v-if="labelPosition === 'left'" :class="value.cssClass">

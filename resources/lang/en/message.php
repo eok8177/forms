@@ -1,5 +1,16 @@
 <?php
 
+/**
+* Description:
+* Messages Language Lines
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+
 return [
 
     'id' => 'ID',

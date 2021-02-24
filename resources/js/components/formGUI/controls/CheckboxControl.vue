@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Checkbox Component
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div>
         <div class="custom-control custom-switch" v-if="labelPosition === 'left'" :class="value.cssClass">

@@ -1,3 +1,14 @@
+/**
+* Description:
+* JS constants
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+
 var FORM_CONSTANTS = {};
 var CONTROL_CONSTANTS = {};
 

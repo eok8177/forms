@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS "Form Builder" Component
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div class="builder">
         <form-builder type="template" v-model="form"></form-builder>

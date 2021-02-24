@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS "Date picker" Component
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div>
         <div class="form-group row datePickerControl" v-if="labelPosition === 'left'" :class="value.cssClass">

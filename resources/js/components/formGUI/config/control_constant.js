@@ -1,3 +1,14 @@
+/**
+* Description:
+* Constants: control types
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+
 // Control
 import CheckboxControl from '../controls/CheckboxControl';
 import DatePickerControl from '../controls/DatePickerControl';
