@@ -103,8 +103,11 @@
             if (!this.value.extensions) return true;
 
             let name = e.target.files[0].name;
-            let ext = name.match(/\.([^\.]+)$/)[1];
-            ext = '.' + ext;
+            let nameParts = name.match(/\.[0-9a-z]+$/i);
+            let ext = null;
+            if (nameParts) {
+              ext = nameParts[0];
+            }
 
             if (this.value.extensions) {
               this.value.extensions.split(',').forEach(function(item) {
