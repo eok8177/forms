@@ -397,6 +397,9 @@ trait FormConfig
         $files = [];
 
         foreach ($config['sections'] as $section) {
+
+            $sectionLabel = $section['label'];
+            
             if (array_key_exists('rows', $section)) {
 
                 if ($section['isDynamic']) {
@@ -413,6 +416,7 @@ trait FormConfig
                                             'value' => $control['value'],
                                             'alias' => $instanceID.'_'.$control['label'],
                                             'label' => $control['label'],
+                                            'section' => $sectionLabel,
                                         ];
                                     }
                                 }
@@ -432,6 +436,7 @@ trait FormConfig
                                             'value' => $control['value'],
                                             'alias' => $control['alias'],
                                             'label' => $control['label'],
+                                            'section' => $sectionLabel,
                                         ];
                                     }
                                 }

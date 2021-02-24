@@ -274,7 +274,7 @@ class Application extends Model
 
         $msg = false;
         foreach (json_decode($this->alert) as $alert) {
-            $msg .= ' '.$alert->alias;
+            $msg .= ' '.$alert->section.' - '.$alert->alias;
         }
         return $msg;
     }
