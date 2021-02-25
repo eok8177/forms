@@ -417,6 +417,7 @@ trait FormConfig
                                             'alias' => $instanceID.'_'.$control['label'],
                                             'label' => $control['label'],
                                             'section' => $sectionLabel,
+                                            'required' => $control['required'],
                                         ];
                                     }
                                 }
@@ -437,6 +438,7 @@ trait FormConfig
                                             'alias' => $control['alias'],
                                             'label' => $control['label'],
                                             'section' => $sectionLabel,
+                                            'required' => $control['required'],
                                         ];
                                     }
                                 }

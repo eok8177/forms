@@ -247,6 +247,18 @@ class Application extends Model
                     ];
                 }
             }
+
+            if (!$field['value'] || is_array($field['value'])) {
+                if ($field['required']) {
+                    $error[] = [
+                        'fieldName' => $fieldName,
+                        'value' => $field['value'],
+                        'alias' => $field['alias'],
+                        'label' => $field['label'],
+                        'section' => $field['section'],
+                    ];
+                }
+            }
         }
 
         $this->alert = $error ? json_encode($error) : NULL;
@@ -275,7 +287,7 @@ class Application extends Model
 
         $msg = false;
         foreach (json_decode($this->alert) as $alert) {
-            $msg .= ' '.$alert->section.' - '.$alert->label;
+            $msg .= ' '.$alert->section.' - '.$alert->label.';';
         }
         return $msg;
     }
