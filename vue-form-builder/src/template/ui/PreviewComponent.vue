@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Preview Component (backend)
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div class="modal" id="previewModal">
         <div class="modal-dialog modal-lg">

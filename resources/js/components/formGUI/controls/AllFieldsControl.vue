@@ -1,7 +1,7 @@
 <!--
 /**
 * Description:
-* VueJS "All fields" Component
+* VueJS "All fields" Component (frontend)
 * 
 * Copyright: Rural Workforce Agency, Victoria (RWAV)
 * Contact email: rwavsupport@rwav.com.au

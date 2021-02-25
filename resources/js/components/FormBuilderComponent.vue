@@ -1,7 +1,7 @@
 <!--
 /**
 * Description:
-* VueJS "Form Builder" Component
+* VueJS "Form Builder" Component (frontend)
 * 
 * Copyright: Rural Workforce Agency, Victoria (RWAV)
 * Contact email: rwavsupport@rwav.com.au

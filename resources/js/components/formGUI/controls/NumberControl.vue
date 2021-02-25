@@ -1,7 +1,7 @@
 <!--
 /**
 * Description:
-* VueJS Number Control
+* VueJS Number Control (frontend)
 * 
 * Copyright: Rural Workforce Agency, Victoria (RWAV)
 * Contact email: rwavsupport@rwav.com.au

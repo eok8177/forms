@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Select Config Component (backend)
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div class="row mt-2">
         <div class="col-md-12">

@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Row Item (backend)
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div class="col-md-12 mb-2 rowItem row" :id="row.name">
         <div class="tools">

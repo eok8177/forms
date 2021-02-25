@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Control Item (backend)
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div class="controlItemWrapper" :class="control.className" @dblclick="openConfig" :data-control-name="control.name">
         <div class="controlItem row" :id="control.name" v-if="labelPosition === 'left'">

@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Sidebar Component (backend)
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div class="card">
         <div class="controlSidebar list-group" v-show="!isConfig">

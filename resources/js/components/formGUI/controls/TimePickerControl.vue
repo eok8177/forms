@@ -1,7 +1,7 @@
 <!--
 /**
 * Description:
-* VueJS Timepicker Control
+* VueJS Timepicker Control (frontend)
 * 
 * Copyright: Rural Workforce Agency, Victoria (RWAV)
 * Contact email: rwavsupport@rwav.com.au

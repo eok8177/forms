@@ -1,7 +1,7 @@
 <!--
 /**
 * Description:
-* VueJS Select Control
+* VueJS Select Control (frontend)
 * 
 * Copyright: Rural Workforce Agency, Victoria (RWAV)
 * Contact email: rwavsupport@rwav.com.au

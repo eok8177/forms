@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Section Config Modal (backend)
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div>
         <div class="modal" id="sectionConfigModal">

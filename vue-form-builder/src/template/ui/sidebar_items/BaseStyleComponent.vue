@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Base Style Component (backend)
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div>
         <div class="row mt-2" v-if="control.type !== 'checkbox' && control.type !== 'address' && control.type !== 'html' && control.type !== 'file'">

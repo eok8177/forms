@@ -1,7 +1,7 @@
 <!--
 /**
 * Description:
-* VueJS Address Component 
+* VueJS Address Component (frontend)
 * 
 * Copyright: Rural Workforce Agency, Victoria (RWAV)
 * Contact email: rwavsupport@rwav.com.au

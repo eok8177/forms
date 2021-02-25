@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Section Component (backend)
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div>
         <div class="row">

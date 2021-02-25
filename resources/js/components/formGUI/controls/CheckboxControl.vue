@@ -1,7 +1,7 @@
 <!--
 /**
 * Description:
-* VueJS Checkbox Component
+* VueJS Checkbox Component (frontend)
 * 
 * Copyright: Rural Workforce Agency, Victoria (RWAV)
 * Contact email: rwavsupport@rwav.com.au

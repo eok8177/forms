@@ -1,7 +1,7 @@
 <!--
 /**
 * Description:
-* VueJS "Date picker" Component
+* VueJS "Date picker" Component (frontend)
 * 
 * Copyright: Rural Workforce Agency, Victoria (RWAV)
 * Contact email: rwavsupport@rwav.com.au

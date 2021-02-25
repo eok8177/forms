@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Number Config Component (backend)
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <!-- Decimal places for number -->
     <div class="row mt-2">

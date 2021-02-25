@@ -1,7 +1,7 @@
 <!--
 /**
 * Description:
-* VueJS Html Control
+* VueJS Html Control (frontend)
 * 
 * Copyright: Rural Workforce Agency, Victoria (RWAV)
 * Contact email: rwavsupport@rwav.com.au
