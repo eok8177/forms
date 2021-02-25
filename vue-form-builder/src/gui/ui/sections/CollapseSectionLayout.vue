@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Collapse Section Layout (backend)
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div class="col-md-12 mb-2">
         <div class="collapseFormItem">

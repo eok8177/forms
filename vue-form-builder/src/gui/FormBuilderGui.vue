@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Form Builder Gui (backend)
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div class="col-md-12">
         <section-component :form="form"></section-component>

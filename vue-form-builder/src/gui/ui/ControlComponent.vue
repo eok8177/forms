@@ -1,3 +1,15 @@
+<!--
+/**
+* Description:
+* VueJS Control Component (backend)
+* 
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
+*/
+-->
 <template>
     <div class="controlItem form-group" :class="control.className">
         <component :is="controlInstance" :control="control" :label-position="labelPosition"></component>
