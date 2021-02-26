@@ -260,7 +260,8 @@ class Application extends Model
                 }
             }
         }
-
+        echo 'checkFiles.error=';
+        print_r($error);die();
         $this->alert = $error ? json_encode($error) : NULL;
         $this->save();
 

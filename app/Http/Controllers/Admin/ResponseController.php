@@ -46,6 +46,13 @@ class ResponseController extends Controller
     */
     public function index(Request $request)
     {
+    $mode = 'UAT'; $id=862;
+    echo '<pre>'.$mode.'--'.$id.'<br>';
+    $app1 = Application::find($id); 
+    if ($app1) {
+        $app1->checkFiles();die();
+    }
+    die('__');
         list($apps, $filter) = Application::search($request);
 
         // check all apps (responses) for attachments with zero file sizes
