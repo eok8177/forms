@@ -136,7 +136,11 @@ class FormController extends Controller
 
         if ($fieldName = $request->get('fieldName') && $file = $request->file) {
 
+            $size_before_save = $file->getSize();
+
             $filename = $file->storeAs('uploads/'.$formId.'/'.$appid, $file->getClientOriginalName(), 'public');
+
+            $size_after_save = Storage::disk('public')->size($filename);
 
             $app->updateConfig($fieldId, $filename);
 
@@ -148,6 +152,8 @@ class FormController extends Controller
                 'payload' => [
                     'fieldId' => $request->get('fieldId'),
                     'fieldName' => $request->get('fieldName'),
+                    'size_before_save' => $size_before_save,
+                    'size_after_save' => $size_after_save,
                     'config_before' => $config_before
                 ],
                 'response' => [
