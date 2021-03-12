@@ -50,7 +50,7 @@ class ResponseController extends Controller
 
         // check all apps (responses) for attachments with zero file sizes
         foreach ($apps->get() as $app) {
-            $app->checkFiles();
+            $app->checkUploadedFiles();
         }
 
         return view('admin.response', [

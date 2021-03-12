@@ -18,7 +18,8 @@
 * - getFieldsAttribute() | get a list of fields ['type', 'label', 'value'] (Laravel Accessor)
 * - _getFileName($fileNameFullPath) | remove invalid symbols from filename
 * - getAdditionalFieldAttribute() | reference to the additional field's detail in the format: ['type', 'label', 'value'] (Laravel Accessor)
-* - checkFiles() | Check uploaded files for empty ones
+* - checkFiles() | Check uploaded files for empty ones (based on application.config)
+* - checkUploadedFiles() | Check uploaded files for empty ones (based on file structure)
 * - getHasAlertAttribute() | are there any alert for this application? (Laravel Accessor)
 * - updateConfig($fieldName, $value) | Save uploaded files paths into applications.config
 * - createEntry() | create new entry
@@ -218,7 +219,7 @@ class Application extends Model
 
     /** 
     * Description:
-    * Check uploaded files for empty ones (based application.config)
+    * Check uploaded files for empty ones (based on application.config)
     *
     * List of parameters:
     * - none
@@ -317,7 +318,7 @@ class Application extends Model
 
         $msg = false;
         foreach (json_decode($this->alert) as $alert) {
-            $msg .= ' '.$alert->section.' - '.$alert->label.';';
+            $msg .= ' '.$alert->fieldName;
         }
         return $msg;
     }
