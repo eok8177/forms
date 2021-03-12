@@ -218,13 +218,13 @@ class Application extends Model
 
     /** 
     * Description:
-    * Check uploaded files for empty ones
+    * Check uploaded files for empty ones (based application.config)
     *
     * List of parameters:
-    * false|array
+    * - none
     *
     * Return:
-    * error: json
+    * object
     *
     * Example of usage:
     * see method Http\Controller\Api\FormController.postForm()
@@ -266,6 +266,36 @@ class Application extends Model
 
         return $this->alert;
     }
+
+
+    /** 
+    * Description:
+    * Check uploaded files for empty ones (based on file structure)
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * object
+    *
+    * Example of usage:
+    * 
+    */
+    public function checkUploadedFiles()
+    {
+        $error = false;
+        $files = Storage::disk('public')->allFiles('uploads/' . $this->form_id . '/' . $this->id);
+        foreach($files as $f) {
+            if (Storage::disk('public')->size($f) > 0) continue;
+            $error[] = ['fieldName' => $f];
+        }
+
+        $this->alert = $error ? json_encode($error) : NULL;
+        $this->save();
+
+        return $this->alert;
+    }
+
 
 
     /**
