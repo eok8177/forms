@@ -273,75 +273,39 @@
                 });
             },
 
-            uploadFiles() {
+            async uploadFiles() {
                 let self = this;
+                let errorFile = [];
                 let done = Object.keys(self.files).length;
-                _.forEach(self.files, function(file,key) {
-                    //if file already uploaded
+
+                for (const key of Object.keys(self.files)) {
+                    let file = self.files[key];
+                    //if file already uploaded & input.value not has File object
                     if (typeof file.data === 'string' || !(file.data instanceof File) ) {
                         done = done - 1;
                         return true;
                     }
 
-                    //change FileName if has restricted symbols
-                    let fileName = file.data.name.replace(/[/\?%*:|"<>#]/g, '-');
+                    // upload File
+                    let response = await self.httpUploadFile(file);
 
-                    var formData = new FormData();
-                    formData.append('appid', self.appID);
-                    formData.append('userid', self.userid);
-                    formData.append('formId', self.formid);
-                    formData.append('fieldName', file.name);
-                    formData.append('fieldId', file.fieldId);
-                    formData.append('file', file.data, fileName);
-                    axios.post('/api/upload-file', formData, {
-                        headers: {
-                          'Content-Type': 'multipart/form-data'
-                        }
-                      }).then(
-                        (response) => {
-                          done = done - 1;
-                          if (done == 0 && self.status === 'submitted') {
-                            self.postForm();
-                          }
-                        }
-                      ).catch((error) => {
-                        let msg = {};
-                        if (error.response) {
-                          msg = {
-                            'fileName': fileName,
-                            'type': 'Request made and server responded',
-                            'data': error.response.data,
-                            'status': error.response.status,
-                            'headers': error.response.headers
-                          };
-                        } else if (error.request) {
-                          msg = {
-                            'fileName': fileName,
-                            'type': 'The request was made but no response was received',
-                            'request': error.request
-                          };
-                        } else {
-                          msg = {
-                            'fileName': fileName,
-                            'type': 'Something happened in setting up the request that triggered an Error',
-                            'request': error.message
-                          };
-                        }
-                        // post error to Log
-                        axios.post('/api/log', {
-                            'type': 'Error upload file',
-                            'error': error,
-                            'appid': self.appID,
-                            'msg': msg
-                        });
-                        self.errorMsg = 'Can`t upload file';
+                    if (response.status == 'error') errorFile.push(key); // if error upload
+
+                    done = done - 1;
+                }
+
+                if (errorFile.length > 0) {
+                    errorFile.forEach(item => {
+                        $('body .error-msg.'+item).show(); //show error message
+                        $('body .error-msg.'+item).closest('.collapse').collapse('show');
                     });
-                });
-                // submit form
+                    this.disabledBtn = false;
+                    return false;
+                }
+
                 if (done == 0 && self.status === 'submitted') {
-                  self.postForm();
-                // only save Draft application
-                } else if (self.status != 'submitted') {
+                  self.postForm(); // submit form
+                } else if (self.status != 'submitted') { // only save Draft application
                     if (self.redirect) {
                         window.location.href = '/user/draft-saved/'+self.formid;
                     } else {
@@ -349,7 +313,7 @@
                         this.disabledBtn = false;
                     }
                 }
-                return;
+                return true;
             },
 
             // Save Draft
@@ -393,7 +357,58 @@
                     }
                   )
                   .catch((error) => console.log(error));
-            }
+            },
+
+            // http method for upload file to server
+            async httpUploadFile(file) {
+                //change FileName if has restricted symbols
+                let fileName = file.data.name.replace(/[/\?%*:|"<>#]/g, '-');
+
+                var formData = new FormData();
+                formData.append('appid', this.appID);
+                formData.append('userid', this.userid);
+                formData.append('formId', this.formid);
+                formData.append('fieldName', file.name);
+                formData.append('fieldId', file.fieldId);
+                formData.append('file', file.data, fileName);
+                try {
+                    return await axios.post('/api/upload-file', formData, {
+                        headers: {
+                          'Content-Type': 'multipart/form-data'
+                        }
+                      });
+                } catch (error) {
+                    let msg = {};
+                    if (error.response) {
+                      msg = {
+                        'fileName': fileName,
+                        'type': 'Request made and server responded',
+                        'data': error.response.data,
+                        'status': error.response.status,
+                        'headers': error.response.headers
+                      };
+                    } else {
+                      msg = {
+                        'fileName': fileName,
+                        'type': 'Something happened in setting up the request that triggered an Error',
+                        'request': error.message
+                      };
+                    }
+                    // post error to Log
+                    axios.post('/api/log', {
+                        'type': 'Error upload file',
+                        'error': error,
+                        'appid': this.appID,
+                        'msg': msg
+                    });
+                    this.errorMsg = 'Failed to upload file, please try again';
+
+                    return {
+                        status: 'error',
+                        msg: msg
+                    };
+                }
+            },
         },
         created() {
             this.formdata = this.form;
