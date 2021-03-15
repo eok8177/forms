@@ -142,11 +142,11 @@ class FormController extends Controller
 
             $size_after_save = Storage::disk('public')->size($filename);
 
-            $app->updateConfig($fieldId, $filename);
-
             if ($size_after_save == 0 || $size_before_save == 0) {
-                return response()->json('file has zerro size on Server', 400);
+                return response()->json('empty file - stored on server', 400);
             }
+
+            $app->updateConfig($fieldId, $filename);
 
             ApiLog::saveLog([
                 'method' => 'upload File',
@@ -174,7 +174,7 @@ class FormController extends Controller
 
         }
 
-        return response()->json('file not uploaded to Server', 400);
+        return response()->json('file is not uploaded to server', 400);
     }
 
 
