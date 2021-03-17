@@ -29,7 +29,7 @@
 
         <div class="d-flex justify-content-end mb-2 text-danger">{{errorMsg}}</div>
 
-        <div class="d-flex justify-content-end mb-2 btns-right">
+        <div class="d-flex justify-content-end mb-2 btns-right" v-if="showActionButtons">
             <button v-if="userid > 0" @click="SaveApps()" class="save" :disabled="disabledBtn">Save</button>
             <button @click="Submit()" class="submit" :disabled="disabledBtn">Submit</button>
         </div>
@@ -97,6 +97,9 @@
             errorMsg: '',
             disabledBtn: false,
             redirect: true,
+
+            showActionButtons: true,
+
             regEmail: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
         }),
         methods: {

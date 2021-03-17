@@ -115,6 +115,10 @@ FORM_CONSTANTS.Type = {
         label: "All Fields",
         icon: 'faCheck'
     },
+    show: {
+        label:"Show Action Buttons",
+        icon: 'faCheck'
+    },
 };
 
 FORM_CONSTANTS.WidthOptions = {

@@ -21,6 +21,7 @@ import HtmlControl from '../controls/HtmlControl';
 import AddressControl from '../controls/AddressControl';
 import RadioControl from '../controls/RadioControl';
 import AllFieldsControl from '../controls/AllFieldsControl';
+import ShowControl from '../controls/ShowControl';
 
 const CONTROL_TYPES = {
     text: {
@@ -66,6 +67,10 @@ const CONTROL_TYPES = {
     all_fields: {
         label:"All Fields",
         source: AllFieldsControl
+    },
+    show: {
+        label:"Show Action Buttons",
+        source: ShowControl
     },
 };
 

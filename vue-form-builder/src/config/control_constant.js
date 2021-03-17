@@ -18,6 +18,7 @@ import TEMPLATEHtmlControl from 'sethFormBuilder/template/ui/common/controls/Htm
 import TEMPLATEAddressControl from 'sethFormBuilder/template/ui/common/controls/AddressControl';
 import TEMPLATERadioControl from 'sethFormBuilder/template/ui/common/controls/RadioControl';
 import TEMPLATEAllFieldsControl from 'sethFormBuilder/template/ui/common/controls/AllFieldsControl';
+import TEMPLATEShowControl from 'sethFormBuilder/template/ui/common/controls/ShowControl';
 
 // CONFIG CONTROL
 import SIDEBARDatePickerControl from 'sethFormBuilder/template/ui/sidebar_items/DatePickerConfigComponent';
@@ -31,6 +32,7 @@ import SIDEBARHtmlControl from 'sethFormBuilder/template/ui/sidebar_items/HtmlCo
 import SIDEBARAddressControl from 'sethFormBuilder/template/ui/sidebar_items/AddressConfigComponent';
 import SIDEBARRadioControl from 'sethFormBuilder/template/ui/sidebar_items/RadioConfigComponent';
 import SIDEBARAllFieldsControl from 'sethFormBuilder/template/ui/sidebar_items/AllFieldsConfigComponent';
+import SIDEBARShowControl from 'sethFormBuilder/template/ui/sidebar_items/ShowConfigComponent';
 
 // Template Control
 // special key for control:
@@ -130,6 +132,14 @@ const CONTROL_TYPES = {
         source: {
             template: TEMPLATEAllFieldsControl,
             config: SIDEBARAllFieldsControl
+        }
+    },
+    show: {
+        label:"Show Action Buttons",
+        icon: faCheck,
+        source: {
+            template: TEMPLATEShowControl,
+            config: SIDEBARShowControl
         }
     },
 };

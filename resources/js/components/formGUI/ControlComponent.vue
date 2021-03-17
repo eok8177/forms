@@ -41,6 +41,9 @@
             // set control
             this.controlInstance = CONTROL_TYPES[this.control.type].source;
 
+            // hide Action Buttons if exist Show Control
+            if (this.control.type == 'show') this.$parent.$parent.$parent.showActionButtons = false;
+
             if (this.control.isConditional) {
                 this.show = this.control.condition.action_type == 'show' ? false : true;
                 this.control.invisible = !this.show;

@@ -11,7 +11,7 @@
 */
 -->
 <template>
-    <div>
+    <div v-if="control.type != 'show'">
         <div class="row mt-2" v-if="control.type !== 'checkbox' && control.type !== 'address' && control.type !== 'html' && control.type !== 'file'">
             <div class="col-md-12">
                 <div class="form-group">

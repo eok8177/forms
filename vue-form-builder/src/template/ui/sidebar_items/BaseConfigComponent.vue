@@ -12,7 +12,7 @@
 -->
 <template>
     <div>
-        <div class="row">
+        <div class="row" v-if="control.type != 'show'">
             <!-- <div class="col-md-6 d-none">
                 <div class="form-group">
                     <label>ID</label>
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="row mt-2">
+        <div class="row mt-2" v-if="control.type != 'show'">
             <div class="col-md-12">
                 <label>
                     <input type="checkbox" name="isRequired" v-model="control.required"> Required?
@@ -57,7 +57,7 @@
                 </label>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-md-12">
                 <label>
