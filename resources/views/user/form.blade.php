@@ -5,17 +5,17 @@
 <div class="dashboard-area tabs-area">
   <h2>{{$app->form->name}}</h2>
 
-@if($app->shedule == 0)
-  <form-gui-component class="py-2 px-2 bg-white"
+@if($app->form->shedule == 1 && $app->form->start_date > date('Y-m-d H:i:s'))
+  <div class="py-2 px-2 bg-white">{!! $app->form->pending_msg !!}</div>
+@elseif($app->form->shedule == 1 && $app->form->end_date < date('Y-m-d H:i:s'))
+  <div class="py-2 px-2 bg-white">{!! $app->form->expired_msg !!}</div>
+@else
+<form-gui-component class="py-2 px-2 bg-white"
     :form="{{$app->config ?? 'null'}}" 
     :formid="{{$app->form_id}}"
     :appid="{{$app->id}}"
     :userid="{{Auth::user()->id ?? 0}}" >
 </form-gui-component>
-@elseif($app->start_date > date('Y-m-d H:i:s'))
-  <div class="py-2 px-2 bg-white">{!! $app->pending_msg !!}</div>
-@elseif($app->end_date < date('Y-m-d H:i:s'))
-  <div class="py-2 px-2 bg-white">{!! $app->expired_msg !!}</div>
 @endif
 
 </div>
