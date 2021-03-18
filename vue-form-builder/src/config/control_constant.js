@@ -127,14 +127,14 @@ const CONTROL_TYPES = {
             config: SIDEBARRadioControl
         }
     },
-    all_fields: {
+/*    all_fields: {
         label: "All Fields",
         icon: faCheck,
         source: {
             template: TEMPLATEAllFieldsControl,
             config: SIDEBARAllFieldsControl
         }
-    },
+    },*/
     show: {
         label:"Show Action Buttons",
         icon: faFlag,

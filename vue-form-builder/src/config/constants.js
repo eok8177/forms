@@ -133,10 +133,10 @@ FORM_CONSTANTS.Type = {
         label: "Radio Buttons",
         icon: faDatabase
     },
-    all_fields: {
+    /*all_fields: {
         label: "All Fields",
         icon: faCheck
-    },
+    },*/
     show: {
         label:"Show Action Buttons",
         icon: faCheck
