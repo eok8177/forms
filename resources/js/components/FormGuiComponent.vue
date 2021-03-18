@@ -29,9 +29,9 @@
 
         <div class="d-flex justify-content-end mb-2 text-danger">{{errorMsg}}</div>
 
-        <div class="d-flex justify-content-end mb-2 btns-right" v-if="showActionButtons">
-            <button v-if="userid > 0" @click="SaveApps()" class="save" :disabled="disabledBtn">Save</button>
-            <button @click="Submit()" class="submit" :disabled="disabledBtn">Submit</button>
+        <div class="d-flex justify-content-end mb-2 btns-right">
+            <button v-if="userid > 0" @click="SaveApps()" class="save" :disabled="disabledBtn || !showActionButtons">Save</button>
+            <button @click="Submit()" class="submit" :disabled="disabledBtn || !showActionButtons">Submit</button>
         </div>
 
         <div class="d-flex justify-content-end mb-2">
