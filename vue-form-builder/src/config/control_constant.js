@@ -5,6 +5,7 @@ import {faCalendarAlt} from '@fortawesome/free-solid-svg-icons/faCalendarAlt';
 import {faClock} from '@fortawesome/free-solid-svg-icons/faClock';
 import {faCheck} from '@fortawesome/free-solid-svg-icons/faCheck';
 import {faDatabase} from '@fortawesome/free-solid-svg-icons/faDatabase';
+import {faFlag} from '@fortawesome/free-solid-svg-icons/faFlag';
 
 // TEMPLATE Control
 import TEMPLATETextControl from 'sethFormBuilder/template/ui/common/controls/TextControl';
@@ -136,7 +137,7 @@ const CONTROL_TYPES = {
     },
     show: {
         label:"Show Action Buttons",
-        icon: faCheck,
+        icon: faFlag,
         source: {
             template: TEMPLATEShowControl,
             config: SIDEBARShowControl
