@@ -66,6 +66,7 @@
         name: "TextControl",
         props: ['value', 'labelPosition'],
         mounted() {
+            let self = this;
             if (!_.isEmpty(this.value.defaultValue)) {
                 this.value.value = this.value.defaultValue;
             }
@@ -80,7 +81,10 @@
             if (this.value.mask) {
               console.log(this.$refs.input);
               console.log(this.value.mask);
-              let im = new Inputmask(this.value.mask);
+              let im = new Inputmask(this.value.mask,{"onincomplete": function(){ 
+                  self.value.value = false;
+                }
+              });
               im.mask(this.$refs.input);
             }
         }
