@@ -185,10 +185,16 @@
                     // Validate start
                     let valid = true;
                     if (control.type != 'file' && control.type != 'html') {
+                    
                         $('body [name="'+control.name+'"]').removeClass('is-invalid');
                         $('body .error-msg.'+control.name).hide();
-                        if (control.required) {
-                            if (control.type != 'address' && !control.value) {
+                        $('body .invalid-format-msg.'+control.name).hide();
+
+                        let isRequired = control.required;
+                        // for the controls when the format is not valid, set this field as required -> we should not allow to submit it
+                        if (control.isInvalidFormat) isRequired = true; 
+                        if (isRequired) {
+                            if (control.isInvalidFormat || (control.type != 'address' && !control.value)) {
                                 valid = false;
                                 $('body [name="'+control.name+'"]').addClass('is-invalid');
                             }
@@ -241,6 +247,9 @@
                     if (!valid) {
                         self.validSection = false;
                         $('body .error-msg.'+control.name).show(); //show error message
+                    }
+                    if (control.isInvalidFormat) {
+                        $('body .invalid-format-msg.'+control.name).show();
                     }
                     //fill from address block
                     if (control.type == 'address') {

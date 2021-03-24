@@ -89,7 +89,8 @@ FORM_CONSTANTS.Control = {
     cssClass: '', // custom CSS Class
 
     isCalculated: false, // is isCalculated data or not
-    errorMsg: 'Please specify the value' // msg when control not valid
+    errorMsg: 'Please specify the value', // msg when control not valid
+    errorInvalidFormatMsg: ''
 };
 
 FORM_CONSTANTS.Type = {

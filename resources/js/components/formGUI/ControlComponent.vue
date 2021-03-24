@@ -16,6 +16,7 @@
 
         <div v-if="control.description" class="description">{{control.description}}</div>
 
+        <div :class="control.name" class="text-danger invalid-format-msg" style="display: none;">{{control.errorInvalidFormatMsg}}</div>
         <div :class="control.name" class="text-danger error-msg" style="display: none;">{{control.errorMsg}}</div>
     </div>
 </template>

@@ -62,6 +62,11 @@
             <label>Error message</label>
             <input type="text" class="form-control" v-model="control.errorMsg">
         </div>
+
+        <div class="form-group">
+            <label>Error invalid format message</label>
+            <input type="text" class="form-control" v-model="control.errorInvalidFormatMsg">
+        </div>
     </div>
 </template>
 

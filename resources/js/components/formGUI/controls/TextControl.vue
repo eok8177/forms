@@ -29,6 +29,7 @@
                        class="form-control"
                        :readonly="value.readonly"
                        v-if="!value.isMultiLine"
+                       v-bind:isInvalidFormat="value.isInvalidFormat"
                        :name="value.fieldName"
                        :required="value.required"
                        v-model="value.value" />
@@ -47,6 +48,7 @@
                    class="form-control"
                    :readonly="value.readonly"
                    v-if="!value.isMultiLine"
+                   v-bind:isInvalidFormat="value.isInvalidFormat"
                    :name="value.fieldName"
                    :required="value.required"
                    v-model="value.value" />
@@ -82,9 +84,9 @@
               console.log(this.$refs.input);
               console.log(this.value.mask);
               let im = new Inputmask(this.value.mask,{"onincomplete": function(){ 
-                  self.value.value = false;
                 }
               });
+                  self.value.isInvalidFormat = true;
               im.mask(this.$refs.input);
             }
         }
