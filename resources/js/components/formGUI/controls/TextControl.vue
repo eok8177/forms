@@ -84,9 +84,9 @@
               console.log(this.$refs.input);
               console.log(this.value.mask);
               let im = new Inputmask(this.value.mask,{"onincomplete": function(){ 
+                  self.value.isInvalidFormat = true;
                 }
               });
-                  self.value.isInvalidFormat = true;
               im.mask(this.$refs.input);
             }
         }
