@@ -12,6 +12,12 @@
 -->
 <template>
     <div v-if="control.type != 'show'">
+    
+        <div class="form-group">
+            <label>Error invalid format message</label>
+            <input type="text" class="form-control" v-model="control.errorInvalidFormatMsg">
+        </div>
+
         <div class="row mt-2" v-if="control.type !== 'checkbox' && control.type !== 'address' && control.type !== 'html' && control.type !== 'file'">
             <div class="col-md-12">
                 <div class="form-group">
@@ -63,10 +69,6 @@
             <input type="text" class="form-control" v-model="control.errorMsg">
         </div>
 
-        <div class="form-group">
-            <label>Error invalid format message</label>
-            <input type="text" class="form-control" v-model="control.errorInvalidFormatMsg">
-        </div>
     </div>
 </template>
 
