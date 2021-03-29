@@ -192,7 +192,7 @@
 
                         let isRequired = control.required;
                         // for the controls when the format is not valid, set this field as required -> we should not allow to submit it
-                        if (control.isInvalidFormat) isRequired = true; 
+                        if (control.isInvalidFormat && control.value) isRequired = true;
                         if (isRequired) {
                             if (control.isInvalidFormat || (control.type != 'address' && !control.value)) {
                                 valid = false;
