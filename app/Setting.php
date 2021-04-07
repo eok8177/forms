@@ -28,6 +28,9 @@ class Setting extends Model
      */
     protected $guarded = [];
 
+    const MAINTENANCE_MODE = 'maintenance_mode';
+    const MAINTENANCE_TEXT = 'maintenance_text';
+
 
     /**
     * Description:
@@ -44,6 +47,18 @@ class Setting extends Model
     */
     public static function updateSettings($data)
     {
+        // only update maintenance mode if this record exists in Settings table
+        if (Setting::where('key', self::MAINTENANCE_MODE)->first()) {
+            $data[self::MAINTENANCE_MODE] = isset($data[self::MAINTENANCE_MODE]) ? 1 : 0;
+            if ($data[self::MAINTENANCE_MODE] == 1) {
+                // activate maintenance mode
+                \Artisan::call('down --secret="'.env('MAINTENANCE_SECRET', '2021').'"');
+            } else {
+                // back to normal
+                \Artisan::call('up');
+            }
+        }
+
         foreach ($data as $key => $item) {
             $item_settings = Setting::where('key', $key)->first();
             $item_settings->value = $item;
@@ -72,6 +87,21 @@ class Setting extends Model
         if (!$colors) return '#000';
 
         return explode(',', preg_replace('/\s+/', '', $colors->value));
+    }
+
+    /**
+    * Description:
+    * Get maintenance message from the database
+    *
+    * List of parameters:
+    * - none
+    *
+    * Return:
+    * - string
+    */
+    public static function getMaintenanceMessage()
+    {
+        return Setting::where('key', self::MAINTENANCE_TEXT)->first()->value;
     }
 
 }

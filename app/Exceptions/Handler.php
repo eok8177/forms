@@ -15,6 +15,9 @@ use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\ErrorLog;
 
+use App\ApiCall;
+use App\Setting;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -77,6 +80,14 @@ class Handler extends ExceptionHandler
              return redirect('/');
           }
         }
+
+        // show maintenance mode page
+        if ($exception->getStatusCode() == 503) {
+            return response()
+            ->view('maintenance-mode', [
+                'message' => Setting::getMaintenanceMessage()
+            ]);
+    }
 
         return parent::render($request, $exception);
     }
