@@ -88,7 +88,7 @@ class Handler extends ExceptionHandler
         }
 
         // show maintenance mode page
-        if ($exception->getStatusCode() == 503) {
+        if (method_exists('getStatusCode', $exception) && $exception->getStatusCode() == 503) {
             return response()
             ->view('maintenance-mode', [
                 'message' => Setting::getMaintenanceMessage()
