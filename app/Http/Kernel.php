@@ -25,7 +25,7 @@ class Kernel extends HttpKernel
         // it broke standard Validation
         // \Illuminate\Session\Middleware\StartSession::class,
         \App\Http\Middleware\TrustProxies::class,
-        \App\Http\Middleware\CheckForMaintenanceMode::class,
+        \Haruncpi\LaravelMaintenance\Middleware\MaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,

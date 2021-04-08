@@ -14,6 +14,7 @@ namespace App\Exceptions;
 use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\ErrorLog;
+use Illuminate\Validation\ValidationException;
 
 use App\ApiCall;
 use App\Setting;
@@ -73,6 +74,11 @@ class Handler extends ExceptionHandler
         'error' => $exception->getMessage(),
       ];
       $log = ErrorLog::log($data);
+      if ($exception instanceof ValidationException) {
+        return redirect('/login')
+          ->withInput($request->only("email", 'remember'))
+          ->withErrors(["email" => \Lang::get('auth.failed')]);
+      }
 
       if ($exception instanceof TokenMismatchException) {
            if ($request->getRequestUri()==='/logout') {
