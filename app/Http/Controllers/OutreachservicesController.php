@@ -47,4 +47,15 @@ class OutreachservicesController extends Controller
         ]);
     }
 
+
+    public function getOutreachServiceDetails(Request $request)
+    {
+        $id = $request->get('item', false);
+
+        $api = new ApiCall;
+        return view('user.outreachservicetable', [
+            'outreachServices' => $api->getOutreachServiceDetails($id)
+        ]);
+    }
+
 }
