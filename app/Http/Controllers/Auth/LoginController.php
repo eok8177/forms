@@ -9,6 +9,9 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+use App\ApiCall;
+
+
 class LoginController extends Controller
 {
     /*
@@ -77,6 +80,13 @@ class LoginController extends Controller
      {
         $user->last_logged_in = date("Y-m-d H:i:s");
         $user->save();
+
+        $api = new ApiCall;
+        if ($api->isOutreachUser($user)) {
+            $user->role = 'outreach';
+            $user->save();
+        }
+
 
         if ($user->role == 'user') {
             $count = $user->draftApps()->count();
