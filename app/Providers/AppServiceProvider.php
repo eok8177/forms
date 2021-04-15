@@ -26,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Validator::extend('recaptcha', 'App\\Validators\\ReCaptcha@validate');
         Validator::extend('emailcheck', 'App\\Validators\\EmailCheck@validate');
+        \Blade::if('outreach', function () { return (auth()->user() && auth()->user()->role == 'outreach') ? 1 : 0; });
     }
 }

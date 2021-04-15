@@ -33,6 +33,12 @@ class ApiCall
         return $this->call('test', false, 'GET');
     }
 
+    public function newLog($logData = null)
+    {
+        return $this->call('log-new', $logData);
+    }
+
+
     /**
     * Description:
     * trigger create new user in MARS
@@ -155,6 +161,73 @@ class ApiCall
     {
         return $this->call('form-delete', $formData);
     }
+
+
+    public function isOutreachUser($formData)
+    {
+        return true;
+        // return $this->call('is-outreach-user', $formData, 'GET');
+    }
+
+
+    public function getOrganisations($formData)
+    {
+        return [12 => 'org1', 15 => 'org2'];
+        // return $this->call('get-organisations', $formData, 'GET');
+    }
+
+
+    public function getHealthCategories($formData)
+    {
+        return [15 => 'health1', 20 => 'health2'];
+        // return $this->call('get-health-categories', $formData, 'GET');
+    }
+
+    public function getOutreachServices($formData)
+    {
+        $dummyServices = [
+            (object)[
+                "ref" => "1A",
+                "location" => "Melbourne",
+                "organisation" => "org1",
+                "healthCategory" => "health1",
+                "totalVisits" => 12,
+                "visitsRemaining" => 2,
+                /*[
+                    [
+                        "visitRef" => "V1",
+                        "visitStatus" => "Accepted",
+                        "visitMethodOfDelivery" => "",
+                        "visitDate" => "",
+                        "visitSubmittedDate" => "",
+                        "visitSubmitter" => "",
+                        "Accepted" => "",
+                    ]
+                ]*/
+            ],
+            (object)[
+                "ref" => "3B",
+                "location" => "Sydney",
+                "organisation" => "org1",
+                "healthCategory" => "health1",
+                "totalVisits" => 12,
+                "visitsRemaining" => 20
+            ],
+            (object)[
+                "ref" => "1A",
+                "location" => "Brisbane",
+                "organisation" => "org2",
+                "healthCategory" => "health2",
+                "totalVisits" => 20,
+                "visitsRemaining" => 0
+            ]
+        ];
+        return $dummyServices; 
+        //return $this->call('get-outreach-services', $formData, 'GET');
+    }
+    
+
+
 
     /**
     * Description:

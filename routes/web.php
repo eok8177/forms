@@ -1,24 +1,24 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+/**
+* Description:
+* Web Routes
+* Here is where you can register web routes for your application. These
+* routes are loaded by the RouteServiceProvider within a group which
+* contains the "web" middleware group. Now create something great!
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 */
 
-Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user', 'admin', 'manager']], function() {
+Route::get('/registration-completed', ['as' => 'front.registration_completed' , 'uses' => 'FrontendController@RegisterThankYou']);
+
+Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user', 'admin', 'manager', 'outreach']], function() {
     Route::get('/', ['as' => 'front.index', 'uses' => 'UserController@redirectTo']);
 });
-
-Route::get('/registered', function () {
-    return view('registered');
-})->name('front.registered');
-
 Route::get('/success/{id}', ['as' => 'front.success', 'uses' => 'FrontendController@success']);
 Route::get('/form/{id?}', ['as' => 'front.form', 'uses' => 'FrontendController@form']);
 Route::get('/all-forms', ['as' => 'front.all_forms', 'uses' => 'FrontendController@allForms']);
@@ -34,7 +34,7 @@ Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social'
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 
 // Manager
-Route::group(['as' => 'manager.', 'middleware' => ['roles', 'verified'],'roles' =>['admin','manager'], 'namespace' => 'Manager', 'prefix' => 'manager'], function() {
+Route::group(['as' => 'manager.', 'middleware' => ['roles', 'verified'],'roles' =>['admin','manager','outreach'], 'namespace' => 'Manager', 'prefix' => 'manager'], function() {
 
     Route::get('responses', ['as' => 'responses', 'uses' => 'ResponseController@index']);
     Route::get('response/{application}', ['as' => 'response', 'uses' => 'ResponseController@response']);
@@ -84,14 +84,21 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
     Route::get('apilogs', ['as' => 'apilogs', 'uses' => 'LogController@apilogs']);
 });
 
+
+// Outreach user
+Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'outreach']], function() {
+    Route::get('outreachservices', ['as' => 'user.outreachservices', 'uses' => 'OutreachservicesController@index']);
+});
+
 // User
-Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'user']], function() {
+Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'user', 'outreach']], function() {
 	Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index']);
 	
     Route::get('user/edit', ['as' => 'user.edit', 'uses' => 'UserController@edit']);
 	Route::put('user/update', ['as' => 'user.update', 'uses' => 'UserController@update']);
 
 
+    Route::get('grants', ['as' => 'user.grants', 'uses' => 'GrantController@index']);
 
     Route::get('user/form/{app}', ['as' => 'user.form', 'uses' => 'UserController@form']);
     Route::delete('user/form/{app}', ['as' => 'user.form.destroy', 'uses' => 'UserController@destroy']);
