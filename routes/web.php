@@ -84,13 +84,6 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
     Route::get('apilogs', ['as' => 'apilogs', 'uses' => 'LogController@apilogs']);
 });
 
-
-// Outreach user
-Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'outreach']], function() {
-    Route::get('outreachservices', ['as' => 'user.outreachservices', 'uses' => 'OutreachservicesController@index']);
-    Route::post('outreachservicedetails', ['as' => 'user.outreachservicedetails', 'uses' => 'OutreachservicesController@getOutreachServiceDetails']);
-});
-
 // User
 Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'user', 'outreach']], function() {
 	Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index']);
@@ -112,6 +105,11 @@ Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'user', 
     Route::post('user/contact', ['as' => 'user.contact', 'uses' => 'UserController@contactSend']);
 });
 
+// Outreach user
+Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'outreach']], function() {
+    Route::get('outreachservices', ['as' => 'user.outreachservices', 'uses' => 'OutreachserviceController@index']);
+    Route::post('outreachservicedetails', ['as' => 'user.outreachservicedetails', 'uses' => 'OutreachserviceController@getOutreachServiceDetails']);
+});
 
 //Image resize & crop on view:  http://image.intervention.io/
 Route::get('/resize/{w}/{h}','ImageController@index')->name('resize');

@@ -172,8 +172,7 @@ class ApiCall
 
     public function getOrganisations($formData)
     {
-        return [12 => 'org1', 15 => 'org2'];
-        // return $this->call('get-organisations', $formData, 'GET');
+        return $this->call('get-organisations', $formData, 'GET');
     }
 
 

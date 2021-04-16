@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\ApiCall;
 
-class OutreachservicesController extends Controller
+class OutreachserviceController extends Controller
 {
     /**
     * Description:
