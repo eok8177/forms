@@ -76,6 +76,8 @@ class UserController extends Controller
             }
             $request->session()->forget('redirectTo');
             return redirect($redirectTo);
+        } else {
+            return redirect('/user');
         }
     }
 
