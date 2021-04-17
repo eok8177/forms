@@ -178,8 +178,7 @@ class ApiCall
 
     public function getHealthCategories($formData)
     {
-        return [15 => 'health1', 20 => 'health2'];
-        // return $this->call('get-health-categories', $formData, 'GET');
+        return $this->call('get-health-categories', $formData, 'GET');
     }
 
     public function getOutreachServices($formData)

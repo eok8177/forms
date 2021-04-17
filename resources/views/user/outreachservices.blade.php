@@ -18,24 +18,24 @@
         </div>
         <div class="btn-group">
           <label >Organisation:</label>
-          <select id="organisation" class="form-control">
+          <select id="organisation" name="organisation" class="form-control">
             @foreach($organisations as $key)
-            <option id="{{$key->ORG_ID}}">{{$key->ORG_NAME}}</option>
+            <option value="{{$key->ORG_ID}}">{{$key->ORG_NAME}}</option>
             @endforeach
           </select>
         </div>
         <div class="btn-group">
           <label >Health Category:</label>
-          <select class="form-control">
-            @foreach($healthCategories as $cat)
-            <option>{{$cat}}</option>
+          <select id="healthCategory" name="healthCategory" class="form-control">
+            @foreach($healthCategories as $key)
+            <option value="{{$key->SpecialityRef}}">{{$key->SpecialityName}}</option>
             @endforeach
           </select>
         </div>
         <div class="btn-group">
           <label >Year of contract:</label>
-          <select class="form-control">
-            <option>Financial Year 21-22</option>
+          <select id="yearOfContract" name="yearOfContract" class="form-control">
+            <option value="2021-2022">Financial Year 21-22</option>
           </select>
         </div>
         <button>Filter</button>
