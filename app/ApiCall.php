@@ -183,80 +183,12 @@ class ApiCall
 
     public function getOutreachServices($formData)
     {
-        $dummyServices = [
-            (object)[
-                "ref" => "1A",
-                "location" => "Melbourne",
-                "organisation" => "org1",
-                "healthCategory" => "health1",
-                "totalVisits" => 12,
-                "visitsRemaining" => 2,
-                /*[
-                    [
-                        "visitRef" => "V1",
-                        "visitStatus" => "Accepted",
-                        "visitMethodOfDelivery" => "",
-                        "visitDate" => "",
-                        "visitSubmittedDate" => "",
-                        "visitSubmitter" => "",
-                        "Accepted" => "",
-                    ]
-                ]*/
-            ],
-            (object)[
-                "ref" => "3B",
-                "location" => "Sydney",
-                "organisation" => "org1",
-                "healthCategory" => "health1",
-                "totalVisits" => 12,
-                "visitsRemaining" => 20
-            ],
-            (object)[
-                "ref" => "1A",
-                "location" => "Brisbane",
-                "organisation" => "org2",
-                "healthCategory" => "health2",
-                "totalVisits" => 20,
-                "visitsRemaining" => 0
-            ]
-        ];
-        return $dummyServices; 
-        //return $this->call('get-outreach-services', $formData, 'GET');
+        return $this->call('get-outreach-services', $formData, 'GET');
     }
     
-    public function getOutreachServiceDetails($id)
+    public function getOutreachServiceVisits($formData)
     {
-        $data = [
-            0 => [
-                "visitRef" => 'visitRef 000',
-                "visitStatus" => 'visitStatus 000',
-                "visitMethodOfDelivery" => 'visitMethodOfDelivery 000',
-                "visitDate" => 'visitDate 000',
-                "visitSubmittedDate" => 'visitSubmittedDate 000',
-                "visitSubmitter" => 'visitSubmitter 000',
-                "Accepted" => 'Accepted 000',
-            ],
-            1 => [
-                "visitRef" => 'visitRef 001',
-                "visitStatus" => 'visitStatus 001',
-                "visitMethodOfDelivery" => 'visitMethodOfDelivery 001',
-                "visitDate" => 'visitDate 001',
-                "visitSubmittedDate" => 'visitSubmittedDate 001',
-                "visitSubmitter" => 'visitSubmitter 001',
-                "Accepted" => 'Accepted 001',
-            ],
-            2 => [
-                "visitRef" => 'visitRef 002',
-                "visitStatus" => 'visitStatus 002',
-                "visitMethodOfDelivery" => 'visitMethodOfDelivery 002',
-                "visitDate" => 'visitDate 002',
-                "visitSubmittedDate" => 'visitSubmittedDate 002',
-                "visitSubmitter" => 'visitSubmitter 002',
-                "Accepted" => 'Accepted 002',
-            ],
-        ];
-
-        return $data[$id];
+        return $this->call('get-outreach-service-visits', $formData, 'GET');
     }
 
 

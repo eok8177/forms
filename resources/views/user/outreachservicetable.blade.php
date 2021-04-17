@@ -10,15 +10,15 @@
   <th>Action</th>
 </tr>
 </thead>
+@foreach($outreachServices[0] as $key) 
 <tr>
-  <td>{{$outreachServices['visitRef']}}</td>
-  <td>{{$outreachServices['visitStatus']}}</td>
-  <td>{{$outreachServices['visitMethodOfDelivery']}}</td>
-  <td>{{$outreachServices['visitDate']}}</td>
-  <td>{{$outreachServices['visitSubmittedDate']}}</td>
-  <td>{{$outreachServices['visitSubmitter']}}</td>
-  <td>{{$outreachServices['Accepted']}}</td>
+  <td>{{$key->ActivityRef}}</td>
+  <td>{{$key->VisitReportStatus}}</td>
+  <td>{{$key->DeliveryMode}}</td>
+  <td>{{ \Carbon\Carbon::parse($key->DateFrom)->format('Y-m-d') }}</td>
+  <td>{{$key->SubmittedDate}}</td>
+  <td>{{$key->Submitter}}</td>
+  <td></td>
 </tr>
+@endforeach
 </table>
-
-
