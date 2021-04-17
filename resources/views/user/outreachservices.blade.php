@@ -63,7 +63,17 @@
         @endforeach
       </table>
 
+@if ($outreachServices[1][0]->FromRecord > 1)
+<< Previous
+@endif
 
+Showing {{$outreachServices[1][0]->FromRecord}}-{{$outreachServices[1][0]->ToRecord}} of {{$outreachServices[1][0]->TotalRecords}} services
+
+@if ($outreachServices[1][0]->HasNextPage == 1)
+Next >>
+@endif
+
+<p>&nbsp;</p>
 
       <p>Visits related to schedule ref: <strong>A1</strong></p>
       <div class="btn-group">
