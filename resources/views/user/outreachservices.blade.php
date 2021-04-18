@@ -63,19 +63,25 @@
         @endforeach
       </table>
 
-@if ($outreachServices[1][0]->FromRecord > 1)
-<< Previous
-@endif
-
-Showing {{$outreachServices[1][0]->FromRecord}}-{{$outreachServices[1][0]->ToRecord}} of {{$outreachServices[1][0]->TotalRecords}} services
-
-@if ($outreachServices[1][0]->HasNextPage == 1)
-Next >>
-@endif
+<div>
+  <ul class="navigation">
+    <li>
+    @if ($outreachServices[1][0]->FromRecord > 1)
+      <a href="#"><< Previous</a>
+    @endif
+    </li>
+    <li class="center bold">Showing {{$outreachServices[1][0]->FromRecord}}-{{$outreachServices[1][0]->ToRecord}} of {{$outreachServices[1][0]->TotalRecords}} services</li>
+    <li class="right">
+    @if ($outreachServices[1][0]->HasNextPage == 1)
+      <a href="#">Next >></a>
+    @endif
+    </li>
+  </ul>
+</div>
 
 <p>&nbsp;</p>
 
-      <p>Visits related to schedule ref: <strong>A1</strong></p>
+      <p>Visits related to schedule ref: <strong><span id="spanScheduleRef">A1</span></strong></p>
       <div class="btn-group">
         <label for="visitStatus">Visit status</label>
         <select id="visitStatus" name="visitStatus" class="form-control">
@@ -110,14 +116,6 @@ Next >>
 
     </div>
 
-      
-
-      
-
-      
-      
-      
-      
     </div>
 </div>
 
@@ -127,10 +125,29 @@ Next >>
 <style>
 #outreach-services label {
     font-size: 14px;
-    margin-top: .5rem; margin-right: 8px;
+    margin-top: .5rem; 
+    margin-right: 8px;
 }
 #outreach-services input[type=text] {
     width: 120px;
+}
+#outreach-services ul.navigation {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding-left: 0;
+}
+#outreach-services ul.navigation li {
+    flex: 1 1 0;
+}
+#outreach-services ul.navigation li.center {
+    text-align: center;
+}
+#outreach-services ul.navigation li.bold {
+    font-weight: bold;
+}
+#outreach-services ul.navigation li.right {
+    text-align: right;
 }
 </style>
 @endpush
@@ -146,6 +163,7 @@ Next >>
     }).then(response => {
     console.log(response.data);
         $('#result-table').html(response.data);
+        $('#spanScheduleRef').html(item);
     }).catch(error => {
         console.error(error);
     });

@@ -23,12 +23,18 @@
 @endforeach
 </table>
 
-@if ($outreachServices[1][0]->FromRecord > 1)
-<< Previous
-@endif
-
-Showing {{$outreachServices[1][0]->FromRecord}}-{{$outreachServices[1][0]->ToRecord}} of {{$outreachServices[1][0]->TotalRecords}} services
-
-@if ($outreachServices[1][0]->HasNextPage == 1)
-Next >>
-@endif
+<div>
+  <ul class="navigation">
+    <li>
+    @if ($outreachServices[1][0]->FromRecord > 1)
+    <a href="#"><< Previous</a>
+    @endif
+    </li>
+    <li class="center bold">Showing {{$outreachServices[1][0]->FromRecord}}-{{$outreachServices[1][0]->ToRecord}} of {{$outreachServices[1][0]->TotalRecords}} services</li>
+    <li class="right">
+    @if ($outreachServices[1][0]->HasNextPage == 1)
+      <a href="#">Next >></a>
+    @endif
+    </li>
+  </ul>
+</div>
