@@ -38,46 +38,10 @@
             <option value="2021-2022">Financial Year 21-22</option>
           </select>
         </div>
-        <button>Filter</button>
+        <button id="filterServices">Filter</button>
       </div>
-      <table class="table table-hover">
-        <thead>
-        <tr>
-        <th>Schedule Ref</th>
-        <th>Location</th>
-        <th>Organisation</th>
-        <th>Health Category</th>
-        <th>Total Visits</th>
-        <th>Visits remaining</th>
-        </tr>
-        </thead>
-        @foreach($outreachServices[0] as $key) 
-        <tr onclick="getData({{$key->ServiceRef}})">
-          <td>{{$key->ServiceRef}}</td>
-          <td>{{$key->TownSuburb}}</td>
-          <td>{{$key->ORG_NAME}}</td>
-          <td>{{$key->HealthCategory}}</td>
-          <td>{{$key->countVisit}}</td>
-          <td>{{$key->countVisit_Remaining}}</td>
-        </tr>
-        @endforeach
-      </table>
 
-<div>
-  <ul class="navigation">
-    <li>
-    @if ($outreachServices[1][0]->FromRecord > 1)
-      <a href="#"><< Previous</a>
-    @endif
-    </li>
-    <li class="center bold">Showing {{$outreachServices[1][0]->FromRecord}}-{{$outreachServices[1][0]->ToRecord}} of {{$outreachServices[1][0]->TotalRecords}} services</li>
-    <li class="right">
-    @if ($outreachServices[1][0]->HasNextPage == 1)
-      <a href="#">Next >></a>
-    @endif
-    </li>
-  </ul>
-</div>
+      <div id="result-table-services"></div>
 
 <p>&nbsp;</p>
 
@@ -109,10 +73,10 @@
         <label for="visitDateTo">To</label>
         <input type="text" id="visitDateTo" name="visitDateTo" value="2021-06-31" />
       </div>
-      <button>Filter</button>
+      <button id="filterVisits">Filter</button>
 
 
-      <div id="result-table"></div>
+      <div id="result-table-visits"></div>
 
     </div>
 
@@ -154,21 +118,61 @@
 
 @push('scripts')
 <script>
-  window.getData = function(item) {
-    console.log(item);
-    axios.post('{{route('user.outreachservicevisits')}}', {
-        item: item
+  var filterServices = {};
+  var filterVisits = {};
+  var ref = false;
+
+  /* Filter Services */
+
+  window.getServices = function(item) {
+    ref = item;
+    filter = {};
+    axios.post('{{route('user.outreachservices')}}', {
+        filter: filterServices
     }, {
         headers: {'Content-Type': 'application/json',}
     }).then(response => {
-    console.log(response.data);
-        $('#result-table').html(response.data);
-        $('#spanScheduleRef').html(item);
-    }).catch(error => {
-        console.error(error);
-    });
+        $('#result-table-services').html(response.data);
+    }).catch(error => console.error(error));
+  };
+  getServices();
 
-  }
+  $('#filterServices').on('click', function() {
+    filterServices['scheduleRef'] = $('#scheduleRef').val();
+    filterServices['location'] = $('#location').val();
+    filterServices['organisation'] = $('#organisation').val();
+    filterServices['healthCategory'] = $('#healthCategory').val();
+    filterServices['yearOfContract'] = $('#yearOfContract').val();
+    getServices();
+  });
+
+  /* Filter Visits*/
+
+  window.getAllVisits = function(item) {
+    filterVisits = {};
+    getVisits(item);
+  };
+
+  window.getVisits = function(item) {
+    ref = item;
+    axios.post('{{route('user.outreachservicevisits')}}', {
+        ref: item,
+        filter: filterVisits
+    }, {
+        headers: {'Content-Type': 'application/json',}
+    }).then(response => {
+        $('#result-table-visits').html(response.data);
+        $('#spanScheduleRef').html(item);
+    }).catch(error => console.error(error));
+  };
+
+  $('#filterVisits').on('click', function() {
+    filterVisits['visitStatus'] = $('#visitStatus').val();
+    filterVisits['methodOfDelivery'] = $('#methodOfDelivery').val();
+    filterVisits['visitDateFrom'] = $('#visitDateFrom').val();
+    filterVisits['visitDateTo'] = $('#visitDateTo').val();
+    getVisits(ref);
+  });
 
   $('#visitDateFrom').datepicker({
     dateFormat: 'yy-mm-dd'

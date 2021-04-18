@@ -108,6 +108,7 @@ Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'user', 
 // Outreach user
 Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'outreach']], function() {
     Route::get('outreachservices', ['as' => 'user.outreachservices', 'uses' => 'OutreachserviceController@index']);
+    Route::post('outreachservices', ['as' => 'user.outreachservices', 'uses' => 'OutreachserviceController@getOutreachServices']);
     Route::post('outreachservicevisits', ['as' => 'user.outreachservicevisits', 'uses' => 'OutreachserviceController@getOutreachServiceVisits']);
 });
 

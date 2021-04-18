@@ -10,14 +10,14 @@
   <th>Action</th>
 </tr>
 </thead>
-@foreach($outreachServices[0] as $key) 
+@foreach($data as $item) 
 <tr>
-  <td>{{$key->ActivityRef}}</td>
-  <td>{{$key->VisitReportStatus}}</td>
-  <td>{{$key->DeliveryMode}}</td>
-  <td>{{ \Carbon\Carbon::parse($key->DateFrom)->format('Y-m-d') }}</td>
-  <td>{{$key->SubmittedDate}}</td>
-  <td>{{$key->Submitter}}</td>
+  <td>{{$item->ActivityRef}}</td>
+  <td>{{$item->VisitReportStatus}}</td>
+  <td>{{$item->DeliveryMode}}</td>
+  <td>{{ \Carbon\Carbon::parse($item->DateFrom)->format('Y-m-d') }}</td>
+  <td>{{$item->SubmittedDate}}</td>
+  <td>{{$item->Submitter}}</td>
   <td></td>
 </tr>
 @endforeach
@@ -26,13 +26,13 @@
 <div>
   <ul class="navigation">
     <li>
-    @if ($outreachServices[1][0]->FromRecord > 1)
+    @if ($pagination[0]->FromRecord > 1)
     <a href="#"><< Previous</a>
     @endif
     </li>
-    <li class="center bold">Showing {{$outreachServices[1][0]->FromRecord}}-{{$outreachServices[1][0]->ToRecord}} of {{$outreachServices[1][0]->TotalRecords}} services</li>
+    <li class="center bold">Showing {{$pagination[0]->FromRecord}}-{{$pagination[0]->ToRecord}} of {{$pagination[0]->TotalRecords}} services</li>
     <li class="right">
-    @if ($outreachServices[1][0]->HasNextPage == 1)
+    @if ($pagination[0]->HasNextPage == 1)
       <a href="#">Next >></a>
     @endif
     </li>
