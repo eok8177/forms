@@ -169,5 +169,13 @@
     });
 
   }
+
+  $('#visitDateFrom').datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
+
+  $('#visitDateTo').datepicker({
+    dateFormat: 'yy-mm-dd'
+  });  
 </script>
 @endpush
