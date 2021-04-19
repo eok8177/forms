@@ -124,10 +124,10 @@
 
   /* Filter Services */
 
-  window.getServices = function(item) {
+  window.getServices = async function(item) {
     ref = item;
     filter = {};
-    axios.post('{{route('user.outreachservices')}}', {
+    await axios.post('{{route('user.outreachservices')}}', {
         filter: filterServices
     }, {
         headers: {'Content-Type': 'application/json',}
@@ -135,7 +135,7 @@
         $('#result-table-services').html(response.data);
     }).catch(error => console.error(error));
   };
-  getServices();
+
 
   $('#filterServices').on('click', function() {
     filterServices['scheduleRef'] = $('#scheduleRef').val();
@@ -143,7 +143,8 @@
     filterServices['organisation'] = $('#organisation').val();
     filterServices['healthCategory'] = $('#healthCategory').val();
     filterServices['yearOfContract'] = $('#yearOfContract').val();
-    getServices();
+    // getServices();
+    loadFirstTable();
   });
 
   /* Filter Visits*/
@@ -174,12 +175,23 @@
     getVisits(ref);
   });
 
+  window.loadFirstTable = async function() {
+    await getServices();
+    window.requestAnimationFrame(() => {
+      let firstItem = $('#result-table-services tbody tr:first td:first').text();
+      getVisits(firstItem);
+    });
+
+  }
+
   $('#visitDateFrom').datepicker({
     dateFormat: 'yy-mm-dd'
   });
 
   $('#visitDateTo').datepicker({
     dateFormat: 'yy-mm-dd'
-  });  
+  });
+
+  loadFirstTable();
 </script>
 @endpush
