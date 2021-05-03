@@ -2,15 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+/**
+* Description:
+* Web Routes
+* Here is where you can register web routes for your application. These
+* routes are loaded by the RouteServiceProvider within a group which
+* contains the "web" middleware group. Now create something great!
+*
+* Copyright: Rural Workforce Agency, Victoria (RWAV)
+* Contact email: rwavsupport@rwav.com.au
+*
+* Authors:
+* Sergey Markov | SergeyM@rwav.com.au
 */
 
 Route::group(['middleware' => ['roles', 'verified'],'roles' =>['user', 'admin', 'manager']], function() {
@@ -36,7 +39,7 @@ Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social'
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 
 // Manager
-Route::group(['as' => 'manager.', 'middleware' => ['roles', 'verified'],'roles' =>['admin','manager'], 'namespace' => 'Manager', 'prefix' => 'manager'], function() {
+Route::group(['as' => 'manager.', 'middleware' => ['roles', 'verified'],'roles' =>['admin','manager','outreach'], 'namespace' => 'Manager', 'prefix' => 'manager'], function() {
 
     Route::get('responses', ['as' => 'responses', 'uses' => 'ResponseController@index']);
     Route::get('response/{application}', ['as' => 'response', 'uses' => 'ResponseController@response']);
@@ -87,13 +90,14 @@ Route::group(['as' => 'admin.', 'middleware' => 'roles','roles' =>['admin'], 'na
 });
 
 // User
-Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'user']], function() {
+Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'user', 'outreach']], function() {
 	Route::get('user', ['as' => 'user.index', 'uses' => 'UserController@index']);
 	
     Route::get('user/edit', ['as' => 'user.edit', 'uses' => 'UserController@edit']);
 	Route::put('user/update', ['as' => 'user.update', 'uses' => 'UserController@update']);
 
 
+    Route::get('grants', ['as' => 'user.grants', 'uses' => 'GrantController@index']);
 
     Route::get('user/form/{app}', ['as' => 'user.form', 'uses' => 'UserController@form']);
     Route::delete('user/form/{app}', ['as' => 'user.form.destroy', 'uses' => 'UserController@destroy']);
@@ -106,6 +110,12 @@ Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'user']]
     Route::post('user/contact', ['as' => 'user.contact', 'uses' => 'UserController@contactSend']);
 });
 
+// Outreach user
+Route::group(['middleware' => ['roles', 'verified'],'roles' =>['admin', 'outreach']], function() {
+    Route::get('outreachservices', ['as' => 'user.outreachservices', 'uses' => 'OutreachserviceController@index']);
+    Route::post('outreachservices', ['as' => 'user.outreachservices', 'uses' => 'OutreachserviceController@getOutreachServices']);
+    Route::post('outreachservicevisits', ['as' => 'user.outreachservicevisits', 'uses' => 'OutreachserviceController@getOutreachServiceVisits']);
+});
 
 //Image resize & crop on view:  http://image.intervention.io/
 Route::get('/resize/{w}/{h}','ImageController@index')->name('resize');

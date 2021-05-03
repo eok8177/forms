@@ -33,6 +33,12 @@ class ApiCall
         return $this->call('test', false, 'GET');
     }
 
+    public function newLog($logData = null)
+    {
+        return $this->call('log-new', $logData);
+    }
+
+
     /**
     * Description:
     * trigger create new user in MARS
@@ -155,6 +161,37 @@ class ApiCall
     {
         return $this->call('form-delete', $formData);
     }
+
+
+    public function isOutreachUser($formData)
+    {
+        return true;
+        // return $this->call('is-outreach-user', $formData, 'GET');
+    }
+
+
+    public function getOrganisations($formData)
+    {
+        return $this->call('get-organisations', $formData, 'GET');
+    }
+
+
+    public function getHealthCategories($formData)
+    {
+        return $this->call('get-health-categories', $formData, 'GET');
+    }
+
+    public function getOutreachServices($formData)
+    {
+        return $this->call('get-outreach-services', $formData, 'GET');
+    }
+    
+    public function getOutreachServiceVisits($formData)
+    {
+        return $this->call('get-outreach-service-visits', $formData, 'GET');
+    }
+
+
 
     /**
     * Description:
