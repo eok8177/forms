@@ -86,6 +86,7 @@
             dateFormat: self.options.dateFormat,
             onSelect: function(e) {
               self.value.value = e;
+              $('[name="'+self.value.fieldName+'"]').change();
             }
           };
           if(self.value.maxDate) {
@@ -146,6 +147,7 @@
                   let min = new Date(year, month - 1, day);
                   if (min > now) this.value.value = '';
                 }
+                $('[name="'+this.value.fieldName+'"]').change();
             }
             catch (e) {
               this.value.value = '';

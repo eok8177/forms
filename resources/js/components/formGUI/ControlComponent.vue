@@ -126,9 +126,10 @@
                 if(field.type == "checkbox") stringVal = field.value ? 1 : 0;
 
                 if(field.type == "datepicker") {
-                    ruleValue = parseFloat(moment(rule.value, DATE_FORMAT.toUpperCase()).valueOf());
-                    numVal = parseFloat(moment(stringVal, DATE_FORMAT.toUpperCase()).valueOf());
-                    stringVal = moment(stringVal, DATE_FORMAT.toUpperCase()).valueOf();
+                    let format = DATE_FORMAT.replace("yy", "yyyy").toUpperCase();
+                    ruleValue = parseFloat(moment(rule.value, format).valueOf());
+                    numVal = parseFloat(moment(stringVal, format).valueOf());
+                    stringVal = moment(stringVal, format).valueOf();
                 }
 
                 switch(rule.operator) {
