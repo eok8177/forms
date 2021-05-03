@@ -18,6 +18,7 @@ import TEMPLATEFileControl from 'sethFormBuilder/template/ui/common/controls/Fil
 import TEMPLATEHtmlControl from 'sethFormBuilder/template/ui/common/controls/HtmlControl';
 import TEMPLATEAddressControl from 'sethFormBuilder/template/ui/common/controls/AddressControl';
 import TEMPLATERadioControl from 'sethFormBuilder/template/ui/common/controls/RadioControl';
+import TEMPLATEChecksBlockControl from 'sethFormBuilder/template/ui/common/controls/ChecksBlockControl';
 import TEMPLATEAllFieldsControl from 'sethFormBuilder/template/ui/common/controls/AllFieldsControl';
 import TEMPLATEShowControl from 'sethFormBuilder/template/ui/common/controls/ShowControl';
 
@@ -32,6 +33,7 @@ import SIDEBARFileControl from 'sethFormBuilder/template/ui/sidebar_items/FileCo
 import SIDEBARHtmlControl from 'sethFormBuilder/template/ui/sidebar_items/HtmlConfigComponent';
 import SIDEBARAddressControl from 'sethFormBuilder/template/ui/sidebar_items/AddressConfigComponent';
 import SIDEBARRadioControl from 'sethFormBuilder/template/ui/sidebar_items/RadioConfigComponent';
+import SIDEBARChecksBlockControl from 'sethFormBuilder/template/ui/sidebar_items/ChecksBlockConfigComponent';
 import SIDEBARAllFieldsControl from 'sethFormBuilder/template/ui/sidebar_items/AllFieldsConfigComponent';
 import SIDEBARShowControl from 'sethFormBuilder/template/ui/sidebar_items/ShowConfigComponent';
 
@@ -123,10 +125,19 @@ const CONTROL_TYPES = {
         label: "Radio Buttons",
         icon: faDatabase,
         source: {
-            template: TEMPLATERadioControl,
+            template: TEMPLATEChecksBlockControl,
             config: SIDEBARRadioControl
         }
     },
+    checkboxes: {
+        label: "Checkbox Buttons",
+        icon: faDatabase,
+        source: {
+            template: TEMPLATEChecksBlockControl,
+            config: SIDEBARChecksBlockControl
+        }
+    },
+
 /*    all_fields: {
         label: "All Fields",
         icon: faCheck,

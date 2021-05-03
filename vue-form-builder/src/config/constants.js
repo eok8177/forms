@@ -134,6 +134,10 @@ FORM_CONSTANTS.Type = {
         label: "Radio Buttons",
         icon: faDatabase
     },
+    checkboxes: {
+        label: "Checkbox Buttons",
+        icon: faDatabase
+    },
     /*all_fields: {
         label: "All Fields",
         icon: faCheck

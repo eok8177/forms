@@ -20,6 +20,7 @@ import FileControl from '../controls/FileControl';
 import HtmlControl from '../controls/HtmlControl';
 import AddressControl from '../controls/AddressControl';
 import RadioControl from '../controls/RadioControl';
+import ChecksBlockControl from '../controls/ChecksBlockControl';
 import AllFieldsControl from '../controls/AllFieldsControl';
 import ShowControl from '../controls/ShowControl';
 
@@ -63,6 +64,10 @@ const CONTROL_TYPES = {
     radio: {
         label:"Radio Block",
         source: RadioControl
+    },
+    checkboxes: {
+        label: "Checkbox Buttons",
+        source: ChecksBlockControl
     },
     all_fields: {
         label:"All Fields",
