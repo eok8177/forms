@@ -140,6 +140,8 @@
               </a>
 
             @endif
+
+            <small class="text-muted p-4 mt-auto">Laravel v{{ Illuminate\Foundation\Application::VERSION }}<br> PHP v{{ PHP_VERSION }}</small>
           </div>
         </div>
     </nav>

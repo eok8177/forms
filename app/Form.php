@@ -80,8 +80,9 @@ class Form extends Model
     static function search($search = false, $trash = false, $draft = false, $order = 'ASC')
     {
         $forms = Form::Where('title','LIKE', '%'.$search.'%')
-            ->with('types', 'groups', 'apps')
-            ->withCount(['groups', 'apps'])
+            ->with('types')
+            ->withCount('groups')
+            // ->withCount('apps')
             ;
 
         if ($trash !== false) {
@@ -303,7 +304,7 @@ class Form extends Model
     */
     public function getHasAppsAttribute()
     {
-        return $this->apps->count() > 0 ? true : false;
+        return $this->apps_count > 0 ? true : false;
     }
 
 

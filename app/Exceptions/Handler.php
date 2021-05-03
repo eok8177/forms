@@ -14,6 +14,10 @@ namespace App\Exceptions;
 use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\ErrorLog;
+use Illuminate\Validation\ValidationException;
+
+use App\ApiCall;
+use App\Setting;
 
 class Handler extends ExceptionHandler
 {
@@ -70,6 +74,11 @@ class Handler extends ExceptionHandler
         'error' => $exception->getMessage(),
       ];
       $log = ErrorLog::log($data);
+      if ($exception instanceof ValidationException) {
+        return redirect('/login')
+          ->withInput($request->only("email", 'remember'))
+          ->withErrors(["email" => \Lang::get('auth.failed')]);
+      }
 
       if ($exception instanceof TokenMismatchException) {
            if ($request->getRequestUri()==='/logout') {
@@ -77,6 +86,14 @@ class Handler extends ExceptionHandler
              return redirect('/');
           }
         }
+
+        // show maintenance mode page
+        if (method_exists('getStatusCode', $exception) && $exception->getStatusCode() == 503) {
+            return response()
+            ->view('maintenance-mode', [
+                'message' => Setting::getMaintenanceMessage()
+            ]);
+    }
 
         return parent::render($request, $exception);
     }

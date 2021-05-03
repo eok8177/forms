@@ -59,7 +59,7 @@ class FrontendController extends Controller
         $request->session()->flash('success', $msg);
 
         return view('success', [
-            'forms' => Form::search(false,0,0)->get(),
+            // 'forms' => Form::search(false,0,0)->get(), // it is Black Hole for memory
             'form' => $app->form
         ]);
     }
@@ -97,7 +97,7 @@ class FrontendController extends Controller
         }
 
         return view('form', [
-            'forms' => Form::search(false,0,0)->get(),
+            // 'forms' => Form::search(false,0,0)->get(),
             'form' => $form,
             'settings' => Setting::pluck('value', 'key'),
             'user' => $user

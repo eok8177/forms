@@ -51,7 +51,8 @@ class SettingController extends Controller
         ];
         return view('admin.setting', [
             'settings' => Setting::all(),
-            'dateFormats' => $dateFormats
+            'dateFormats' => $dateFormats,
+            'maintenance_secret' => env('MAINTENANCE_SECRET', '2021')
         ]);
     }
 
