@@ -453,4 +453,38 @@ trait FormConfig
         return $files;
     }
 
+
+    /**
+    * Description:
+    * update by alias value in Form config (json)
+    *
+    * List of parameters:
+    * - $alias: string
+    * - $value : string
+    *
+    * Example of usage: /app/Http/Controllers/FrontendController.form()
+    *
+    */ 
+    public function prefillConfigAlias($alias, $value)
+    {
+        $config = json_decode($this->config, true);
+        foreach ($config['sections'] as $sectionID => $section) {
+            if (array_key_exists('rows', $section)) {
+
+                foreach ($section['rows'] as $rowID => $row) {
+                    if (array_key_exists('controls', $row)) {
+                        foreach ($row['controls'] as $controlID => $control) {
+                            $fieldID = $control['fieldName'];
+                            if ($control['alias'] == $alias) {
+                                $config['sections'][$sectionID]['rows'][$rowID]['controls'][$controlID]['value'] = $value;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        $this->config = json_encode($config);
+    }
+
 }

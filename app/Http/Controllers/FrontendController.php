@@ -96,6 +96,19 @@ class FrontendController extends Controller
             }
         }
 
+        // Prefilling Outreach form
+        if ($form->types->name == 'Outreach') {
+            // Get from API array of alias => value
+            $array = [
+                'alias_1' => 'First fill',
+                'alias_2' => 'Second fill'
+            ];
+            // Prefill
+            foreach ($array as $alias => $value) {
+                $form->prefillConfigAlias($alias, $value);
+            }
+        }
+
         return view('form', [
             // 'forms' => Form::search(false,0,0)->get(),
             'form' => $form,
